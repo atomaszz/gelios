@@ -55,6 +55,14 @@
     <Compile Include="SectionBar.cs" />
     <Compile Include="TAlternateItem.cs" />
     <Compile Include="TBaseWorkShape.cs" />
+    <Compile Include="TBifurcation.cs" />
+    <Compile Include="TCheckCondition.cs" />
+    <Compile Include="TCheckConditionCW.cs" />
+    <Compile Include="TControlFunc.cs" />
+    <Compile Include="TControlWork.cs" />
+    <Compile Include="TCycleDoWhileDo.cs" />
+    <Compile Include="TCycleDoWhileDoFC.cs" />
+    <Compile Include="TCycleWhileDo.cs" />
     <Compile Include="TPaintGrid.cs" />
     <Compile Include="TWork.cs" />
     <Compile Include="TZWork.cs" />
