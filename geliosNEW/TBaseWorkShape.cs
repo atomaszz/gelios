@@ -12,8 +12,8 @@ namespace geliosNEW
     {
         //--переменные--//
         int F_BlockId;
-    //    TList WorkShapes;
-   //     TList WorkLines;
+        //    TList WorkShapes;
+        //     TList WorkLines;
         Point F_StartPoint;
         Point f_BaseStartPoint;
 
@@ -47,55 +47,55 @@ namespace geliosNEW
 
         /*      TShapeCopy FOnShapeCopy;
               TLineCopy FOnLineCopy;*/
-              bool f_LEControl;
-    /*          HWND F_WndHandler;*/
-              Control F_UnderControl;
-       /*       TColor F_FlagColor;
-              int F_FlagType;
-              TColor F_FlagSColor;
-              int F_FlagSType;
-              TColor F_FlagEColor;
-              int F_FlagEType;
-              TColor F_FrameColorTFE;
+        bool f_LEControl;
+        /*          HWND F_WndHandler;*/
+        Control F_UnderControl;
+        /*       TColor F_FlagColor;
+               int F_FlagType;
+               TColor F_FlagSColor;
+               int F_FlagSType;
+               TColor F_FlagEColor;
+               int F_FlagEType;
+               TColor F_FrameColorTFE;
 
-              TListFlag* ListFlag;
-              TWSFlagCreate FOnWSFlagCreate;
-              TWSFlagDestroy FOnWSFlagDestroy;
-              bool f_ApplyAttribute;
-              int f_ParentShapeID;
-              int f_Tag;
-              TAfterLinePrepare FOnAfterLinePrepare;
-              bool f_LEActive;
-              int f_BaseOffsetX;
-              int f_BaseOffsetY;
-              TColor f_BaseLineColor;
-              TCompositeBaseWork* f_CompositeWorkShape;
+               TListFlag* ListFlag;
+               TWSFlagCreate FOnWSFlagCreate;
+               TWSFlagDestroy FOnWSFlagDestroy;
+               bool f_ApplyAttribute;
+               int f_ParentShapeID;
+               int f_Tag;
+               TAfterLinePrepare FOnAfterLinePrepare;
+               bool f_LEActive;
+               int f_BaseOffsetX;
+               int f_BaseOffsetY;
+               TColor f_BaseLineColor;*/
+        TCompositeBaseWork f_CompositeWorkShape;
 
 
-              void PenCopy();
-              void BrushCopy();
-              void FontCopy();
-              void LineCopy();
-              void __fastcall SetLEControl(bool Value);
-              void __fastcall SetWndHandler(const HWND Value);
-              void DoSetLEControl();
-              void DoSetWndHandler();*/
-  //            public void SetUnderControl(Control Value);
-     /*         void DoSetUnderCotrol();
-              void DoSetFlag();
-              void DoSetFlagS();
-              void DoSetFlagE();
+        /*     void PenCopy();
+             void BrushCopy();
+             void FontCopy();
+             void LineCopy();
+             void __fastcall SetLEControl(bool Value);
+             void __fastcall SetWndHandler(const HWND Value);
+             void DoSetLEControl();
+             void DoSetWndHandler();*/
+        //            public void SetUnderControl(Control Value);
+        /*         void DoSetUnderCotrol();
+                 void DoSetFlag();
+                 void DoSetFlagS();
+                 void DoSetFlagE();
 
-              void __fastcall FlagCreate(TRectLine* ASender, TFlagShape* AFlag, int APosFlag);
-              void __fastcall FlagDestroy(TRectLine* ASender, TFlagShape* AFlag, int APosFlag);
+                 void __fastcall FlagCreate(TRectLine* ASender, TFlagShape* AFlag, int APosFlag);
+                 void __fastcall FlagDestroy(TRectLine* ASender, TFlagShape* AFlag, int APosFlag);
 
-              TRectLine* __fastcall GetRectLineItem(int AIndex);
-              int __fastcall GetRectLineCount();
-              void DoSetLEActive();
-              void __fastcall SetLEActive(bool AValue);
-              void __fastcall SetBaseLineColor(TColor AValue);
+                 TRectLine* __fastcall GetRectLineItem(int AIndex);
+                 int __fastcall GetRectLineCount();
+                 void DoSetLEActive();
+                 void __fastcall SetLEActive(bool AValue);
+                 void __fastcall SetBaseLineColor(TColor AValue);
 
-              protected:*/
+                 protected:*/
         int F_Step;
         int F_NumberShapeId;
         int F_NumberLineId;
@@ -103,35 +103,57 @@ namespace geliosNEW
         int F_LastLineId;
         int F_WidthWork;
         int F_Indent;
-/*
-              void FreeWorkShapes();
-              int __fastcall virtual GetTypeShape();
-              TPoint __fastcall virtual GetEndPoint();
-              int __fastcall GetWorkLinesCount();
-              int __fastcall GetWorkShapesCount();
-              void __fastcall virtual SetStartPoint(TPoint Value);
-              TPoint __fastcall virtual GetStartPoint();
-              void __fastcall  SetBaseStartPoint(TPoint Value);
-              bool __fastcall GetDrawCaption();
-              void __fastcall SetDrawCaption(bool Value);
-              void __fastcall SetFont(Graphics::TFont* Value);
-              int virtual CalcBend(int t_x1, int t_x2);
-              void PaintFirstFlag();
-              void PaintLastFlag();
-              void PaintMiddleFlag();
-              virtual TRectLine* __fastcall GetFirstLine();
-              virtual TRectLine* __fastcall GetLastLine();
-              virtual TRectLine* __fastcall GetMiddleLine();
-              void __fastcall SetDrawFirstFlag(bool Value);
-              void __fastcall SetDrawLastFlag(bool Value);
-              void __fastcall SetDrawMiddleFlag(bool Value);
-              void __fastcall SetApplyAttribute(bool Value);
-              virtual void PrepareLines();
-              virtual int __fastcall GetOffsetXFromStart();
-              virtual int __fastcall  CalcWidthWork();
-              void __fastcall SetCompositeWorkShape(TCompositeBaseWork* ACWS);
+        /*
+                      void FreeWorkShapes();
+                      int __fastcall virtual GetTypeShape();*/
+        public virtual Point GetEndPoint()
+        {
+            return new Point(0, 0);
+        }
+        /*           int __fastcall GetWorkLinesCount();
+                   int __fastcall GetWorkShapesCount();
+                   void __fastcall virtual SetStartPoint(TPoint Value);
+                   TPoint __fastcall virtual GetStartPoint();*/
+        void SetBaseStartPoint(Point Value)
+        {
+            f_BaseStartPoint = Value;
+        }
+        /*           bool __fastcall GetDrawCaption();
+                   void __fastcall SetDrawCaption(bool Value);
+                   void __fastcall SetFont(Graphics::TFont* Value);
+                   int virtual CalcBend(int t_x1, int t_x2);
+                   void PaintFirstFlag();
+                   void PaintLastFlag();
+                   void PaintMiddleFlag();
+                   virtual TRectLine* __fastcall GetFirstLine();
+                   virtual TRectLine* __fastcall GetLastLine();
+                   virtual TRectLine* __fastcall GetMiddleLine();
+                   void __fastcall SetDrawFirstFlag(bool Value);
+                   void __fastcall SetDrawLastFlag(bool Value);
+                   void __fastcall SetDrawMiddleFlag(bool Value);
+                   void __fastcall SetApplyAttribute(bool Value);*/
+        public virtual void PrepareLines()
+        {
+            /*      if (f_CompositeWorkShape)
+                  {
+                      f_CompositeWorkShape.Prepare();
+                      return;
+                  }
 
-              public:*/
+                  DoSetLEControl();
+                  DoSetWndHandler();
+                  DoSetUnderCotrol();
+                  DoSetLEActive();
+                  PrepareLines();
+                  PaintFirstFlag();
+                  PaintLastFlag();
+                  PaintMiddleFlag();*/
+        }
+        /*       virtual int __fastcall GetOffsetXFromStart();
+               virtual int __fastcall  CalcWidthWork();
+               void __fastcall SetCompositeWorkShape(TCompositeBaseWork* ACWS);
+
+               public:*/
         public TBaseWorkShape(int X, int Y, int Step, int NumberShape_Id, int Block_Id, int NumberLine_Id)
         {
             F_Step = Step;
@@ -141,71 +163,87 @@ namespace geliosNEW
             F_LastShapeId = F_NumberShapeId;
             F_LastLineId = F_NumberLineId;
 
-            F_StartPoint = new Point(X, Y);   /*     F_StartPoint.x = X; F_StartPoint.y = Y;*/        
+            F_StartPoint = new Point(X, Y);   /*     F_StartPoint.x = X; F_StartPoint.y = Y;*/
             f_BaseStartPoint = F_StartPoint;
 
             F_BrushColor = Color.White;
-   //         F_BrushStyle = bsClear;
+            //         F_BrushStyle = bsClear;
             F_PenColor = Color.Black;
             F_FrameColor = Color.Red;
-   //         F_PenMode = pmCopy;
-   //         F_Font = new Graphics::TFont;
+            //         F_PenMode = pmCopy;
+            //         F_Font = new Graphics::TFont;
 
             F_PenWidth = 1;
-    //        F_PenStyle = psSolid;
-   //         F_DrawFrame = false;
+            //        F_PenStyle = psSolid;
+            //         F_DrawFrame = false;
 
             F_LineColor = Color.Black;
             F_LineWidth = 1;
-    //        F_LineStyle = psSolid;
-   //         F_LineMode = pmCopy;
+            //        F_LineStyle = psSolid;
+            //         F_LineMode = pmCopy;
 
             F_IsLineCopy = true;
             F_IsBrushCopy = true;
             F_IsFontCopy = true;
             F_IsPenCopy = true;
-  //          OnShapeCopy = NULL;
-    //        OnLineCopy = NULL;
+            //          OnShapeCopy = NULL;
+            //        OnLineCopy = NULL;
             F_DrawCaption = true;
 
             F_DrawFirstFlag = false;
             F_DrawLastFlag = false;
             F_DrawMiddleFlag = false;
 
-     //       WorkShapes = new TList;
-     //       WorkLines = new TList;
-    //        ListFlag = new TListFlag;
+            //       WorkShapes = new TList;
+            //       WorkLines = new TList;
+            //        ListFlag = new TListFlag;
 
             f_LEControl = false;
- /*           F_WndHandler = 0;
-            F_UnderControl = NULL;
+            /*           F_WndHandler = 0;
+                       F_UnderControl = NULL;
 
-            F_FlagColor = clWhite;
-            F_FlagType = 0;
-            F_FlagSColor = clWhite;
-            F_FlagSType = 0;
-            F_FlagEColor = clWhite;
-            F_FlagEType = 0;
-            F_FrameColorTFE = clRed;
+                       F_FlagColor = clWhite;
+                       F_FlagType = 0;
+                       F_FlagSColor = clWhite;
+                       F_FlagSType = 0;
+                       F_FlagEColor = clWhite;
+                       F_FlagEType = 0;
+                       F_FrameColorTFE = clRed;
 
-            FOnWSFlagCreate = NULL;
-            FOnWSFlagDestroy = NULL;
-            f_ApplyAttribute = true;
-            F_DrawCaption = true;
-            f_ParentShapeID = 0;
-            f_Tag = 0;
-            FOnAfterLinePrepare = NULL;
-            f_LEActive = true;
-            f_BaseOffsetX = 0;
-            f_BaseOffsetY = 0;
-            F_WidthWork = 0;
-            F_Indent = 0;
-            f_CompositeWorkShape = NULL;*/
+                       FOnWSFlagCreate = NULL;
+                       FOnWSFlagDestroy = NULL;
+                       f_ApplyAttribute = true;
+                       F_DrawCaption = true;
+                       f_ParentShapeID = 0;
+                       f_Tag = 0;
+                       FOnAfterLinePrepare = NULL;
+                       f_LEActive = true;
+                       f_BaseOffsetX = 0;
+                       f_BaseOffsetY = 0;
+                       F_WidthWork = 0;
+                       F_Indent = 0;
+                       f_CompositeWorkShape = NULL;*/
         }
         ~TBaseWorkShape() { }
-        /*     virtual void Init();
-              virtual void Prepare();
-              virtual void Paint(TCanvas* Canvas);
+        public virtual void Init() { }
+        public virtual void Prepare()
+        {
+            if (f_CompositeWorkShape!=null)
+            {
+                f_CompositeWorkShape.Prepare();
+                return;
+            }
+
+     /*       DoSetLEControl();
+            DoSetWndHandler();
+            DoSetUnderCotrol();
+            DoSetLEActive();
+            PrepareLines();
+            PaintFirstFlag();
+            PaintLastFlag();
+            PaintMiddleFlag();*/
+        }
+ /*             virtual void Paint(TCanvas* Canvas);
               virtual TBaseShape* GetShapeByLine(TRectLine* ALine, int APos);
               void AddShape(TBaseShape* N);
               void AddLine(TArrowLine* L);
@@ -231,40 +269,45 @@ namespace geliosNEW
               TPoint OffsetStartPoint();
               TPoint GetStartPointOneComposite();
               virtual void TrimFirstLine(bool ATrimComposite, TPoint APStart, TPoint APEnd);
-              __property TPoint StartPoint = {read = GetStartPoint, write = SetStartPoint
-          };
-          __property TPoint BaseStartPoint = {read = f_BaseStartPoint, write = SetBaseStartPoint
-      };
+              __property TPoint StartPoint = {read = GetStartPoint, write = SetStartPoint*/
+        public Point BaseStartPoint
+        {
+            set { SetBaseStartPoint(value); }
+            get { return f_BaseStartPoint; }
+        }
 
-      __property TColor  BrushColor = {read = F_BrushColor, write = F_BrushColor};
-           __property TBrushStyle BrushStyle = {read = F_BrushStyle, write = F_BrushStyle};
+        /*   __property TColor  BrushColor = {read = F_BrushColor, write = F_BrushColor};
+                __property TBrushStyle BrushStyle = {read = F_BrushStyle, write = F_BrushStyle};
 
-           __property TColor  PenColor = {read = F_PenColor, write = F_PenColor};
-           __property int PenWidth = { read = F_PenWidth, write = F_PenWidth };
-      __property TPenStyle PenStyle = {read = F_PenStyle, write = F_PenStyle};
-           __property TPenMode PenMode = {read = F_PenMode, write = F_PenMode};
-           __property Graphics::TFont*  Font = { read = F_Font, write = SetFont};
-      __property TColor FrameColor  = {read = F_FrameColor, write = F_FrameColor};
-           __property TColor FrameColorTFE  = {read = F_FrameColorTFE, write = F_FrameColorTFE};
-           __property bool DrawFrame = { read = F_DrawFrame, write = F_DrawFrame };
+                __property TColor  PenColor = {read = F_PenColor, write = F_PenColor};
+                __property int PenWidth = { read = F_PenWidth, write = F_PenWidth };
+           __property TPenStyle PenStyle = {read = F_PenStyle, write = F_PenStyle};
+                __property TPenMode PenMode = {read = F_PenMode, write = F_PenMode};
+                __property Graphics::TFont*  Font = { read = F_Font, write = SetFont};
+           __property TColor FrameColor  = {read = F_FrameColor, write = F_FrameColor};
+                __property TColor FrameColorTFE  = {read = F_FrameColorTFE, write = F_FrameColorTFE};
+                __property bool DrawFrame = { read = F_DrawFrame, write = F_DrawFrame };
 
-      __property TColor    LineColor = {read = F_LineColor, write = F_LineColor};
-           __property int LineWidth = { read = F_LineWidth, write = F_LineWidth };
-      __property TPenStyle LineStyle = {read = F_LineStyle, write = F_LineStyle};
-           __property TPenMode  LineMode  = {read = F_LineMode,  write = F_LineMode};
-           __property bool IsLineCopy = { read = F_IsLineCopy, write = F_IsLineCopy };
-      __property bool IsBrushCopy = { read = F_IsBrushCopy, write = F_IsBrushCopy };
-      __property bool IsFontCopy = { read = F_IsFontCopy, write = F_IsFontCopy };
-      __property bool IsPenCopy = { read = F_IsPenCopy, write = F_IsPenCopy };
-      __property int TypeShape = { read = GetTypeShape };
-      __property TShapeCopy  OnShapeCopy = {read = FOnShapeCopy, write = FOnShapeCopy};
-           __property TLineCopy  OnLineCopy = {read = FOnLineCopy, write = FOnLineCopy};
-           __property int FirstShapeId = { read = F_NumberShapeId };
-      __property int LastShapeId = { read = F_LastShapeId };
-      __property int FirstLineId = { read = F_NumberLineId };
-      __property int LastLineId = { read = F_LastLineId };
-      __property TPoint EndPoint = {read = GetEndPoint};
-           __property int WorkShapesCount = { read = GetWorkShapesCount };
+           __property TColor    LineColor = {read = F_LineColor, write = F_LineColor};
+                __property int LineWidth = { read = F_LineWidth, write = F_LineWidth };
+           __property TPenStyle LineStyle = {read = F_LineStyle, write = F_LineStyle};
+                __property TPenMode  LineMode  = {read = F_LineMode,  write = F_LineMode};
+                __property bool IsLineCopy = { read = F_IsLineCopy, write = F_IsLineCopy };
+           __property bool IsBrushCopy = { read = F_IsBrushCopy, write = F_IsBrushCopy };
+           __property bool IsFontCopy = { read = F_IsFontCopy, write = F_IsFontCopy };
+           __property bool IsPenCopy = { read = F_IsPenCopy, write = F_IsPenCopy };
+           __property int TypeShape = { read = GetTypeShape };
+           __property TShapeCopy  OnShapeCopy = {read = FOnShapeCopy, write = FOnShapeCopy};
+                __property TLineCopy  OnLineCopy = {read = FOnLineCopy, write = FOnLineCopy};
+                __property int FirstShapeId = { read = F_NumberShapeId };
+           __property int LastShapeId = { read = F_LastShapeId };
+           __property int FirstLineId = { read = F_NumberLineId };
+           __property int LastLineId = { read = F_LastLineId };*/
+        public Point EndPoint
+        {
+            get { return GetEndPoint(); }
+        }
+/*           __property int WorkShapesCount = { read = GetWorkShapesCount };
       __property int WorkLinesCount = { read = GetWorkLinesCount };
       __property bool DrawCaption = { read = GetDrawCaption, write = SetDrawCaption };
       __property bool DrawFirstFlag = { read = F_DrawFirstFlag, write = SetDrawFirstFlag };

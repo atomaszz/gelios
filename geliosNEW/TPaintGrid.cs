@@ -301,13 +301,13 @@ namespace geliosNEW
                 m_CurrWorkShape.LEControl = f_LEControl;
           //      m_CurrWorkShape.WndHandler = f_WndHandler;
                 m_CurrWorkShape.UnderControl = f_UnderControl;
-    /*            m_CurrWorkShape.OnWSFlagCreate = WsFlagCreate;
-                m_CurrWorkShape.OnWSFlagDestroy = WsFlagDestroy;
-                m_CurrWorkShape.BaseStartPoint.x += -f_X_offsSum;
-                m_CurrWorkShape.BaseStartPoint.y += -f_Y_offsSum;
+                //       m_CurrWorkShape.OnWSFlagCreate = WsFlagCreate;
+                //      m_CurrWorkShape.OnWSFlagDestroy = WsFlagDestroy;
+                m_CurrWorkShape.BaseStartPoint = 
+                    new Point (m_CurrWorkShape.BaseStartPoint.X - f_X_offsSum, m_CurrWorkShape.BaseStartPoint.Y - f_Y_offsSum);
                 m_CurrWorkShape.Init();
                 m_CurrWorkShape.Prepare();
-                f_CurrEndPoint = m_CurrWorkShape.EndPoint;*/
+                f_CurrEndPoint = m_CurrWorkShape.EndPoint;
 
                 f_CurrentCommand = 1;
             }

@@ -53,11 +53,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SectionBar.cs" />
+    <Compile Include="SharedConst.cs" />
     <Compile Include="TAlternateItem.cs" />
+    <Compile Include="TBaseShape.cs" />
     <Compile Include="TBaseWorkShape.cs" />
     <Compile Include="TBifurcation.cs" />
     <Compile Include="TCheckCondition.cs" />
     <Compile Include="TCheckConditionCW.cs" />
+    <Compile Include="TCompositeBaseWork.cs" />
+    <Compile Include="TCompositeBaseWorkItem.cs" />
     <Compile Include="TControlFunc.cs" />
     <Compile Include="TControlWork.cs" />
     <Compile Include="TCycleDoWhileDo.cs" />
