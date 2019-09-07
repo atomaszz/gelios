@@ -194,6 +194,8 @@ namespace geliosNEW
         {
             if (lastCheckedControl != null)
             {
+                lastCheckedControl.Checked = false;
+                lastCheckedControl.BackColor = Color.FromName("DarkGray");
                 lastCheckedControl = null;
                 numControl = -1;
                 return true;

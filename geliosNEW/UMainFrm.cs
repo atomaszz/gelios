@@ -23,6 +23,12 @@ namespace geliosNEW
         int f_CurrIDShape; //текущая фигура
         int f_CurrIDLine;//текущая линия
         int f_Operation;//текущая операция
+        TLevelController LevelController;
+        TListNode MainList;
+        Color f_HaveChildColor;
+        Color f_AltParamShapeColor;
+        Color f_AltParamLineColor;
+        bool f_AltParamShapeColorEnable;
         public UMainFrm()
         {
             InitializeComponent();
@@ -36,7 +42,30 @@ namespace geliosNEW
      //       f_FonColor = clWhite;
    //         f_PixelColor = clBlack;
             Grid = new TPaintGrid(pbMain.Image, this);
+            f_HaveChildColor = Color.Green;
+            LevelController = new TLevelController();
+            MainList = new TListNode();
+            f_AltParamShapeColorEnable = false;
+            f_AltParamShapeColor = Color.Yellow;
+            f_AltParamLineColor = Color.Fuchsia;
         }
+        void ShapeCopy(TBaseShape Shape, int Num_Shape)
+        {
+            if (MainList.IsContainsChildShape(Shape.ID))
+                Shape.PenColor = f_HaveChildColor;
+            if (Shape.ParamAlt!=null)
+            {
+                if (f_AltParamShapeColorEnable)
+                {
+                    Shape.BrushStyle = new SolidBrush(Color.Black);
+                    Shape.BrushColor = f_AltParamShapeColor;
+                }
+                else
+                    Shape.BrushStyle = null;
+                Shape.PenColor = f_AltParamLineColor;
+            }
+        }
+
         int GetTypShape()
         {
             return menuBar.GetActiveControlNum();
@@ -45,9 +74,9 @@ namespace geliosNEW
         {
             TBaseWorkShape WH;
             WH = Grid.AddWorkShape(AType, f_CurrIDShape, f_CurrIDBlock, f_CurrIDLine);
-   /*         WH.OnShapeCopy = &ShapeCopy;
+       //     WH.OnShapeCopy = &ShapeCopy;
             WH.ParentShapeID = LevelController.ParentShapeID;
-            assert(WH);
+       /*     assert(WH);
             f_CurrIDShape = WH.LastShapeId;
             f_CurrIDLine = WH.LastLineId;
             f_CurrIDBlock++;

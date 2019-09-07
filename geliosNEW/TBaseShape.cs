@@ -51,7 +51,7 @@ namespace geliosNEW
         int f_NumAlternative;
         int f_IdAlternativeParent;
         int f_NumAlternativeParent;
-  //      TParamAlternative f_ParamAlt;
+        TParamAlternative f_ParamAlt;
         TBaseShape f_Clon;
 
   /*      void DoSetLEFrame();
@@ -88,7 +88,7 @@ namespace geliosNEW
             F_BrushColor = Color.White;
             F_PenColor = Color.Black;
             F_FrameColor = Color.Red;
-       //     F_BrushStyle = bsClear;
+            F_BrushStyle = null;
       //      F_PenMode = pmCopy;
       //      F_Font = new Graphics::TFont;
 
@@ -124,68 +124,87 @@ namespace geliosNEW
             f_NumAlternative = 0;
             f_IdAlternativeParent = 0;
             f_NumAlternativeParent = 0;
-   //         f_ParamAlt = NULL;
+            f_ParamAlt = null;
             f_Clon = null;
         }
         ~TBaseShape() { }
- /*       public void SetRealRect(int X, int Y, int Width, int Height);
-        public void SetRealRect(TRect Rect);
+        /*       public void SetRealRect(int X, int Y, int Width, int Height);
+               public void SetRealRect(TRect Rect);
 
-        public virtual void SetRect(int X, int Y, int Width, int Height);
-        public virtual void SetRect(TRect Rect);
-        public virtual void SetBaseRect(TRect Rect);
+               public virtual void SetRect(int X, int Y, int Width, int Height);
+               public virtual void SetRect(TRect Rect);
+               public virtual void SetBaseRect(TRect Rect);
 
-        public TRect GetRealRect();
-        public TRect GetRect();
-        public TRect GetFrameRect();
-        public TRect FrameRectToRect(TRect R);
+               public TRect GetRealRect();
+               public TRect GetRect();
+               public TRect GetFrameRect();
+               public TRect FrameRectToRect(TRect R);
 
-        public virtual void Paint(TCanvas Canvas);
-        public int PointInFrame(int X, int Y);
-        public virtual bool PowerIn();
-        public bool ReactMouse(TPoint APoint);
-        public void ApplyOffset(int Ax, int Ay);
-        public virtual bool CopyObject(TBaseShape ASource);
-        public void AddWorkLine(TRectLine* ALine);
-        public void ClearWorkLine();
-        public void AddParamAlternativeItem(TParamAlternativeItem* AItem);
-        public void DeleteParamAlternativeItem(int AIndex);
-        public void DeleteParamAlternativeItem2(void* APointer);
-        public virtual AnsiString Make_One_Simple();
-        public virtual AnsiString Make_One_SimpleItem(int AIndex);
+               public virtual void Paint(TCanvas Canvas);
+               public int PointInFrame(int X, int Y);
+               public virtual bool PowerIn();
+               public bool ReactMouse(TPoint APoint);
+               public void ApplyOffset(int Ax, int Ay);
+               public virtual bool CopyObject(TBaseShape ASource);
+               public void AddWorkLine(TRectLine* ALine);
+               public void ClearWorkLine();
+               public void AddParamAlternativeItem(TParamAlternativeItem* AItem);
+               public void DeleteParamAlternativeItem(int AIndex);
+               public void DeleteParamAlternativeItem2(void* APointer);
+               public virtual AnsiString Make_One_Simple();
+               public virtual AnsiString Make_One_SimpleItem(int AIndex);*/
 
 
-        __property TColor  BrushColor = {read = F_BrushColor, write = F_BrushColor
-    __property TColor  PenColor = {read = F_PenColor, write = F_PenColor
-__property Graphics::TFont*  Font = { read = F_Font, write = SetFont};
-__property int PenWidth = { read = F_PenWidth, write = F_PenWidth };
-__property TPenStyle PenStyle = {read = F_PenStyle, write = F_PenStyle};
-    __property TBrushStyle BrushStyle = {read = F_BrushStyle, write = F_BrushStyle};
-    __property String  Caption = {read = F_Caption, write = F_Caption};
-    __property TColor FrameColor  = {read = F_FrameColor, write = F_FrameColor};
-    __property bool DrawFrame = { read = F_DrawFrame, write = F_DrawFrame };
-__property int TypeShape = { read = GetTypeShape };
-__property TPoint Point_StartShape = {read = GetPointStartShape};
-    __property TPoint Point_EndShape = {read = GetPointEndShape};
-    __property TPenMode PenMode = {read = F_PenMode, write = F_PenMode};
-    __property int ID = { read = F_Id };
-__property bool DrawCaption = { read = F_DrawCaption, write = F_DrawCaption };
-__property TRect BoundRect = {read = F_Rect, write = SetBoundRect};
-    __property bool LEControl = { read = f_LEControl, write = SetCreateLEControl };
-__property HWND WndHandler = {read = F_WndHandler, write = SetWndHandler};
-    __property int LEFrame = { read = F_LEFrame, write = SetLEFrame };
-__property TControl* UnderControl = { read = F_UnderControl, write = SetUnderControl };
-__property bool ApplyAttribute = { read = f_ApplyAttribute, write = f_ApplyAttribute };
-__property bool LEActive = { read = f_LEActive, write = SetLEActive };
-__property TBaseLine* BaseLine[int AIndex] = { read = GetBaseLine };
-__property int BaseLineCount = { read = GetBaseLineCount };
-__property TPoint PointTail_StartShape = {read = GetPointTailStartShape};
-    __property TPoint PointTail_EndShape = {read = GetPointTailEndShape};
-    __property int Step = { read = F_Step };
-__property TRectLine* WorkLine[int AIndex] = { read = GetWorkLine };
-__property int WorkLineCount = { read = GetWorkLineCount };
-__property int Tag = { read = f_Tag, write = f_Tag };
-__property TParamAlternative* ParamAlt = { read = f_ParamAlt };
-__property TBaseShape* Clon = { read = f_Clon, write = f_Clon }; */
+        public  Color  BrushColor
+        {
+            set { F_BrushColor = value; }
+            get { return F_BrushColor; }
+        }
+        public Color  PenColor
+        {
+            set { F_PenColor = value; }
+            get { return F_PenColor; }
+        }
+        /*       __property Graphics::TFont*  Font = { read = F_Font, write = SetFont};
+               __property int PenWidth = { read = F_PenWidth, write = F_PenWidth };
+               __property TPenStyle PenStyle = {read = F_PenStyle, write = F_PenStyle};*/
+        public  Brush BrushStyle
+        {
+            set { F_BrushStyle = value; }
+            get { return F_BrushStyle; }
+        }
+/*           __property String  Caption = {read = F_Caption, write = F_Caption};
+           __property TColor FrameColor  = {read = F_FrameColor, write = F_FrameColor};
+           __property bool DrawFrame = { read = F_DrawFrame, write = F_DrawFrame };
+       __property int TypeShape = { read = GetTypeShape };
+       __property TPoint Point_StartShape = {read = GetPointStartShape};
+           __property TPoint Point_EndShape = {read = GetPointEndShape};
+           __property TPenMode PenMode = {read = F_PenMode, write = F_PenMode};*/
+        public int ID
+        {
+            get { return F_Id; }
+        }
+        /*__property bool DrawCaption = { read = F_DrawCaption, write = F_DrawCaption };
+        __property TRect BoundRect = {read = F_Rect, write = SetBoundRect};
+            __property bool LEControl = { read = f_LEControl, write = SetCreateLEControl };
+        __property HWND WndHandler = {read = F_WndHandler, write = SetWndHandler};
+            __property int LEFrame = { read = F_LEFrame, write = SetLEFrame };
+        __property TControl* UnderControl = { read = F_UnderControl, write = SetUnderControl };
+        __property bool ApplyAttribute = { read = f_ApplyAttribute, write = f_ApplyAttribute };
+        __property bool LEActive = { read = f_LEActive, write = SetLEActive };
+        __property TBaseLine* BaseLine[int AIndex] = { read = GetBaseLine };
+        __property int BaseLineCount = { read = GetBaseLineCount };
+        __property TPoint PointTail_StartShape = {read = GetPointTailStartShape};
+            __property TPoint PointTail_EndShape = {read = GetPointTailEndShape};
+            __property int Step = { read = F_Step };
+        __property TRectLine* WorkLine[int AIndex] = { read = GetWorkLine };
+        __property int WorkLineCount = { read = GetWorkLineCount };
+        __property int Tag = { read = f_Tag, write = f_Tag };*/
+        public TParamAlternative ParamAlt
+        {
+            get { return f_ParamAlt; }
+        }
+            
+/*__property TBaseShape* Clon = { read = f_Clon, write = f_Clon }; */
     }
 }

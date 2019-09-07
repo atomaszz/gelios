@@ -61,9 +61,9 @@ namespace geliosNEW
                TListFlag* ListFlag;
                TWSFlagCreate FOnWSFlagCreate;
                TWSFlagDestroy FOnWSFlagDestroy;
-               bool f_ApplyAttribute;
+               bool f_ApplyAttribute;*/
                int f_ParentShapeID;
-               int f_Tag;
+         /*      int f_Tag;
                TAfterLinePrepare FOnAfterLinePrepare;
                bool f_LEActive;
                int f_BaseOffsetX;
@@ -213,9 +213,9 @@ namespace geliosNEW
                        FOnWSFlagCreate = NULL;
                        FOnWSFlagDestroy = NULL;
                        f_ApplyAttribute = true;
-                       F_DrawCaption = true;
+                       F_DrawCaption = true;*/
                        f_ParentShapeID = 0;
-                       f_Tag = 0;
+                 /*      f_Tag = 0;
                        FOnAfterLinePrepare = NULL;
                        f_LEActive = true;
                        f_BaseOffsetX = 0;
@@ -348,9 +348,12 @@ namespace geliosNEW
 
              __property TRectLine* RectLineItems[int AIndex] = { read = GetRectLineItem };
         __property int RectLineCount = { read = GetRectLineCount };
-        __property bool ApplyAttribute = { read = f_ApplyAttribute, write = SetApplyAttribute };
-        __property int ParentShapeID = { read = f_ParentShapeID, write = f_ParentShapeID };
-        __property int Tag = { read = f_Tag, write = f_Tag };
+        __property bool ApplyAttribute = { read = f_ApplyAttribute, write = SetApplyAttribute };*/
+        public int ParentShapeID {
+            set { f_ParentShapeID = value; }
+            get { return f_ParentShapeID;  }
+        }
+  /*      __property int Tag = { read = f_Tag, write = f_Tag };
         __property TAfterLinePrepare OnAfterLinePrepare =  {read = FOnAfterLinePrepare, write = FOnAfterLinePrepare};
              __property bool LEActive = { read = f_LEActive, write = SetLEActive };
         __property int OffsetXFromStart = { read = GetOffsetXFromStart };
