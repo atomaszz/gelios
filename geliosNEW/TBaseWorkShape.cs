@@ -10,10 +10,12 @@ namespace geliosNEW
 {
     public class TBaseWorkShape
     {
+        public delegate void TShapeCopy(TBaseShape Shape, int Num_Shape);
+        //    public delegate void TLineCopy(TArrowLine Line, int Num_Line);
         //--переменные--//
         int F_BlockId;
-        //    TList WorkShapes;
-        //     TList WorkLines;
+        List<object> WorkShapes;
+        List<object> WorkLines;
         Point F_StartPoint;
         Point f_BaseStartPoint;
 
@@ -45,8 +47,8 @@ namespace geliosNEW
         bool F_DrawLastFlag;
         bool F_DrawMiddleFlag;
 
-        /*      TShapeCopy FOnShapeCopy;
-              TLineCopy FOnLineCopy;*/
+        TShapeCopy FOnShapeCopy;
+         //     TLineCopy FOnLineCopy;
         bool f_LEControl;
         /*          HWND F_WndHandler;*/
         Control F_UnderControl;
@@ -77,9 +79,24 @@ namespace geliosNEW
              void FontCopy();
              void LineCopy();
              void __fastcall SetLEControl(bool Value);
-             void __fastcall SetWndHandler(const HWND Value);
-             void DoSetLEControl();
-             void DoSetWndHandler();*/
+             void __fastcall SetWndHandler(const HWND Value);*/
+        void DoSetLEControl()
+        {
+            int i;
+            TBaseShape bs;
+            TRectLine line;
+            for (i = 0; i <= WorkShapes.Count - 1; i++)
+            {
+                bs = (TBaseShape)WorkShapes.ElementAt(i);
+                bs.LEControl = f_LEControl;
+            }
+            for (i = 0; i <= WorkLines.Count - 1; i++)
+            {
+                line = (TRectLine)WorkLines.ElementAt(i);
+                line.LEControl = f_LEControl;
+            }
+        }
+        /*     void DoSetWndHandler();
         //            public void SetUnderControl(Control Value);
         /*         void DoSetUnderCotrol();
                  void DoSetFlag();
@@ -118,9 +135,21 @@ namespace geliosNEW
         {
             f_BaseStartPoint = Value;
         }
-        /*           bool __fastcall GetDrawCaption();
-                   void __fastcall SetDrawCaption(bool Value);
-                   void __fastcall SetFont(Graphics::TFont* Value);
+        bool GetDrawCaption()
+        {
+            return F_DrawCaption;
+        }
+        void  SetDrawCaption(bool Value)
+        {
+            TBaseShape baseShape;
+            F_DrawCaption = Value;
+            for (int i = 0; i <= WorkShapes.Count - 1; i++)
+            {
+                baseShape = (TBaseShape)WorkShapes.ElementAt(i);
+                baseShape.DrawCaption = F_DrawCaption;
+            }
+        }
+         /*          void __fastcall SetFont(Graphics::TFont* Value);
                    int virtual CalcBend(int t_x1, int t_x2);
                    void PaintFirstFlag();
                    void PaintLastFlag();
@@ -150,10 +179,20 @@ namespace geliosNEW
                   PaintMiddleFlag();*/
         }
         /*       virtual int __fastcall GetOffsetXFromStart();
-               virtual int __fastcall  CalcWidthWork();
-               void __fastcall SetCompositeWorkShape(TCompositeBaseWork* ACWS);
+               virtual int __fastcall  CalcWidthWork();*/
+        void  SetCompositeWorkShape(TCompositeBaseWork ACWS)
+        {
+            f_CompositeWorkShape = ACWS;
+            if (f_CompositeWorkShape!=null)
+            {
+           /*     f_CompositeWorkShape.FirstLine.UnderControl = F_UnderControl;
+                f_CompositeWorkShape.FirstLine.WndHandler = F_WndHandler;
+                f_CompositeWorkShape.FirstLine.OnRctFlagCreate = &FlagCreate;
+                f_CompositeWorkShape.FirstLine.OnRctFlagDestroy = &FlagDestroy;*/
 
-               public:*/
+            }
+        }
+
         public TBaseWorkShape(int X, int Y, int Step, int NumberShape_Id, int Block_Id, int NumberLine_Id)
         {
             F_Step = Step;
@@ -163,7 +202,7 @@ namespace geliosNEW
             F_LastShapeId = F_NumberShapeId;
             F_LastLineId = F_NumberLineId;
 
-            F_StartPoint = new Point(X, Y);   /*     F_StartPoint.x = X; F_StartPoint.y = Y;*/
+            F_StartPoint = new Point(X, Y);   
             f_BaseStartPoint = F_StartPoint;
 
             F_BrushColor = Color.White;
@@ -213,7 +252,7 @@ namespace geliosNEW
                        FOnWSFlagCreate = NULL;
                        FOnWSFlagDestroy = NULL;
                        f_ApplyAttribute = true;
-                       F_DrawCaption = true;*/
+                       F_DrawCaption = true;
                        f_ParentShapeID = 0;
                  /*      f_Tag = 0;
                        FOnAfterLinePrepare = NULL;
@@ -228,48 +267,89 @@ namespace geliosNEW
         public virtual void Init() { }
         public virtual void Prepare()
         {
-            if (f_CompositeWorkShape!=null)
+            if (f_CompositeWorkShape != null)
             {
                 f_CompositeWorkShape.Prepare();
                 return;
             }
-
-     /*       DoSetLEControl();
-            DoSetWndHandler();
+            DoSetLEControl();
+         /*   DoSetWndHandler();
             DoSetUnderCotrol();
-            DoSetLEActive();
+            DoSetLEActive();*/
             PrepareLines();
-            PaintFirstFlag();
+        /*    PaintFirstFlag();
             PaintLastFlag();
             PaintMiddleFlag();*/
         }
- /*             virtual void Paint(TCanvas* Canvas);
-              virtual TBaseShape* GetShapeByLine(TRectLine* ALine, int APos);
-              void AddShape(TBaseShape* N);
-              void AddLine(TArrowLine* L);
-              TBaseShape* GetWorkShape(int num);
-              TBaseShape* GetWorkNode(int num);
-              TArrowLine* GetWorkLine(int num);
-              void SetOffsetPosition(int X_Ofs, int Y_Ofs);
-              void SetBaseOffsetPosition(int X_Ofs, int Y_Ofs);
-              TRect GetFrameRectWithLines();
-              TRect FrameRectToRect(TRect R);
-              TPoint GetStartPointFromFrameRect(TRect R);
-              TRect GetMaxRect();
-              bool KeepFlag(TBaseShape* Flag, int &type);
-              void FreeWorkLines();
-              virtual bool MakeFlagForShape(TBaseShape* AShape, bool ACreate, int APos, int AType, TColor AColor);
-              int ShapeSupport(TBaseShape* AShape);
-              TBaseShape* ShapeSupportID(int AShapeID);
-              void ShowAllFlagForSahpe(int AType, TColor AColor);
-              void HideAllFlagForSahpe();
-              virtual void CreateLines();
-              int ReactMouse(TPoint APoint);
-              int Bend(int t_x1, int t_x2);
-              TPoint OffsetStartPoint();
-              TPoint GetStartPointOneComposite();
-              virtual void TrimFirstLine(bool ATrimComposite, TPoint APStart, TPoint APEnd);
-              __property TPoint StartPoint = {read = GetStartPoint, write = SetStartPoint*/
+        /*             virtual void Paint(TCanvas* Canvas);
+                     virtual TBaseShape* GetShapeByLine(TRectLine* ALine, int APos);
+                     void AddShape(TBaseShape* N);
+                     void AddLine(TArrowLine* L);
+                     TBaseShape* GetWorkShape(int num);
+                     TBaseShape* GetWorkNode(int num);
+                     TArrowLine* GetWorkLine(int num);
+                     void SetOffsetPosition(int X_Ofs, int Y_Ofs);
+                     void SetBaseOffsetPosition(int X_Ofs, int Y_Ofs);
+                     TRect GetFrameRectWithLines();
+                     TRect FrameRectToRect(TRect R);
+                     TPoint GetStartPointFromFrameRect(TRect R);*/
+        public Rectangle GetMaxRect()
+        {
+            Rectangle Res, R_tmp;
+            TBaseShape baseShape;
+            TArrowLine currLine;
+            if (CompositeWorkShape!=null)
+                return CompositeWorkShape.GetMaxRect();
+            baseShape = (TBaseShape)WorkShapes.ElementAt(0);
+            Res = baseShape.GetRect();
+            for (int i = 1; i <= WorkShapes.Count - 1; i++)
+            {
+                baseShape = (TBaseShape)WorkShapes.ElementAt(i);
+                R_tmp = baseShape.GetRect();
+                if (R_tmp.Left < Res.Left) Res.X = R_tmp.Left;
+                if (R_tmp.Right > Res.Right) Res.Width = R_tmp.Right;
+                if (R_tmp.Top < Res.Top) Res.Y = R_tmp.Top;
+                if (R_tmp.Bottom > Res.Bottom) Res.Height = R_tmp.Bottom;
+            }
+
+            for (int i = 0; i <= WorkLines.Count - 1; i++)
+            {
+                currLine = (TArrowLine)WorkLines.ElementAt(i);
+                if (currLine.xStart < Res.Left) Res.X = currLine.xStart;
+                if (currLine.xEnd < Res.Left) Res.X = currLine.xEnd;
+                if (currLine.xStart > Res.Right) Res.Width = currLine.xStart;
+                if (currLine.xEnd > Res.Right) Res.Width = currLine.xEnd;
+
+                if (currLine.yStart < Res.Top) Res.Y = currLine.yStart;
+                if (currLine.yEnd < Res.Top) Res.Y = currLine.yEnd;
+                if (currLine.yStart > Res.Bottom) Res.Height = currLine.yStart;
+                if (currLine.yEnd > Res.Bottom) Res.Height = currLine.yEnd;
+
+            }
+
+
+            Res.X = Res.Left - SharedConst.OFFS_FRAME * PenWidth;
+            Res.Y = Res.Top - SharedConst.OFFS_FRAME * PenWidth;
+            Res.Width = Res.Right + SharedConst.OFFS_FRAME * PenWidth;
+            Res.Height = Res.Bottom + SharedConst.OFFS_FRAME * PenWidth;
+            F_Ofs_Point.X = Res.Left - F_StartPoint.X;
+            F_Ofs_Point.Y = Res.Top - F_StartPoint.Y;
+            return Res;
+        }
+        /*         bool KeepFlag(TBaseShape* Flag, int &type);
+                 void FreeWorkLines();
+                 virtual bool MakeFlagForShape(TBaseShape* AShape, bool ACreate, int APos, int AType, TColor AColor);
+                 int ShapeSupport(TBaseShape* AShape);
+                 TBaseShape* ShapeSupportID(int AShapeID);
+                 void ShowAllFlagForSahpe(int AType, TColor AColor);
+                 void HideAllFlagForSahpe();
+                 virtual void CreateLines();
+                 int ReactMouse(TPoint APoint);
+                 int Bend(int t_x1, int t_x2);
+                 TPoint OffsetStartPoint();
+                 TPoint GetStartPointOneComposite();
+                 virtual void TrimFirstLine(bool ATrimComposite, TPoint APStart, TPoint APEnd);
+                 __property TPoint StartPoint = {read = GetStartPoint, write = SetStartPoint*/
         public Point BaseStartPoint
         {
             set { SetBaseStartPoint(value); }
@@ -279,9 +359,13 @@ namespace geliosNEW
         /*   __property TColor  BrushColor = {read = F_BrushColor, write = F_BrushColor};
                 __property TBrushStyle BrushStyle = {read = F_BrushStyle, write = F_BrushStyle};
 
-                __property TColor  PenColor = {read = F_PenColor, write = F_PenColor};
-                __property int PenWidth = { read = F_PenWidth, write = F_PenWidth };
-           __property TPenStyle PenStyle = {read = F_PenStyle, write = F_PenStyle};
+                __property TColor  PenColor = {read = F_PenColor, write = F_PenColor};*/
+        public int PenWidth
+        {
+            set { F_PenWidth = value; }
+            get { return F_PenWidth; }
+        }
+   /*        __property TPenStyle PenStyle = {read = F_PenStyle, write = F_PenStyle};
                 __property TPenMode PenMode = {read = F_PenMode, write = F_PenMode};
                 __property Graphics::TFont*  Font = { read = F_Font, write = SetFont};
            __property TColor FrameColor  = {read = F_FrameColor, write = F_FrameColor};
@@ -296,25 +380,50 @@ namespace geliosNEW
            __property bool IsBrushCopy = { read = F_IsBrushCopy, write = F_IsBrushCopy };
            __property bool IsFontCopy = { read = F_IsFontCopy, write = F_IsFontCopy };
            __property bool IsPenCopy = { read = F_IsPenCopy, write = F_IsPenCopy };
-           __property int TypeShape = { read = GetTypeShape };
-           __property TShapeCopy  OnShapeCopy = {read = FOnShapeCopy, write = FOnShapeCopy};
-                __property TLineCopy  OnLineCopy = {read = FOnLineCopy, write = FOnLineCopy};
-                __property int FirstShapeId = { read = F_NumberShapeId };
-           __property int LastShapeId = { read = F_LastShapeId };
-           __property int FirstLineId = { read = F_NumberLineId };
-           __property int LastLineId = { read = F_LastLineId };*/
+           __property int TypeShape = { read = GetTypeShape };*/
+        public TShapeCopy  OnShapeCopy
+        {
+            set { FOnShapeCopy = value; }
+            get { return FOnShapeCopy; }
+        }
+ /*               __property TLineCopy  OnLineCopy = {read = FOnLineCopy, write = FOnLineCopy};*/
+        public int FirstShapeId
+        {
+            get { return F_NumberShapeId; }
+        }
+        public int LastShapeId
+        {
+            get { return F_LastShapeId; }
+        }
+
+        public int FirstLineId
+        {
+            get { return F_NumberLineId; }
+        }
+
+        public int LastLineId
+        {
+            get { return F_LastLineId; }
+        }
         public Point EndPoint
         {
             get { return GetEndPoint(); }
         }
 /*           __property int WorkShapesCount = { read = GetWorkShapesCount };
-      __property int WorkLinesCount = { read = GetWorkLinesCount };
-      __property bool DrawCaption = { read = GetDrawCaption, write = SetDrawCaption };
-      __property bool DrawFirstFlag = { read = F_DrawFirstFlag, write = SetDrawFirstFlag };
+      __property int WorkLinesCount = { read = GetWorkLinesCount };*/
+      public bool DrawCaption
+        { set { SetDrawCaption(value); }
+            get { return GetDrawCaption(); }
+        }
+ /*     __property bool DrawFirstFlag = { read = F_DrawFirstFlag, write = SetDrawFirstFlag };
       __property bool DrawLastFlag = { read = F_DrawLastFlag, write = SetDrawLastFlag };
-      __property bool DrawMiddleFlag = { read = F_DrawMiddleFlag, write = SetDrawMiddleFlag };
-      __property int BlockId = { read = F_BlockId, write = F_BlockId };
-      __property int ShapeId = { read = F_NumberShapeId };
+      __property bool DrawMiddleFlag = { read = F_DrawMiddleFlag, write = SetDrawMiddleFlag };*/
+      public int BlockId
+        {
+            set { F_BlockId = value; }
+            get { return F_BlockId; }
+        }
+/*      __property int ShapeId = { read = F_NumberShapeId };
       __property int LineId = { read = F_NumberLineId };
       //     __property TTrailer* FirstTrailer = {read = F_FirstTrailer};
       //     __property TTrailer* LastTrailer = {read = F_LastTrailer};
@@ -361,7 +470,11 @@ namespace geliosNEW
         __property int BaseOffsetY = { read = f_BaseOffsetY };
         __property int WidthWork = { read = CalcWidthWork };
         __property int Indent = { read = F_Indent };
-        __property TColor BaseLineColor = {read = f_BaseLineColor, write = SetBaseLineColor};
-             __property TCompositeBaseWork* CompositeWorkShape = { read = f_CompositeWorkShape, write = SetCompositeWorkShape };*/
+        __property TColor BaseLineColor = {read = f_BaseLineColor, write = SetBaseLineColor};*/
+        public TCompositeBaseWork CompositeWorkShape
+        {
+            set { SetCompositeWorkShape(value); }
+            get { return f_CompositeWorkShape;  }
+        }
     }
 }

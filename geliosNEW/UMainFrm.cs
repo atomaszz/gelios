@@ -40,7 +40,7 @@ namespace geliosNEW
     //        f_PaintPixels = true;
     //        f_DrawFrameLine = false;
      //       f_FonColor = clWhite;
-   //         f_PixelColor = clBlack;
+     //       f_PixelColor = clBlack;
             Grid = new TPaintGrid(pbMain.Image, this);
             f_HaveChildColor = Color.Green;
             LevelController = new TLevelController();
@@ -48,6 +48,12 @@ namespace geliosNEW
             f_AltParamShapeColorEnable = false;
             f_AltParamShapeColor = Color.Yellow;
             f_AltParamLineColor = Color.Fuchsia;
+            MainList.OnListChange = ListChange;
+
+        }
+        void ListChange()
+        {
+            MainList.FillPainterList(Grid.g_PainterList, f_IdAlternative, f_NumAlternative, LevelController.ParentShapeID);
         }
         void ShapeCopy(TBaseShape Shape, int Num_Shape)
         {
@@ -65,7 +71,15 @@ namespace geliosNEW
                 Shape.PenColor = f_AltParamLineColor;
             }
         }
-
+        void SetNewPolygon()
+        {
+            Point P;
+      /*      P = Grid.GetPointPolygon(sbX.Position, sbY.Position);
+            if ((P.x - pbMain.Width - sbX.Position) > 2)
+                sbX.Max = P.x - pbMain.Width + (Grid.StepPixels * 4);
+            if ((P.y - pbMain.Height - sbY.Position) > 2)
+                sbY.Max = P.y - pbMain.Height + (Grid.StepPixels * 4);*/
+        }
         int GetTypShape()
         {
             return menuBar.GetActiveControlNum();
@@ -74,21 +88,20 @@ namespace geliosNEW
         {
             TBaseWorkShape WH;
             WH = Grid.AddWorkShape(AType, f_CurrIDShape, f_CurrIDBlock, f_CurrIDLine);
-       //     WH.OnShapeCopy = &ShapeCopy;
+            WH.OnShapeCopy = ShapeCopy;
             WH.ParentShapeID = LevelController.ParentShapeID;
-       /*     assert(WH);
             f_CurrIDShape = WH.LastShapeId;
             f_CurrIDLine = WH.LastLineId;
             f_CurrIDBlock++;
             MainList.AddShapeToList(f_IdAlternative, f_NumAlternative, WH, LevelController.ParentShapeID);
             Grid.PreparePaint();
             SetNewPolygon();
-            SetNewPosition();
-            InvalidateRgn(pbMain.Parent.Handle, Grid.GetRegion(WH, 4), false);
+ /*           SetNewPosition();
+            InvalidateRgn(pbMain.Parent.Handle, Grid.GetRegion(WH, 4), false);*/
 
             if (AType == 2)
             {
-                Application.ProcessMessages();
+         /*       Application.ProcessMessages();
                 WH = Grid.AddWorkShape(AType, f_CurrIDShape, f_CurrIDBlock, f_CurrIDLine);
                 WH.OnShapeCopy = &ShapeCopy;
                 WH.ParentShapeID = LevelController.ParentShapeID;
@@ -100,8 +113,8 @@ namespace geliosNEW
                 Grid.PreparePaint();
                 SetNewPolygon();
                 SetNewPosition();
-                InvalidateRgn(pbMain.Parent.Handle, Grid.GetRegion(WH, 4), false);
-            }*/
+                InvalidateRgn(pbMain.Parent.Handle, Grid.GetRegion(WH, 4), false);*/
+            }
         }
         void CreateSectionBar()
         {
@@ -224,6 +237,19 @@ namespace geliosNEW
                 AddWorkShape(typ);
                 menuBar.DownFalse();
             }
+       /*     else
+                Grid.MouseUp(Sender, Button, Shift, X, Y);
+            Item = Grid.FindAlternateItem(X, Y);
+            if ((Button == mbRight) && (Item))
+            {
+                MenuAlternateItemCreate(Item, X, Y);
+                return;
+            }
+            if (Button == mbRight)
+            {
+                MenuContextCreate(X, Y);
+                return;
+            }*/
         }
 
         private void ПреобразоватьВПридиктнуюМодельToolStripMenuItem_Click(object sender, EventArgs e)

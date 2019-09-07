@@ -175,6 +175,72 @@ namespace geliosNEW
             indexFindChild = 0;
         }
         ~TNodeSearch() { }
-
     };
+    class TPainterList
+    {
+        public List<object> List;
+        int f_pos;
+        public int GetCount()
+        {
+            return List.Count;
+        }
+        public TPainterList()
+        {
+            List = new List<object>();
+            f_pos = 0;
+        }
+        ~TPainterList() { }
+        public TBaseWorkShape First()
+        {
+            TBaseWorkShape Res = null;
+            f_pos = 0;
+            if (List.Count > 0)
+                Res = (TBaseWorkShape)List.ElementAt(f_pos);
+            return Res;
+        }
+        public TBaseWorkShape Next()
+        {
+            TBaseWorkShape Res = null;
+            f_pos++;
+            if ((List.Count > f_pos) && (f_pos >= 0))
+                Res = (TBaseWorkShape)List.ElementAt(f_pos);
+            return Res;
+        }
+        public TBaseWorkShape Prior()
+        {
+            TBaseWorkShape Res = null;
+            f_pos--;
+            if ((List.Count > f_pos) && (f_pos >= 0))
+                Res = (TBaseWorkShape)List.ElementAt(f_pos);
+            return Res;
+        }
+        public TBaseWorkShape Last()
+        {
+            TBaseWorkShape Res = null;
+            if (List.Count > 0)
+            {
+                f_pos = List.Count - 1;
+                Res = (TBaseWorkShape)List.ElementAt(f_pos);
+            }
+            return Res;
+        }
+        public void ClearAll()
+        {
+            List.Clear();
+        }
+        public bool IsExists(TBaseWorkShape AWS)
+        {
+            for (int i = 0; i <= List.Count - 1; i++)
+            {
+                if ((TBaseWorkShape)List.ElementAt(i) == AWS)
+                    return true;
+            }
+            return false;
+        }
+        public int Count
+        {
+            get { return GetCount(); }
+        }
+    };
+
 }

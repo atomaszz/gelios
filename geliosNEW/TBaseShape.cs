@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace geliosNEW
 {
-    class TBaseShape
+    public class TBaseShape
     {
         Color F_BrushColor;  //цвет кисти
         Color F_PenColor;   //цвет пена
@@ -61,9 +61,31 @@ namespace geliosNEW
         void  SetWndHandler(const HWND Value);
         void  SetLEFrame(int Value);
         void  SetUnderControl(TControl* Value);
-        void  SetFont(Graphics::TFont* Value);
-        void  SetCreateLEControl(bool Value);
-        void SetLEControl();
+        void  SetFont(Graphics::TFont* Value);*/
+        void  SetCreateLEControl(bool Value)
+        {
+            if ((TypeShape == 100) || (TypeShape == 80))
+            {
+                f_LEControl = Value;
+           /*     if (f_LEControl)
+                {
+                    if (!F_LEControl)
+                    {
+                        F_LEControl = new TLEControl();
+                        F_LEControl.Source = this;
+                        F_LEControl.Id = F_Id;
+                        F_LEControl.UnderControl = F_UnderControl;
+                        F_LEControl.Active = f_LEActive;
+                    }
+                    SetLEControl();
+                }
+                else
+                {
+                    F_LEControl = null;
+                }*/
+            }
+        }
+   /*     void SetLEControl();
         TRectLine   GetWorkLine(int AIndex);
         int  GetWorkLineCount();
         void CheckNullParamAlt();*/
@@ -75,9 +97,12 @@ namespace geliosNEW
 
 
    /*     protected void SaveCanvas(TCanvas* Canvas);
-        protected void RestoreCanvas(TCanvas* Canvas);
-        protected virtual int GetTypeShape();
-        void SetLEActive(bool AValue);
+        protected void RestoreCanvas(TCanvas* Canvas);*/
+        protected virtual int GetTypeShape()
+        {
+            return F_TypeShape;
+        }
+  /*      void SetLEActive(bool AValue);
         virtual TBaseLine  GetBaseLine(int AIndex);
         int  virtual GetBaseLineCount();
         virtual Point  GetPointTailStartShape();
@@ -135,9 +160,12 @@ namespace geliosNEW
                public virtual void SetRect(TRect Rect);
                public virtual void SetBaseRect(TRect Rect);
 
-               public TRect GetRealRect();
-               public TRect GetRect();
-               public TRect GetFrameRect();
+               public TRect GetRealRect();*/
+        public Rectangle GetRect()
+        {
+            return F_Rect;
+        }
+      /*         public TRect GetFrameRect();
                public TRect FrameRectToRect(TRect R);
 
                public virtual void Paint(TCanvas Canvas);
@@ -175,19 +203,28 @@ namespace geliosNEW
         }
 /*           __property String  Caption = {read = F_Caption, write = F_Caption};
            __property TColor FrameColor  = {read = F_FrameColor, write = F_FrameColor};
-           __property bool DrawFrame = { read = F_DrawFrame, write = F_DrawFrame };
-       __property int TypeShape = { read = GetTypeShape };
-       __property TPoint Point_StartShape = {read = GetPointStartShape};
+           __property bool DrawFrame = { read = F_DrawFrame, write = F_DrawFrame };*/
+       public int TypeShape { get { return GetTypeShape(); } }
+     /*__property TPoint Point_StartShape = {read = GetPointStartShape};
            __property TPoint Point_EndShape = {read = GetPointEndShape};
            __property TPenMode PenMode = {read = F_PenMode, write = F_PenMode};*/
         public int ID
         {
             get { return F_Id; }
         }
-        /*__property bool DrawCaption = { read = F_DrawCaption, write = F_DrawCaption };
-        __property TRect BoundRect = {read = F_Rect, write = SetBoundRect};
-            __property bool LEControl = { read = f_LEControl, write = SetCreateLEControl };
-        __property HWND WndHandler = {read = F_WndHandler, write = SetWndHandler};
+        public  bool DrawCaption
+        {
+            set { F_DrawCaption = value; }
+            get { return F_DrawCaption; }
+        }
+      /*  __property TRect BoundRect = {read = F_Rect, write = SetBoundRect};*/
+            public bool LEControl
+        {
+            set { SetCreateLEControl(value); }
+            get { return f_LEControl; }
+        }
+            
+ /*       __property HWND WndHandler = {read = F_WndHandler, write = SetWndHandler};
             __property int LEFrame = { read = F_LEFrame, write = SetLEFrame };
         __property TControl* UnderControl = { read = F_UnderControl, write = SetUnderControl };
         __property bool ApplyAttribute = { read = f_ApplyAttribute, write = f_ApplyAttribute };

@@ -59,5 +59,55 @@ namespace geliosNEW.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Point, аналогичного {X=388,Y=17}.
+        /// </summary>
+        internal static System.Drawing.Point imageList1_TrayLocation {
+            get {
+                object obj = ResourceManager.GetObject("imageList1.TrayLocation", resourceCulture);
+                return ((System.Drawing.Point)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Point, аналогичного {X=17,Y=17}.
+        /// </summary>
+        internal static System.Drawing.Point menuStrip1_TrayLocation {
+            get {
+                object obj = ResourceManager.GetObject("menuStrip1.TrayLocation", resourceCulture);
+                return ((System.Drawing.Point)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Point, аналогичного {X=248,Y=17}.
+        /// </summary>
+        internal static System.Drawing.Point openFileDialog1_TrayLocation {
+            get {
+                object obj = ResourceManager.GetObject("openFileDialog1.TrayLocation", resourceCulture);
+                return ((System.Drawing.Point)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Point, аналогичного {X=498,Y=17}.
+        /// </summary>
+        internal static System.Drawing.Point saveFileDialog1_TrayLocation {
+            get {
+                object obj = ResourceManager.GetObject("saveFileDialog1.TrayLocation", resourceCulture);
+                return ((System.Drawing.Point)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Point, аналогичного {X=132,Y=17}.
+        /// </summary>
+        internal static System.Drawing.Point statusStrip1_TrayLocation {
+            get {
+                object obj = ResourceManager.GetObject("statusStrip1.TrayLocation", resourceCulture);
+                return ((System.Drawing.Point)(obj));
+            }
+        }
     }
 }

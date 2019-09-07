@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace geliosNEW
 {
-    class TParamAlternative
+    public class TParamAlternative
     {
         List<object> f_List;
         void FreeList()

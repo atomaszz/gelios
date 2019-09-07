@@ -142,7 +142,7 @@ namespace geliosNEW
     SOVM1
 
     */
-    class TParamAlternativeItem
+    public class TParamAlternativeItem
     {
         int f_NUMBER;
         string f_PRED_ISTOR;

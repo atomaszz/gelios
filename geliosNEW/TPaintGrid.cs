@@ -28,12 +28,12 @@ namespace geliosNEW
         Control f_UnderControl;
         Form f_WndHandler;
         Point f_CurrEndPoint; //координаты последней точки
-  //      TClipPath f_ClipPath; //класс пути отсечения
- //       TListForPaint f_ListForPaint; //содержит фигуры для отрисовки
- //       TFlagController f_FlagController; //контроллер флагов
- //       TInvalidateList f_InvalidateList; //список отрисовываемых фигур реально
- //       TLineCutting f_LineCutting; //фигура при перетаскивании
- //       TAltWSList f_AltWSList;//содержит ссодержитписок ТФС для показа альтернативы
+                              //      TClipPath f_ClipPath; //класс пути отсечения
+                              //       TListForPaint f_ListForPaint; //содержит фигуры для отрисовки
+                              //       TFlagController f_FlagController; //контроллер флагов
+                              //       TInvalidateList f_InvalidateList; //список отрисовываемых фигур реально
+                              //       TLineCutting f_LineCutting; //фигура при перетаскивании
+                              //       TAltWSList f_AltWSList;//содержит ссодержитписок ТФС для показа альтернативы
 
 
         int f_X_offs; //смещение по Х
@@ -49,13 +49,13 @@ namespace geliosNEW
         int f_FlagType;
         int f_CurrentCommand; // 1- добавление ТФЕ
         int f_TypMouseOperation; //тип операции с мышью
- //       TBaseShape f_SelectedTFE; //выбранная ТФЕ
+                                 //       TBaseShape f_SelectedTFE; //выбранная ТФЕ
         TBaseWorkShape f_SelectedTFS; //выбранная ТФС
         Color f_FrameColorTFE; //цвет линии обрамления ТФЕ
         Color f_FrameColorTFS; //цвет линии обрамления ТФC
         bool f_WSMoving;
         int f_WSMovingCount;
- //       TFlagShape f_SelectedFlag; //выбранный флажок
+        //       TFlagShape f_SelectedFlag; //выбранный флажок
         int f_Regim;
         TBaseWorkShape f_SelectedAlternateFirst; //первая выбранная ТФС для альтернативы
         TBaseWorkShape f_SelectedAlternateLast; //первая выбранная ТФС для альтернативы
@@ -71,72 +71,78 @@ namespace geliosNEW
         bool f_localVisiblearrowall;
 
         // функции
-   /*     void  SetStepPixels(int Value);
-        void  SetStepPixelsGrid(int Value);
-        void  SetPaintPixels(bool Value);
-        void  SetFonColor(TColor Value);
-        void  SetPixelColor(TColor Value);
-        void  SetLineColor(TColor Value);
-        void  SetBrushTFE(bool Value);
-        void  SetBrushColor(TColor Value);
-        void  SetFontTFE(Graphics::TFont* Value);
-        void  SetFlagType(int Value);
-        void  SetEnterFlagColor(TColor Value);
-        void  SetLeaveFlagColor(TColor Value);
-        void  SetFrameColorTFE(TColor Value);
-        void  SetFrameColorTFS(TColor Value);
-        void  SetTypMouseOperation(int Value);
-        void  SetAltFlagColor(TColor Value);
-        void  SetAltEnterFlagColor(Color Value);
-        void  SetAltArrowColor(Color Value);
-        void  SetAltEnterArrowColor(Color Value);
-        void  SetAltLineColor(TColor Value);
-        void  SetAltEnabledFlagColor(Color Value);
+        /*     void  SetStepPixels(int Value);
+             void  SetStepPixelsGrid(int Value);
+             void  SetPaintPixels(bool Value);
+             void  SetFonColor(TColor Value);
+             void  SetPixelColor(TColor Value);
+             void  SetLineColor(TColor Value);
+             void  SetBrushTFE(bool Value);
+             void  SetBrushColor(TColor Value);
+             void  SetFontTFE(Graphics::TFont* Value);
+             void  SetFlagType(int Value);
+             void  SetEnterFlagColor(TColor Value);
+             void  SetLeaveFlagColor(TColor Value);
+             void  SetFrameColorTFE(TColor Value);
+             void  SetFrameColorTFS(TColor Value);
+             void  SetTypMouseOperation(int Value);
+             void  SetAltFlagColor(TColor Value);
+             void  SetAltEnterFlagColor(Color Value);
+             void  SetAltArrowColor(Color Value);
+             void  SetAltEnterArrowColor(Color Value);
+             void  SetAltLineColor(TColor Value);
+             void  SetAltEnabledFlagColor(Color Value);
 
-        void FreeBitmap();
-        void FreeBitmapCopy();
-        void CreateGrid(int Ax, int Ay);
-        void CreateSrcBitmap(int Ax, int Ay);
-        void CreateSrcBitmapCopy(int Ax, int Ay);
-        void RepaintFon(int Ax, int Ay);
-        void DoPaint();
-        void CopyFon();
-        void ApplyAttributeForWorkShape(TBaseWorkShape WS); // применяет аттрибуты для ТФС
-        void ApplyAttributeForCompositeWorkShape(TBaseWorkShape WS);
-        void BeforeResize();
-        void RecalcCurrEndPoint();  // расчет последней координаты последней ТФС в f_CurrEndPoint
+             void FreeBitmap();
+             void FreeBitmapCopy();
+             void CreateGrid(int Ax, int Ay);
+             void CreateSrcBitmap(int Ax, int Ay);
+             void CreateSrcBitmapCopy(int Ax, int Ay);
+             void RepaintFon(int Ax, int Ay);
+             void DoPaint();
+             void CopyFon();
+             void ApplyAttributeForWorkShape(TBaseWorkShape WS); // применяет аттрибуты для ТФС
+             void ApplyAttributeForCompositeWorkShape(TBaseWorkShape WS);
+             void BeforeResize();*/
+        void RecalcCurrEndPoint()  // расчет последней координаты последней ТФС в f_CurrEndPoint
+        {
+            TBaseWorkShape TempWork;
+            TempWork = g_PainterList.Last();
+            if (TempWork!=null)
+                f_CurrEndPoint = TempWork.EndPoint;
 
-        void  WsFlagCreate(TFlag AFlag, TBaseWorkShape WS);
-        void  WsFlagDestroy(TFlag AFlag, TBaseWorkShape WS);
-        bool SelectTFE(int Ax, int Ay);
-        bool SelectTFS(int Ax, int Ay);
-        void NilTFE();
-        void NilTFS();
-        TBaseWorkShape FindNextWorkShape(TBaseWorkShape W);
-        TBaseWorkShape FindPriorWorkShape(TBaseWorkShape W);
-        TBaseWorkShape  GetLastWorkShape();
-        TBaseWorkShape  GetFirstWorkShape();
-        void RecalcFollowWorkShape(TBaseWorkShape ABeforeInsertWork, TBaseWorkShape AInsertWork);
-        void PaintAlternateList();
-        bool CreateAternative(TFlagShape AFlag);
-        bool CreateDeleteTFSList(TFlagShape AFlag);*/
+        }
+        /*   void  WsFlagCreate(TFlag AFlag, TBaseWorkShape WS);
+           void  WsFlagDestroy(TFlag AFlag, TBaseWorkShape WS);
+           bool SelectTFE(int Ax, int Ay);
+           bool SelectTFS(int Ax, int Ay);
+           void NilTFE();
+           void NilTFS();
+           TBaseWorkShape FindNextWorkShape(TBaseWorkShape W);
+           TBaseWorkShape FindPriorWorkShape(TBaseWorkShape W);
+           TBaseWorkShape  GetLastWorkShape();
+           TBaseWorkShape  GetFirstWorkShape();
+           void RecalcFollowWorkShape(TBaseWorkShape ABeforeInsertWork, TBaseWorkShape AInsertWork);
+           void PaintAlternateList();
+           bool CreateAternative(TFlagShape AFlag);
+           bool CreateDeleteTFSList(TFlagShape AFlag);*/
         void NilAternative()
         {
-     /*       if (f_SelectedAlternateFirst)
-                f_SelectedAlternateFirst.Tag = 0;
-            if (f_SelectedAlternateLast)
-                f_SelectedAlternateLast.Tag = 0;
-            f_SelectedAlternateFirst = f_SelectedAlternateLast = null;*/
+            /*       if (f_SelectedAlternateFirst)
+                       f_SelectedAlternateFirst.Tag = 0;
+                   if (f_SelectedAlternateLast)
+                       f_SelectedAlternateLast.Tag = 0;
+                   f_SelectedAlternateFirst = f_SelectedAlternateLast = null;*/
         }
         void NilDeleteTFSList()
         {
-/*            if (f_SelectedDeleteTFSFirst)
-                f_SelectedDeleteTFSFirst.Tag = 0;
-            if (f_SelectedDeleteTFSLast)
-                f_SelectedDeleteTFSLast.Tag = 0;
-            f_SelectedDeleteTFSFirst = f_SelectedDeleteTFSLast = null;*/
+            /*            if (f_SelectedDeleteTFSFirst)
+                            f_SelectedDeleteTFSFirst.Tag = 0;
+                        if (f_SelectedDeleteTFSLast)
+                            f_SelectedDeleteTFSLast.Tag = 0;
+                        f_SelectedDeleteTFSFirst = f_SelectedDeleteTFSLast = null;*/
         }
-        void  SetRegim(int Value)
+        void SetRegim(int Value)
         {
             // int m_OldRegim;
             if (f_Regim != Value)
@@ -183,17 +189,17 @@ namespace geliosNEW
                 }
             }
         }
-  /*      int GetMainTabCount();
+        /*      int GetMainTabCount();
 
 
-        int TypMouseOperation 
-        {
-            get { return f_TypMouseOperation; }
-            //          set { SetTypMouseOperation(value); }
-        }
+              int TypMouseOperation 
+              {
+                  get { return f_TypMouseOperation; }
+                  //          set { SetTypMouseOperation(value); }
+              }*/
 
         public TPainterList g_PainterList; //класс содержащие рабочие блоки
-        public TAlternateList g_AlternateList;*/
+                                           /*       public TAlternateList g_AlternateList;*/
 
         public TPaintGrid(Image ACanvas, UMainFrm AOwnerForm/*TCanvas* ACanvas, HWND AOwnerForm*/)
         {
@@ -222,12 +228,12 @@ namespace geliosNEW
             f_CurrentCommand = 0;
             f_FlagType = 0;
             f_TypMouseOperation = 0;
-   //         f_SelectedTFE = null;
+            //         f_SelectedTFE = null;
             f_SelectedTFS = null;
-   //         f_FrameColorTFE = null;
-    //        f_FrameColorTFS = null;
+            //         f_FrameColorTFE = null;
+            //        f_FrameColorTFS = null;
             f_WSMoving = false;
-        //    f_SelectedFlag = null;
+            //    f_SelectedFlag = null;
             f_Regim = 0;
             f_SelectedAlternateFirst = null; //первая выбранная ТФС для альтернативы
             f_SelectedAlternateLast = null; //первая выбранная ТФС для альтернативы
@@ -235,23 +241,23 @@ namespace geliosNEW
             f_SelectedDeleteTFSLast = null; //первая выбранная ТФС для альтернативы
 
 
-    /*        f_FontTFE = new Font();
-            ScrBitmap = new Graphics::TBitmap;
-            ScrBitmapCopy = new Graphics::TBitmap;
-            f_ClipPath = new TClipPath;
-            g_PainterList = new TPainterList;
-            f_ListForPaint = new TListForPaint;
-            f_FlagController = new TFlagController();
-            f_InvalidateList = new TInvalidateList;
-            f_LineCutting = new TLineCutting(f_Canvas);
-            g_AlternateList = new TAlternateList;
-            f_AltWSList = new TAltWSList;*/
+            /*        f_FontTFE = new Font();
+                    ScrBitmap = new Graphics::TBitmap;
+                    ScrBitmapCopy = new Graphics::TBitmap;
+                    f_ClipPath = new TClipPath;*/
+            g_PainterList = new TPainterList();
+           /*         f_ListForPaint = new TListForPaint;
+                    f_FlagController = new TFlagController();
+                    f_InvalidateList = new TInvalidateList;
+                    f_LineCutting = new TLineCutting(f_Canvas);
+                    g_AlternateList = new TAlternateList;
+                    f_AltWSList = new TAltWSList;*/
             f_localVisiblearrowall = false;
         }
         ~TPaintGrid() { }
 
- /*       public void Recreate(int AWidth, int AHeight);
-        public void Paint();*/
+        /*       public void Recreate(int AWidth, int AHeight);
+               public void Paint();*/
         public TBaseWorkShape AddWorkShape(int AType, int ACurrIDShape, int ACurrIDBlock, int ACurrIDLine)
         {
             TBaseWorkShape m_CurrWorkShape = null;
@@ -299,12 +305,12 @@ namespace geliosNEW
 
 
                 m_CurrWorkShape.LEControl = f_LEControl;
-          //      m_CurrWorkShape.WndHandler = f_WndHandler;
+                //      m_CurrWorkShape.WndHandler = f_WndHandler;
                 m_CurrWorkShape.UnderControl = f_UnderControl;
                 //       m_CurrWorkShape.OnWSFlagCreate = WsFlagCreate;
                 //      m_CurrWorkShape.OnWSFlagDestroy = WsFlagDestroy;
-                m_CurrWorkShape.BaseStartPoint = 
-                    new Point (m_CurrWorkShape.BaseStartPoint.X - f_X_offsSum, m_CurrWorkShape.BaseStartPoint.Y - f_Y_offsSum);
+                m_CurrWorkShape.BaseStartPoint =
+                    new Point(m_CurrWorkShape.BaseStartPoint.X - f_X_offsSum, m_CurrWorkShape.BaseStartPoint.Y - f_Y_offsSum);
                 m_CurrWorkShape.Init();
                 m_CurrWorkShape.Prepare();
                 f_CurrEndPoint = m_CurrWorkShape.EndPoint;
@@ -313,13 +319,40 @@ namespace geliosNEW
             }
             return m_CurrWorkShape;
         }
-   /*     public TBaseWorkShape InsertWorkShape(int AType, TBaseWorkShape* AWBefore, int ACurrIDShape, int ACurrIDBlock, int ACurrIDLine);
-        HRGN GetRegion(TBaseWorkShape* WS, int AOfs);
-        Point GetPointPolygon(int AXoffs = 0, int AYoffs = 0); //определение макисмальной точки полигона
-        TPoint GetTopPoint(int AXoffs = 0, int AYoffs = 0);
-        void ApplyOffset(int AX, int AY);
-        void PreparePaint();
-        int ApplyVisibleFlag(int APosition, bool AVisible); //показать флажки по всем ТФС по заданной позиции
+        /*     public TBaseWorkShape InsertWorkShape(int AType, TBaseWorkShape* AWBefore, int ACurrIDShape, int ACurrIDBlock, int ACurrIDLine);
+             HRGN GetRegion(TBaseWorkShape* WS, int AOfs);*/
+        public Point GetPointPolygon(int AXoffs = 0, int AYoffs = 0) //определение макисмальной точки полигона
+        {
+            Point res = new Point(0, 0);
+            Rectangle temp = new Rectangle(0, 0, 0, 0);
+            TBaseWorkShape TempWork;
+
+            TempWork = g_PainterList.First();
+            while (TempWork!=null)
+            {
+                temp = TempWork.GetMaxRect();
+                if (temp.Right > res.X) res.X = temp.Right;
+                if (temp.Bottom > res.Y) res.Y = temp.Bottom;
+                TempWork = g_PainterList.Next();
+            }
+            res.X = res.X + AXoffs;
+            res.Y = res.Y + AYoffs;
+            return res;
+        }
+        /*       TPoint GetTopPoint(int AXoffs = 0, int AYoffs = 0);
+         void ApplyOffset(int AX, int AY);*/
+        public void PreparePaint()
+        {
+            TBaseWorkShape CurrShape;
+            CurrShape = g_PainterList.First();
+            while (CurrShape!=null)
+            {
+                CurrShape.Prepare();
+                CurrShape = g_PainterList.Next();
+            }
+            RecalcCurrEndPoint();
+        }
+   /*     int ApplyVisibleFlag(int APosition, bool AVisible); //показать флажки по всем ТФС по заданной позиции
         int ApplyVisibleFlagForAlternative(bool AVisible);///показать флажки по всем ТФС для создания альтернативы
         int ApplyVisibleFlagForDeleteTFS(bool AVisible);///показать флажки по всем ТФС для удаления от точки до точки
         void ReapintFlag(bool AEnter, TBaseShape* AFlag);

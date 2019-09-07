@@ -9,6 +9,8 @@ namespace geliosNEW
 
     class TListNode
     {
+        public delegate void TListChange();
+
         bool f_Update;
         bool f_Changes;
         TNodeSearchController Searcher;
@@ -26,7 +28,7 @@ namespace geliosNEW
             return false;
         }
 
-     /*   TListChange FOnListChange;*/
+        TListChange FOnListChange;
         TStackDustController f_StackDustController;
 
         TNodeAlt CheckFirstNodeAlt()
@@ -35,7 +37,7 @@ namespace geliosNEW
             if (AlternateList.Count == 1)
             {
                 Alt = (TNodeAlt)(AlternateList.ElementAt(0));
-                if (Alt.NodeStart==null) return Alt;
+                if (Alt.NodeStart == null) return Alt;
             }
             return null;
         }
@@ -58,15 +60,38 @@ namespace geliosNEW
                 MainList.RemoveAt(i);
             }
         }
-    /*    void FreeListAncestor();
-        void FreeListAlternate();
-        int GetNodeMaxID();
-        int GetTFEMaxID();
-        int GetAlternateMaxID();
-        void CheckDeleteAlternate(TBaseWorkShape AWS);
-        TNodeAncestor IsExistsNodeAncestor(int AIdBlock, int AIdShapeAncestor);
-        TNodeAncestor DoAddNodeAncestor(int AIdBlock, int AIdShapeAncestor);
-        int GetAlternateCount();
+        /*    void FreeListAncestor();
+            void FreeListAlternate();
+            int GetNodeMaxID();
+            int GetTFEMaxID();
+            int GetAlternateMaxID();
+            void CheckDeleteAlternate(TBaseWorkShape AWS);*/
+        TNodeAncestor IsExistsNodeAncestor(int AIdBlock, int AIdShapeAncestor)
+        {
+            TNodeAncestor currNode;
+            for (int i = AncestorList.Count - 1; i >= 0; i--)
+            {
+                currNode = (TNodeAncestor)AncestorList.ElementAt(i);
+                if ((currNode.IdBlock == AIdBlock) && (currNode.IdShapeAncestor == AIdShapeAncestor))
+                    return currNode;
+            }
+            return null;
+        }
+
+        TNodeAncestor DoAddNodeAncestor(int AIdBlock, int AIdShapeAncestor)
+        {
+            TNodeAncestor Res = IsExistsNodeAncestor(AIdBlock, AIdShapeAncestor);
+            if (Res==null)
+            {
+                TNodeAncestor NAc = new TNodeAncestor();
+                NAc.IdBlock = AIdBlock;
+                NAc.IdShapeAncestor = AIdShapeAncestor;
+                AncestorList.Add(NAc);
+                Res = NAc;
+            }
+            return Res;
+        }
+    /*    int GetAlternateCount();
         TNode GetAlternateItem(int AIndex);
         void SaveParamAlternateToXML(TBaseShape ATFE, TGlsXmlElement AElement);
         void SaveParamAlternateToBin(TBaseShape ATFE, SF_TFE A_tfe, THandle AFile);
@@ -82,16 +107,83 @@ namespace geliosNEW
             AlternateList = new List<object>();
             Searcher = new TNodeSearchController();
             Searcher.SetMainList(this);
-       //     FOnListChange = null;
+            FOnListChange = null;
             f_Update = false;
             f_Changes = false;
             f_StackDustController = new TStackDustController();
         }
         ~TListNode() { }
-        /*     public TNodeMain FindLastNodeToAlternate(int AltId, int ANumAlt, int AIdParenShape);
-             public void FillPainterList(TPainterList PainterList, int AltId, int ANumAlt, int IdParentShape);
-             public void AddShapeToList(int AltId, int ANumAlt, TBaseWorkShape WShape, int IdParentShape);
-             public void InsertShapeToList(int AltId, int ANumAlt, TBaseWorkShape WBefore, TBaseWorkShape WShape, int IdParentShape);
+        public TNodeMain FindLastNodeToAlternate(int AltId, int ANumAlt, int AIdParenShape)
+        {
+            TNodeMain TempN;
+            for (int i = 0; i <= MainList.Count - 1; i++)
+            {
+                TempN = (TNodeMain)MainList.ElementAt(i);
+                if ((TempN.IdAlternate == AltId) && (TempN.NumAlt == ANumAlt)
+                  && (TempN.IdParentShape == AIdParenShape))
+                    if (TempN.Next==null) return TempN;
+            }
+            return null;
+        }
+        public void FillPainterList(TPainterList PainterList, int AltId, int ANumAlt, int IdParentShape)
+        {
+            TBaseWorkShape WShape;
+            int uid = 0;
+            PainterList.List.Clear();
+            WShape = FindFirstChild(AltId, ANumAlt, IdParentShape, ref uid);
+            while (WShape!=null)
+            {
+                PainterList.List.Add(WShape);
+                WShape = FindNextChild(uid);
+            }
+            DisableFind(uid);
+        }
+        public void AddShapeToList(int AltId, int ANumAlt, TBaseWorkShape WShape, int IdParentShape)
+        {
+            TNodeMain Nd;
+            TNodeMain NPrior;
+            TNodeAncestor NAc;
+            int ParentBlock;
+            int pos = 0;
+            if (!CheckAlternateNode(AltId, ANumAlt)) return;
+            NPrior = FindLastNodeToAlternate(AltId, ANumAlt, IdParentShape);
+
+            Nd = new TNodeMain();
+            Nd.IdBlock = WShape.BlockId;  //s
+            Nd.IdParentShape = IdParentShape;
+            Nd.WorkShape = WShape;
+            Nd.IdAlternate = AltId;
+            Nd.NumAlt = ANumAlt;
+            if (NPrior!=null) //не первый узел 
+            {
+                NPrior.Next = Nd;
+                Nd.Prior = NPrior;
+            }
+
+            MainList.Add(Nd);
+            if ((FOnListChange!=null) && (!f_Update)) OnListChange();
+            f_Changes = true;
+
+            TNodeAlt NAlt = CheckFirstNodeAlt();
+            if ((NAlt!=null) && (AltId == 0))
+                NAlt.NodeStart = Nd;
+
+            if (IdParentShape != 0)
+            {
+                DoAddNodeAncestor(Nd.IdBlock, Nd.IdParentShape);
+                while (true)
+                {
+                    if (Nd.IdParentShape == 0) return;
+                    ParentBlock = FindBlockOutShape(Nd.IdParentShape);
+
+
+                    Nd = FindNode(ParentBlock, ref pos);
+                    if (Nd.IdParentShape != 0)
+                        DoAddNodeAncestor(Nd.IdBlock, Nd.IdParentShape);
+                }
+            }
+        }
+    /*         public void InsertShapeToList(int AltId, int ANumAlt, TBaseWorkShape WBefore, TBaseWorkShape WShape, int IdParentShape);
              public int DeleteBlock(int IdBlock);
              public void ClearDeleteBlock();
              public bool IsContainsChildBlock(int IdBlock);*/
@@ -107,13 +199,60 @@ namespace geliosNEW
             }
             return false;
         }
-     /*   public TNodeMain FindNode(int IdBlock, int &pos);
-        public TNodeMain FindNode(TBaseWorkShape WShape);
-        public int FindBlockOutShape(int IdShape);
-        public TBaseWorkShape FindFirstChild(int AltId, int ANumAlt, int IdParentShape, int &AUid);
-        public TBaseWorkShape FindNextChild(int AUid);
-        public bool DisableFind(int AUid);
-        public bool IsFirstWorkShape(TBaseWorkShape WShape, int AltId, int ANumAlt, int IdParentShape);
+        public TNodeMain FindNode(int IdBlock, ref int pos)
+        {
+            int i = -1;
+            pos = i;
+            TNodeMain TempN;
+            for (i = 0; i <= MainList.Count - 1; i++)
+            {
+                TempN = (TNodeMain)MainList.ElementAt(i);
+                if (TempN.IdBlock == IdBlock)
+                {
+                    pos = i;
+                    return (TempN);
+                }
+            }
+            return (null);
+        }
+        public TNodeMain FindNode(TBaseWorkShape WShape)
+        {
+            TNodeMain TempN;
+            for (int i = 0; i <= MainList.Count - 1; i++)
+            {
+                TempN = (TNodeMain)MainList.ElementAt(i);
+                if (TempN.WorkShape == WShape)
+                    return (TempN);
+            }
+            return (null);
+        }
+        public int FindBlockOutShape(int IdShape)
+        {
+            int i, j, mn, mx;
+            TNodeMain TempN;
+            for (i = 0; i <= MainList.Count - 1; i++)
+            {
+                TempN = (TNodeMain)MainList.ElementAt(i);
+                mn = TempN.WorkShape.FirstShapeId;
+                mx = TempN.WorkShape.LastShapeId;
+                if ((IdShape >= mn) && (IdShape <= mx))
+                    return TempN.IdBlock;
+            }
+            return 0;
+        }
+        public TBaseWorkShape FindFirstChild(int AltId, int ANumAlt, int IdParentShape, ref int AUid)
+        {
+            return Searcher.FindFirstChild(AltId, ANumAlt, IdParentShape, ref AUid);
+        }
+        public TBaseWorkShape FindNextChild(int AUid)
+        {
+            return Searcher.FindNextChild(AUid);
+        }
+        public bool DisableFind(int AUid)
+        {
+            return Searcher.DisableFind(AUid);
+        }
+   /*     public bool IsFirstWorkShape(TBaseWorkShape WShape, int AltId, int ANumAlt, int IdParentShape);
         public TBaseWorkShape GetLastWorkShape(int AltId, int ANumAlt, int IdParentShape);
         public bool IsEmpty();
         public int DecayWorkShape(TBaseWorkShape WDecay, TBaseWorkShape WN1, TBaseWorkShape WN2);
@@ -183,9 +322,14 @@ namespace geliosNEW
         public void SaveAllToFileBin(AnsiString AFileName, int ATypeParam, TDischargedMassiv AOgrSovm);
 
 
-        public TStackDustController* StackDustController = {read = f_StackDustController
-        public TListChange  OnListChange = {read = FOnListChange, write = FOnListChange
-        public int NodeMaxID = { read = GetNodeMaxID };
+        public TStackDustController* StackDustController = {read = f_StackDustController*/
+        public TListChange OnListChange
+        {
+            set { FOnListChange = value; }
+            get { return FOnListChange;  }
+        }
+
+/*        public int NodeMaxID = { read = GetNodeMaxID };
         public int TFEMaxID = { read = GetTFEMaxID };
         public int AlternateMaxID = { read = GetAlternateMaxID };
         public int AlternateCount = { read = GetAlternateCount };
