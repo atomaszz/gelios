@@ -71,9 +71,19 @@ namespace geliosNEW
         bool f_localVisiblearrowall;
 
         // функции
-        /*     void  SetStepPixels(int Value);
-             void  SetStepPixelsGrid(int Value);
-             void  SetPaintPixels(bool Value);
+        void  SetStepPixels(int Value)
+        {
+            if (Value < 5) Value = 5;
+            if (Value > 12) Value = 12;
+            f_StepPixels = Value;
+        }
+        void  SetStepPixelsGrid(int Value)
+        {
+            if (Value < 5) Value = 5;
+            if (Value > 12) Value = 12;
+            f_StepPixelsGrid = Value;
+        }
+         /*    void  SetPaintPixels(bool Value);
              void  SetFonColor(TColor Value);
              void  SetPixelColor(TColor Value);
              void  SetLineColor(TColor Value);
@@ -119,9 +129,12 @@ namespace geliosNEW
            void NilTFE();
            void NilTFS();
            TBaseWorkShape FindNextWorkShape(TBaseWorkShape W);
-           TBaseWorkShape FindPriorWorkShape(TBaseWorkShape W);
-           TBaseWorkShape  GetLastWorkShape();
-           TBaseWorkShape  GetFirstWorkShape();
+           TBaseWorkShape FindPriorWorkShape(TBaseWorkShape W);*/
+        TBaseWorkShape  GetLastWorkShape()
+        {
+            return g_PainterList.Last();
+        }
+       /*    TBaseWorkShape  GetFirstWorkShape();
            void RecalcFollowWorkShape(TBaseWorkShape ABeforeInsertWork, TBaseWorkShape AInsertWork);
            void PaintAlternateList();
            bool CreateAternative(TFlagShape AFlag);
@@ -199,12 +212,12 @@ namespace geliosNEW
               }*/
 
         public TPainterList g_PainterList; //класс содержащие рабочие блоки
-                                           /*       public TAlternateList g_AlternateList;*/
+ //       public TAlternateList g_AlternateList;
 
         public TPaintGrid(Image ACanvas, UMainFrm AOwnerForm/*TCanvas* ACanvas, HWND AOwnerForm*/)
         {
             f_Width = f_Height = 0;
-            f_StepPixels = 5;
+            f_StepPixels = 6;
             f_StepPixelsGrid = 8;
             f_FonColor = Color.White;
             f_PixelColor = Color.Black;
@@ -307,7 +320,7 @@ namespace geliosNEW
                 m_CurrWorkShape.LEControl = f_LEControl;
                 //      m_CurrWorkShape.WndHandler = f_WndHandler;
                 m_CurrWorkShape.UnderControl = f_UnderControl;
-                //       m_CurrWorkShape.OnWSFlagCreate = WsFlagCreate;
+                //m_CurrWorkShape.OnWSFlagCreate = WsFlagCreate;
                 //      m_CurrWorkShape.OnWSFlagDestroy = WsFlagDestroy;
                 m_CurrWorkShape.BaseStartPoint =
                     new Point(m_CurrWorkShape.BaseStartPoint.X - f_X_offsSum, m_CurrWorkShape.BaseStartPoint.Y - f_Y_offsSum);
@@ -367,9 +380,20 @@ namespace geliosNEW
         HRGN GetRGNAltWSList();
         bool IsAltWSListEmpty();
         TBaseShape* FindTFE(int Ax, int Ay);
-        TBaseWorkShape* FindTFS(int Ax, int Ay);
-        TAlternateItem* FindAlternateItem(int Ax, int Ay);
-        void ClearAll();
+        TBaseWorkShape* FindTFS(int Ax, int Ay);*/
+     /*   TAlternateItem FindAlternateItem(int Ax, int Ay)
+        {
+            TAlternateItem Item;
+            Item = g_AlternateList.First();
+            while (Item!=null)
+            {
+                if (PtInRect(&Item.ArrowWorkShape.GetSmallRegionRect(), new Point(Ax, Ay)))
+                    return Item;
+                Item = g_AlternateList.Next();
+            }
+            return null;
+        }*/
+    /*    void ClearAll();
         void RecalcAfterDeleted(bool AFirst, TPoint FPoint);
         void SetWSFlagEvent(TBaseWorkShape* WS);
         void RecalcBaseOffsetPosition();
@@ -381,11 +405,18 @@ namespace geliosNEW
         TBaseWorkShape* CreateTempWorkShape(int AType, TPoint AStart, int ANumberShapeId = 0);
 
         __property int Width = { read = f_Width };
-        __property int Height = { read = f_Height };
-        __property int StepPixels = { read = f_StepPixels, write = SetStepPixels };
-        __property int StepPixelsGrid = { read = f_StepPixelsGrid, write = SetStepPixelsGrid };
-        __property bool PaintPixels = { read = f_PaintPixels, write = SetPaintPixels };
-        __property TColor  FonColor = {read = f_FonColor, write = SetFonColor
+        __property int Height = { read = f_Height };*/
+        public int StepPixels
+        {
+            get { return f_StepPixels; }
+            set { SetStepPixels(value); }
+        }
+        public int StepPixelsGrid
+        {
+            get { return f_StepPixelsGrid; }
+            set { SetStepPixelsGrid(value); }
+        }
+/*        __property TColor  FonColor = {read = f_FonColor, write = SetFonColor
     };
     __property TColor  PixelColor = {read = f_PixelColor, write = SetPixelColor
 };
@@ -409,11 +440,20 @@ __property TColor LeaveFlagColor  = {read = f_LeaveFlagColor, write = SetLeaveFl
             get { return f_Regim; }
             set { SetRegim(value); }
         }
-        /*__property TBaseWorkShape* LastWorkShape = { read = GetLastWorkShape };
-        __property TBaseWorkShape* FirstWorkShape = { read = GetFirstWorkShape };
-        __property int OffsetSumX = { read = f_X_offsSum };
-        __property int OffsetSumY = { read = f_Y_offsSum };
-        __property TBaseShape* SelectedTFE = { read = f_SelectedTFE };
+        public TBaseWorkShape LastWorkShape 
+        {
+            get { return GetLastWorkShape(); }
+        }
+        /*  __property TBaseWorkShape* FirstWorkShape = { read = GetFirstWorkShape };*/
+        public int OffsetSumX
+        {
+            get { return f_X_offsSum; }
+        }
+        public int OffsetSumY
+        {
+            get { return f_Y_offsSum; }
+        }
+  /*      __property TBaseShape* SelectedTFE = { read = f_SelectedTFE };
         __property TBaseWorkShape* SelectedTFS = { read = f_SelectedTFS, write = f_SelectedTFS };
         __property TColor AltFlagColor = {read = f_AltFlagColor, write = SetAltFlagColor};
            __property TColor AltEnterFlagColor = {read = f_AltEnterFlagColor, write = SetAltEnterFlagColor};

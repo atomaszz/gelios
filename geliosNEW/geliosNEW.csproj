@@ -51,13 +51,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="TEllShape.cs" />
     <Compile Include="TFlagShape.cs" />
     <Compile Include="GraphicShapes.cs" />
     <Compile Include="ListLevel.cs" />
     <Compile Include="SectionBar.cs" />
     <Compile Include="SharedConst.cs" />
     <Compile Include="StackDust.cs" />
-    <Compile Include="TAlternateItem.cs" />
+    <Compile Include="Alternate.cs" />
     <Compile Include="TArrowLine.cs" />
     <Compile Include="TBaseLine.cs" />
     <Compile Include="TBaseShape.cs" />
@@ -78,6 +79,10 @@
     <Compile Include="TParamAlternative.cs" />
     <Compile Include="TParamAlternativeItem.cs" />
     <Compile Include="TRectLine.cs" />
+    <Compile Include="TRectShape.cs" />
+    <Compile Include="TTail.cs" />
+    <Compile Include="TTfeRectShape.cs" />
+    <Compile Include="TTrailer.cs" />
     <Compile Include="TWork.cs" />
     <Compile Include="TZWork.cs" />
     <Compile Include="TZWorkOR.cs" />

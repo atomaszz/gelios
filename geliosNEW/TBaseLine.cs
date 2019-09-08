@@ -15,7 +15,7 @@ namespace geliosNEW
         public delegate void TFlagImport(TBaseLine ASource, TBaseLine ADest, TFlagShape AFlag, int APosFlag);
 
         int F_Step;
-        bool F_DrawFlag;
+        protected bool F_DrawFlag;
         bool F_DrawFlagS;
         bool F_DrawFlagE;
         TFlagShape F_Flag;
@@ -129,11 +129,76 @@ namespace geliosNEW
         Pen Pen;
         Pen OldPenParent;
            //   public:
-      /*     TBaseLine(int x0, int y0, int x1, int y1, int step);
-              virtual ~TBaseLine();
-              int CompareToPoint(TPoint P);
-              virtual void Paint(TCanvas* Canvas);
-              virtual void PaintLine(TCanvas* Canvas);
+        public TBaseLine(int x0, int y0, int x1, int y1, int step)
+        {
+            ApplyCoord(x0, y0, x1, y1);
+   //         Pen = new Graphics::TPen;
+         //   OldPenParent = new Graphics::TPen;
+            F_Step = step;
+            F_Flag = null;
+            F_FlagS = null;
+            F_FlagE = null;
+            F_DrawFlag = false;
+            F_DrawFlagS = false;
+            F_DrawFlagE = false;
+
+            F_FlagColor = Color.White;
+            F_DrawFlagS = false;
+            F_FlagSColor = Color.White;
+            F_DrawFlagE = false;
+            F_FlagEColor = Color.White;
+
+            F_FlagType = 0;
+            F_FlagSType = 0;
+            F_FlagEType = 0;
+
+            F_FlagRadius = 0.7;
+            F_FlagSRadius = 0.7;
+            F_FlagERadius = 0.7;
+
+      //      F_WndHandler = 0;
+            F_UnderControl = null;
+            F_Visible = true;
+            FOnFlagCreate = null;
+            FOnFlagDestroy = null;
+            FOnFlagImport = null;
+            f_LEControl = false;
+            f_Tag = 0;
+            f_Tag2 = 0;
+        }
+        ~TBaseLine() { }
+        /*           int CompareToPoint(TPoint P);*/
+        virtual void Paint(PaintEventArgs Canvas)
+        {
+            Point p0, p1, p2, p3, Center;
+            if (!F_Visible) return;
+   //         OldPenParent.Assign(Canvas.Pen);
+  //          Canvas.Pen.Assign(this.Pen);
+            if ((F_DrawFlag) && (F_Flag!=null))
+            {
+                F_Flag.TypeFlag = F_FlagType;
+                F_Flag.PenWidth = Width;
+                F_Flag.PenColor = Color;
+                F_Flag.Radius = F_FlagRadius;
+            }
+            if ((F_DrawFlagS) && (F_FlagS != null))
+            {
+                F_FlagS.TypeFlag = F_FlagSType;
+                F_FlagS.PenWidth = Width;
+                F_FlagS.PenColor = Color;
+                F_FlagS.Radius = F_FlagSRadius;
+            }
+            if (F_DrawFlagE && F_FlagE)
+            {
+                F_FlagE.TypeFlag = F_FlagEType;
+                F_FlagE.PenWidth = Width;
+                F_FlagE.PenColor = Color;
+                F_FlagE.Radius = F_FlagERadius;
+            }
+     //       DrawLinesAndFlag(Canvas);
+            Canvas.Pen.Assign(OldPenParent);
+        }
+  /*            virtual void PaintLine(TCanvas* Canvas);
               virtual void PaintFlag(TCanvas* Canvas);
               bool KeepFlag(TBaseShape* Flag, int &type);*/
         public void ApplyCoord(int x0, int y0, int x1, int y1)

@@ -82,8 +82,8 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pbMain = new System.Windows.Forms.PictureBox();
-            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
-            this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
+            this.sbY = new System.Windows.Forms.VScrollBar();
+            this.sbX = new System.Windows.Forms.HScrollBar();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -461,8 +461,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel2.Controls.Add(this.pbMain);
-            this.panel2.Controls.Add(this.vScrollBar1);
-            this.panel2.Controls.Add(this.hScrollBar1);
+            this.panel2.Controls.Add(this.sbY);
+            this.panel2.Controls.Add(this.sbX);
             this.panel2.Location = new System.Drawing.Point(3, 27);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(955, 372);
@@ -482,23 +482,23 @@
             this.pbMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pbMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseUp);
             // 
-            // vScrollBar1
+            // sbY
             // 
-            this.vScrollBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.sbY.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.vScrollBar1.Location = new System.Drawing.Point(936, 0);
-            this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(19, 352);
-            this.vScrollBar1.TabIndex = 1;
+            this.sbY.Location = new System.Drawing.Point(936, 0);
+            this.sbY.Name = "sbY";
+            this.sbY.Size = new System.Drawing.Size(19, 352);
+            this.sbY.TabIndex = 1;
             // 
-            // hScrollBar1
+            // sbX
             // 
-            this.hScrollBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.sbX.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.hScrollBar1.Location = new System.Drawing.Point(0, 352);
-            this.hScrollBar1.Name = "hScrollBar1";
-            this.hScrollBar1.Size = new System.Drawing.Size(955, 20);
-            this.hScrollBar1.TabIndex = 0;
+            this.sbX.Location = new System.Drawing.Point(0, 352);
+            this.sbX.Name = "sbX";
+            this.sbX.Size = new System.Drawing.Size(955, 20);
+            this.sbX.TabIndex = 0;
             // 
             // UMainFrm
             // 
@@ -577,8 +577,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem настройкаИнтерфейсаToolStripMenuItem;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.HScrollBar hScrollBar1;
-        private System.Windows.Forms.VScrollBar vScrollBar1;
+        private System.Windows.Forms.HScrollBar sbX;
+        private System.Windows.Forms.VScrollBar sbY;
         private System.Windows.Forms.PictureBox pbMain;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;

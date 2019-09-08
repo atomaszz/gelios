@@ -29,6 +29,9 @@ namespace geliosNEW
         Color f_AltParamShapeColor;
         Color f_AltParamLineColor;
         bool f_AltParamShapeColorEnable;
+        Graphics pbGraph;
+        Rectangle rectMainShow;
+        PaintEventArgs pntMainShow;
         public UMainFrm()
         {
             InitializeComponent();
@@ -49,11 +52,28 @@ namespace geliosNEW
             f_AltParamShapeColor = Color.Yellow;
             f_AltParamLineColor = Color.Fuchsia;
             MainList.OnListChange = ListChange;
-
+            f_CurrIDBlock = 1;
+            pbGraph = pbMain.CreateGraphics();
+            rectMainShow = new Rectangle(0, 0, pbMain.Width, pbMain.Height);
+            pntMainShow = new PaintEventArgs(pbGraph, rectMainShow);
         }
         void ListChange()
         {
             MainList.FillPainterList(Grid.g_PainterList, f_IdAlternative, f_NumAlternative, LevelController.ParentShapeID);
+        }
+        void SetNewPosition()
+        {
+            Rectangle R;
+            TBaseWorkShape W;
+            W = Grid.LastWorkShape;
+            if (W!=null)
+            {
+                R = W.GetFrameRectWithLines();
+                if ((R.Right + Math.Abs(Grid.OffsetSumX) - pbMain.Width - sbX.Value) > (Grid.StepPixels * 2))
+                    sbX.Value = sbX.Maximum;
+                if ((R.Bottom + Math.Abs(Grid.OffsetSumY) - pbMain.Height - sbY.Value) > (Grid.StepPixels * 2))
+                    sbY.Value = sbY.Maximum;
+            }
         }
         void ShapeCopy(TBaseShape Shape, int Num_Shape)
         {
@@ -73,10 +93,10 @@ namespace geliosNEW
         }
         void SetNewPolygon()
         {
-            Point P;
-      /*      P = Grid.GetPointPolygon(sbX.Position, sbY.Position);
-            if ((P.x - pbMain.Width - sbX.Position) > 2)
-                sbX.Max = P.x - pbMain.Width + (Grid.StepPixels * 4);
+        /*    Point P;
+            P = Grid.GetPointPolygon(sbX.Value, sbY.Value);
+            if ((P.X - pbMain.Width - sbX.Value) > 2)
+                sbX. = P.x - pbMain.Width + (Grid.StepPixels * 4);
             if ((P.y - pbMain.Height - sbY.Position) > 2)
                 sbY.Max = P.y - pbMain.Height + (Grid.StepPixels * 4);*/
         }
@@ -96,16 +116,14 @@ namespace geliosNEW
             MainList.AddShapeToList(f_IdAlternative, f_NumAlternative, WH, LevelController.ParentShapeID);
             Grid.PreparePaint();
             SetNewPolygon();
- /*           SetNewPosition();
-            InvalidateRgn(pbMain.Parent.Handle, Grid.GetRegion(WH, 4), false);*/
-
+            SetNewPosition();
+    //        InvalidateRgn(pbMain.Parent.Handle, Grid.GetRegion(WH, 4), false);
             if (AType == 2)
             {
-         /*       Application.ProcessMessages();
                 WH = Grid.AddWorkShape(AType, f_CurrIDShape, f_CurrIDBlock, f_CurrIDLine);
-                WH.OnShapeCopy = &ShapeCopy;
+                WH.OnShapeCopy = ShapeCopy;
                 WH.ParentShapeID = LevelController.ParentShapeID;
-                assert(WH);
+       //         assert(WH);
                 f_CurrIDShape = WH.LastShapeId;
                 f_CurrIDLine = WH.LastLineId;
                 f_CurrIDBlock++;
@@ -113,7 +131,7 @@ namespace geliosNEW
                 Grid.PreparePaint();
                 SetNewPolygon();
                 SetNewPosition();
-                InvalidateRgn(pbMain.Parent.Handle, Grid.GetRegion(WH, 4), false);*/
+      //          InvalidateRgn(pbMain.Parent.Handle, Grid.GetRegion(WH, 4), false);
             }
         }
         void CreateSectionBar()
@@ -205,11 +223,11 @@ namespace geliosNEW
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-    /*        toolStripStatusLabel1.Text = e.X.ToString();
+  /*          toolStripStatusLabel1.Text = e.X.ToString();
             toolStripStatusLabel2.Text = e.Y.ToString();
             //     paralWorkOperAnd(g, 40, 20, 1.5f);
 
-            Pen workPen = new Pen(Color.Black, 2f);
+    /*        Pen workPen = new Pen(Color.Black, 2f);
             GraphicShapes test = new GraphicShapes(pbMain, workPen);
             test.drawForNum(0,20,30,15,25);
             test.drawForNum(13, 45, 30, 15, 25);*/
@@ -229,6 +247,9 @@ namespace geliosNEW
 
         private void PictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
+            /*draw_panel_Paint(pntMainShow);
+            draw_panel_Paint1(pntMainShow);*/
+
             bool m_tfs, m_tfe;
             TAlternateItem Item;
             int typ = GetTypShape();
@@ -237,9 +258,9 @@ namespace geliosNEW
                 AddWorkShape(typ);
                 menuBar.DownFalse();
             }
-       /*     else
-                Grid.MouseUp(Sender, Button, Shift, X, Y);
-            Item = Grid.FindAlternateItem(X, Y);
+          /*  else
+                Grid.MouseUp(Sender, Button, Shift, X, Y);*/
+       /*     Item = Grid.FindAlternateItem(X, Y);
             if ((Button == mbRight) && (Item))
             {
                 MenuAlternateItemCreate(Item, X, Y);
@@ -251,6 +272,21 @@ namespace geliosNEW
                 return;
             }*/
         }
+
+
+    /*    private void draw_panel_Paint(PaintEventArgs e)
+        {
+            e.Graphics.DrawLine(new Pen(Color.Black, 10), 35, 50, 500, 500);
+        }
+        private void draw_panel_Paint1(PaintEventArgs e)
+        {
+            e.Graphics.DrawLine(new Pen(Color.Red, 5), 35, 50, 100, 100);
+        }*/
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
         private void ПреобразоватьВПридиктнуюМодельToolStripMenuItem_Click(object sender, EventArgs e)
         {

@@ -113,16 +113,18 @@ namespace geliosNEW
                  void __fastcall SetBaseLineColor(TColor AValue);
 
                  protected:*/
-        int F_Step;
-        int F_NumberShapeId;
+        protected int F_Step;
+        protected int F_NumberShapeId;
         int F_NumberLineId;
-        int F_LastShapeId;
+        protected int F_LastShapeId;
         int F_LastLineId;
         int F_WidthWork;
-        int F_Indent;
-        /*
-                      void FreeWorkShapes();
-                      int __fastcall virtual GetTypeShape();*/
+        protected int F_Indent;
+        public void FreeWorkShapes()
+        {
+            WorkShapes.Clear();
+        }
+       /*               int __fastcall virtual GetTypeShape();*/
         public virtual Point GetEndPoint()
         {
             return new Point(0, 0);
@@ -233,9 +235,9 @@ namespace geliosNEW
             F_DrawLastFlag = false;
             F_DrawMiddleFlag = false;
 
-            //       WorkShapes = new TList;
-            //       WorkLines = new TList;
-            //        ListFlag = new TListFlag;
+            WorkShapes = new List<object>();
+            WorkLines = new List<object>();
+         //   ListFlag = new List<object>();
 
             f_LEControl = false;
             /*           F_WndHandler = 0;
@@ -289,9 +291,54 @@ namespace geliosNEW
                      TBaseShape* GetWorkNode(int num);
                      TArrowLine* GetWorkLine(int num);
                      void SetOffsetPosition(int X_Ofs, int Y_Ofs);
-                     void SetBaseOffsetPosition(int X_Ofs, int Y_Ofs);
-                     TRect GetFrameRectWithLines();
-                     TRect FrameRectToRect(TRect R);
+                     void SetBaseOffsetPosition(int X_Ofs, int Y_Ofs);*/
+        public Rectangle GetFrameRectWithLines()
+        {
+            Rectangle Res, R_tmp;
+            TBaseShape baseShape;
+            TArrowLine currLine;
+            int i;
+            if (CompositeWorkShape!=null)
+                return CompositeWorkShape.GetMaxRect();
+
+            baseShape = (TBaseShape)WorkShapes.ElementAt(0);
+            Res = baseShape.GetRect();
+
+            for (i = 1; i <= WorkShapes.Count - 1; i++)
+            {
+                baseShape = (TBaseShape)WorkShapes.ElementAt(i);
+                R_tmp = baseShape.GetRect();
+                if (R_tmp.Left < Res.Left) Res.X = R_tmp.Left;
+                if (R_tmp.Right > Res.Right) Res.Width = R_tmp.Right;
+                if (R_tmp.Top < Res.Top) Res.Y = R_tmp.Top;
+                if (R_tmp.Bottom > Res.Bottom) Res.Height = R_tmp.Bottom;
+            }
+
+
+            for (i = 0; i <= WorkLines.Count - 1; i++)
+            {
+                currLine = (TArrowLine)WorkLines.ElementAt(i);
+                if (currLine.xStart < Res.Left) Res.X = currLine.xStart;
+                if (currLine.xEnd < Res.Left) Res.X = currLine.xEnd;
+                if (currLine.xStart > Res.Right) Res.Width = currLine.xStart;
+                if (currLine.xEnd > Res.Right) Res.Width = currLine.xEnd;
+
+                if (currLine.yStart < Res.Top) Res.Y = currLine.yStart;
+                if (currLine.yEnd < Res.Top) Res.Y = currLine.yEnd;
+                if (currLine.yStart > Res.Bottom) Res.Width = currLine.yStart;
+                if (currLine.yEnd > Res.Bottom) Res.Width = currLine.yEnd;
+
+            }
+
+            Res.X = Res.Left - SharedConst.OFFS_FRAME * PenWidth;
+            Res.Y = Res.Top - SharedConst.OFFS_FRAME * PenWidth;
+            Res.Width = Res.Right + SharedConst.OFFS_FRAME * PenWidth;
+            Res.Height = Res.Bottom + SharedConst.OFFS_FRAME * PenWidth;
+            F_Ofs_Point.X = Res.Left - F_StartPoint.X;
+            F_Ofs_Point.Y = Res.Top - F_StartPoint.Y;
+            return Res;
+        }
+              /*       TRect FrameRectToRect(TRect R);
                      TPoint GetStartPointFromFrameRect(TRect R);*/
         public Rectangle GetMaxRect()
         {
@@ -336,9 +383,12 @@ namespace geliosNEW
             F_Ofs_Point.Y = Res.Top - F_StartPoint.Y;
             return Res;
         }
-        /*         bool KeepFlag(TBaseShape* Flag, int &type);
-                 void FreeWorkLines();
-                 virtual bool MakeFlagForShape(TBaseShape* AShape, bool ACreate, int APos, int AType, TColor AColor);
+        /*         bool KeepFlag(TBaseShape* Flag, int &type);*/
+        public void FreeWorkLines()
+        {
+            WorkLines.Clear();
+        }
+       /*          virtual bool MakeFlagForShape(TBaseShape* AShape, bool ACreate, int APos, int AType, TColor AColor);
                  int ShapeSupport(TBaseShape* AShape);
                  TBaseShape* ShapeSupportID(int AShapeID);
                  void ShowAllFlagForSahpe(int AType, TColor AColor);
