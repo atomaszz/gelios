@@ -479,6 +479,7 @@
             this.pbMain.Size = new System.Drawing.Size(933, 352);
             this.pbMain.TabIndex = 2;
             this.pbMain.TabStop = false;
+            this.pbMain.Paint += new System.Windows.Forms.PaintEventHandler(this.PbMain_Paint);
             this.pbMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pbMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseUp);
             // 

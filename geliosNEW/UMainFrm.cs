@@ -249,7 +249,7 @@ namespace geliosNEW
         {
             /*draw_panel_Paint(pntMainShow);
             draw_panel_Paint1(pntMainShow);*/
-
+ //           pntMainShow.Graphics.DrawLine(new Pen(Color.Black, 3), 5,5,100,100);
             bool m_tfs, m_tfe;
             TAlternateItem Item;
             int typ = GetTypShape();
@@ -296,6 +296,11 @@ namespace geliosNEW
         private void ВставитьБлокToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void PbMain_Paint(object sender, PaintEventArgs e)
+        {
+            Grid.Paint();
         }
     }
 }

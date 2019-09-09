@@ -38,8 +38,12 @@ namespace geliosNEW
             F_ShOwner = null;
             F_ShPos = -1;
         }
-/*        public void Paint(TCanvas* Canvas);
-        public __property TPoint Center  = {read = F_Center, write = F_Center*/
+/*        public void Paint(TCanvas* Canvas);*/
+        public Point Center
+        {
+            set { F_Center = value; }
+            get { return F_Center; }
+        }
     public double Radius
         {
             set { F_Radius = value; }

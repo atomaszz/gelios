@@ -57,20 +57,37 @@ namespace geliosNEW
         /*     void SetPenStyle(TPenStyle Value);
              void SetPenMode(TPenMode Value);
 
-             int GetTypeLine();
+             int GetTypeLine();*/
 
-             Color GetPenColor();*/
+        Color GetPenColor()
+        {
+            return Pen.Color;
+        }
         int GetPenWidth()
         {
             return (int)Pen.Width;
         }
-  /*        TPenStyle GetPenStyle();
-          TPenMode GetPenMode();
+        /*        TPenStyle GetPenStyle();
+                TPenMode GetPenMode();*/
 
-          Point GetPointStart();
-          Point GetPointEnd();
-          void SetPointStart(TPoint Value);
-          void  SetPointEnd(TPoint Value);*/
+        Point GetPointStart()
+        {
+            return (new Point(x0, y0));
+        }
+        Point GetPointEnd()
+        {
+            return (new Point(x1, y1));
+        }
+        void SetPointStart(Point Value)
+        {
+            x0 = Value.X;
+            y0 = Value.Y;
+        }
+        void  SetPointEnd(Point Value)
+        {
+            x1 = Value.X;
+            y1 = Value.Y;
+        }
         void  SetDrawFlag(bool Value)
         {
             int pos = 1;
@@ -91,19 +108,212 @@ namespace geliosNEW
             }
         }
         /*   void  SetDrawFlagS(bool Value);
-           void  SetDrawFlagE(bool Value);
+           void  SetDrawFlagE(bool Value);*/
 
-           bool GetCoordLines(TPoint &p0, TPoint &p1, TPoint &p2, TPoint &p3, TPoint &Center);
-           void DrawLinesAndFlag(TCanvas* Canvas);
+        bool GetCoordLines(ref Point p0, ref Point p1, ref Point p2, ref Point p3, ref Point Center)
+        {
+            int cnt;
+            int xd, yd;
+            int x_start, x_end, y_start, y_end;
+            p0 = new Point(0, 0);
+            p1 = new Point(0, 0);
+            p2 = new Point(0, 0);
+            p3 = new Point(0, 0);
+            cnt = (int)(F_Flag.Radius * F_Step);
+            xd = Math.Abs((int)((x1 - x0) / 2));
+            yd = Math.Abs((int)((y1 - y0) / 2));
+            if (y0 == y1)
+            {
+                if (x0 == x1) return false;
+                x_start = Math.Min(x0, x1);
+                x_end = x_start + xd - cnt;
+                p0 = new Point(x_start, y0);
+                p1 = new Point(x_end, y0);
 
-           bool GetCoordLinesStart(TPoint &p0, TPoint &Center);
-           bool GetCoordLinesEnd(TPoint &p0, TPoint &Center);
-           TPoint __fastcall GetStart();
-           TPoint __fastcall GetEnd();
+                Center = new Point(x_end + cnt, y0);
+
+                x_start = x_end + 2 * cnt;
+                x_end = x_start + xd - cnt;
+                p2 = new Point(x_start, y0);
+                p3 = new Point(x_end, y0);
+
+            }
+            if (x0 == x1)
+            {
+                if (y0 == y1) return false;
+                y_start = Math.Min(y0, y1);
+                y_end = y_start + yd - cnt;
+                p0 = new Point(x1, y_start);
+                p1 = new Point(x1, y_end);
+
+                Center = new Point(x0, y_end + cnt);
+
+                y_start = y_end + 2 * cnt;
+                y_end = y_start + yd - cnt;
+                p2 = new Point(x1, y_start);
+                p3 = new Point(x1, y_end);
+            }
+            return true;
+        }
+        void DrawLinesAndFlag(PaintEventArgs Canvas)
+        {
+            Point m_s = new Point(x0, y0);
+            Point m_e = new Point(x1, y1);
+            Point m_1 = new Point(0, 0);
+            Point m_2 = new Point(0, 0);
+            Point temp1 = new Point(), temp2 = new Point(), temp3 = new Point(), temp4 = new Point(), center = new Point();
+            Point center_S = new Point(), center_C = new Point(), center_E = new Point();
+            bool p_c, p_s, p_e;
+            p_c = p_s = p_e = false;
+            if (F_FlagS != null)
+            {
+                if (GetCoordLinesStart(ref temp1, ref center))
+                {
+                    m_s = temp1;
+                    p_s = true;
+                    center_S = center;
+                }
+            }
+            if (F_Flag!=null)
+            {
+                if (GetCoordLines(ref temp1, ref temp2, ref temp3, ref temp4, ref center))
+                {
+                    m_1 = temp2;
+                    m_2 = temp3;
+                    p_c = true;
+                    center_C = center;
+                }
+            }
+            if (F_FlagE!=null)
+            {
+
+                if (GetCoordLinesEnd(ref temp1, ref center))
+                {
+                    m_e = temp1;
+                    p_e = true;
+                    center_E = center;
+                }
+            }
+
+    //        Canvas.MoveTo(m_s.X, m_s.Y);
+            if (F_Flag!=null)
+            {
+                Canvas.Graphics.DrawLine(new Pen(Color.Black,2),m_s, m_1);
+        /*        Canvas.LineTo(m_1.X, m_1.Y);
+                Canvas.MoveTo(m_2.X, m_2.Y);*/
+            }
+            Canvas.Graphics.DrawLine(new Pen(Color.Black, 2), m_2, m_e);
+    //        Canvas.LineTo(m_e.X, m_e.Y);
+            if (p_s)
+            {
+                F_FlagS.Center = center_S;
+                F_FlagS.Paint(Canvas);
+            }
+            else if (F_FlagS!=null) F_FlagS.Paint(Canvas);
+            if (p_c)
+            {
+                F_Flag.Center = center_C;
+                // F_Flag->BrushColor = F_FlagColor;
+                F_Flag.Paint(Canvas);
+            }
+            else if (F_Flag!=null) F_Flag.Paint(Canvas);
+            if (p_e)
+            {
+                F_FlagE.Center = center_E;
+                // F_FlagE->BrushColor = F_FlagEColor;
+                F_FlagE.Paint(Canvas);
+            }
+            else if (F_FlagE!=null) F_FlagE.Paint(Canvas);
+        }
+
+        bool GetCoordLinesStart(ref Point  p, ref Point Center)
+        {
+            int cnt;
+            int x_start, y_start;
+            p = new Point(0, 0);
+            Center = new Point(0, 0);
+            cnt = (int)(F_FlagS.Radius * F_Step);
+
+            if (y0 == y1)
+            {
+                if (x0 == x1)
+                    return false;
+                if (x0 <= x1)
+                {
+                    x_start = x0 + cnt * 2;
+                    Center = new Point(x_start - cnt, y0);
+                }
+                else
+                {
+                    x_start = x0 - cnt * 2;
+                    Center = new Point(x_start + cnt, y0);
+                }
+                p = new Point(x_start, y0);
+            }
+            if (x0 == x1)
+            {
+                if (y0 == y1)
+                    return false;
+                if (y0 <= y1)
+                {
+                    y_start = y0 + cnt * 2;
+                    Center = new Point(x0, y_start - cnt);
+                }
+                else
+                {
+                    y_start = y0 - cnt * 2;
+                    Center = new Point(x0, y_start + cnt);
+                }
+                p = new Point(x0, y_start);
+            }
+            return true;
+        }
+        bool GetCoordLinesEnd(ref Point p, ref Point Center)
+        {
+            int cnt;
+            int x_end, y_end;
+            p = new Point(0, 0);
+            Center = new Point(0, 0);
+            cnt = (int)(F_FlagE.Radius * F_Step);
+            if (y0 == y1)
+            {
+                if (x0 == x1) return false;
+                if (x0 <= x1)
+                {
+                    x_end = x1 - cnt * 2;
+                    Center = new Point(x_end + cnt, y1);
+                }
+                else
+                {
+                    x_end = x1 + cnt * 2;
+                    Center = new Point(x_end - cnt, y1);
+                }
+                p = new Point(x_end, y1);
+            }
+            if (x0 == x1)
+            {
+                if (y0 == y1) return false;
+                if (y0 <= y1)
+                {
+                    y_end = y1 - cnt * 2;
+                    Center = new Point(x1, y_end + cnt);
+                }
+                else
+                {
+                    y_end = y1 + cnt * 2;
+                    Center = new Point(x1, y_end - cnt);
+                }
+
+                p = new Point(x1, y_end);
+            }
+            return true;
+        }
+   /*        Point GetStart();
+           Point GetEnd();*/
            //void __fastcall SetParentWindow(TWinControl* Value);
-           void __fastcall SetLEControl(bool Value);
-           void __fastcall SetWndHandler(const HWND Value);
-           void __fastcall SetUnderControl(TControl* Value);*/
+    /*       void SetLEControl(bool Value);
+           void SetWndHandler(const HWND Value);
+           void SetUnderControl(TControl* Value);*/
         void  SetFlagColor(Color Value)
         {
             F_FlagColor = Value;
@@ -168,7 +378,7 @@ namespace geliosNEW
         }
         ~TBaseLine() { }
         /*           int CompareToPoint(TPoint P);*/
-        virtual void Paint(PaintEventArgs Canvas)
+        public virtual void Paint(PaintEventArgs Canvas)
         {
             Point p0, p1, p2, p3, Center;
             if (!F_Visible) return;
@@ -188,15 +398,15 @@ namespace geliosNEW
                 F_FlagS.PenColor = Color;
                 F_FlagS.Radius = F_FlagSRadius;
             }
-            if (F_DrawFlagE && F_FlagE)
+            if (F_DrawFlagE && (F_FlagE!=null))
             {
                 F_FlagE.TypeFlag = F_FlagEType;
                 F_FlagE.PenWidth = Width;
                 F_FlagE.PenColor = Color;
                 F_FlagE.Radius = F_FlagERadius;
             }
-     //       DrawLinesAndFlag(Canvas);
-            Canvas.Pen.Assign(OldPenParent);
+            DrawLinesAndFlag(Canvas);
+     //       Canvas.Pen.Assign(OldPenParent);
         }
   /*            virtual void PaintLine(TCanvas* Canvas);
               virtual void PaintFlag(TCanvas* Canvas);
@@ -255,7 +465,7 @@ namespace geliosNEW
         public  Color  Color
         {
             set { SetPenColor(value); }
-     //       get { return GetPenColor(); }
+            get { return GetPenColor(); }
         }
 
         public  int Width
@@ -263,13 +473,21 @@ namespace geliosNEW
             set { SetPenWidth(value); }
             get { return GetPenWidth(); }
         }
-     /*   public TPenStyle Style = {read = GetPenStyle, write = SetPenStyle
+        /*   public TPenStyle Style = {read = GetPenStyle, write = SetPenStyle
 
-      __property TPenMode  Mode  = {read = GetPenMode,  write = SetPenMode};
-          __property int TypeLine = { read = GetTypeLine };
-      __property TPoint    PointStart = {read  = GetPointStart, write = SetPointStart};
-          __property TPoint    PointEnd = {read  = GetPointEnd, write = SetPointEnd};*/
-          public  bool DrawFlag
+         __property TPenMode  Mode  = {read = GetPenMode,  write = SetPenMode};
+             __property int TypeLine = { read = GetTypeLine };*/
+        public Point PointStart
+        {
+            set { SetPointStart(value); }
+            get { return GetPointStart(); }
+        }
+        public Point PointEnd
+        {
+            set { SetPointEnd(value); }
+            get { return GetPointEnd(); }
+        }
+        public  bool DrawFlag
         {
             set { SetDrawFlag(value); }
             get { return F_DrawFlag; }

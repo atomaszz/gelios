@@ -39,20 +39,22 @@ namespace geliosNEW
           //      Canvas.MoveTo(x0, y0);
                 if (F_FirstRadius > 0)
                 {
-                    Start.Center = Point(x0, y0);
+                    Start.Center = new Point(x0, y0);
                     Start.Radius = F_FirstRadius;
                     Start.Paint(Canvas);
                 }
-                Canvas.LineTo(x1, y1);
+                //          Canvas.LineTo(x1, y1);
+                Canvas.Graphics.DrawLine(new Pen(Color.Black,2), x0, y0, x1, y1);
                 if (F_LastRadius > 0)
                 {
-                    End.Center = Point(x1, y1);
+                    End.Center = new Point(x1, y1);
                     End.Radius = F_LastRadius;
                     End.Paint(Canvas);
                 }
-                Canvas.LineTo(x1, y1);
+                Canvas.Graphics.DrawLine(new Pen(Color.Black, 2), x0, y0, x1, y1);
+           //     Canvas.LineTo(x1, y1);
 
-                Canvas.Pen.Assign(OldPenParent);
+           //     Canvas.Pen.Assign(OldPenParent);
             }
         }
         public double FirstRadius

@@ -55,9 +55,15 @@ namespace geliosNEW
         TParamAlternative f_ParamAlt;
         TBaseShape f_Clon;
 
-        /*      void DoSetLEFrame();
-              Point  GetPointStartShape();
-              Point  GetPointEndShape();*/
+        /*      void DoSetLEFrame();*/
+        Point  GetPointStartShape()
+        {
+            return (new Point(F_Rect.Left, F_Rect.Top + (int)((F_Rect.Bottom - F_Rect.Top) / 2)));
+        }
+        Point  GetPointEndShape()
+        {
+            return (new Point(F_Rect.Right, F_Rect.Top + (int)((F_Rect.Bottom - F_Rect.Top) / 2)));
+        }
         void SetBoundRect(Rectangle Value)
         {
             SetBaseRect(Value);
@@ -275,9 +281,15 @@ namespace geliosNEW
     /*       __property TColor FrameColor  = {read = F_FrameColor, write = F_FrameColor};
            __property bool DrawFrame = { read = F_DrawFrame, write = F_DrawFrame };*/
        public int TypeShape { get { return GetTypeShape(); } }
-     /*__property TPoint Point_StartShape = {read = GetPointStartShape};
-           __property TPoint Point_EndShape = {read = GetPointEndShape};
-           __property TPenMode PenMode = {read = F_PenMode, write = F_PenMode};*/
+       public Point Point_StartShape
+        {
+            get { return GetPointStartShape(); }
+        }
+        public Point Point_EndShape
+        {
+            get { return GetPointEndShape(); }
+        }
+   /*     public TPenMode PenMode = {read = F_PenMode, write = F_PenMode};*/
         public int ID
         {
             get { return F_Id; }

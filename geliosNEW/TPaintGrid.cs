@@ -83,34 +83,97 @@ namespace geliosNEW
             if (Value > 12) Value = 12;
             f_StepPixelsGrid = Value;
         }
-         /*    void  SetPaintPixels(bool Value);
-             void  SetFonColor(TColor Value);
-             void  SetPixelColor(TColor Value);
-             void  SetLineColor(TColor Value);
-             void  SetBrushTFE(bool Value);
-             void  SetBrushColor(TColor Value);
-             void  SetFontTFE(Graphics::TFont* Value);
-             void  SetFlagType(int Value);
-             void  SetEnterFlagColor(TColor Value);
-             void  SetLeaveFlagColor(TColor Value);
-             void  SetFrameColorTFE(TColor Value);
-             void  SetFrameColorTFS(TColor Value);
-             void  SetTypMouseOperation(int Value);
-             void  SetAltFlagColor(TColor Value);
-             void  SetAltEnterFlagColor(Color Value);
-             void  SetAltArrowColor(Color Value);
-             void  SetAltEnterArrowColor(Color Value);
-             void  SetAltLineColor(TColor Value);
-             void  SetAltEnabledFlagColor(Color Value);
+        /*    void  SetPaintPixels(bool Value);
+            void  SetFonColor(TColor Value);
+            void  SetPixelColor(TColor Value);
+            void  SetLineColor(TColor Value);
+            void  SetBrushTFE(bool Value);
+            void  SetBrushColor(TColor Value);
+            void  SetFontTFE(Graphics::TFont* Value);
+            void  SetFlagType(int Value);
+            void  SetEnterFlagColor(TColor Value);
+            void  SetLeaveFlagColor(TColor Value);
+            void  SetFrameColorTFE(TColor Value);
+            void  SetFrameColorTFS(TColor Value);
+            void  SetTypMouseOperation(int Value);
+            void  SetAltFlagColor(TColor Value);
+            void  SetAltEnterFlagColor(Color Value);
+            void  SetAltArrowColor(Color Value);
+            void  SetAltEnterArrowColor(Color Value);
+            void  SetAltLineColor(TColor Value);
+            void  SetAltEnabledFlagColor(Color Value);
 
-             void FreeBitmap();
-             void FreeBitmapCopy();
-             void CreateGrid(int Ax, int Ay);
-             void CreateSrcBitmap(int Ax, int Ay);
-             void CreateSrcBitmapCopy(int Ax, int Ay);
-             void RepaintFon(int Ax, int Ay);
-             void DoPaint();
-             void CopyFon();
+            void FreeBitmap();
+            void FreeBitmapCopy();
+            void CreateGrid(int Ax, int Ay);
+            void CreateSrcBitmap(int Ax, int Ay);
+            void CreateSrcBitmapCopy(int Ax, int Ay);
+            void RepaintFon(int Ax, int Ay);*/
+        void DoPaint()
+        {
+            int i;
+            TBaseWorkShape WP;
+            TBaseShape BS;
+            TListForPaintItem ItemPaint;
+
+            if (f_RefreshFon)
+                RepaintFon(f_X_offsSum, f_Y_offsSum);
+            else
+                CopyFon();
+
+
+            if ((f_ListForPaint->Count == 0) && (f_RefreshFon ||
+              (f_CurrentCommand != 0)))
+            {
+                f_InvalidateList->Clear();
+                WP = g_PainterList->First();
+                while (WP)
+                {
+                    f_InvalidateList->AddWorkShape(WP);
+                    if ((WP == f_LineCutting->WorkShape) && (f_WSMovingCount == 0)) continue;
+                    ApplyAttributeForWorkShape(WP);
+                    WP->Paint(ScrBitmap->Canvas);
+                    WP = g_PainterList->Next();
+                }
+            }
+
+            if ((f_ListForPaint->Count == 0) && (!f_RefreshFon && (f_CurrentCommand == 0)))
+            {
+                for (i = 0; i <= f_InvalidateList->Count - 1; i++)
+                {
+                    WP = f_InvalidateList->Items[i];
+                    if ((WP == f_LineCutting->WorkShape) && (f_WSMovingCount == 0)) continue;
+                    ApplyAttributeForWorkShape(WP);
+                    WP->Paint(ScrBitmap->Canvas);
+                }
+            }
+
+            if (f_ListForPaint->Count > 0)
+            {
+                for (i = 0; i <= f_ListForPaint->Count - 1; i++)
+                {
+                    ItemPaint = f_ListForPaint->Items[i];
+                    switch (ItemPaint->Type)
+                    {
+                        case 0:
+                            BS = static_cast<TBaseShape*>(ItemPaint->ClassPoint);
+                            BS->Paint(ScrBitmap->Canvas);
+                            break;
+                        case 1:
+                            WP = static_cast<TBaseWorkShape*>(ItemPaint->ClassPoint);
+                            ApplyAttributeForWorkShape(WP);
+                            if ((WP == f_LineCutting->WorkShape) && (f_WSMovingCount == 0)) continue;
+                            WP->Paint(ScrBitmap->Canvas);
+                            break;
+                    }
+                }
+                f_ListForPaint->Clear();
+            }
+            PaintAlternateList();
+            f_RefreshFon = false;//f_Srolling;
+            f_CurrentCommand = 0;
+        }
+   /*          void CopyFon();
              void ApplyAttributeForWorkShape(TBaseWorkShape WS); // применяет аттрибуты для ТФС
              void ApplyAttributeForCompositeWorkShape(TBaseWorkShape WS);
              void BeforeResize();*/
@@ -269,8 +332,12 @@ namespace geliosNEW
         }
         ~TPaintGrid() { }
 
-        /*       public void Recreate(int AWidth, int AHeight);
-               public void Paint();*/
+        /*       public void Recreate(int AWidth, int AHeight);*/
+        public void Paint()
+        {
+            DoPaint();
+    //        f_Canvas.Draw(0, 0, ScrBitmap);
+        }
         public TBaseWorkShape AddWorkShape(int AType, int ACurrIDShape, int ACurrIDBlock, int ACurrIDLine)
         {
             TBaseWorkShape m_CurrWorkShape = null;
