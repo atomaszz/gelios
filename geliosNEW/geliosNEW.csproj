@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DynamicArray.cs" />
+    <Compile Include="LineCutting.cs" />
     <Compile Include="ListForPaint.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -74,6 +76,7 @@
     <Compile Include="TCycleDoWhileDo.cs" />
     <Compile Include="TCycleDoWhileDoFC.cs" />
     <Compile Include="TCycleWhileDo.cs" />
+    <Compile Include="TInvalidateList.cs" />
     <Compile Include="TListNode.cs" />
     <Compile Include="ListShape.cs" />
     <Compile Include="TPaintGrid.cs" />

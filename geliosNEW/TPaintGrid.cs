@@ -29,10 +29,10 @@ namespace geliosNEW
         Form f_WndHandler;
         Point f_CurrEndPoint; //координаты последней точки
                               //      TClipPath f_ClipPath; //класс пути отсечения
-                              //       TListForPaint f_ListForPaint; //содержит фигуры для отрисовки
-                              //       TFlagController f_FlagController; //контроллер флагов
-                              //       TInvalidateList f_InvalidateList; //список отрисовываемых фигур реально
-                              //       TLineCutting f_LineCutting; //фигура при перетаскивании
+        TListForPaint f_ListForPaint; //содержит фигуры для отрисовки
+                                      //       TFlagController f_FlagController; //контроллер флагов
+        TInvalidateList f_InvalidateList; //список отрисовываемых фигур реально
+        TLineCutting f_LineCutting; //фигура при перетаскивании
                               //       TAltWSList f_AltWSList;//содержит ссодержитписок ТФС для показа альтернативы
 
 
@@ -107,8 +107,38 @@ namespace geliosNEW
             void FreeBitmapCopy();
             void CreateGrid(int Ax, int Ay);
             void CreateSrcBitmap(int Ax, int Ay);
-            void CreateSrcBitmapCopy(int Ax, int Ay);
-            void RepaintFon(int Ax, int Ay);*/
+            void CreateSrcBitmapCopy(int Ax, int Ay);*/
+        void RepaintFon(int Ax, int Ay)
+        {
+            int j, i, m_X, m_Y;
+            int x_offs, y_offs;
+       //     m/_X = ScrBitmap.Width;
+       //     m_Y = ScrBitmap.Height;
+            if (Math.Abs(Ax) < f_StepPixelsGrid) x_offs = Ax;
+    /*        else
+            {
+                th = div(Ax, f_StepPixelsGrid);
+                x_offs = th.rem;
+            }
+            if (abs(Ay) < f_StepPixelsGrid) y_offs = Ay;
+            else
+            {
+                th = div(Ay, f_StepPixelsGrid);
+                y_offs = th.rem;
+            }
+
+            ScrBitmap.Canvas.Brush.Color = f_FonColor;
+            ScrBitmap.Canvas.FillRect(TRect(0, 0, m_X, m_Y));
+            if (f_PaintPixels && (f_StepPixelsGrid > 0))
+            {
+                for (i = x_offs; i <= m_X + abs(x_offs); i = i + f_StepPixelsGrid)
+                {
+                    for (j = y_offs; j <= m_Y + abs(y_offs); j = j + f_StepPixelsGrid)
+                        ScrBitmap.Canvas.Pixels[i][j] = f_PixelColor;
+                }
+            }
+            ScrBitmapCopy.Canvas.CopyRect(Bounds(0, 0, m_X, m_Y), ScrBitmap.Canvas, Bounds(0, 0, m_X, m_Y));*/
+        }
         void DoPaint()
         {
             int i;
@@ -122,60 +152,96 @@ namespace geliosNEW
                 CopyFon();
 
 
-            if ((f_ListForPaint->Count == 0) && (f_RefreshFon ||
+            if ((f_ListForPaint.Count == 0) && (f_RefreshFon ||
               (f_CurrentCommand != 0)))
             {
-                f_InvalidateList->Clear();
-                WP = g_PainterList->First();
-                while (WP)
+                f_InvalidateList.Clear();
+                WP = g_PainterList.First();
+                while (WP!=null)
                 {
-                    f_InvalidateList->AddWorkShape(WP);
-                    if ((WP == f_LineCutting->WorkShape) && (f_WSMovingCount == 0)) continue;
+                    f_InvalidateList.AddWorkShape(WP);
+                    if ((WP == f_LineCutting.WorkShape) && (f_WSMovingCount == 0)) continue;
                     ApplyAttributeForWorkShape(WP);
-                    WP->Paint(ScrBitmap->Canvas);
-                    WP = g_PainterList->Next();
+                    WP.Paint(ScrBitmap.Canvas);
+                    WP = g_PainterList.Next();
                 }
             }
 
-            if ((f_ListForPaint->Count == 0) && (!f_RefreshFon && (f_CurrentCommand == 0)))
+            if ((f_ListForPaint.Count == 0) && (!f_RefreshFon && (f_CurrentCommand == 0)))
             {
-                for (i = 0; i <= f_InvalidateList->Count - 1; i++)
+                for (i = 0; i <= f_InvalidateList.Count - 1; i++)
                 {
-                    WP = f_InvalidateList->Items[i];
-                    if ((WP == f_LineCutting->WorkShape) && (f_WSMovingCount == 0)) continue;
+                    WP = f_InvalidateList.Items[i];
+                    if ((WP == f_LineCutting.WorkShape) && (f_WSMovingCount == 0)) continue;
                     ApplyAttributeForWorkShape(WP);
-                    WP->Paint(ScrBitmap->Canvas);
+                    WP.Paint(ScrBitmap.Canvas);
                 }
             }
 
-            if (f_ListForPaint->Count > 0)
+            if (f_ListForPaint.Count > 0)
             {
-                for (i = 0; i <= f_ListForPaint->Count - 1; i++)
+                for (i = 0; i <= f_ListForPaint.Count - 1; i++)
                 {
-                    ItemPaint = f_ListForPaint->Items[i];
-                    switch (ItemPaint->Type)
+                    ItemPaint = f_ListForPaint.Items[i];
+                    switch (ItemPaint.Type)
                     {
                         case 0:
-                            BS = static_cast<TBaseShape*>(ItemPaint->ClassPoint);
-                            BS->Paint(ScrBitmap->Canvas);
+                            BS = static_cast<TBaseShape*>(ItemPaint.ClassPoint);
+                            BS.Paint(ScrBitmap.Canvas);
                             break;
                         case 1:
-                            WP = static_cast<TBaseWorkShape*>(ItemPaint->ClassPoint);
+                            WP = static_cast<TBaseWorkShape*>(ItemPaint.ClassPoint);
                             ApplyAttributeForWorkShape(WP);
-                            if ((WP == f_LineCutting->WorkShape) && (f_WSMovingCount == 0)) continue;
-                            WP->Paint(ScrBitmap->Canvas);
+                            if ((WP == f_LineCutting.WorkShape) && (f_WSMovingCount == 0)) continue;
+                            WP.Paint(ScrBitmap.Canvas);
                             break;
                     }
                 }
-                f_ListForPaint->Clear();
+                f_ListForPaint.Clear();
             }
             PaintAlternateList();
             f_RefreshFon = false;//f_Srolling;
             f_CurrentCommand = 0;
         }
-   /*          void CopyFon();
-             void ApplyAttributeForWorkShape(TBaseWorkShape WS); // применяет аттрибуты для ТФС
-             void ApplyAttributeForCompositeWorkShape(TBaseWorkShape WS);
+        void CopyFon()
+        {
+            int aX, aY;
+            aX = ScrBitmapCopy.Width;
+            aY = ScrBitmapCopy.Height;
+   //         ScrBitmap.Canvas.CopyRect(Bounds(0, 0, aX, aY), ScrBitmapCopy.Canvas, Bounds(0, 0, aX, aY));
+        }
+        void ApplyAttributeForWorkShape(TBaseWorkShape WS) // применяет аттрибуты для ТФС
+        {
+            WS.PenWidth = f_WSPenWidth;
+            WS.LineWidth = f_WSPenWidth;
+            WS.PenColor = f_LineColor;
+            WS.BaseLineColor = f_LineColor;
+            if (f_BrushTFE)
+                WS.BrushStyle = bsSolid;
+            else
+                WS.BrushStyle = bsClear;
+            WS.BrushColor = f_BrushColor;
+            WS.Font = f_FontTFE;
+            WS.FlagSType = f_FlagType;
+            WS.FlagEType = f_FlagType;
+            WS.FrameColorTFE = f_FrameColorTFE;
+            WS.FrameColor = f_FrameColorTFS;
+            if (WS.CompositeWorkShape)
+            {
+                WS.CompositeWorkShape.SetColorAll(f_LineColor);
+                WS.CompositeWorkShape.SetBrushColorAll(f_BrushColor);
+                WS.CompositeWorkShape.SetBrushStyleAll(WS.BrushStyle);
+            }
+            if (f_AltWSList.Find(WS))
+            {
+                WS.PenColor = f_AltLineColor;
+                if (WS.CompositeWorkShape)
+                    WS.CompositeWorkShape.SetColorAll(f_AltLineColor);
+            }
+            ApplyAttributeForCompositeWorkShape(WS);
+        }
+
+        /*     void ApplyAttributeForCompositeWorkShape(TBaseWorkShape WS);
              void BeforeResize();*/
         void RecalcCurrEndPoint()  // расчет последней координаты последней ТФС в f_CurrEndPoint
         {
@@ -197,10 +263,20 @@ namespace geliosNEW
         {
             return g_PainterList.Last();
         }
-       /*    TBaseWorkShape  GetFirstWorkShape();
-           void RecalcFollowWorkShape(TBaseWorkShape ABeforeInsertWork, TBaseWorkShape AInsertWork);
-           void PaintAlternateList();
-           bool CreateAternative(TFlagShape AFlag);
+        /*    TBaseWorkShape  GetFirstWorkShape();
+            void RecalcFollowWorkShape(TBaseWorkShape ABeforeInsertWork, TBaseWorkShape AInsertWork);*/
+        void PaintAlternateList()
+        {
+            TAlternateItem Item;
+            Item = g_AlternateList.First();
+            while (Item!=null)
+            {
+                if (Item.Visible)
+                    Item.ArrowWorkShape.Paint(ScrBitmap.Canvas);
+                Item = g_AlternateList.Next();
+            }
+        }
+     /*      bool CreateAternative(TFlagShape AFlag);
            bool CreateDeleteTFSList(TFlagShape AFlag);*/
         void NilAternative()
         {
@@ -275,7 +351,7 @@ namespace geliosNEW
               }*/
 
         public TPainterList g_PainterList; //класс содержащие рабочие блоки
- //       public TAlternateList g_AlternateList;
+        public TAlternateList g_AlternateList;
 
         public TPaintGrid(Image ACanvas, UMainFrm AOwnerForm/*TCanvas* ACanvas, HWND AOwnerForm*/)
         {
@@ -322,12 +398,12 @@ namespace geliosNEW
                     ScrBitmapCopy = new Graphics::TBitmap;
                     f_ClipPath = new TClipPath;*/
             g_PainterList = new TPainterList();
-           /*         f_ListForPaint = new TListForPaint;
-                    f_FlagController = new TFlagController();
-                    f_InvalidateList = new TInvalidateList;
-                    f_LineCutting = new TLineCutting(f_Canvas);
-                    g_AlternateList = new TAlternateList;
-                    f_AltWSList = new TAltWSList;*/
+            /*         f_ListForPaint = new TListForPaint;
+                     f_FlagController = new TFlagController();*/
+            f_InvalidateList = new TInvalidateList();
+            f_LineCutting = new TLineCutting(f_Canvas);
+                    g_AlternateList = new TAlternateList();
+          /*          f_AltWSList = new TAltWSList*/
             f_localVisiblearrowall = false;
         }
         ~TPaintGrid() { }
