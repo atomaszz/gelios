@@ -26,7 +26,7 @@ namespace geliosNEW
         }
 
         ~TTail() { }
-        public void Paint(PaintEventArgs Canvas)
+        public void Paint(Graphics Canvas)
         {
             Rectangle R;
             if ((F_FirstRadius == 0) && (F_LastRadius == 0))
@@ -44,14 +44,14 @@ namespace geliosNEW
                     Start.Paint(Canvas);
                 }
                 //          Canvas.LineTo(x1, y1);
-                Canvas.Graphics.DrawLine(new Pen(Color.Black,2), x0, y0, x1, y1);
+                Canvas.DrawLine(new Pen(Color.Black,2), x0, y0, x1, y1);
                 if (F_LastRadius > 0)
                 {
                     End.Center = new Point(x1, y1);
                     End.Radius = F_LastRadius;
                     End.Paint(Canvas);
                 }
-                Canvas.Graphics.DrawLine(new Pen(Color.Black, 2), x0, y0, x1, y1);
+                Canvas.DrawLine(new Pen(Color.Black, 2), x0, y0, x1, y1);
            //     Canvas.LineTo(x1, y1);
 
            //     Canvas.Pen.Assign(OldPenParent);

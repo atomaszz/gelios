@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace geliosNEW
 {
@@ -16,7 +17,7 @@ namespace geliosNEW
         int f_OffsetTop;
         bool f_Selected;
         Point f_StartPoint;
-      //  ColorSetup f_ColorSetup;
+        TColorSetup f_ColorSetup;
         long f_Ref;
  //       TCompositeStack2 f_History;
   /*      TBaseLine GetBaseLineItem(int AIndex);
@@ -36,9 +37,43 @@ namespace geliosNEW
         Point  virtual GetEndPoint();
         Point  virtual GetStartPoint();
         virtual TBaseLine  GetEndLine();
-        void  virtual SetStartPoint(Point AValue);
-        void  SetSelected(bool AValue);
-        TBaseLine GetBaseLine(int AIndex);
+        void  virtual SetStartPoint(Point AValue);*/
+        void  SetSelected(bool AValue)
+        {
+            TCompositeBaseWorkItem Item;
+            TBaseLine BL;
+            f_Selected = AValue;
+            for (int i = f_ListBL.Count - 1; i >= 0; i--)
+            {
+                BL = (TBaseLine)f_ListBL.ElementAt(i);
+         //           BL.Color = (f_Selected) ? f_ColorSetup.FrameColorTFS : f_ColorSetup.LineColor;
+            }
+                for (int i = 0; i <= f_ListItem.Count - 1; i++)
+                {
+                    Item = (TCompositeBaseWorkItem)f_ListItem.ElementAt(i);
+                    if (Item.BaseShape!=null)
+                    {
+                /*        if (f_Selected)
+                            Item.BaseShape.PenColor = f_ColorSetup.FrameColorTFS;
+                        else
+                            Item.BaseShape.PenColor = Item.BaseShape.Tag ? f_ColorSetup.HaveChildColor : f_ColorSetup.LineColor;
+                        if (Item.BaseShape.Clon.ParamAlt)
+                        {
+                            if (f_ColorSetup.AltParamShapeColorEnable)
+                            {
+                                Item.BaseShape.BrushStyle = bsSolid;
+                                Item.BaseShape.BrushColor = f_ColorSetup.AltParamShapeColor;
+                            }
+                            else
+                                Item.BaseShape.BrushStyle = bsClear;
+                            Item.BaseShape.PenColor = f_ColorSetup.AltParamLineColor;
+                        }*/
+                    }
+               /*     for (int j = 0; j <= Item.CompositeWorkCount - 1; j++)
+                        Item.CompositeWork[j].SetSelected(AValue);*/
+                }
+        }
+     /*   TBaseLine GetBaseLine(int AIndex);
         TBaseLine GetNewLine();*/
         public virtual TRectLine GetFirstLine()
         {
@@ -54,7 +89,7 @@ namespace geliosNEW
             f_OffsetTop = 0;
             f_LastLineBend = 0;
             f_FirstLineBend = 0;
-     //       f_ColorSetup = NULL;
+            f_ColorSetup = null;
             f_Selected = false;
             f_Ref = 1;
      //       f_History = new TCompositeStack2;
@@ -77,9 +112,24 @@ namespace geliosNEW
                 Item.Prepare();
             }*/
         }
+        virtual public void Paint(Graphics ACanvas)
+        {
+            TCompositeBaseWorkItem Item;
+            TBaseLine BL;
+            for (int i = 0; i <= f_ListItem.Count - 1; i++)
+            {
+                Item = (TCompositeBaseWorkItem)f_ListItem.ElementAt(i);
+                Item.Paint(ACanvas);
+            }
+            for (int j = 0; j <= f_ListBL.Count - 1; j++)
+            {
+                BL = (TBaseLine)f_ListBL.ElementAt(j);
+                //      BL->Color = f_ColorSetup->LineColor;
+                BL.Paint(ACanvas);
+            }
+        }
 
-        /*   virtual public void Paint(TCanvas* ACanvas);
-           virtual public void ReplaceShape(int IdShapeReplace, TCompositeBaseWork* ANew);
+        /*   virtual public void ReplaceShape(int IdShapeReplace, TCompositeBaseWork* ANew);
            virtual public void Appearance();
            virtual public bool ConvertWorkShape(TAlternateViewItemTFS* AWS, TAlternateView* AV);
            virtual public void ConvertWorkShapeFromBase(TBaseWorkShape* AWS, TAlternateView* AV);*/
@@ -151,8 +201,12 @@ namespace geliosNEW
      };
      __property TPoint EndPoint = {read = GetEndPoint};
           __property TBaseLine* EndLine = { read = GetEndLine };
-     __property TColorSetup* ColorSetup = { read = f_ColorSetup, write = f_ColorSetup };
-     __property bool Selected = { read = f_Selected, write = SetSelected };*/
+     __property TColorSetup* ColorSetup = { read = f_ColorSetup, write = f_ColorSetup };*/
+        public bool Selected
+        {
+            set { f_Selected = value; }
+         /*   get { return SetSelected(); }*/
+        }
         public  TRectLine FirstLine { get { return GetFirstLine(); } }
 /*__property TCompositeStack2* History = { read = f_History };
 __property TBaseWorkShape * ConvertedBWS = { read = f_ConvertedBWS, write = f_ConvertedBWS };*/

@@ -155,7 +155,7 @@ namespace geliosNEW
             }
             return true;
         }
-        void DrawLinesAndFlag(PaintEventArgs Canvas)
+        void DrawLinesAndFlag(Graphics Canvas)
         {
             Point m_s = new Point(x0, y0);
             Point m_e = new Point(x1, y1);
@@ -198,11 +198,11 @@ namespace geliosNEW
     //        Canvas.MoveTo(m_s.X, m_s.Y);
             if (F_Flag!=null)
             {
-                Canvas.Graphics.DrawLine(new Pen(Color.Black,2),m_s, m_1);
+                Canvas.DrawLine(new Pen(Color.Black,2),m_s, m_1);
         /*        Canvas.LineTo(m_1.X, m_1.Y);
                 Canvas.MoveTo(m_2.X, m_2.Y);*/
             }
-            Canvas.Graphics.DrawLine(new Pen(Color.Black, 2), m_2, m_e);
+            Canvas.DrawLine(new Pen(Color.Black, 2), m_2, m_e);
     //        Canvas.LineTo(m_e.X, m_e.Y);
             if (p_s)
             {
@@ -378,7 +378,7 @@ namespace geliosNEW
         }
         ~TBaseLine() { }
         /*           int CompareToPoint(TPoint P);*/
-        public virtual void Paint(PaintEventArgs Canvas)
+        public virtual void Paint(Graphics Canvas)
         {
             Point p0, p1, p2, p3, Center;
             if (!F_Visible) return;

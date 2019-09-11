@@ -53,7 +53,7 @@ namespace geliosNEW
 
         }
         ~TAlternateItem() { }
-/*        public TArrowWorkShape ArrowWorkShape 
+  /*      public TArrowWorkShape ArrowWorkShape 
         {
             get { return f_ArrowWorkShape; }
         }*/
@@ -113,13 +113,24 @@ namespace geliosNEW
     {
         List<object> f_List;
         int f_pos;
- /*       int GetCount();
-        public TAlternateList();
+ /*       int GetCount();*/
+        public TAlternateList()
+        {
+            f_List = new List<object>();
+            f_pos = 0;
+        }
         ~TAlternateList() { }
-        public TAlternateItem First();
-        public TAlternateItem Next();
-        public TAlternateItem Prior();
-        public TAlternateItem Last();
+        public TAlternateItem First()
+        {
+            TAlternateItem Res = null;
+            f_pos = 0;
+            if (f_List.Count > 0)
+                Res = (TAlternateItem)f_List.ElementAt(f_pos);
+            return Res;
+        }
+    /*    public TAlternateItem Next();
+        public TAlternateItem Prior();*/
+    /*    public TAlternateItem Last();
         public bool EnterByShape(TBaseShape AFlagShape);
         public bool LeaveByShape(TBaseShape* AFlagShape);
         public void ClearAll();

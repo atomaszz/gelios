@@ -22,8 +22,8 @@ namespace geliosNEW
         Form f_OwnerForm;  //форма владельца
         bool f_RefreshFon; //нужно ли перерисовывать фон
         int f_WSPenWidth; //толщина линий ТФЕ
-        Bitmap ScrBitmap;
-        Bitmap ScrBitmapCopy;
+        Graphics ScrBitmap;
+        Graphics ScrBitmapCopy;
         bool f_LEControl;
         Control f_UnderControl;
         Form f_WndHandler;
@@ -162,7 +162,7 @@ namespace geliosNEW
                     f_InvalidateList.AddWorkShape(WP);
                     if ((WP == f_LineCutting.WorkShape) && (f_WSMovingCount == 0)) continue;
                     ApplyAttributeForWorkShape(WP);
-                    WP.Paint(ScrBitmap.Canvas);
+                    WP.Paint(ScrBitmap);
                     WP = g_PainterList.Next();
                 }
             }
@@ -171,10 +171,10 @@ namespace geliosNEW
             {
                 for (i = 0; i <= f_InvalidateList.Count - 1; i++)
                 {
-                    WP = f_InvalidateList.Items[i];
-                    if ((WP == f_LineCutting.WorkShape) && (f_WSMovingCount == 0)) continue;
-                    ApplyAttributeForWorkShape(WP);
-                    WP.Paint(ScrBitmap.Canvas);
+                //    WP = f_InvalidateList.Items[i];
+               /*     if ((WP == f_LineCutting.WorkShape) && (f_WSMovingCount == 0)) continue;
+                    ApplyAttributeForWorkShape(WP);*/
+                //    WP.Paint(ScrBitmap.Canvas);
                 }
             }
 
@@ -182,20 +182,20 @@ namespace geliosNEW
             {
                 for (i = 0; i <= f_ListForPaint.Count - 1; i++)
                 {
-                    ItemPaint = f_ListForPaint.Items[i];
-                    switch (ItemPaint.Type)
+              //      ItemPaint = f_ListForPaint.Items[i];
+            /*        switch (ItemPaint.Type)
                     {
                         case 0:
-                            BS = static_cast<TBaseShape*>(ItemPaint.ClassPoint);
-                            BS.Paint(ScrBitmap.Canvas);
+                            BS = (TBaseShape)ItemPaint.ClassPoint;
+                        //    BS.Paint(ScrBitmap.Canvas);
                             break;
                         case 1:
-                            WP = static_cast<TBaseWorkShape*>(ItemPaint.ClassPoint);
+                            WP = (TBaseWorkShape)ItemPaint.ClassPoint;
                             ApplyAttributeForWorkShape(WP);
                             if ((WP == f_LineCutting.WorkShape) && (f_WSMovingCount == 0)) continue;
-                            WP.Paint(ScrBitmap.Canvas);
+                  //          WP.Paint(ScrBitmap.Canvas);
                             break;
-                    }
+                    }*/
                 }
                 f_ListForPaint.Clear();
             }
@@ -206,13 +206,13 @@ namespace geliosNEW
         void CopyFon()
         {
             int aX, aY;
-            aX = ScrBitmapCopy.Width;
-            aY = ScrBitmapCopy.Height;
+    //   /     aX = ScrBitmapCopy.Width;
+//aY = ScrBitmapCopy.Height;
    //         ScrBitmap.Canvas.CopyRect(Bounds(0, 0, aX, aY), ScrBitmapCopy.Canvas, Bounds(0, 0, aX, aY));
         }
         void ApplyAttributeForWorkShape(TBaseWorkShape WS) // применяет аттрибуты для ТФС
         {
-            WS.PenWidth = f_WSPenWidth;
+    /*        WS.PenWidth = f_WSPenWidth;
             WS.LineWidth = f_WSPenWidth;
             WS.PenColor = f_LineColor;
             WS.BaseLineColor = f_LineColor;
@@ -226,7 +226,7 @@ namespace geliosNEW
             WS.FlagEType = f_FlagType;
             WS.FrameColorTFE = f_FrameColorTFE;
             WS.FrameColor = f_FrameColorTFS;
-            if (WS.CompositeWorkShape)
+            if (WS.CompositeWorkShape!=null)
             {
                 WS.CompositeWorkShape.SetColorAll(f_LineColor);
                 WS.CompositeWorkShape.SetBrushColorAll(f_BrushColor);
@@ -235,10 +235,10 @@ namespace geliosNEW
             if (f_AltWSList.Find(WS))
             {
                 WS.PenColor = f_AltLineColor;
-                if (WS.CompositeWorkShape)
+                if (WS.CompositeWorkShape!=null)
                     WS.CompositeWorkShape.SetColorAll(f_AltLineColor);
             }
-            ApplyAttributeForCompositeWorkShape(WS);
+            ApplyAttributeForCompositeWorkShape(WS);*/
         }
 
         /*     void ApplyAttributeForCompositeWorkShape(TBaseWorkShape WS);
@@ -267,14 +267,14 @@ namespace geliosNEW
             void RecalcFollowWorkShape(TBaseWorkShape ABeforeInsertWork, TBaseWorkShape AInsertWork);*/
         void PaintAlternateList()
         {
-            TAlternateItem Item;
+      /*      TAlternateItem Item;
             Item = g_AlternateList.First();
             while (Item!=null)
             {
                 if (Item.Visible)
                     Item.ArrowWorkShape.Paint(ScrBitmap.Canvas);
                 Item = g_AlternateList.Next();
-            }
+            }*/
         }
      /*      bool CreateAternative(TFlagShape AFlag);
            bool CreateDeleteTFSList(TFlagShape AFlag);*/
@@ -398,10 +398,10 @@ namespace geliosNEW
                     ScrBitmapCopy = new Graphics::TBitmap;
                     f_ClipPath = new TClipPath;*/
             g_PainterList = new TPainterList();
-            /*         f_ListForPaint = new TListForPaint;
-                     f_FlagController = new TFlagController();*/
+            f_ListForPaint = new TListForPaint();
+            /*   f_FlagController = new TFlagController();*/
             f_InvalidateList = new TInvalidateList();
-            f_LineCutting = new TLineCutting(f_Canvas);
+     //       f_LineCutting = new TLineCutting(f_Canvas);
                     g_AlternateList = new TAlternateList();
           /*          f_AltWSList = new TAltWSList*/
             f_localVisiblearrowall = false;

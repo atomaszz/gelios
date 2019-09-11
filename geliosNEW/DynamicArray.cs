@@ -40,7 +40,7 @@ namespace geliosNEW
         }
         void  SetArray(int AIndex, object AValue)
         {
-            TDynamicArrayItem Item, FindItem = NULL;
+            TDynamicArrayItem Item, FindItem = null;
             for (int i = 0; i <= f_List.Count - 1; i++)
             {
                 Item = (TDynamicArrayItem)f_List.ElementAt(i);
@@ -81,7 +81,7 @@ namespace geliosNEW
         }
         void  SetNamed(string AIndex, object AValue)
         {
-            AppendNamed(AIndex, AValue);
+        //    AppendNamed(AIndex, AValue);
         }
         object  GetInteger(int APos)
         {
@@ -96,7 +96,7 @@ namespace geliosNEW
         }
         void  SetInteger(int APos, object AValue)
         {
-            AppendInteger(APos, AValue);
+        //    AppendInteger(APos, AValue);
         }
         TDynamicArrayItem  GetPosition(int APos)
         {

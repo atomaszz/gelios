@@ -13,7 +13,10 @@ namespace geliosNEW
         int f_Width;
         int f_Heigth;
    //     TBaseWorkShape GetItem(int AIndex);
-    //    int GetCount();
+        int GetCount()
+        {
+            return (f_List.Count);
+        }
         public TInvalidateList()
         {
             f_List = new List<object>();
@@ -43,7 +46,10 @@ namespace geliosNEW
                 f_List.Add(AShape);
         }
         //      public TBaseWorkShape  Items[int AIndex] = { read =  GetItem
-        //       public int Count = { read = GetCount };
+        public int Count
+        {
+            get { return GetCount(); }
+        }
         //       public int Width = { read = f_Width, write = f_Width };
         //       public int Heigth = { read = f_Heigth, write = f_Heigth };
     }

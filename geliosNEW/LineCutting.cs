@@ -25,19 +25,36 @@ namespace geliosNEW
         }
         int GetXDln()
         {
-            return Math.Abs(SharedConst.MyMax(f_PEnd.X, f_PStart.X) - MyMin(f_PEnd.X, f_PStart.X));
+            return Math.Abs(SharedConst.MyMax(f_PEnd.X, f_PStart.X) - SharedConst.MyMin(f_PEnd.X, f_PStart.X));
         }
-        public TLineCuttingItem();
-        public int Type = { read = GetType };
-        public TPoint PointStart = {read = f_PStart, write  = f_PStart
+        public TLineCuttingItem()
+        {
+            f_PStart = new Point(0, 0);
+            f_PEnd = new Point(0, 0);
+            f_Includet = false;
+        }
+        public int Type { get { return GetType(); } }
 
-        public TPoint PointEnd = {read = f_PEnd, write  = f_PEnd
-
-        public bool Includet = { read = f_Includet, write = f_Includet };
-        public int XDln = { read = GetXDln };
+        public Point PointStart
+        {
+            set { f_PStart = value; }
+            get { return f_PStart;  }
+        }
+        public Point PointEnd
+        {
+            set { f_PEnd = value; }
+            get { return f_PEnd; }
+        }
+        public bool Includet
+        {
+            set { f_Includet = value; }
+            get { return f_Includet; }
+        }
+        public int XDln
+        {
+            get { return GetXDln(); }
+        }
     }
-
-
 
     class TLineCutting
     {
@@ -86,19 +103,19 @@ namespace geliosNEW
             {
                 f_PenColorWS = f_WorkShape.PenColor;
                 f_PenWidthWS = f_WorkShape.PenWidth;
-                f_PenStyleWS = f_WorkShape.PenStyle;
+            /*    f_PenStyleWS = f_WorkShape.PenStyle;
                 f_PenModeWS = f_WorkShape.PenMode;
                 f_FrameColorWS = f_WorkShape.FrameColor;
                 f_BrushStyleWS = f_WorkShape.BrushStyle;
                 f_DrawCaption = f_WorkShape.DrawCaption;
                 f_FirstLine.PointStart = f_WorkShape.FirstLine.PointStart;
                 f_FirstLine.PointEnd = f_WorkShape.FirstLine.PointEnd;
-                if (f_WorkShape.CompositeWorkShape)
+                if (f_WorkShape.CompositeWorkShape!=null)
                 {
                     f_DShapes.Clear();
                     f_WorkShape.CompositeWorkShape.GetAllShapes(f_DShapes);
                 }
-                CreateImage();
+                CreateImage();*/
             }
         }
    /*     void SetNextWorkShape(TBaseWorkShape AValue);

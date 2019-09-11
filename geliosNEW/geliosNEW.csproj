@@ -49,11 +49,14 @@
     <Compile Include="DynamicArray.cs" />
     <Compile Include="LineCutting.cs" />
     <Compile Include="ListForPaint.cs" />
+    <Compile Include="Messangers.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="TArrowWorkShape.cs" />
+    <Compile Include="TColorSetup.cs" />
     <Compile Include="TEllShape.cs" />
     <Compile Include="TFlagShape.cs" />
     <Compile Include="GraphicShapes.cs" />

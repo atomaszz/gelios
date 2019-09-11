@@ -29,9 +29,11 @@ namespace geliosNEW
         Color f_AltParamShapeColor;
         Color f_AltParamLineColor;
         bool f_AltParamShapeColorEnable;
-        Graphics pbGraph;
-        Rectangle rectMainShow;
-        PaintEventArgs pntMainShow;
+    /*     Graphics pbGraph;
+            Rectangle rectMainShow;
+             PaintEventArgs pntMainShow;*/
+        public Bitmap pbMainBitMap;
+        public Graphics pbMainGrph;
         public UMainFrm()
         {
             InitializeComponent();
@@ -53,9 +55,12 @@ namespace geliosNEW
             f_AltParamLineColor = Color.Fuchsia;
             MainList.OnListChange = ListChange;
             f_CurrIDBlock = 1;
-            pbGraph = pbMain.CreateGraphics();
-            rectMainShow = new Rectangle(0, 0, pbMain.Width, pbMain.Height);
-            pntMainShow = new PaintEventArgs(pbGraph, rectMainShow);
+            //      pbGraph = pbMain.CreateGraphics();
+
+            pbMainBitMap = new Bitmap(pbMain.Width, pbMain.Height);
+            pbMainGrph = Graphics.FromImage(pbMainBitMap);
+            /*       rectMainShow = new Rectangle(0, 0, pbMain.Width, pbMain.Height);
+                   pntMainShow = new PaintEventArgs(pbGraph, rectMainShow);*/
         }
         void ListChange()
         {
@@ -217,20 +222,19 @@ namespace geliosNEW
 
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
-
-
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
   /*          toolStripStatusLabel1.Text = e.X.ToString();
             toolStripStatusLabel2.Text = e.Y.ToString();
-            //     paralWorkOperAnd(g, 40, 20, 1.5f);
+            //     paralWorkOperAnd(g, 40, 20, 1.5f);*/
 
-    /*        Pen workPen = new Pen(Color.Black, 2f);
+       /*     Pen workPen = new Pen(Color.Black, 2f);
             GraphicShapes test = new GraphicShapes(pbMain, workPen);
             test.drawForNum(0,20,30,15,25);
             test.drawForNum(13, 45, 30, 15, 25);*/
+
+
             //  test.drawForNum(4);
             // test.drawForNum(5);
         }
@@ -247,9 +251,16 @@ namespace geliosNEW
 
         private void PictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
+        /*    Pen workPen = new Pen(Color.Black, 2f);
+            bmp = new Bitmap(pbMain.Width, pbMain.Height);
+            workGrph = Graphics.FromImage(bmp);
+            workGrph.DrawEllipse(workPen, 10, 10, 100, 100);
+            pbMain.Image = bmp;*/
+
+
             /*draw_panel_Paint(pntMainShow);
             draw_panel_Paint1(pntMainShow);*/
- //           pntMainShow.Graphics.DrawLine(new Pen(Color.Black, 3), 5,5,100,100);
+            //           pntMainShow.Graphics.DrawLine(new Pen(Color.Black, 3), 5,5,100,100);
             bool m_tfs, m_tfe;
             TAlternateItem Item;
             int typ = GetTypShape();

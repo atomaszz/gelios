@@ -33,9 +33,25 @@ namespace geliosNEW
         void FreeList();
         public TCompositeBaseWorkItem();
         ~TCompositeBaseWorkItem() { };
-        public void Prepare();
-        public void Paint(TCanvas* ACanvas);
-        public TBaseShape FindTFE(int Ax, int Ay);
+        public void Prepare();*/
+        public void Paint(Graphics ACanvas)
+        {
+            TCompositeBaseWork Item;
+            int mColor;
+            if (f_Shape!=null)
+            {
+                mColor = SharedConst.GMess.SendMess(1, f_Shape.ID, 0);
+                if (mColor != 0)
+                    f_Shape.PenColor = new Color();
+                f_Shape.Paint(ACanvas);
+            }
+            for (int i = f_CompositeWorkList.Count - 1; i >= 0; i--)
+            {
+                Item = (TCompositeBaseWork)f_CompositeWorkList.ElementAt(i);
+                Item.Paint(ACanvas);
+            }
+        }
+  /*      public TBaseShape FindTFE(int Ax, int Ay);
         public void ApplyOffset(int Ax, int Ay);
         public void AddCompositeWork(TCompositeBaseWork* AWork);*/
         public Rectangle GetAnyRect()
@@ -48,9 +64,13 @@ namespace geliosNEW
         }
     /*    public TRect GetRectSummary(TRect ARect);
         public  void OffsetEndCoordinate();
-        public void Degenerate();
-        public TBaseShape* BaseShape = {read = f_Shape, write = SetBaseShape
-        public TCompositeBaseWork* CompositeWork[int AIndex] = { read = GetCompositeWork };
+        public void Degenerate();*/
+        public TBaseShape BaseShape
+        {
+            set { f_Shape = value;  }
+            get { return f_Shape; }
+        }
+ /*       public TCompositeBaseWork* CompositeWork[int AIndex] = { read = GetCompositeWork };
         public int CompositeWorkCount = { read = GetCompositeWorkCount };
         public TPoint StartPoint = {read = GetStartPoint, write = SetStartPoint
         public TPoint EndPoint = {read = GetEndPoint};*/

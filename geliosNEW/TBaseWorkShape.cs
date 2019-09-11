@@ -52,15 +52,15 @@ namespace geliosNEW
         bool f_LEControl;
         /*          HWND F_WndHandler;*/
         Control F_UnderControl;
-        /*       TColor F_FlagColor;
-               int F_FlagType;
-               TColor F_FlagSColor;
-               int F_FlagSType;
-               TColor F_FlagEColor;
-               int F_FlagEType;
-               TColor F_FrameColorTFE;
+        Color F_FlagColor;
+        int F_FlagType;
+        Color F_FlagSColor;
+        int F_FlagSType;
+        Color F_FlagEColor;
+        int F_FlagEType;
+        Color F_FrameColorTFE;
 
-               TListFlag* ListFlag;
+         /*      TListFlag* ListFlag;
                TWSFlagCreate FOnWSFlagCreate;
                TWSFlagDestroy FOnWSFlagDestroy;
                bool f_ApplyAttribute;*/
@@ -72,10 +72,21 @@ namespace geliosNEW
                int f_BaseOffsetY;
                TColor f_BaseLineColor;*/
         TCompositeBaseWork f_CompositeWorkShape;
-
-
-        /*     void PenCopy();
-             void BrushCopy();
+        void PenCopy()
+        {
+            TBaseShape currShape;
+            int i;
+            if (!F_IsPenCopy) return;
+            for (i = 0; i <= WorkShapes.Count - 1; i++)
+            {
+                currShape = (TBaseShape)WorkShapes.ElementAt(i);
+                currShape.PenColor = PenColor;
+                currShape.PenWidth = PenWidth;
+             //   currShape.PenStyle = PenStyle;
+              //  currShape.PenMode = PenMode;
+            }
+        }
+        /*     void BrushCopy();
              void FontCopy();
              void LineCopy();
              void __fastcall SetLEControl(bool Value);
@@ -241,29 +252,28 @@ namespace geliosNEW
 
             f_LEControl = false;
             /*           F_WndHandler = 0;
-                       F_UnderControl = NULL;
+                       F_UnderControl = NULL;*/
+            F_FlagColor = Color.White;
+            F_FlagType = 0;
+            F_FlagSColor = Color.White;
+            F_FlagSType = 0;
+            F_FlagEColor = Color.White;
+            F_FlagEType = 0;
+            F_FrameColorTFE = Color.Red;
 
-                       F_FlagColor = clWhite;
-                       F_FlagType = 0;
-                       F_FlagSColor = clWhite;
-                       F_FlagSType = 0;
-                       F_FlagEColor = clWhite;
-                       F_FlagEType = 0;
-                       F_FrameColorTFE = clRed;
-
-                       FOnWSFlagCreate = NULL;
-                       FOnWSFlagDestroy = NULL;
-                       f_ApplyAttribute = true;
-                       F_DrawCaption = true;
-                       f_ParentShapeID = 0;
-                 /*      f_Tag = 0;
+       /*     FOnWSFlagCreate = null;
+            FOnWSFlagDestroy = null;
+            f_ApplyAttribute = true;*/
+            F_DrawCaption = true;
+            f_ParentShapeID = 0;
+                  /*    f_Tag = 0;
                        FOnAfterLinePrepare = NULL;
                        f_LEActive = true;
                        f_BaseOffsetX = 0;
-                       f_BaseOffsetY = 0;
-                       F_WidthWork = 0;
-                       F_Indent = 0;
-                       f_CompositeWorkShape = NULL;*/
+                       f_BaseOffsetY = 0;*/
+            F_WidthWork = 0;
+            F_Indent = 0;
+            f_CompositeWorkShape = null;
         }
         ~TBaseWorkShape() { }
         public virtual void Init() { }
@@ -283,8 +293,51 @@ namespace geliosNEW
             PaintLastFlag();
             PaintMiddleFlag();*/
         }
-        /*             virtual void Paint(TCanvas* Canvas);
-                     virtual TBaseShape* GetShapeByLine(TRectLine* ALine, int APos);
+        public virtual void Paint(Graphics Canvas)
+        {
+            int i;
+            TBaseShape currShape;
+            TArrowLine currLine;
+            Color OldPenColor;
+            if (f_CompositeWorkShape!=null)
+            {
+                f_CompositeWorkShape.Selected = F_DrawFrame;
+                f_CompositeWorkShape.Paint(Canvas);
+                return;
+            }
+      /*      PenCopy();
+            BrushCopy();
+            FontCopy();*/
+            for (i = 0; i <= WorkShapes.Count - 1; i++)
+            {
+                currShape = (TBaseShape)WorkShapes.ElementAt(i);
+                currShape.FrameColor = F_FrameColorTFE;
+
+                OldPenColor = currShape.PenColor;
+                if (F_DrawFrame) currShape.PenColor = F_FrameColor;
+
+                if (OnShapeCopy!=null) OnShapeCopy(currShape, i); //переставлено
+                currShape.Paint(Canvas);
+                currShape.PenColor = OldPenColor;
+
+            }
+     /*       LineCopy();
+
+            DoSetFlag();
+            DoSetFlagS();
+            DoSetFlagE();*/
+
+            for (i = 0; i <= WorkLines.Count - 1; i++)
+            {
+                currLine = (TArrowLine)WorkLines.ElementAt(i);
+             //   if (OnLineCopy) OnLineCopy(currLine, i);
+                OldPenColor = currLine.Color;
+                if (F_DrawFrame) currLine.Color = F_FrameColor;
+           //     currLine.Paint(Canvas);
+                currLine.Color = OldPenColor;
+            }
+        }
+              /*       virtual TBaseShape* GetShapeByLine(TRectLine* ALine, int APos);
                      void AddShape(TBaseShape* N);
                      void AddLine(TArrowLine* L);
                      TBaseShape* GetWorkShape(int num);
@@ -407,24 +460,32 @@ namespace geliosNEW
         }
 
         /*   __property TColor  BrushColor = {read = F_BrushColor, write = F_BrushColor};
-                __property TBrushStyle BrushStyle = {read = F_BrushStyle, write = F_BrushStyle};
+                __property TBrushStyle BrushStyle = {read = F_BrushStyle, write = F_BrushStyle};*/
 
-                __property TColor  PenColor = {read = F_PenColor, write = F_PenColor};*/
+        public Color  PenColor
+        {
+            set { F_PenColor = value; }
+            get { return F_PenColor; }
+        }
         public int PenWidth
         {
             set { F_PenWidth = value; }
             get { return F_PenWidth; }
         }
-   /*        __property TPenStyle PenStyle = {read = F_PenStyle, write = F_PenStyle};
-                __property TPenMode PenMode = {read = F_PenMode, write = F_PenMode};
-                __property Graphics::TFont*  Font = { read = F_Font, write = SetFont};
-           __property TColor FrameColor  = {read = F_FrameColor, write = F_FrameColor};
-                __property TColor FrameColorTFE  = {read = F_FrameColorTFE, write = F_FrameColorTFE};
-                __property bool DrawFrame = { read = F_DrawFrame, write = F_DrawFrame };
+        /*        __property TPenStyle PenStyle = {read = F_PenStyle, write = F_PenStyle};
+                     __property TPenMode PenMode = {read = F_PenMode, write = F_PenMode};
+                     __property Graphics::TFont*  Font = { read = F_Font, write = SetFont};
+                __property TColor FrameColor  = {read = F_FrameColor, write = F_FrameColor};
+                     __property TColor FrameColorTFE  = {read = F_FrameColorTFE, write = F_FrameColorTFE};
+                     __property bool DrawFrame = { read = F_DrawFrame, write = F_DrawFrame };
 
-           __property TColor    LineColor = {read = F_LineColor, write = F_LineColor};
-                __property int LineWidth = { read = F_LineWidth, write = F_LineWidth };
-           __property TPenStyle LineStyle = {read = F_LineStyle, write = F_LineStyle};
+                __property TColor    LineColor = {read = F_LineColor, write = F_LineColor};*/
+        public int LineWidth
+        {
+            set { F_LineWidth = value; }
+            get { return F_LineWidth; }
+        }
+    /*       __property TPenStyle LineStyle = {read = F_LineStyle, write = F_LineStyle};
                 __property TPenMode  LineMode  = {read = F_LineMode,  write = F_LineMode};
                 __property bool IsLineCopy = { read = F_IsLineCopy, write = F_IsLineCopy };
            __property bool IsBrushCopy = { read = F_IsBrushCopy, write = F_IsBrushCopy };

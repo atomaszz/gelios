@@ -16,6 +16,8 @@ namespace geliosNEW
         public const int BL_OTHER = 2;
         public const int BL_POINT = 3;
 
+        public static TMessangers GMess;
+
         public static int MyMin(int A1, int A2)
         {
             if (A1 < A2)

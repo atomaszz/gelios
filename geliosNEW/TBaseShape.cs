@@ -185,7 +185,7 @@ namespace geliosNEW
         }
         /*         public TRect GetFrameRect();
                  public TRect FrameRectToRect(TRect R);*/
-        public virtual void Paint(PaintEventArgs Canvas)
+        public virtual void Paint(Graphics Canvas)
         {
             Rectangle R = new Rectangle();
             Point Pt = new Point();
@@ -200,31 +200,31 @@ namespace geliosNEW
                 F_FrameRect.Y = F_Rect.Top - SharedConst.OFFS_FRAME * F_PenWidth;
                 F_FrameRect.Width = F_Rect.Right + SharedConst.OFFS_FRAME * F_PenWidth;
                 F_FrameRect.Height = F_Rect.Bottom + SharedConst.OFFS_FRAME * F_PenWidth;
-                Canvas.Graphics.DrawRectangle(tpen, F_FrameRect);
+                Canvas.DrawRectangle(tpen, F_FrameRect);
 
                 R.X = F_FrameRect.Left - SharedConst.D_FRAME * F_PenWidth;
                 R.Width = F_FrameRect.Left + SharedConst.D_FRAME * F_PenWidth;
                 R.Y = F_FrameRect.Top - SharedConst.D_FRAME * F_PenWidth;
                 R.Height = F_FrameRect.Top + SharedConst.D_FRAME * F_PenWidth;
-                Canvas.Graphics.DrawEllipse(tpen, R);
+                Canvas.DrawEllipse(tpen, R);
 
                 R.X = F_FrameRect.Right - SharedConst.D_FRAME * F_PenWidth;
                 R.Width = F_FrameRect.Right + SharedConst.D_FRAME * F_PenWidth;
                 R.Y = F_FrameRect.Top - SharedConst.D_FRAME * F_PenWidth;
                 R.Height = F_FrameRect.Top + SharedConst.D_FRAME * F_PenWidth;
-                Canvas.Graphics.DrawEllipse(tpen, R);
+                Canvas.DrawEllipse(tpen, R);
 
                 R.X = F_FrameRect.Right - SharedConst.D_FRAME * F_PenWidth;
                 R.Width = F_FrameRect.Right + SharedConst.D_FRAME * F_PenWidth;
                 R.Y = F_FrameRect.Bottom - SharedConst.D_FRAME * F_PenWidth;
                 R.Height = F_FrameRect.Bottom + SharedConst.D_FRAME * F_PenWidth;
-                Canvas.Graphics.DrawEllipse(tpen, R);
+                Canvas.DrawEllipse(tpen, R);
 
                 R.X = F_FrameRect.Left - SharedConst.D_FRAME * F_PenWidth;
                 R.Width = F_FrameRect.Left + SharedConst.D_FRAME * F_PenWidth;
                 R.Y = F_FrameRect.Bottom - SharedConst.D_FRAME * F_PenWidth;
                 R.Height = F_FrameRect.Bottom + SharedConst.D_FRAME * F_PenWidth;
-                Canvas.Graphics.DrawEllipse(tpen, R);
+                Canvas.DrawEllipse(tpen, R);
             }
             if (f_ApplyAttribute)
             {
@@ -278,8 +278,12 @@ namespace geliosNEW
             set { F_Caption = value; }
             get { return F_Caption; }
         }
-    /*       __property TColor FrameColor  = {read = F_FrameColor, write = F_FrameColor};
-           __property bool DrawFrame = { read = F_DrawFrame, write = F_DrawFrame };*/
+        public Color FrameColor
+        {
+            set { F_FrameColor = value; }
+            get { return F_FrameColor; }
+        }
+  /*         __property bool DrawFrame = { read = F_DrawFrame, write = F_DrawFrame };*/
        public int TypeShape { get { return GetTypeShape(); } }
        public Point Point_StartShape
         {
