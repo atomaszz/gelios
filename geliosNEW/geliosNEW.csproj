@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="DynamicArray.cs" />
     <Compile Include="LineCutting.cs" />
+    <Compile Include="ListFlag.cs" />
     <Compile Include="ListForPaint.cs" />
     <Compile Include="Messangers.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -55,6 +56,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="AltSelector.cs" />
     <Compile Include="TArrowWorkShape.cs" />
     <Compile Include="TColorSetup.cs" />
     <Compile Include="TEllShape.cs" />

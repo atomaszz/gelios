@@ -20,17 +20,30 @@ namespace geliosNEW
             else
                 return null;
         }
-    /*    int GetCompositeWorkCount();
-        Point GetStartPoint();
-        Point GetEndPoint();*/
+    /*    int GetCompositeWorkCount();*/
+        Point GetStartPoint()
+        {
+            return new Point(0, 0);
+        }
+   /*     Point GetEndPoint();*/
         Rectangle GetMaxRect()
         {
             Rectangle Res = GetAnyRect();
      //       Res = GetRectSummary(Res);
             return Res;
         }
- /*       void SetStartPoint(TPoint AValue);
-        void FreeList();
+        void SetStartPoint(Point AValue)
+        {
+            int m_x, m_y;
+            Point m_startP = StartPoint;
+            if ((m_startP.X != AValue.X) || (m_startP.Y != AValue.Y))
+            {
+                m_x = AValue.X - m_startP.X;
+                m_y = AValue.Y - m_startP.Y;
+                ApplyOffset(m_x, m_y);
+            }
+        }
+  /*      void FreeList();
         public TCompositeBaseWorkItem();
         ~TCompositeBaseWorkItem() { };
         public void Prepare();*/
@@ -51,9 +64,27 @@ namespace geliosNEW
                 Item.Paint(ACanvas);
             }
         }
-  /*      public TBaseShape FindTFE(int Ax, int Ay);
-        public void ApplyOffset(int Ax, int Ay);
-        public void AddCompositeWork(TCompositeBaseWork* AWork);*/
+  /*      public TBaseShape FindTFE(int Ax, int Ay);*/
+        public void ApplyOffset(int Ax, int Ay)
+        {
+            Rectangle R;
+            if (f_Shape!=null)
+            {
+                R = f_Shape.BoundRect;
+                R.X = R.Left + Ax;
+                R.Width = R.Right + Ax;
+                R.Y = R.Top + Ay;
+                R.Height = R.Bottom + Ay;
+                f_Shape.BoundRect = R;
+            }
+            TCompositeBaseWork Item;
+            for (int i = 0; i <= f_CompositeWorkList.Count - 1; i++)
+            {
+                Item = (TCompositeBaseWork)(f_CompositeWorkList.ElementAt(i));
+                Item.ApplyOffset(Ax, Ay);
+            }
+        }
+        /*      public void AddCompositeWork(TCompositeBaseWork* AWork);*/
         public Rectangle GetAnyRect()
         {
             if (f_Shape!=null)
@@ -71,9 +102,14 @@ namespace geliosNEW
             get { return f_Shape; }
         }
  /*       public TCompositeBaseWork* CompositeWork[int AIndex] = { read = GetCompositeWork };
-        public int CompositeWorkCount = { read = GetCompositeWorkCount };
-        public TPoint StartPoint = {read = GetStartPoint, write = SetStartPoint
-        public TPoint EndPoint = {read = GetEndPoint};*/
+        public int CompositeWorkCount = { read = GetCompositeWorkCount };*/
+        public Point StartPoint
+        {
+            set { SetStartPoint(value); }
+            get { return GetStartPoint();  }
+        }
+            
+    /*   public TPoint EndPoint = {read = GetEndPoint};*/
         public Rectangle MaxRect
         { get { return GetMaxRect(); } }
     }

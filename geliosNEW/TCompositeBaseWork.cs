@@ -27,17 +27,30 @@ namespace geliosNEW
         protected int f_LastLineBend;
         protected int f_FirstLineBend;
         protected Point f_EndPoint;
-  /*      protected void FreeListItem();
-        protected void FreeListBL();
-        protected void HideLines();
-        protected void FreeListRectLine();
-        protected void virtual SetTopBorder(int AValue);
-        protected void  SetLineColor(TColor AValue);
-        protected int  GetItemCount();
-        Point  virtual GetEndPoint();
-        Point  virtual GetStartPoint();
-        virtual TBaseLine  GetEndLine();
-        void  virtual SetStartPoint(Point AValue);*/
+        /*      protected void FreeListItem();
+              protected void FreeListBL();
+              protected void HideLines();
+              protected void FreeListRectLine();
+              protected void virtual SetTopBorder(int AValue);
+              protected void  SetLineColor(TColor AValue);
+              protected int  GetItemCount();
+              Point  virtual GetEndPoint();*/
+        public virtual Point GetStartPoint()
+        {
+            return new Point(0, 0);
+        }
+            /*  virtual TBaseLine  GetEndLine();*/
+        public virtual void SetStartPoint(Point AValue)
+        {
+            int m_x, m_y;
+            Point m_startP = StartPoint;
+            if ((m_startP.X != AValue.X) || (m_startP.Y != AValue.Y))
+            {
+                m_x = AValue.X - m_startP.X;
+                m_y = AValue.Y - m_startP.Y;
+                ApplyOffset(m_x, m_y);
+            }
+        }
         void  SetSelected(bool AValue)
         {
             TCompositeBaseWorkItem Item;
@@ -171,35 +184,59 @@ namespace geliosNEW
             }
         }
         /*     public TBaseShape FindTFE(int Ax, int Ay);
-             public TBaseShape CloneShape(TBaseShape* ADest);
-             virtual public void ApplyOffset(int Ax, int Ay);
-             public TRect GetAnyRect();
-             public TRect GetRectSummary(TRect ARect);
-             public TCompositeBaseWorkItem* FindItem(int ABaseShapeID, TCompositeBaseWork** AFind);
-             public bool ContainedShape(int ABaseShapeID);
-             public TCompositeBaseWork CopyRef();
-             public void FreeRef();
-             public void GetAllLines(TDynamicArray* R, bool AMarkFirst);
-             public void GetAllShapes(TDynamicArray* R);
-             virtual public void MakeFirstLine(TPoint AStart, int ABend);
-             public void SetColorAll(TColor AColor);
-             public void SetBrushColorAll(TColor AColor);
-             public void SetBrushStyleAll(TBrushStyle AStyle);
-             virtual public void TrimFirstLine(TPoint APStart, TPoint APEnd);
-             public void DeleteLine(void Line);
+             public TBaseShape CloneShape(TBaseShape* ADest);*/
+        virtual public void ApplyOffset(int Ax, int Ay)
+        {
+            TCompositeBaseWorkItem Item;
+            TBaseLine BL;
+            TRectLine RL;
+            for (int i = 0; i <= f_ListItem.Count - 1; i++)
+            {
+                Item = (TCompositeBaseWorkItem)(f_ListItem.ElementAt(i));
+                Item.ApplyOffset(Ax, Ay);
+            }
+            for (int j = 0; j <= f_ListBL.Count - 1; j++)
+            {
+                BL = (TBaseLine)(f_ListBL.ElementAt(j));
+                BL.ApplyOffset(Ax, Ay);
+            }
+            for (int k = 0; k <= f_ListRectLine.Count - 1; k++)
+            {
+                RL = (TRectLine)f_ListRectLine.ElementAt(k);
+                RL.ApplyOffset(Ax, Ay);
+            }
+        }
+        /*         public TRect GetAnyRect();
+                 public TRect GetRectSummary(TRect ARect);
+                 public TCompositeBaseWorkItem* FindItem(int ABaseShapeID, TCompositeBaseWork** AFind);
+                 public bool ContainedShape(int ABaseShapeID);
+                 public TCompositeBaseWork CopyRef();
+                 public void FreeRef();
+                 public void GetAllLines(TDynamicArray* R, bool AMarkFirst);
+                 public void GetAllShapes(TDynamicArray* R);
+                 virtual public void MakeFirstLine(TPoint AStart, int ABend);
+                 public void SetColorAll(TColor AColor);
+                 public void SetBrushColorAll(TColor AColor);
+                 public void SetBrushStyleAll(TBrushStyle AStyle);
+                 virtual public void TrimFirstLine(TPoint APStart, TPoint APEnd);
+                 public void DeleteLine(void Line);
 
 
-             __property int TopBorder = { read = f_TopBorder, write = SetTopBorder };
-             __property int OffsetTop = { read = f_OffsetTop };
-             __property TBaseLine* BaseLineItem[int AIndex] = {read = GetBaseLineItem
-         };
-         __property int BaseLineCount = { read = GetBaseLineCount };
-         __property int ItemCount = { read = GetItemCount };
-         __property int LastLineBend = { read = f_LastLineBend };
-         __property int FirstLineBend = { read = f_FirstLineBend };
-         __property TPoint StartPoint = {read = GetStartPoint, write = SetStartPoint
-     };
-     __property TPoint EndPoint = {read = GetEndPoint};
+                 __property int TopBorder = { read = f_TopBorder, write = SetTopBorder };
+                 __property int OffsetTop = { read = f_OffsetTop };
+                 __property TBaseLine* BaseLineItem[int AIndex] = {read = GetBaseLineItem
+             };
+             __property int BaseLineCount = { read = GetBaseLineCount };
+             __property int ItemCount = { read = GetItemCount };
+             __property int LastLineBend = { read = f_LastLineBend };
+             __property int FirstLineBend = { read = f_FirstLineBend };*/
+        public Point StartPoint
+        {
+            set { SetStartPoint(value);  }
+            get { return GetStartPoint(); }
+
+        }
+  /*   __property TPoint EndPoint = {read = GetEndPoint};
           __property TBaseLine* EndLine = { read = GetEndLine };
      __property TColorSetup* ColorSetup = { read = f_ColorSetup, write = f_ColorSetup };*/
         public bool Selected

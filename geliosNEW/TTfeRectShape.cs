@@ -47,12 +47,20 @@ namespace geliosNEW
             SetTail();
         }
         ~TTfeRectShape() { }
-  /*      public bool GetTailPoint(int num, ref Point pt);
-        public void SetRect(int X, int Y, int Width, int Height);
-        public void SetRect(TRect Rect);
-        public void SetBaseRect(TRect Rect);
-        public void Paint(PaintEventArgs Canvas);
-        public bool CopyObject(TBaseShape ASource);
-        public string  Make_One_SimpleItem(int AIndex);*/
+        public bool GetTailPoint(int num, ref Point pt)
+        {
+            bool res = ((num == 0) || (num == 1));
+            if (num == 0)
+                pt = Start.PointStart;
+            if (num == 1)
+                pt = End.PointEnd;
+            return res;
+        }
+        /*    public void SetRect(int X, int Y, int Width, int Height);
+            public void SetRect(TRect Rect);
+            public void SetBaseRect(TRect Rect);
+            public void Paint(PaintEventArgs Canvas);
+            public bool CopyObject(TBaseShape ASource);
+            public string  Make_One_SimpleItem(int AIndex);*/
     }
 }

@@ -55,7 +55,7 @@ namespace geliosNEW
         Color f_FrameColorTFS; //цвет линии обрамления ТФC
         bool f_WSMoving;
         int f_WSMovingCount;
-        //       TFlagShape f_SelectedFlag; //выбранный флажок
+        TFlagShape f_SelectedFlag; //выбранный флажок
         int f_Regim;
         TBaseWorkShape f_SelectedAlternateFirst; //первая выбранная ТФС для альтернативы
         TBaseWorkShape f_SelectedAlternateLast; //первая выбранная ТФС для альтернативы
@@ -112,10 +112,10 @@ namespace geliosNEW
         {
             int j, i, m_X, m_Y;
             int x_offs, y_offs;
-       //     m/_X = ScrBitmap.Width;
+       //     m_X = ScrBitmap.Width;
        //     m_Y = ScrBitmap.Height;
             if (Math.Abs(Ax) < f_StepPixelsGrid) x_offs = Ax;
-    /*        else
+   /*         else
             {
                 th = div(Ax, f_StepPixelsGrid);
                 x_offs = th.rem;

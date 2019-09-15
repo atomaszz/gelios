@@ -213,14 +213,19 @@ namespace geliosNEW
                int f_CurrentBaseLine;*/
         bool f_PaintLine;
         Color f_BaseLineColor;
-
-        /*    void __fastcall SetBend(int Value);
-            TPoint __fastcall GetPointStart();
-            TPoint __fastcall GetPointEnd();
-            void __fastcall SetPointStart(TPoint Value);
-            void __fastcall SetPointEnd(TPoint Value);
-            void SetDrawFlagS();
-            void SetDrawFlagE();*/
+        void SetBend(int Value)
+        {
+            if ((Value > 3) || (Value < 0))
+                F_bend = 0;
+            else
+                F_bend = Value;
+        }
+        /*     TPoint __fastcall GetPointStart();
+             TPoint __fastcall GetPointEnd();
+             void __fastcall SetPointStart(TPoint Value);
+             void __fastcall SetPointEnd(TPoint Value);
+             void SetDrawFlagS();
+             void SetDrawFlagE();*/
         void SetColorFlagS()
         {
             int i, res;
@@ -356,10 +361,16 @@ namespace geliosNEW
            //     line.PaintFlag(Canvas);
             }
         }
-     /*   bool KeepFlag(TBaseShape* Flag, int &type);
-        void ApplyOffset(int Ax, int Ay);
-        TBaseLine* FirstBaseLine();
-        TBaseLine* NextBaseLine();*/
+     /*   bool KeepFlag(TBaseShape* Flag, int &type);*/
+        public void ApplyOffset(int Ax, int Ay)
+        {
+            x0 = x0 + Ax;
+            x1 = x1 + Ax;
+            y0 = y0 + Ay;
+            y1 = y1 + Ay;
+        }
+   /*     TBaseLine FirstBaseLine();
+        TBaseLine NextBaseLine();*/
 
 
         public int xEnd
@@ -392,22 +403,38 @@ namespace geliosNEW
             __property int Width = { read = F_Width, write = F_Width };
             __property TPenStyle Style = {read = F_Style, write = F_Style
         };
-        __property TPenMode  Mode  = {read = F_PenMode,  write = F_PenMode};
-             __property int Bend = { read = F_bend, write = SetBend };
-        __property int ID = { read = F_id, write = F_id };
-        __property TPoint    PointStart = {read  = GetPointStart, write = SetPointStart};
-             __property TPoint    PointEnd = {read  = GetPointEnd, write = SetPointEnd};
+        __property TPenMode  Mode  = {read = F_PenMode,  write = F_PenMode};*/
+        public int Bend
+        {
+            set { SetBend(value); }
+            get { return F_bend; }
+        }
+        /*        __property int ID = { read = F_id, write = F_id };
+                __property TPoint    PointStart = {read  = GetPointStart, write = SetPointStart};
+                     __property TPoint    PointEnd = {read  = GetPointEnd, write = SetPointEnd};*/
 
-             __property bool DrawFlag = { read = F_DrawFlag, write = F_DrawFlag };
-        __property TColor      FlagColor = {read = F_FlagColor, write = F_FlagColor};
-             __property int FlagType = { read = F_FlagType, write = F_FlagType };
+        public bool DrawFlag
+        {
+            set { F_DrawFlag = value; }
+            get { return F_DrawFlag; }
+        }
+     /*   __property TColor      FlagColor = {read = F_FlagColor, write = F_FlagColor};
+             __property int FlagType = { read = F_FlagType, write = F_FlagType };*/
 
-        __property bool DrawFlagS = { read = F_DrawFlagS, write = F_DrawFlagS };
-        __property TColor      FlagSColor = {read = F_FlagSColor, write = F_FlagSColor};
-             __property int FlagSType = { read = F_FlagSType, write = F_FlagSType };
+        public bool DrawFlagS
+        {
+            set { F_DrawFlagS = value; }
+            get { return F_DrawFlagS; }
+        }
+        /*      __property TColor      FlagSColor = {read = F_FlagSColor, write = F_FlagSColor};
+                   __property int FlagSType = { read = F_FlagSType, write = F_FlagSType };*/
 
-        __property bool DrawFlagE = { read = F_DrawFlagE, write = F_DrawFlagE };
-        __property TColor      FlagEColor = {read = F_FlagEColor, write = F_FlagEColor};
+        public bool DrawFlagE
+        {
+            set { F_DrawFlagE = value; }
+            get { return F_DrawFlagE; }
+        }
+ /*       __property TColor      FlagEColor = {read = F_FlagEColor, write = F_FlagEColor};
              __property int FlagEType = { read = F_FlagEType, write = F_FlagEType };*/
         public bool LEControl
         {

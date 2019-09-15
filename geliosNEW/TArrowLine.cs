@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace geliosNEW
 {
-    class TArrowLine : TRectLine
+    public class TArrowLine : TRectLine
     {
      int F_Step;
         public TArrowLine(int Step, int Number = 0) :base(Step, Number)

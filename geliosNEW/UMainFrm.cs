@@ -14,6 +14,11 @@ namespace geliosNEW
     {
         SectionBar menuBar;
         TPaintGrid Grid;
+        int f_StepPixel;
+        bool f_PaintPixels;
+        bool f_DrawFrameLine;
+        Color f_FonColor;
+        Color f_PixelColor;
         int f_IdAlternative; //текущая альтернатива
         int f_NumAlternative; //текущая альтернатива номер
         int f_IdAlternativeParent; //предок текущей альтернативы
@@ -34,18 +39,19 @@ namespace geliosNEW
              PaintEventArgs pntMainShow;*/
         public Bitmap pbMainBitMap;
         public Graphics pbMainGrph;
+        bool f_IsDebug;
         public UMainFrm()
         {
             InitializeComponent();
             CreateSectionBar();
             /*-----------------------*/
-    //        TAltSelectorItem Item;
-     //       f_IsDebug = HasParam("debug");
-    //        f_StepPixel = 8;
-    //        f_PaintPixels = true;
-    //        f_DrawFrameLine = false;
-     //       f_FonColor = clWhite;
-     //       f_PixelColor = clBlack;
+            TAltSelectorItem Item;
+            f_IsDebug = false; // HasParam("debug");
+            f_StepPixel = 8;
+            f_PaintPixels = true;
+            f_DrawFrameLine = false;
+            f_FonColor = Color.White;
+            f_PixelColor = Color.Black;
             Grid = new TPaintGrid(pbMain.Image, this);
             f_HaveChildColor = Color.Green;
             LevelController = new TLevelController();
@@ -98,12 +104,12 @@ namespace geliosNEW
         }
         void SetNewPolygon()
         {
-        /*    Point P;
+            Point P;
             P = Grid.GetPointPolygon(sbX.Value, sbY.Value);
             if ((P.X - pbMain.Width - sbX.Value) > 2)
-                sbX. = P.x - pbMain.Width + (Grid.StepPixels * 4);
-            if ((P.y - pbMain.Height - sbY.Position) > 2)
-                sbY.Max = P.y - pbMain.Height + (Grid.StepPixels * 4);*/
+                sbX.Value = P.X - pbMain.Width + (Grid.StepPixels * 4);
+            if ((P.Y - pbMain.Height - sbY.Value) > 2)
+                sbY.Maximum = P.Y - pbMain.Height + (Grid.StepPixels * 4);
         }
         int GetTypShape()
         {

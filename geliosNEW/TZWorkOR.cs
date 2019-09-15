@@ -21,7 +21,7 @@ namespace geliosNEW
           //  F_OldPenParent = new Graphics::TPen;
         }
         ~TZWorkOR() { }
-/*        public void Init();
+/*      overade  public void Init();
         public void Prepare();
         public void Paint(TCanvas* Canvas);
         public Point GetEndPoint();*/

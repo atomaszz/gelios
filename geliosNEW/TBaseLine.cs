@@ -418,8 +418,14 @@ namespace geliosNEW
             this.x1 = x1;
             this.y1 = y1;
         }
-        /*        void ApplyOffset(int Ax, int Ay);
-                void MoveTo(int Ax, int Ay);
+        public void ApplyOffset(int Ax, int Ay)
+        {
+            x0 = x0 + Ax;
+            x1 = x1 + Ax;
+            y0 = y0 + Ay;
+            y1 = y1 + Ay;
+        }
+   /*             void MoveTo(int Ax, int Ay);
                 void MoveTo(TPoint APoint);*/
         public bool ImportFlag(TFlagShape AFlag, int APos, int ATypeFlag,
                     double ARadius, Color ABrushColor)

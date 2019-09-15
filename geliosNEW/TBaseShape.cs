@@ -45,7 +45,7 @@ namespace geliosNEW
         //       Control F_UnderControl;
         bool f_ApplyAttribute;
         bool f_LEActive;
-        //      TList* f_WorkLines;
+        List<object> f_WorkLines;
         int f_Tag;
 
         int f_IdAlternative;
@@ -158,7 +158,7 @@ namespace geliosNEW
             f_LEControl = false;
             f_ApplyAttribute = true;
             f_LEActive = true;
-         //   f_WorkLines = new TList;
+            f_WorkLines = new List<object>();
             f_Tag = 0;
             f_IdAlternative = 0;
             f_NumAlternative = 0;
@@ -241,9 +241,12 @@ namespace geliosNEW
                public virtual bool PowerIn();
                public bool ReactMouse(TPoint APoint);
                public void ApplyOffset(int Ax, int Ay);
-               public virtual bool CopyObject(TBaseShape ASource);
-               public void AddWorkLine(TRectLine* ALine);
-               public void ClearWorkLine();
+               public virtual bool CopyObject(TBaseShape ASource);*/
+        public void AddWorkLine(TRectLine ALine)
+        {
+            f_WorkLines.Add(ALine);
+        }
+   /*            public void ClearWorkLine();
                public void AddParamAlternativeItem(TParamAlternativeItem* AItem);
                public void DeleteParamAlternativeItem(int AIndex);
                public void DeleteParamAlternativeItem2(void* APointer);
