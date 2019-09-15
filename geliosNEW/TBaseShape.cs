@@ -75,7 +75,7 @@ namespace geliosNEW
         void  SetFont(Graphics::TFont* Value);*/
         void  SetCreateLEControl(bool Value)
         {
-            if ((TypeShape == 100) || (TypeShape == 80))
+     /*       if ((TypeShape == 100) || (TypeShape == 80))
             {
                 f_LEControl = Value;
            /*     if (f_LEControl)
@@ -93,8 +93,8 @@ namespace geliosNEW
                 else
                 {
                     F_LEControl = null;
-                }*/
-            }
+                }
+            }*/
         }
    /*     void SetLEControl();
         TRectLine   GetWorkLine(int AIndex);
@@ -115,7 +115,7 @@ namespace geliosNEW
 /*        protected void RestoreCanvas(TCanvas* Canvas);*/
         protected virtual int GetTypeShape()
         {
-            return F_TypeShape;
+            return 1;//F_TypeShape;
         }
   /*      void SetLEActive(bool AValue);
         virtual TBaseLine  GetBaseLine(int AIndex);
@@ -142,14 +142,16 @@ namespace geliosNEW
             F_Caption = F_Id.ToString();
             F_TypeShape = 0;
 
-            F_Rect = new Rectangle(X, Y - step * 2, X + step * 4, Y + step * 2);
+            F_Rect = new Rectangle(X, Y - step * 2, step * 4, step * 4);
             F_Step = step;
 
             F_DrawLastFlag = F_DrawFirstFlag = false;
 
             F_FrameRect = 
-                new Rectangle(F_Rect.Left - SharedConst.OFFS_FRAME * F_PenWidth, F_Rect.Top - SharedConst.OFFS_FRAME * F_PenWidth,
-                F_Rect.Right + SharedConst.OFFS_FRAME * F_PenWidth, F_Rect.Bottom + SharedConst.OFFS_FRAME * F_PenWidth);
+                new Rectangle(F_Rect.Left - SharedConst.OFFS_FRAME * F_PenWidth, 
+                F_Rect.Top - SharedConst.OFFS_FRAME * F_PenWidth,
+                F_Rect.Right - F_Rect.Left + 2 * SharedConst.OFFS_FRAME * F_PenWidth, 
+                F_Rect.Bottom - F_Rect.Top + 2 * SharedConst.OFFS_FRAME * F_PenWidth);
             F_DrawCaption = true;
           //  F_LEControl = NULL;
           //  F_WndHandler = 0;

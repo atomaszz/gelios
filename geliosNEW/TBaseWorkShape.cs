@@ -144,13 +144,23 @@ namespace geliosNEW
         }
         /*          void DoSetFlag();
                   void DoSetFlagS();
-                  void DoSetFlagE();
+                  void DoSetFlagE();*/
+        void FlagCreate(TRectLine ASender, TFlagShape AFlag, int APosFlag)
+        {
+            bool res = false;
+            TBaseShape Shape = GetShapeByLine(ASender, APosFlag);
+            TFlag Flag = ListFlag.AddFlag(AFlag, Shape, ASender, APosFlag, ref res);
+            if (!res && FOnWSFlagCreate!=null) OnWSFlagCreate(Flag, this);
 
-                  void __fastcall FlagCreate(TRectLine* ASender, TFlagShape* AFlag, int APosFlag);
-                  void __fastcall FlagDestroy(TRectLine* ASender, TFlagShape* AFlag, int APosFlag);
+        }
+        void FlagDestroy(TRectLine ASender, TFlagShape AFlag, int APosFlag)
+        {
+            TFlag Flag = ListFlag.DeleteFlagByShape(AFlag);
+            if (Flag!=null && FOnWSFlagDestroy!=null) OnWSFlagDestroy(Flag, this);
+        }
 
-                  TRectLine* __fastcall GetRectLineItem(int AIndex);
-                  int __fastcall GetRectLineCount();*/
+           /*           TRectLine* __fastcall GetRectLineItem(int AIndex);
+                      int __fastcall GetRectLineCount();*/
         void DoSetLEActive()
         {
             int i;
@@ -257,20 +267,16 @@ namespace geliosNEW
                 void __fastcall SetApplyAttribute(bool Value);*/
         public virtual void PrepareLines()
         {
-            if (f_CompositeWorkShape!=null)
-                  {
-                      f_CompositeWorkShape.Prepare();
-                      return;
-                  }
-
-                  DoSetLEControl();
-                  DoSetWndHandler();
-                  DoSetUnderCotrol();
-                  DoSetLEActive();
-                  PrepareLines();
-                  PaintFirstFlag();
-                  PaintLastFlag();
-                  PaintMiddleFlag();
+            TRectLine line;
+            for (int i = 0; i <= WorkLines.Count - 1; i++)
+            {
+                line = (TRectLine)(WorkLines.ElementAt(i));
+                line.OnRctFlagCreate = FlagCreate;
+                line.OnRctFlagDestroy = FlagDestroy;
+                line.Prepare();
+            }
+            if (WorkLines.Count > 0)
+                if (FOnAfterLinePrepare!=null) OnAfterLinePrepare(this);
         }
         /*       virtual int __fastcall GetOffsetXFromStart();*/
         public virtual int CalcWidthWork()
@@ -333,7 +339,7 @@ namespace geliosNEW
 
             WorkShapes = new List<object>();
             WorkLines = new List<object>();
-         //   ListFlag = new List<object>();
+         //   ListFlag =  new List<object>();
 
             f_LEControl = false;
             /*           F_WndHandler = 0;
@@ -346,16 +352,16 @@ namespace geliosNEW
             F_FlagEType = 0;
             F_FrameColorTFE = Color.Red;
 
-       /*     FOnWSFlagCreate = null;
+            FOnWSFlagCreate = null;
             FOnWSFlagDestroy = null;
-            f_ApplyAttribute = true;*/
+            f_ApplyAttribute = true;
             F_DrawCaption = true;
             f_ParentShapeID = 0;
-                  /*    f_Tag = 0;
-                       FOnAfterLinePrepare = NULL;
-                       f_LEActive = true;
-                       f_BaseOffsetX = 0;
-                       f_BaseOffsetY = 0;*/
+            f_Tag = 0;
+            FOnAfterLinePrepare = null;
+            f_LEActive = true;
+            f_BaseOffsetX = 0;
+            f_BaseOffsetY = 0;
             F_WidthWork = 0;
             F_Indent = 0;
             f_CompositeWorkShape = null;
@@ -422,7 +428,10 @@ namespace geliosNEW
                 currLine.Color = OldPenColor;
             }
         }
-        /*       virtual TBaseShape* GetShapeByLine(TRectLine* ALine, int APos);*/
+        public virtual TBaseShape GetShapeByLine(TRectLine ALine, int APos)
+        {
+            return null;
+        }
         public void AddShape(TBaseShape N)
         {
             WorkShapes.Add(N);
@@ -709,21 +718,34 @@ namespace geliosNEW
 
         __property TColor      FlagEColor = {read = F_FlagEColor, write = F_FlagEColor};
              __property int FlagEType = { read = F_FlagEType, write = F_FlagEType };
-        __property int Step = { read = F_Step };
+        __property int Step = { read = F_Step };*/
 
-        __property TWSFlagCreate   OnWSFlagCreate = {read = FOnWSFlagCreate, write = FOnWSFlagCreate};
-             __property TWSFlagDestroy  OnWSFlagDestroy = {read = FOnWSFlagDestroy, write = FOnWSFlagDestroy};
+        public TWSFlagCreate   OnWSFlagCreate
+        {
+            set { FOnWSFlagCreate = value; }
+            get { return FOnWSFlagCreate;  }
+        }
+        public TWSFlagDestroy  OnWSFlagDestroy
+        {
+            set { FOnWSFlagDestroy = value; }
+            get { return FOnWSFlagDestroy;  }
+        }    
 
-             __property TRectLine* RectLineItems[int AIndex] = { read = GetRectLineItem };
+      /*       __property TRectLine* RectLineItems[int AIndex] = { read = GetRectLineItem };
         __property int RectLineCount = { read = GetRectLineCount };
         __property bool ApplyAttribute = { read = f_ApplyAttribute, write = SetApplyAttribute };*/
         public int ParentShapeID {
             set { f_ParentShapeID = value; }
             get { return f_ParentShapeID;  }
         }
-  /*      __property int Tag = { read = f_Tag, write = f_Tag };
-        __property TAfterLinePrepare OnAfterLinePrepare =  {read = FOnAfterLinePrepare, write = FOnAfterLinePrepare};
-             __property bool LEActive = { read = f_LEActive, write = SetLEActive };
+        /*      __property int Tag = { read = f_Tag, write = f_Tag };*/
+        public TAfterLinePrepare OnAfterLinePrepare
+        {
+            set { FOnAfterLinePrepare = value; }
+            get { return FOnAfterLinePrepare; }
+        }
+
+   /*          __property bool LEActive = { read = f_LEActive, write = SetLEActive };
         __property int OffsetXFromStart = { read = GetOffsetXFromStart };
         __property int BaseOffsetX = { read = f_BaseOffsetX };
         __property int BaseOffsetY = { read = f_BaseOffsetY };

@@ -64,11 +64,42 @@ public class TListFlag
             List = new List<object>();
         }
         ~TListFlag() { }
-   /*     public TFlag AddFlag(TFlagShape AFlag, TBaseShape AShape, TRectLine ALine,
-              int APosition, ref bool AFlagExits );
-        public TFlag* DeleteFlagByShape(TFlagShape* AFlag);
-        public bool DeleteFlagByFlag(TFlag* AFlag);
+        public TFlag AddFlag(TFlagShape AFlag, TBaseShape AShape, TRectLine ALine,
+                             int APosition, ref bool AFlagExits )
+        {
+            TFlag Member;
+            TBaseLine MLine;
+            int APos;
+            AFlagExits = true;
+            for (int i = List.Count - 1; i >= 0; i--)
+            {
+                Member = (TFlag)(List.ElementAt(i));
+                if (Member.Flag == AFlag) return Member;
+            }
+            Member = new TFlag();
+            Member.Position = APosition;
+            Member.Shape = AShape;
+            Member.Line = ALine;
+            Member.Flag = AFlag;
+            List.Add(Member);
+            AFlagExits = false;
+            return Member;
+        }
+        public TFlag DeleteFlagByShape(TFlagShape AFlag)
+        {
+            TFlag Member, Res = null;
+            for (int i = List.Count - 1; i >= 0; i--)
+            {
+                Member = (TFlag)(List.ElementAt(i));
+                if (Member.Flag == AFlag)
+                {
+                    List.RemoveAt(i);
+                }
+            }
+            return Res;
+        }
+   /*     public bool DeleteFlagByFlag(TFlag AFlag);
         public int Count = { read = GetCount };
-        public TFlag* Items[int AIndex] = { read =  GetItem*/
+        public TFlag Items[int AIndex] = { read =  GetItem*/
     }
 }

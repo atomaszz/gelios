@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AltStack.cs" />
     <Compile Include="DynamicArray.cs" />
     <Compile Include="LineCutting.cs" />
     <Compile Include="ListFlag.cs" />
@@ -58,6 +59,7 @@
     </Compile>
     <Compile Include="AltSelector.cs" />
     <Compile Include="TArrowWorkShape.cs" />
+    <Compile Include="TClipPath.cs" />
     <Compile Include="TColorSetup.cs" />
     <Compile Include="TEllShape.cs" />
     <Compile Include="TFlagShape.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="TCycleDoWhileDo.cs" />
     <Compile Include="TCycleDoWhileDoFC.cs" />
     <Compile Include="TCycleWhileDo.cs" />
+    <Compile Include="TGlsRegistry.cs" />
     <Compile Include="TInvalidateList.cs" />
     <Compile Include="TListNode.cs" />
     <Compile Include="ListShape.cs" />

@@ -9,7 +9,9 @@ namespace geliosNEW
 {
     public class TRectLine
     {
-     int x0, y0, x1, y1;
+        public delegate void TRctFlagCreate (TRectLine ASender, TFlagShape AFlag, int APosFlag);
+        public delegate void TRctFlagDestroy(TRectLine ASender, TFlagShape AFlag, int APosFlag);
+        int x0, y0, x1, y1;
         int F_id;
         int F_bend;
         int F_Step;
@@ -207,10 +209,9 @@ namespace geliosNEW
         /*       HWND F_WndHandler;
                TControl* F_UnderControl;*/
         TFlagShape F_MiddleFlag;
-
-          /*     TRctFlagCreate FOnRctFlagCreate;
-               TRctFlagDestroy FOnRctFlagDestroy;
-               int f_CurrentBaseLine;*/
+        TRctFlagCreate FOnRctFlagCreate;
+        TRctFlagDestroy FOnRctFlagDestroy;
+        int f_CurrentBaseLine;
         bool f_PaintLine;
         Color f_BaseLineColor;
         void SetBend(int Value)
@@ -256,8 +257,11 @@ namespace geliosNEW
             else
                 ALine.DrawFlag = ADrawFlag;
         }
-       /*        void __fastcall FlagImport(TBaseLine* ASource, TBaseLine* ADest, TFlagShape* AFlag, int APosFlag);
-               void __fastcall SetBaseLineColor(TColor AValue);
+        void FlagImport(TBaseLine ASource, TBaseLine ADest, TFlagShape AFlag, int APosFlag)
+        {
+            ASource.NilFlag(AFlag);
+        }
+     /*          void __fastcall SetBaseLineColor(TColor AValue);
 
                protected:*/
         List<object> Lines;
@@ -278,9 +282,16 @@ namespace geliosNEW
                 Res = (TBaseLine)Lines.ElementAt(num);
             return Res;
         }
-        /*     public:
-          void __fastcall FlagCreate(TBaseLine* ASender, TFlagShape* AFlag, int APosFlag);
-             void __fastcall FlagDestroy(TBaseLine* ASender, TFlagShape* AFlag, int APosFlag);*/
+        public void FlagCreate(TBaseLine ASender, TFlagShape AFlag, int APosFlag)
+        {
+            if (APosFlag == 1) F_MiddleFlag = AFlag;
+            if (FOnRctFlagCreate!=null) FOnRctFlagCreate(this, AFlag, APosFlag);
+        }
+        public void  FlagDestroy(TBaseLine ASender, TFlagShape AFlag, int APosFlag)
+        {
+            if (APosFlag == 1) F_MiddleFlag = null;
+            if (FOnRctFlagDestroy!=null) FOnRctFlagDestroy(this, AFlag, APosFlag);
+        }
         public TRectLine(int step, int number)
         {
             x0 = 0;
@@ -321,12 +332,11 @@ namespace geliosNEW
 
             for (int i = 0; i <= 2; i++)
             {
-                TBaseLine line;
-    /*            line = new TBaseLine(0, 0, 0, 0, F_Step);
-                line.OnFlagCreate = &FlagCreate;
-                line.OnFlagDestroy = &FlagDestroy;
-                line.OnFlagImport = &FlagImport;*/
-             //   Lines.Add(line);
+                TBaseLine line = new TBaseLine(0, 0, 0, 0, F_Step);
+                line.OnFlagCreate = FlagCreate;
+                line.OnFlagDestroy = FlagDestroy;
+                line.OnFlagImport = FlagImport;
+                Lines.Add(line);
             }
 
         }
@@ -441,12 +451,20 @@ namespace geliosNEW
             set { f_LEControl = value; }
             get { return f_LEControl; }
         }
-/*__property HWND WndHandler = {read = F_WndHandler, write = SetWndHandler};
-     __property TControl* UnderControl = { read = F_UnderControl, write = SetUnderControl };
+        /*__property HWND WndHandler = {read = F_WndHandler, write = SetWndHandler};
+             __property TControl* UnderControl = { read = F_UnderControl, write = SetUnderControl };*/
 
-__property TRctFlagCreate   OnRctFlagCreate = {read = FOnRctFlagCreate, write = FOnRctFlagCreate};
-     __property TRctFlagDestroy  OnRctFlagDestroy = {read = FOnRctFlagDestroy, write = FOnRctFlagDestroy};
-     __property bool PaintLine = { read = f_PaintLine, write = f_PaintLine };
+        public TRctFlagCreate OnRctFlagCreate
+        {
+            set { FOnRctFlagCreate = value; }
+            get { return FOnRctFlagCreate;  }
+        }
+        public TRctFlagDestroy  OnRctFlagDestroy
+        {
+            set { FOnRctFlagDestroy = value; }
+            get { return FOnRctFlagDestroy; }
+        }
+ /*    __property bool PaintLine = { read = f_PaintLine, write = f_PaintLine };
 __property TColor BaseLineColor = {read = f_BaseLineColor, write = SetBaseLineColor};*/
     }
 }

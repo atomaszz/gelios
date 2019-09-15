@@ -19,6 +19,14 @@ namespace geliosNEW
         bool f_DrawFrameLine;
         Color f_FonColor;
         Color f_PixelColor;
+        Color f_FrameLineColor;
+        Color f_LineColor;
+        int f_WSPenWidth;
+        int X_Base, Y_Base;
+        int X_Ofs, Y_Ofs;
+        int __idls;
+        int f_FlagType;
+        bool f_BrushTFE;
         int f_IdAlternative; //текущая альтернатива
         int f_NumAlternative; //текущая альтернатива номер
         int f_IdAlternativeParent; //предок текущей альтернативы
@@ -33,36 +41,140 @@ namespace geliosNEW
         Color f_HaveChildColor;
         Color f_AltParamShapeColor;
         Color f_AltParamLineColor;
+        Color f_BrushColor;
+        Color f_ColorLeave;
+        Color f_ColorEnter;
+        Color f_FrameColorTFE;
+        Color f_FrameColorTFS;
+        Color f_AltFlagColor;
+        Color f_AltEnterFlagColor;
+        Color f_AltArrowColor;
+        Color f_AltEnterArrowColor;
+        Color f_AltLineColor;
+        Color f_AltEnabledFlagColor;
         bool f_AltParamShapeColorEnable;
-    /*     Graphics pbGraph;
-            Rectangle rectMainShow;
-             PaintEventArgs pntMainShow;*/
+        bool f_CanModifyPenWidth;
+        TColorSetup f_ColorSetup;
+        /*     Graphics pbGraph;
+                Rectangle rectMainShow;
+                 PaintEventArgs pntMainShow;*/
         public Bitmap pbMainBitMap;
         public Graphics pbMainGrph;
         bool f_IsDebug;
+        int f_TypeParam;
+        bool f_CheckNud;
+        TAlternateController f_AlternateController;
+        TAltSelector f_AltSelector;
+        TAltStackController f_AltStackController;
+        void InitHelp()
+        {
+       //     fmHelp = null;
+        }
+        void InitPieModule()
+        {
+   /*         string S = "Îøèáêà çàãðóçêè ìîäóëÿ ÏÐÎËÎÃ ñèñòåìû!\r\n";
+            S = S + "Áåç äàííîé ôóíêöèè óñëîâèÿ ïðåäèêàòîâ ÒÔÅ â çàäà÷àõ îïòèìèçàöèè áóäóò èãíîðèðîâàòüñÿ!";
+            gPieModule = new TPieModule;
+            if (!gPieModule->CheckModule())
+                MessageBox(0, S.c_str(), "Ïðåäóïðåæäåíèå", MB_ICONWARNING);*/
+        }
         public UMainFrm()
         {
             InitializeComponent();
             CreateSectionBar();
             /*-----------------------*/
             TAltSelectorItem Item;
-            f_IsDebug = false; // HasParam("debug");
+            f_IsDebug = false; //HasParam("debug");
             f_StepPixel = 8;
             f_PaintPixels = true;
             f_DrawFrameLine = false;
             f_FonColor = Color.White;
             f_PixelColor = Color.Black;
-            Grid = new TPaintGrid(pbMain.Image, this);
-            f_HaveChildColor = Color.Green;
-            LevelController = new TLevelController();
+            Grid = new TPaintGrid(pbMainGrph, this);
+            Grid.LEControl = true;
+            Grid.WndHandler = this.Handle;
+            Grid.UnderControl = pbMain;
+            CreateSectionBar();
             MainList = new TListNode();
-            f_AltParamShapeColorEnable = false;
-            f_AltParamShapeColor = Color.Yellow;
-            f_AltParamLineColor = Color.Fuchsia;
             MainList.OnListChange = ListChange;
+            LevelController = new TLevelController();
+            LevelController.Push(0);
+            f_IdAlternative = 0;
             f_CurrIDBlock = 1;
-            //      pbGraph = pbMain.CreateGraphics();
+            f_CurrIDShape = 0;
+            f_CurrIDLine = 0;
+            f_WSPenWidth = 1;
+            f_FrameLineColor = Color.Black;
+            sbY.Maximum = 0;
+            sbX.Maximum = 0;
+            X_Base = Y_Base = X_Ofs = Y_Ofs = 0;
+            f_LineColor = Color.Black;
+            f_BrushTFE = false;
+            f_BrushColor = Color.White;
+       //     f_FontTFE = new Graphics::TFont;
+            f_FlagType = 1;
+            f_ColorLeave = Color.Red;
+            f_ColorEnter = Color.Yellow;
+            __idls = 0;
+            f_FrameColorTFE = Color.Red;
+            f_FrameColorTFS = Color.Red;
+            f_HaveChildColor = Color.Green;
+            f_AltFlagColor = Color.Blue;
+            f_AltEnterFlagColor = Color.Aqua;
+            f_AltArrowColor = Color.Blue;
+            f_AltEnterArrowColor = Color.Aqua;
+            f_AltLineColor = Color.Blue;
+            f_AltEnabledFlagColor = Color.Silver;
+            f_Operation = 0;
+            f_TypeParam = SharedConst.PROP;
+            f_CanModifyPenWidth = false;
+            f_AltParamLineColor = Color.Fuchsia;
+            f_AltParamShapeColor = Color.Yellow;
+            f_AltParamShapeColorEnable = false;
+            f_CheckNud = false;
+            f_AlternateController = new TAlternateController(Handle);
+            f_AlternateController.OnListChange = AlternateListChange;
+            f_AlternateController.LEControl = true;
+            f_AlternateController.WndHandler = this.Handle;
+            f_AlternateController.UnderControl = pbMain;
+            f_AltSelector = new TAltSelector();
+            f_AltStackController = new TAltStackController();
+         //   f_MenuController = new TMenuController;
+         //   f_ContextMenuController = new TMenuController;
+            Item = f_AltSelector.CreateNewAlternateID(LevelController.ParentShapeID);
+            f_IdAlternative = Item.ID;
+            f_NumAlternative = f_AltSelector.AddAltItem(f_IdAlternative);
+            f_IdAlternativeParent = f_IdAlternative;
+            f_NumAlternativeParent = f_NumAlternative;
+            MainList.CreateAlternate(null, null, f_IdAlternative, f_NumAlternative);
+            f_AltStackController.Push(f_IdAlternative, f_NumAlternative,
+               f_IdAlternativeParent, f_NumAlternativeParent);
+            f_ColorSetup = new TColorSetup();
+      /*      f_RSettings = new TGlsRegistry();
+            GMess = new TMessangers();
+            f_AV = new TAlternateView;
+            f_StackHistory = new TDynamicArray();
+            f_ActList = new TGlsActionList;
+            InitActionList();
+            f_RSettings.Path = "\\Software\\TFEGraph\\GLS";
+            RestoreSettings();
+            GMess.RegistrMessage(1, ContainsChildShape);
+            GMess.RegistrMessage(2, SaveHideBar);
+            GMess.RegistrMessage(3, CompareWS);
+            GMess.RegistrMessage(4, GLBCheckUsedPath);
+            GMess.RegistrMessage(5, GLBShowPredicateModel);
+            GMess.RegistrMessage(6, GLBFindTFS);
+            GMess.RegistrMessage(7, GLBApplySettingsForOutherGrid);*/
+            InitHelp();
+            InitPieModule();
+       /*     f_Zadacha = new TZadacha;
+            f_ClipCopyTFS = new TClipCopyTFS(Handle, 0x8000000);
+            f_PredicatePath = new TPredicatePath;
+            f_PredicateDopPrav = new AnsiString;
+            ApplySettings();
+            randomize();*/
 
+            //      pbGraph = pbMain.CreateGraphics();
             pbMainBitMap = new Bitmap(pbMain.Width, pbMain.Height);
             pbMainGrph = Graphics.FromImage(pbMainBitMap);
             /*       rectMainShow = new Rectangle(0, 0, pbMain.Width, pbMain.Height);
@@ -115,6 +227,11 @@ namespace geliosNEW
         {
             return menuBar.GetActiveControlNum();
         }
+        void AlternateListChange()
+        {
+            f_AlternateController.FillAlternateList(Grid.g_AlternateList,
+            LevelController.ParentShapeID, f_IdAlternative, f_NumAlternative);
+        }
         void AddWorkShape(int AType)
         {
             TBaseWorkShape WH;
@@ -131,6 +248,7 @@ namespace geliosNEW
     //        InvalidateRgn(pbMain.Parent.Handle, Grid.GetRegion(WH, 4), false);
             if (AType == 2)
             {
+                Grid.Paint();
                 WH = Grid.AddWorkShape(AType, f_CurrIDShape, f_CurrIDBlock, f_CurrIDLine);
                 WH.OnShapeCopy = ShapeCopy;
                 WH.ParentShapeID = LevelController.ParentShapeID;

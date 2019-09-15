@@ -15,11 +15,7 @@ namespace geliosNEW
         }
         public TRectShape(int X, int Y, int step, int number = 0) :base(X, Y, step, number)
         {
-            Rectangle R = new Rectangle();
-            R.X = X;
-            R.Y = Y - step*2 ;
-            R.Width = step*8;
-            R.Height = step*2;
+            Rectangle R = new Rectangle(X,Y - step * 2, step * 8, step * 4);
             BoundRect = R;
             F_TypeShape = 1;
         }

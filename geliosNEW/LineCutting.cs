@@ -71,7 +71,7 @@ namespace geliosNEW
         List<object> f_BaseLineList;
         TBaseWorkShape f_WorkShape;
         TBaseWorkShape f_NextWorkShape;
-   //     TCanvas f_Canvas;
+        Graphics f_Canvas;
         TRectLine f_FirstLine;
         TRectLine f_LastLine;
         bool f_IsFirstWS;
@@ -125,10 +125,25 @@ namespace geliosNEW
         bool AddToPointList(Point APointStart, Point APointEnd);
         bool ComparePoint(TLineCuttingItem A, TLineCuttingItem B, ref Point AStart, ref Point AEnd);
         void ApplyOffset(int Ax, int Ay);
-        void Paint(TCanvas ACanvas);
-        public TLineCutting(Canvas ACanvas);
+        void Paint(TCanvas ACanvas);*/
+        public TLineCutting(Graphics ACanvas)
+        {
+            f_PointList = new List<object>();
+            f_BaseLineList = new List<object>();
+            f_WorkShape = null;
+            f_NextWorkShape = null;
+            f_BaseX = f_BaseY = 0;
+            f_StartBaseX = f_StartBaseY = 0;
+            f_Canvas = ACanvas;
+            f_FirstLine = new TRectLine(0, 0);
+            f_LastLine = new TRectLine(0, 0);
+            f_IsFirstWS = f_IsLastWS = false;
+            f_DLines = new TDynamicArray();
+            f_DShapes = new TDynamicArray();
+        }
+
         ~TLineCutting() { }
-        public void BeginMoving(int Ax, int Ay);
+  /*      public void BeginMoving(int Ax, int Ay);
         public void Moving(int Ax, int Ay);
         public void EndMoving(int &AxOfs, int &AyOfs);
         public void ClearAll();*/

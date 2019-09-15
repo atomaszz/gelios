@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing; 
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace geliosNEW
 {
@@ -109,9 +110,9 @@ namespace geliosNEW
             get { return f_ParentNumAlt; }
         }
     }
-    class TAlternateList
+    public class TAlternateList
     {
-        List<object> f_List;
+        public List<object> f_List;
         int f_pos;
  /*       int GetCount();*/
         public TAlternateList()
@@ -138,21 +139,22 @@ namespace geliosNEW
     }
 
 
-    class TAlternateController
+    public class TAlternateController
     {
-        //  HWND f_OwnerForm;
-        /*        TList* f_List;
-                TColor f_ArrowColor;
-                TColor f_EnterArrowColor;
-                TColor f_PenColor;
-                int f_PenWidth;
-                TListChange FOnListChange;
-                TClipPath* f_ClipPath;
-                bool f_LEControl;
-                HWND f_WndHandler;
-                TControl* f_UnderControl;
-                bool f_UpdateAlternateList;
-
+        public delegate void TListChange();
+        IntPtr f_OwnerForm;
+        List<object> f_List;
+        Color f_ArrowColor;
+        Color f_EnterArrowColor;
+        Color f_PenColor;
+        int f_PenWidth;
+        TListChange FOnListChange;
+        TClipPath f_ClipPath;
+        bool f_LEControl;
+        IntPtr f_WndHandler;
+        Control f_UnderControl;
+        bool f_UpdateAlternateList;
+        /*
                 void FreeList();
                 int FindAlternateItem(TBaseWorkShape* AWorkShape, bool AFirst);
                 TBaseWorkShape* FindNextWorkShape(TBaseWorkShape* W);
@@ -164,36 +166,79 @@ namespace geliosNEW
                 void __fastcall SetPenColor(TColor AValue);
                 void __fastcall SetPenWidth(int AValue);
                 void RecalcCoordArrow();
-                public:
-             TAlternateController(HWND AOwnerForm);
-                ~TAlternateController();
+                public:*/
+        public TAlternateController(IntPtr AOwnerForm)
+        {
+            f_List = new List<object>();
+            FOnListChange = null;
+            f_OwnerForm = AOwnerForm;
+      //      f_ArrowColor = new Color(0);
+      //      f_EnterArrowColor = new Color(0);
+     //       f_PenColor = new Color(0);
+            f_PenWidth = 1;
+            f_LEControl = false;
+       //     f_WndHandler = null;
+            f_UnderControl = null;
+            f_ClipPath = new TClipPath();
+            f_UpdateAlternateList = false;
+        }
+        ~TAlternateController() { }
 
-                bool AddAlternateItem(TBaseWorkShape* AWSFirst, TBaseWorkShape* AWSLast, int AId, int ANumAlt,
-                  int AParentId, int AParentNumAlt);
-                void DeleteAlternateItem(TBaseWorkShape* AWSFirst, TBaseWorkShape* AWSLast, int AId, int ANum);
-                void DeleteAlternateItem2(int AId, bool ASendMessage = true);
-                void FillAlternateList(TAlternateList* AlternateList, int AParentShapeID,
-                    int AId, int ANumAlt);
-                void VisibleArrow(TBaseWorkShape* W, bool AVisible);
-                void VisibleArrowAll(bool AVisible);
-                int IsExistsAlternate(TBaseWorkShape* AWSFirst, TBaseWorkShape* AWSLast);
-                void CoordinateCorrect();
-                void RecalcPosition(int AParentShapeID, int AId, int ANumAlt);
-                bool GetWSToAlternate(int AId, TBaseWorkShape** AWSFirst, TBaseWorkShape** AWSLast);
-                void ClearAll();
-                bool DeleteWorkShape(TBaseWorkShape* AWS);
+        /*            bool AddAlternateItem(TBaseWorkShape* AWSFirst, TBaseWorkShape* AWSLast, int AId, int ANumAlt,
+                      int AParentId, int AParentNumAlt);
+                    void DeleteAlternateItem(TBaseWorkShape* AWSFirst, TBaseWorkShape* AWSLast, int AId, int ANum);
+                    void DeleteAlternateItem2(int AId, bool ASendMessage = true);*/
+        public void FillAlternateList(TAlternateList AlternateList, int AParentShapeID,
+                        int AId, int ANumAlt)
+        {
+            TAlternateItem Item;
+            AlternateList.f_List.Clear();
+            for (int i = 0; i <= f_List.Count - 1; i++)
+            {
+                Item = (TAlternateItem)(f_List.ElementAt(i));
+                if ((Item.WorkShape.ParentShapeID == AParentShapeID) &&
+                     (Item.IdAltParent == AId) && (Item.NumAltParent == ANumAlt))
+                    AlternateList.f_List.Add(Item);
+            }
+        }
+        /*            void VisibleArrow(TBaseWorkShape* W, bool AVisible);
+                    void VisibleArrowAll(bool AVisible);
+                    int IsExistsAlternate(TBaseWorkShape* AWSFirst, TBaseWorkShape* AWSLast);
+                    void CoordinateCorrect();
+                    void RecalcPosition(int AParentShapeID, int AId, int ANumAlt);
+                    bool GetWSToAlternate(int AId, TBaseWorkShape** AWSFirst, TBaseWorkShape** AWSLast);
+                    void ClearAll();
+                    bool DeleteWorkShape(TBaseWorkShape* AWS);*/
+        public TListChange OnListChange
+        {
+            set { FOnListChange = value; }
+            get { return FOnListChange; }
+        }
 
-                __property TListChange  OnListChange = {read = FOnListChange, write = FOnListChange
-            };
-            __property TColor ArrowColor = {read = f_ArrowColor, write = SetArrowColor
-        };
-        __property TColor EnterArrowColor = {read = f_EnterArrowColor, write = SetEnterArrowColor};
-             __property TColor PenColor = {read = f_PenColor, write = SetPenColor};
-             __property int PenWidth = { read = f_PenWidth, write = SetPenWidth };
-        __property bool LEControl = { read = f_LEControl, write = f_LEControl };
-        __property HWND WndHandler = {read = f_WndHandler, write = f_WndHandler};
-             __property TControl* UnderControl = { read = f_UnderControl, write = f_UnderControl };
-        __property bool UpdateAlternateList = { read = f_UpdateAlternateList, write = f_UpdateAlternateList };
-        */
+        /*      __property TColor ArrowColor = {read = f_ArrowColor, write = SetArrowColor
+};
+__property TColor EnterArrowColor = {read = f_EnterArrowColor, write = SetEnterArrowColor};
+     __property TColor PenColor = {read = f_PenColor, write = SetPenColor};
+     __property int PenWidth = { read = f_PenWidth, write = SetPenWidth };*/
+        public bool LEControl
+        {
+            set { f_LEControl = value; }
+            get { return f_LEControl;  }
+        }
+        public IntPtr WndHandler
+        {
+            set { f_WndHandler = value; }
+            get { return f_WndHandler; }
+        }
+        public Control UnderControl
+        {
+            set { f_UnderControl = value; }
+            get { return f_UnderControl; }
+        }
+        public bool UpdateAlternateList
+        {
+            set { f_UpdateAlternateList = value; }
+            get { return f_UpdateAlternateList; }
+        }
     }
 }

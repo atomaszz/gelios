@@ -465,9 +465,30 @@ namespace geliosNEW
             }
             return true;
         }
-        /*   // bool NilFlag(int APos, TFlagShape *AFlag = NULL);
-           int NilFlag(TFlagShape* AFlag);
-           virtual bool CopyObject(TBaseLine* ASource);*/
+        public int NilFlag(TFlagShape AFlag)
+        {
+            if (AFlag==null) return -1;
+            if (AFlag == F_FlagS)
+            {
+                F_FlagS = null;
+                F_DrawFlagS = false;
+                return 0;
+            }
+            if (AFlag == F_Flag)
+            {
+                F_Flag = null;
+                F_DrawFlag = false;
+                return 1;
+            }
+            if (AFlag == F_FlagE)
+            {
+                F_FlagE = null;
+                F_DrawFlagE = false;
+                return 2;
+            }
+            return -1;
+        }
+      /*     virtual bool CopyObject(TBaseLine* ASource);*/
         public  Color  Color
         {
             set { SetPenColor(value); }

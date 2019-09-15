@@ -18,7 +18,7 @@ namespace geliosNEW
         bool f_PaintPixels; //рисовать ли пикселы
         Color f_FonColor; //цвет фона
         Color f_PixelColor; //цвет пиксела
-        Image f_Canvas; //канва
+        Graphics f_Canvas; //канва
         Form f_OwnerForm;  //форма владельца
         bool f_RefreshFon; //нужно ли перерисовывать фон
         int f_WSPenWidth; //толщина линий ТФЕ
@@ -26,7 +26,7 @@ namespace geliosNEW
         Graphics ScrBitmapCopy;
         bool f_LEControl;
         Control f_UnderControl;
-        Form f_WndHandler;
+        IntPtr f_WndHandler;
         Point f_CurrEndPoint; //координаты последней точки
                               //      TClipPath f_ClipPath; //класс пути отсечения
         TListForPaint f_ListForPaint; //содержит фигуры для отрисовки
@@ -162,7 +162,7 @@ namespace geliosNEW
                     f_InvalidateList.AddWorkShape(WP);
                     if ((WP == f_LineCutting.WorkShape) && (f_WSMovingCount == 0)) continue;
                     ApplyAttributeForWorkShape(WP);
-                    WP.Paint(ScrBitmap);
+                    WP.Paint(f_Canvas);
                     WP = g_PainterList.Next();
                 }
             }
@@ -353,7 +353,7 @@ namespace geliosNEW
         public TPainterList g_PainterList; //класс содержащие рабочие блоки
         public TAlternateList g_AlternateList;
 
-        public TPaintGrid(Image ACanvas, UMainFrm AOwnerForm/*TCanvas* ACanvas, HWND AOwnerForm*/)
+        public TPaintGrid(Graphics ACanvas, UMainFrm AOwnerForm/*TCanvas* ACanvas, HWND AOwnerForm*/)
         {
             f_Width = f_Height = 0;
             f_StepPixels = 6;
@@ -364,7 +364,7 @@ namespace geliosNEW
             f_Canvas = ACanvas;
             f_OwnerForm = AOwnerForm;
             f_LEControl = false;
-            f_WndHandler = null;
+            f_WndHandler = new IntPtr();
             f_UnderControl = null;
             f_RefreshFon = true;
             f_CurrEndPoint = new Point(40, 100);
@@ -401,7 +401,7 @@ namespace geliosNEW
             f_ListForPaint = new TListForPaint();
             /*   f_FlagController = new TFlagController();*/
             f_InvalidateList = new TInvalidateList();
-     //       f_LineCutting = new TLineCutting(f_Canvas);
+            f_LineCutting = new TLineCutting(f_Canvas);
                     g_AlternateList = new TAlternateList();
           /*          f_AltWSList = new TAltWSList*/
             f_localVisiblearrowall = false;
@@ -559,14 +559,26 @@ namespace geliosNEW
             get { return f_StepPixelsGrid; }
             set { SetStepPixelsGrid(value); }
         }
-/*        __property TColor  FonColor = {read = f_FonColor, write = SetFonColor
-    };
-    __property TColor  PixelColor = {read = f_PixelColor, write = SetPixelColor
-};
-__property bool LEControl = { read = f_LEControl, write = f_LEControl };
-__property HWND WndHandler = {read = f_WndHandler, write = f_WndHandler};
-   __property TControl* UnderControl = { read = f_UnderControl, write = f_UnderControl };
-__property int WSPenWidth = { read = f_WSPenWidth, write = f_WSPenWidth };
+        /*        __property TColor  FonColor = {read = f_FonColor, write = SetFonColor
+            };
+            __property TColor  PixelColor = {read = f_PixelColor, write = SetPixelColor
+        };*/
+        public bool LEControl
+        {
+            set { f_LEControl = value; }
+            get { return f_LEControl; }
+        }
+        public  IntPtr WndHandler
+        {
+            set { f_WndHandler = value; }
+            get { return f_WndHandler; }
+        }
+        public Control UnderControl
+        {
+            set { f_UnderControl = value;  }
+            get { return f_UnderControl;  }
+        }
+/*__property int WSPenWidth = { read = f_WSPenWidth, write = f_WSPenWidth };
 __property bool RefreshFon = { read = f_RefreshFon, write = f_RefreshFon };
 
 __property TColor LineColor = {read = f_LineColor, write = SetLineColor};

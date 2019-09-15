@@ -258,9 +258,39 @@ namespace geliosNEW
         public int DecayWorkShape(TBaseWorkShape WDecay, TBaseWorkShape WN1, TBaseWorkShape WN2);
         public void FusionWorkShape(TBaseWorkShape WFusion, TBaseWorkShape WN1, TBaseWorkShape WN2);
         public TBaseWorkShape FindWorkShapeOutBaseShape(TBaseShape Shape, int &ShapeId);
-        public TBaseWorkShape FindWorkShapeOutBaseShapeID(int ShapeID, TBaseShape Shape);
-        public bool CreateAlternate(TBaseWorkShape WS, TBaseWorkShape WE, int AID, int ANumAlt);
-        public int AddAlternate(TBaseWorkShape WS, TBaseWorkShape WE, int AID);
+        public TBaseWorkShape FindWorkShapeOutBaseShapeID(int ShapeID, TBaseShape Shape);*/
+        public bool CreateAlternate(TBaseWorkShape WS, TBaseWorkShape WE, int AID, int ANumAlt)
+        {
+            TNodeAlt Alt;
+            TNodeMain NS, NE;
+            if (WS==null && WE == null)
+            {
+                Alt = new TNodeAlt();
+                Alt.ID = AID;
+                Alt.NodeStart = null;
+                Alt.NodeEnd = null;
+                Alt.Num = ANumAlt;
+                AlternateList.Add(Alt);
+                return true;
+            }
+            NS = FindNode(WS);
+            NE = FindNode(WE);
+            if ((NS==null) || (NE == null)) return false;
+            for (int i = 0; i <= AlternateList.Count - 1; i++)
+            {
+                Alt = (TNodeAlt)AlternateList.ElementAt(i);
+                if (Alt.ID == AID)
+                    return false;
+            }
+            Alt = new TNodeAlt();
+            Alt.ID = AID;
+            Alt.NodeStart = NS;
+            Alt.NodeEnd = NE;
+            Alt.Num = ANumAlt;
+            AlternateList.Add(Alt);
+            return true;
+        }
+  /*      public int AddAlternate(TBaseWorkShape WS, TBaseWorkShape WE, int AID);
         public bool AddAlternate(int AID, int ANumAlt);
         public int DeleteAlternate(int AID, int ANum);*/
         public TNodeMain SearchFirstNodeToAlternate(int AltId, int ANumAlt, int IdParentShape)
