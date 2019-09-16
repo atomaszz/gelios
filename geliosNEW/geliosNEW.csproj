@@ -58,6 +58,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="AltSelector.cs" />
+    <Compile Include="TAltWSList.cs" />
     <Compile Include="TArrowWorkShape.cs" />
     <Compile Include="TClipPath.cs" />
     <Compile Include="TColorSetup.cs" />

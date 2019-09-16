@@ -11,16 +11,19 @@ namespace geliosNEW
     {
         TBaseShape f_Shape;
         TBaseShape f_SavedShape;
-        List<object> f_CompositeWorkList;
-   /*     void SetBaseShape(TBaseShape AShape);*/
+        public List<TCompositeBaseWork> CompositeWork;
+        /*     void SetBaseShape(TBaseShape AShape);*/
         TCompositeBaseWork GetCompositeWork(int AIndex)
         {
-            if (AIndex >= 0 && AIndex <= f_CompositeWorkList.Count - 1)
-                return (TCompositeBaseWork)f_CompositeWorkList.ElementAt(AIndex);
+            if (AIndex >= 0 && AIndex <= CompositeWork.Count - 1)
+                return CompositeWork.ElementAt(AIndex);
             else
                 return null;
         }
-    /*    int GetCompositeWorkCount();*/
+        int GetCompositeWorkCount()
+        {
+            return CompositeWork.Count;
+        }
         Point GetStartPoint()
         {
             return new Point(0, 0);
@@ -58,9 +61,9 @@ namespace geliosNEW
                     f_Shape.PenColor = new Color();
                 f_Shape.Paint(ACanvas);
             }
-            for (int i = f_CompositeWorkList.Count - 1; i >= 0; i--)
+            for (int i = CompositeWork.Count - 1; i >= 0; i--)
             {
-                Item = (TCompositeBaseWork)f_CompositeWorkList.ElementAt(i);
+                Item = (TCompositeBaseWork)CompositeWork.ElementAt(i);
                 Item.Paint(ACanvas);
             }
         }
@@ -78,9 +81,9 @@ namespace geliosNEW
                 f_Shape.BoundRect = R;
             }
             TCompositeBaseWork Item;
-            for (int i = 0; i <= f_CompositeWorkList.Count - 1; i++)
+            for (int i = 0; i <= CompositeWork.Count - 1; i++)
             {
-                Item = (TCompositeBaseWork)(f_CompositeWorkList.ElementAt(i));
+                Item = (TCompositeBaseWork)(CompositeWork.ElementAt(i));
                 Item.ApplyOffset(Ax, Ay);
             }
         }
@@ -101,8 +104,10 @@ namespace geliosNEW
             set { f_Shape = value;  }
             get { return f_Shape; }
         }
- /*       public TCompositeBaseWork* CompositeWork[int AIndex] = { read = GetCompositeWork };
-        public int CompositeWorkCount = { read = GetCompositeWorkCount };*/
+        public int CompositeWorkCount
+        {
+            get { return GetCompositeWorkCount(); }
+        }
         public Point StartPoint
         {
             set { SetStartPoint(value); }

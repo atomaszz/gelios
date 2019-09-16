@@ -64,7 +64,10 @@ namespace geliosNEW
             Line.Bend = CalcBend(Line.xStart, Line.xEnd);
             base.Prepare();
         }
-        /*     public void Paint(TCanvas* Canvas);*/
+        override public void Paint(Graphics Canvas)
+        {
+            base.Paint(Canvas);
+        }
         public void CreateLines()
         {
             TArrowLine Line;

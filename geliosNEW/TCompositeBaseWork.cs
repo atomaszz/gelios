@@ -214,10 +214,39 @@ namespace geliosNEW
                  public void FreeRef();
                  public void GetAllLines(TDynamicArray* R, bool AMarkFirst);
                  public void GetAllShapes(TDynamicArray* R);
-                 virtual public void MakeFirstLine(TPoint AStart, int ABend);
-                 public void SetColorAll(TColor AColor);
-                 public void SetBrushColorAll(TColor AColor);
-                 public void SetBrushStyleAll(TBrushStyle AStyle);
+                 virtual public void MakeFirstLine(TPoint AStart, int ABend);*/
+        public void SetColorAll(Color AColor)
+        {
+            TCompositeBaseWorkItem Item;
+            TBaseLine BL;
+            for (int i = f_ListBL.Count - 1; i >= 0; i--)
+            {
+                BL = (TBaseLine)(f_ListBL.ElementAt(i));
+                BL.Color = AColor;
+            }
+            for (int i = 0; i <= f_ListItem.Count - 1; i++)
+            {
+                Item = (TCompositeBaseWorkItem)f_ListItem.ElementAt(i);
+                if (Item.BaseShape!=null)
+                    Item.BaseShape.PenColor = AColor;
+                for (int j = 0; j <= Item.CompositeWorkCount - 1; j++)
+                    Item.CompositeWork[j].SetColorAll(AColor);
+            }
+        }
+        public void SetBrushColorAll(Color AColor)
+        {
+            TCompositeBaseWorkItem Item;
+            for (int i = 0; i <= f_ListItem.Count - 1; i++)
+            {
+                Item = (TCompositeBaseWorkItem)(f_ListItem.ElementAt(i));
+                if (Item.BaseShape!=null)
+                    Item.BaseShape.BrushColor = AColor;
+                for (int j = 0; j <= Item.CompositeWorkCount - 1; j++)
+                    Item.CompositeWork[j].SetBrushColorAll(AColor);
+
+            }
+        }
+         /*        public void SetBrushStyleAll(TBrushStyle AStyle);
                  virtual public void TrimFirstLine(TPoint APStart, TPoint APEnd);
                  public void DeleteLine(void Line);
 

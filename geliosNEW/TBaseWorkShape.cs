@@ -171,10 +171,17 @@ namespace geliosNEW
                 //            bs.LEActive = f_LEActive;
             }
         }
-        /*            void __fastcall SetLEActive(bool AValue);
-                    void __fastcall SetBaseLineColor(TColor AValue);
-
-                    protected:*/
+        /*            void __fastcall SetLEActive(bool AValue);*/
+        void SetBaseLineColor(Color AValue)
+        {
+            TArrowLine Line;
+            f_BaseLineColor = AValue;
+            for (int i = WorkLines.Count - 1; i >= 0; i--)
+            {
+                Line = (TArrowLine)(WorkLines.ElementAt(i));
+                Line.BaseLineColor = f_BaseLineColor;
+            }
+        }
         protected int F_Step;
         protected int F_NumberShapeId;
         protected int F_NumberLineId;
@@ -396,9 +403,9 @@ namespace geliosNEW
                 f_CompositeWorkShape.Paint(Canvas);
                 return;
             }
-      /*      PenCopy();
-            BrushCopy();
-            FontCopy();*/
+            PenCopy();
+      //      BrushCopy();
+     //       FontCopy();
             for (i = 0; i <= WorkShapes.Count - 1; i++)
             {
                 currShape = (TBaseShape)WorkShapes.ElementAt(i);
@@ -606,8 +613,12 @@ namespace geliosNEW
             get { return f_BaseStartPoint; }
         }
 
-        /*   __property TColor  BrushColor = {read = F_BrushColor, write = F_BrushColor};
-                __property TBrushStyle BrushStyle = {read = F_BrushStyle, write = F_BrushStyle};*/
+        public Color  BrushColor
+        {
+            set { F_BrushColor = value; }
+            get { return F_BrushColor; }
+        }
+          /*      __property TBrushStyle BrushStyle = {read = F_BrushStyle, write = F_BrushStyle};*/
 
         public Color  PenColor
         {
@@ -621,10 +632,18 @@ namespace geliosNEW
         }
         /*        __property TPenStyle PenStyle = {read = F_PenStyle, write = F_PenStyle};
                      __property TPenMode PenMode = {read = F_PenMode, write = F_PenMode};
-                     __property Graphics::TFont*  Font = { read = F_Font, write = SetFont};
-                __property TColor FrameColor  = {read = F_FrameColor, write = F_FrameColor};
-                     __property TColor FrameColorTFE  = {read = F_FrameColorTFE, write = F_FrameColorTFE};
-                     __property bool DrawFrame = { read = F_DrawFrame, write = F_DrawFrame };
+                     __property Graphics::TFont*  Font = { read = F_Font, write = SetFont};*/
+        public Color FrameColor
+        {
+            set { F_FrameColor = value; }
+            get { return F_FrameColor; }
+        }
+        public Color FrameColorTFE
+        {
+            set { F_FrameColorTFE = value; }
+            get { return F_FrameColorTFE; }
+        }
+               /*      __property bool DrawFrame = { read = F_DrawFrame, write = F_DrawFrame };
 
                 __property TColor    LineColor = {read = F_LineColor, write = F_LineColor};*/
         public int LineWidth
@@ -710,17 +729,42 @@ namespace geliosNEW
             set { F_UnderControl = value; }
             get { return F_UnderControl; }
         }
-        /*__property TColor      FlagColor = {read = F_FlagColor, write = F_FlagColor};
-             __property int FlagType = { read = F_FlagType, write = F_FlagType };
+        public Color FlagColor
+        {
+            set { F_FlagColor = value; }
+            get { return F_FlagColor; }
+        }
+        public int FlagType
+        {
+            set { F_FlagType = value; }
+            get { return F_FlagType; }
+        }
+        public Color FlagSColor
+        {
+            set { F_FlagSColor = value; }
+            get { return F_FlagSColor; }
+        }
+        public int FlagSType
+        {
+            set { F_FlagSType = value; }
+            get { return F_FlagSType; }
+        }
 
-        __property TColor      FlagSColor = {read = F_FlagSColor, write = F_FlagSColor};
-             __property int FlagSType = { read = F_FlagSType, write = F_FlagSType };
-
-        __property TColor      FlagEColor = {read = F_FlagEColor, write = F_FlagEColor};
-             __property int FlagEType = { read = F_FlagEType, write = F_FlagEType };
-        __property int Step = { read = F_Step };*/
-
-        public TWSFlagCreate   OnWSFlagCreate
+        public Color FlagEColor
+        {
+            set { F_FlagEColor = value; }
+            get { return F_FlagEColor; }
+        }
+        public int FlagEType
+        {
+            set { F_FlagEType = value; }
+            get { return F_FlagEType; }
+        }
+        public int Step
+        {
+            get { return F_Step; }
+        }
+        public TWSFlagCreate OnWSFlagCreate
         {
             set { FOnWSFlagCreate = value; }
             get { return FOnWSFlagCreate;  }
@@ -745,13 +789,17 @@ namespace geliosNEW
             get { return FOnAfterLinePrepare; }
         }
 
-   /*          __property bool LEActive = { read = f_LEActive, write = SetLEActive };
-        __property int OffsetXFromStart = { read = GetOffsetXFromStart };
-        __property int BaseOffsetX = { read = f_BaseOffsetX };
-        __property int BaseOffsetY = { read = f_BaseOffsetY };
-        __property int WidthWork = { read = CalcWidthWork };
-        __property int Indent = { read = F_Indent };
-        __property TColor BaseLineColor = {read = f_BaseLineColor, write = SetBaseLineColor};*/
+        /*          __property bool LEActive = { read = f_LEActive, write = SetLEActive };
+             __property int OffsetXFromStart = { read = GetOffsetXFromStart };
+             __property int BaseOffsetX = { read = f_BaseOffsetX };
+             __property int BaseOffsetY = { read = f_BaseOffsetY };
+             __property int WidthWork = { read = CalcWidthWork };
+             __property int Indent = { read = F_Indent };*/
+        public Color BaseLineColor
+        {
+            set { SetBaseLineColor(value); }
+            get { return f_BaseLineColor; }
+        }
         public TCompositeBaseWork CompositeWorkShape
         {
             set { SetCompositeWorkShape(value); }

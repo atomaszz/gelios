@@ -90,6 +90,8 @@ namespace geliosNEW
             f_DrawFrameLine = false;
             f_FonColor = Color.White;
             f_PixelColor = Color.Black;
+            pbMainBitMap = new Bitmap(pbMain.Width, pbMain.Height);
+            pbMainGrph = Graphics.FromImage(pbMainBitMap);
             Grid = new TPaintGrid(pbMainGrph, this);
             Grid.LEControl = true;
             Grid.WndHandler = this.Handle;
@@ -175,8 +177,6 @@ namespace geliosNEW
             randomize();*/
 
             //      pbGraph = pbMain.CreateGraphics();
-            pbMainBitMap = new Bitmap(pbMain.Width, pbMain.Height);
-            pbMainGrph = Graphics.FromImage(pbMainBitMap);
             /*       rectMainShow = new Rectangle(0, 0, pbMain.Width, pbMain.Height);
                    pntMainShow = new PaintEventArgs(pbGraph, rectMainShow);*/
         }

@@ -261,9 +261,16 @@ namespace geliosNEW
         {
             ASource.NilFlag(AFlag);
         }
-     /*          void __fastcall SetBaseLineColor(TColor AValue);
-
-               protected:*/
+        void SetBaseLineColor(Color AValue)
+        {
+            f_BaseLineColor = AValue;
+            TBaseLine line;
+            for (int i = Lines.Count - 1; i >= 0; i--)
+            {
+                line = (TBaseLine)(Lines.ElementAt(i));
+                line.BasePenColor = f_BaseLineColor;
+            }
+        }
         List<object> Lines;
         void InvisibleLines()
         {
@@ -436,16 +443,31 @@ namespace geliosNEW
             set { F_DrawFlagS = value; }
             get { return F_DrawFlagS; }
         }
-        /*      __property TColor      FlagSColor = {read = F_FlagSColor, write = F_FlagSColor};
-                   __property int FlagSType = { read = F_FlagSType, write = F_FlagSType };*/
-
+        public Color FlagSColor
+        {
+            set { F_FlagSColor = value; }
+            get { return F_FlagSColor; }
+        }
+        public int FlagSType
+        {
+            set { F_FlagSType = value; }
+            get { return F_FlagSType; }
+        }
         public bool DrawFlagE
         {
             set { F_DrawFlagE = value; }
             get { return F_DrawFlagE; }
         }
- /*       __property TColor      FlagEColor = {read = F_FlagEColor, write = F_FlagEColor};
-             __property int FlagEType = { read = F_FlagEType, write = F_FlagEType };*/
+        public Color FlagEColor
+        {
+            set { F_FlagEColor = value; }
+            get { return F_FlagEColor; }
+        }
+        public int FlagEType
+        {
+            set { F_FlagEType = value; }
+            get { return F_FlagEType; }
+        }
         public bool LEControl
         {
             set { f_LEControl = value; }
@@ -464,7 +486,11 @@ namespace geliosNEW
             set { FOnRctFlagDestroy = value; }
             get { return FOnRctFlagDestroy; }
         }
- /*    __property bool PaintLine = { read = f_PaintLine, write = f_PaintLine };
-__property TColor BaseLineColor = {read = f_BaseLineColor, write = SetBaseLineColor};*/
+        /*    __property bool PaintLine = { read = f_PaintLine, write = f_PaintLine };*/
+        public Color BaseLineColor
+        {
+            set { SetBaseLineColor(value); }
+            get { return f_BaseLineColor; }
+        }
     }
 }

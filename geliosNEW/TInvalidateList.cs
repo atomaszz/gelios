@@ -9,23 +9,29 @@ namespace geliosNEW
 {
     class TInvalidateList
     {
-        List<object> f_List;
+        public List<object> Items;
         int f_Width;
         int f_Heigth;
-   //     TBaseWorkShape GetItem(int AIndex);
+        TBaseWorkShape GetItem(int AIndex)
+        {
+            TBaseWorkShape res = null;
+            if ((AIndex >= 0) && (AIndex <= Items.Count - 1))
+                res = (TBaseWorkShape)(Items.ElementAt(AIndex));
+            return res;
+        }
         int GetCount()
         {
-            return (f_List.Count);
+            return (Items.Count);
         }
         public TInvalidateList()
         {
-            f_List = new List<object>();
+            Items = new List<object>();
             f_Width = f_Heigth = 0;
         }
         ~TInvalidateList() { }
         public void Clear()
         {
-            f_List.Clear();
+            Items.Clear();
         }
         public void AddWorkShape(TBaseWorkShape AShape)
         {
@@ -33,9 +39,9 @@ namespace geliosNEW
             Rectangle Bounds = new Rectangle(0, 0, f_Width, f_Heigth);
             Point P1, P2;
             TBaseWorkShape Tmp;
-            for (int i = 0; i <= f_List.Count - 1; i++)
+            for (int i = 0; i <= Items.Count - 1; i++)
             {
-                Tmp = (TBaseWorkShape)f_List.ElementAt(i);
+                Tmp = (TBaseWorkShape)Items.ElementAt(i);
                 if (Tmp == AShape) return;
             }
             R = AShape.GetFrameRectWithLines();
@@ -43,9 +49,8 @@ namespace geliosNEW
             P2 = new Point(R.Right, R.Bottom);
             //    if (PtInRect(&Bounds, P1) || PtInRect(&Bounds, P2) )
             if ((R.Top <= f_Heigth) || (R.Bottom <= f_Heigth) || (R.Left!=0))
-                f_List.Add(AShape);
+                Items.Add(AShape);
         }
-        //      public TBaseWorkShape  Items[int AIndex] = { read =  GetItem
         public int Count
         {
             get { return GetCount(); }

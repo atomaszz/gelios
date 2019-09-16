@@ -33,7 +33,7 @@ namespace geliosNEW
                                       //       TFlagController f_FlagController; //контроллер флагов
         TInvalidateList f_InvalidateList; //список отрисовываемых фигур реально
         TLineCutting f_LineCutting; //фигура при перетаскивании
-                              //       TAltWSList f_AltWSList;//содержит ссодержитписок ТФС для показа альтернативы
+        TAltWSList f_AltWSList;//содержит ссодержитписок ТФС для показа альтернативы
 
 
         int f_X_offs; //смещение по Х
@@ -171,9 +171,9 @@ namespace geliosNEW
             {
                 for (i = 0; i <= f_InvalidateList.Count - 1; i++)
                 {
-                //    WP = f_InvalidateList.Items[i];
-               /*     if ((WP == f_LineCutting.WorkShape) && (f_WSMovingCount == 0)) continue;
-                    ApplyAttributeForWorkShape(WP);*/
+                    WP = (TBaseWorkShape)f_InvalidateList.Items[i];
+                    if ((WP == f_LineCutting.WorkShape) && (f_WSMovingCount == 0)) continue;
+                    ApplyAttributeForWorkShape(WP);
                 //    WP.Paint(ScrBitmap.Canvas);
                 }
             }
@@ -212,16 +212,16 @@ namespace geliosNEW
         }
         void ApplyAttributeForWorkShape(TBaseWorkShape WS) // применяет аттрибуты для ТФС
         {
-    /*        WS.PenWidth = f_WSPenWidth;
+            WS.PenWidth = f_WSPenWidth;
             WS.LineWidth = f_WSPenWidth;
             WS.PenColor = f_LineColor;
             WS.BaseLineColor = f_LineColor;
-            if (f_BrushTFE)
+        /*    if (f_BrushTFE)
                 WS.BrushStyle = bsSolid;
             else
-                WS.BrushStyle = bsClear;
+                WS.BrushStyle = bsClear;*/
             WS.BrushColor = f_BrushColor;
-            WS.Font = f_FontTFE;
+        //    WS.Font = f_FontTFE;
             WS.FlagSType = f_FlagType;
             WS.FlagEType = f_FlagType;
             WS.FrameColorTFE = f_FrameColorTFE;
@@ -230,7 +230,7 @@ namespace geliosNEW
             {
                 WS.CompositeWorkShape.SetColorAll(f_LineColor);
                 WS.CompositeWorkShape.SetBrushColorAll(f_BrushColor);
-                WS.CompositeWorkShape.SetBrushStyleAll(WS.BrushStyle);
+        //        WS.CompositeWorkShape.SetBrushStyleAll(WS.BrushStyle);
             }
             if (f_AltWSList.Find(WS))
             {
@@ -238,11 +238,17 @@ namespace geliosNEW
                 if (WS.CompositeWorkShape!=null)
                     WS.CompositeWorkShape.SetColorAll(f_AltLineColor);
             }
-            ApplyAttributeForCompositeWorkShape(WS);*/
+            ApplyAttributeForCompositeWorkShape(WS);
         }
-
-        /*     void ApplyAttributeForCompositeWorkShape(TBaseWorkShape WS);
-             void BeforeResize();*/
+        void ApplyAttributeForCompositeWorkShape(TBaseWorkShape WS)
+        {
+            if (WS.CompositeWorkShape!=null)
+            {
+                WS.CompositeWorkShape.FirstLine.FlagSType = WS.FlagSType;
+                WS.CompositeWorkShape.FirstLine.FlagEType = WS.FlagEType;
+            }
+        }
+   /*     void BeforeResize();*/
         void RecalcCurrEndPoint()  // расчет последней координаты последней ТФС в f_CurrEndPoint
         {
             TBaseWorkShape TempWork;
@@ -402,8 +408,8 @@ namespace geliosNEW
             /*   f_FlagController = new TFlagController();*/
             f_InvalidateList = new TInvalidateList();
             f_LineCutting = new TLineCutting(f_Canvas);
-                    g_AlternateList = new TAlternateList();
-          /*          f_AltWSList = new TAltWSList*/
+            g_AlternateList = new TAlternateList();
+            f_AltWSList = new TAltWSList();
             f_localVisiblearrowall = false;
         }
         ~TPaintGrid() { }

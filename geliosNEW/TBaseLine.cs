@@ -596,13 +596,25 @@ namespace geliosNEW
             set { y1 = value; }
             get { return y1; }
         }
-   /*     public int MinX
-        { get { return GetMinX(); } }
-__property int MinY = { read = GetMinY };
-__property int MaxX = { read = GetMaxX };
-__property int MaxY = { read = GetMaxY };
-__property TColor BasePenColor = {read = f_BasePenColor, write = f_BasePenColor};
-    __property int Tag = { read = f_Tag, write = f_Tag };
-__property int Tag2 = { read = f_Tag2, write = f_Tag2 };*/
+        /*     public int MinX
+             { get { return GetMinX(); } }
+     __property int MinY = { read = GetMinY };
+     __property int MaxX = { read = GetMaxX };
+     __property int MaxY = { read = GetMaxY };*/
+        public Color BasePenColor
+        {
+            set { f_BasePenColor = value; }
+            get { return f_BasePenColor;  }
+        }
+        public int Tag
+        {
+            set { f_Tag = value; }
+            get { return f_Tag; }
+        }
+        public int Tag2
+        {
+            set { f_Tag2 = value; }
+            get { return f_Tag2; }
+        }
     }
 }
