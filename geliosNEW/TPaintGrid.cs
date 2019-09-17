@@ -77,6 +77,10 @@ namespace geliosNEW
             if (Value > 12) Value = 12;
             f_StepPixels = Value;
         }
+        public void UpdateGraphics(Graphics ACanvas)
+        {
+            f_Canvas = ACanvas;
+        }
         void  SetStepPixelsGrid(int Value)
         {
             if (Value < 5) Value = 5;
@@ -359,7 +363,7 @@ namespace geliosNEW
         public TPainterList g_PainterList; //класс содержащие рабочие блоки
         public TAlternateList g_AlternateList;
 
-        public TPaintGrid(Graphics ACanvas, UMainFrm AOwnerForm/*TCanvas* ACanvas, HWND AOwnerForm*/)
+        public TPaintGrid(UMainFrm AOwnerForm/*TCanvas* ACanvas, HWND AOwnerForm*/)
         {
             f_Width = f_Height = 0;
             f_StepPixels = 6;
@@ -367,7 +371,6 @@ namespace geliosNEW
             f_FonColor = Color.White;
             f_PixelColor = Color.Black;
             f_PaintPixels = true;
-            f_Canvas = ACanvas;
             f_OwnerForm = AOwnerForm;
             f_LEControl = false;
             f_WndHandler = new IntPtr();
@@ -418,7 +421,7 @@ namespace geliosNEW
         public void Paint()
         {
             DoPaint();
-    //        f_Canvas.Draw(0, 0, ScrBitmap);
+            //        f_Canvas.Draw(0, 0, ScrBitmap);
         }
         public TBaseWorkShape AddWorkShape(int AType, int ACurrIDShape, int ACurrIDBlock, int ACurrIDLine)
         {

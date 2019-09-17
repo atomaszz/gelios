@@ -19,14 +19,15 @@ namespace geliosNEW
             BoundRect = R;
             F_TypeShape = 1;
         }
-     /*   public void Paint(TCanvas Canvas)
+        override public void Paint(Graphics Canvas)
         {
             SaveCanvas(Canvas);
-            TBaseShape::Paint(Canvas);
-            Canvas.Rectangle(BoundRect.Left, BoundRect.Top, BoundRect.Right, BoundRect.Bottom);
+            base.Paint(Canvas);
+            Canvas.DrawRectangle(new Pen(Color.Black,2),BoundRect.Left, BoundRect.Top, BoundRect.Width, BoundRect.Height);
             if (DrawCaption)
-                DrawText(Canvas.Handle, Caption.c_str(), -1, &BoundRect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+                Canvas.DrawString(Caption, new Font("Times New Roman", 10, FontStyle.Regular), new SolidBrush(Color.Black), new PointF(10, 10));
+            //        DrawText(Canvas.Handle, Caption.c_str(), -1, &BoundRect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
             RestoreCanvas(Canvas);
-        }*/
+        }
     }
 }

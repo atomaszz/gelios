@@ -60,6 +60,12 @@ namespace geliosNEW
                  PaintEventArgs pntMainShow;*/
         public Bitmap pbMainBitMap;
         public Graphics pbMainGrph;
+        /*-------------------*/
+        bool boolDraw;
+        Bitmap bmp;
+        Graphics g;
+        SolidBrush redBrush;
+
         bool f_IsDebug;
         int f_TypeParam;
         bool f_CheckNud;
@@ -75,7 +81,7 @@ namespace geliosNEW
    /*         string S = "Îøèáêà çàãðóçêè ìîäóëÿ ÏÐÎËÎÃ ñèñòåìû!\r\n";
             S = S + "Áåç äàííîé ôóíêöèè óñëîâèÿ ïðåäèêàòîâ ÒÔÅ â çàäà÷àõ îïòèìèçàöèè áóäóò èãíîðèðîâàòüñÿ!";
             gPieModule = new TPieModule;
-            if (!gPieModule->CheckModule())
+            if (!gPieModule.CheckModule())
                 MessageBox(0, S.c_str(), "Ïðåäóïðåæäåíèå", MB_ICONWARNING);*/
         }
         public UMainFrm()
@@ -92,7 +98,13 @@ namespace geliosNEW
             f_PixelColor = Color.Black;
             pbMainBitMap = new Bitmap(pbMain.Width, pbMain.Height);
             pbMainGrph = Graphics.FromImage(pbMainBitMap);
-            Grid = new TPaintGrid(pbMainGrph, this);
+            /*-----------------------------*/
+            bmp = new Bitmap(pbMain.Width, pbMain.Height);
+            pbMain.BackgroundImage = bmp;
+            g = Graphics.FromImage(bmp);
+            redBrush = new SolidBrush(Color.Red);
+            /*----------------------------*/
+            Grid = new TPaintGrid(this);
             Grid.LEControl = true;
             Grid.WndHandler = this.Handle;
             Grid.UnderControl = pbMain;
@@ -248,7 +260,7 @@ namespace geliosNEW
     //        InvalidateRgn(pbMain.Parent.Handle, Grid.GetRegion(WH, 4), false);
             if (AType == 2)
             {
-                Grid.Paint();
+                pbMain.Invalidate();
                 WH = Grid.AddWorkShape(AType, f_CurrIDShape, f_CurrIDBlock, f_CurrIDLine);
                 WH.OnShapeCopy = ShapeCopy;
                 WH.ParentShapeID = LevelController.ParentShapeID;
@@ -349,14 +361,60 @@ namespace geliosNEW
         }
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-  /*          toolStripStatusLabel1.Text = e.X.ToString();
-            toolStripStatusLabel2.Text = e.Y.ToString();
-            //     paralWorkOperAnd(g, 40, 20, 1.5f);*/
 
-       /*     Pen workPen = new Pen(Color.Black, 2f);
-            GraphicShapes test = new GraphicShapes(pbMain, workPen);
-            test.drawForNum(0,20,30,15,25);
-            test.drawForNum(13, 45, 30, 15, 25);*/
+            /*        // Объявляем объект "g" класса Graphics и предоставляем
+                    // ему возможность рисования на pictureBox1:
+                    Graphics g = pbMain.CreateGraphics();
+                    g.Clear(Color.Turquoise);
+                    // Создаем объекты-кисти для закрашивания фигур
+                    SolidBrush myCorp = new SolidBrush(Color.DarkMagenta);
+                    SolidBrush myTrum = new SolidBrush(Color.DarkOrchid);
+                    SolidBrush myTrub = new SolidBrush(Color.DeepPink);
+                    SolidBrush mySeа = new SolidBrush(Color.Blue);
+                    //Выбираем перо myPen желтого цвета толщиной в 2 пикселя:
+                    Pen myWind = new Pen(Color.Yellow, 2);
+                    // Закрашиваем фигуры
+                    g.FillRectangle(myTrub, 300, 125, 75, 75); // 1 труба (прямоугольник)
+                    g.FillRectangle(myTrub, 480, 125, 75, 75); // 2 труба (прямоугольник)
+                    g.FillPolygon(myCorp, new Point[]      // корпус (трапеция)
+                      {
+            new Point(100,300),new Point(700,300),
+            new Point(700,300),new Point(600,400),
+            new Point(600,400),new Point(200,400),
+            new Point(200,400),new Point(100,300)
+                      }
+                    );
+                    g.FillRectangle(myTrum, 250, 200, 350, 100); // палуба (прямоугольник)
+                                                                 // Море - 12 секторов-полуокружностей
+                    int x = 50;
+                    int Radius = 50;
+                    while (x <= pbMain.Width - Radius)
+                    {
+                        g.FillPie(mySeа, 0 + x, 375, 50, 50, 0, -180);
+                        x += 50;
+                    }
+                    // Иллюминаторы 
+                    for (int y = 300; y <= 550; y += 50)
+                    {
+                        g.DrawEllipse(myWind, y, 240, 20, 20); // 6 окружностей
+                    }*/
+
+
+
+            /*     Graphics g;    //  графический объект — некий холст
+                 Bitmap buf;  //  буфер для Bitmap-изображения
+                 buf = new Bitmap(pbMain.Width, pbMain.Height);  // с размерами
+                 g = Graphics.FromImage(buf);   // инициализация g
+                 g.DrawRectangle(new Pen(Color.Black, 2), 20, 20, 80, 50);*/
+
+            /*          toolStripStatusLabel1.Text = e.X.ToString();
+                      toolStripStatusLabel2.Text = e.Y.ToString();
+                      //     paralWorkOperAnd(g, 40, 20, 1.5f);*/
+
+            /*     Pen workPen = new Pen(Color.Black, 2f);
+                 GraphicShapes test = new GraphicShapes(pbMain, workPen);
+                 test.drawForNum(0,20,30,15,25);
+                 test.drawForNum(13, 45, 30, 15, 25);*/
 
 
             //  test.drawForNum(4);
@@ -375,11 +433,13 @@ namespace geliosNEW
 
         private void PictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-        /*    Pen workPen = new Pen(Color.Black, 2f);
-            bmp = new Bitmap(pbMain.Width, pbMain.Height);
-            workGrph = Graphics.FromImage(bmp);
-            workGrph.DrawEllipse(workPen, 10, 10, 100, 100);
-            pbMain.Image = bmp;*/
+            redBrush = new SolidBrush(Color.Green);
+            pbMain.Invalidate();
+            /*    Pen workPen = new Pen(Color.Black, 2f);
+                bmp = new Bitmap(pbMain.Width, pbMain.Height);
+                workGrph = Graphics.FromImage(bmp);
+                workGrph.DrawEllipse(workPen, 10, 10, 100, 100);
+                pbMain.Image = bmp;*/
 
 
             /*draw_panel_Paint(pntMainShow);
@@ -435,6 +495,7 @@ namespace geliosNEW
 
         private void PbMain_Paint(object sender, PaintEventArgs e)
         {
+            Grid.UpdateGraphics(e.Graphics);
             Grid.Paint();
         }
     }

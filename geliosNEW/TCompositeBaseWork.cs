@@ -137,7 +137,7 @@ namespace geliosNEW
             for (int j = 0; j <= f_ListBL.Count - 1; j++)
             {
                 BL = (TBaseLine)f_ListBL.ElementAt(j);
-                //      BL->Color = f_ColorSetup->LineColor;
+                //      BL.Color = f_ColorSetup.LineColor;
                 BL.Paint(ACanvas);
             }
         }

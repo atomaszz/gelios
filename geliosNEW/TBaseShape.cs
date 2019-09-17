@@ -56,11 +56,11 @@ namespace geliosNEW
         TBaseShape f_Clon;
 
         /*      void DoSetLEFrame();*/
-        Point  GetPointStartShape()
+        Point GetPointStartShape()
         {
             return (new Point(F_Rect.Left, F_Rect.Top + (int)((F_Rect.Bottom - F_Rect.Top) / 2)));
         }
-        Point  GetPointEndShape()
+        Point GetPointEndShape()
         {
             return (new Point(F_Rect.Right, F_Rect.Top + (int)((F_Rect.Bottom - F_Rect.Top) / 2)));
         }
@@ -69,37 +69,37 @@ namespace geliosNEW
             SetBaseRect(Value);
             //SetLEControl();
         }
-   /*     void  SetWndHandler(const HWND Value);
-        void  SetLEFrame(int Value);
-        void  SetUnderControl(TControl* Value);
-        void  SetFont(Graphics::TFont* Value);*/
-        void  SetCreateLEControl(bool Value)
+        /*     void  SetWndHandler(const HWND Value);
+             void  SetLEFrame(int Value);
+             void  SetUnderControl(TControl* Value);
+             void  SetFont(Graphics::TFont* Value);*/
+        void SetCreateLEControl(bool Value)
         {
-     /*       if ((TypeShape == 100) || (TypeShape == 80))
-            {
-                f_LEControl = Value;
-           /*     if (f_LEControl)
-                {
-                    if (!F_LEControl)
-                    {
-                        F_LEControl = new TLEControl();
-                        F_LEControl.Source = this;
-                        F_LEControl.Id = F_Id;
-                        F_LEControl.UnderControl = F_UnderControl;
-                        F_LEControl.Active = f_LEActive;
-                    }
-                    SetLEControl();
-                }
-                else
-                {
-                    F_LEControl = null;
-                }
-            }*/
+            /*       if ((TypeShape == 100) || (TypeShape == 80))
+                   {
+                       f_LEControl = Value;
+                  /*     if (f_LEControl)
+                       {
+                           if (!F_LEControl)
+                           {
+                               F_LEControl = new TLEControl();
+                               F_LEControl.Source = this;
+                               F_LEControl.Id = F_Id;
+                               F_LEControl.UnderControl = F_UnderControl;
+                               F_LEControl.Active = f_LEActive;
+                           }
+                           SetLEControl();
+                       }
+                       else
+                       {
+                           F_LEControl = null;
+                       }
+                   }*/
         }
-   /*     void SetLEControl();
-        TRectLine   GetWorkLine(int AIndex);
-        int  GetWorkLineCount();
-        void CheckNullParamAlt();*/
+        /*     void SetLEControl();
+             TRectLine   GetWorkLine(int AIndex);
+             int  GetWorkLineCount();
+             void CheckNullParamAlt();*/
 
         protected int F_Step;
 
@@ -107,12 +107,27 @@ namespace geliosNEW
         protected Rectangle F_RealRect;   //реальный прмоугольник рисовани
 
 
-/*        protected void SaveCanvas(TCanvas* Canvas)
+        protected void SaveCanvas(Graphics Canvas)
         {
+            // F_Old_BrushColor = Canvas.Brush.Color;
+            //    F_Old_BrushStyle = Canvas.Brush.Style;
+            //   F_Old_PenColor = Canvas.Pen.Color;
+            //      F_Old_Font.Assign(Canvas.Font);
+            //     F_Old_PenWidth = Canvas.Pen.Width;
+            //     F_Old_PenStyle = Canvas.Pen.Style;
+            //     F_Old_PenMode = Canvas.Pen.Mode;
+        }
 
-        }*/
-
-/*        protected void RestoreCanvas(TCanvas* Canvas);*/
+        protected void RestoreCanvas(Graphics Canvas)
+        {
+      /*      Canvas.Brush.Color = F_Old_BrushColor;
+            Canvas.Pen.Color = F_Old_PenColor;
+            Canvas.Font.Assign(F_Old_Font);
+            Canvas.Pen.Width = F_Old_PenWidth;
+            Canvas.Pen.Style = F_Old_PenStyle;
+            Canvas.Pen.Mode = F_Old_PenMode;
+            Canvas.Brush.Style = F_Old_BrushStyle;*/
+        }
         protected virtual int GetTypeShape()
         {
             return 1;//F_TypeShape;

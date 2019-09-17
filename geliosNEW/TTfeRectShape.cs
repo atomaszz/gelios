@@ -56,11 +56,22 @@ namespace geliosNEW
                 pt = End.PointEnd;
             return res;
         }
-        /*    public void SetRect(int X, int Y, int Width, int Height);
-            public void SetRect(TRect Rect);
-            public void SetBaseRect(TRect Rect);
-            public void Paint(PaintEventArgs Canvas);
-            public bool CopyObject(TBaseShape ASource);
+        public void SetRect(int X, int Y, int Width, int Height)
+        {
+       //     base.SetRect(X + F_Step * 2, Y, Width, Height);
+            SetTail();
+        }
+     /*       public void SetRect(TRect Rect);
+            public void SetBaseRect(TRect Rect);*/
+        override public void Paint(Graphics Canvas)
+        {
+            SetTail();
+       //     CopyPen();
+            base.Paint(Canvas);
+            Start.Paint(Canvas);
+            End.Paint(Canvas);
+        }
+     /*       public bool CopyObject(TBaseShape ASource);
             public string  Make_One_SimpleItem(int AIndex);*/
     }
 }

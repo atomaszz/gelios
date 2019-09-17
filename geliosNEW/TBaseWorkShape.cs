@@ -139,7 +139,7 @@ namespace geliosNEW
             for (i = 0; i <= WorkLines.Count - 1; i++)
             {
                 line = (TRectLine)WorkLines.ElementAt(i);
-                //    line->UnderControl = F_UnderControl;
+                //    line.UnderControl = F_UnderControl;
             }
         }
         /*          void DoSetFlag();

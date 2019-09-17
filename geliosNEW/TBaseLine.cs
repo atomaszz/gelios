@@ -213,14 +213,14 @@ namespace geliosNEW
             if (p_c)
             {
                 F_Flag.Center = center_C;
-                // F_Flag->BrushColor = F_FlagColor;
+                // F_Flag.BrushColor = F_FlagColor;
                 F_Flag.Paint(Canvas);
             }
             else if (F_Flag!=null) F_Flag.Paint(Canvas);
             if (p_e)
             {
                 F_FlagE.Center = center_E;
-                // F_FlagE->BrushColor = F_FlagEColor;
+                // F_FlagE.BrushColor = F_FlagEColor;
                 F_FlagE.Paint(Canvas);
             }
             else if (F_FlagE!=null) F_FlagE.Paint(Canvas);
