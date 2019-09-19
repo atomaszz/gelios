@@ -18,7 +18,7 @@ namespace geliosNEW
         {
             base.Prepare();
         }
-        public void Paint(Image Canvas)
+        override public void Paint(Graphics Canvas)
         {
             base.Paint(Canvas);
         }

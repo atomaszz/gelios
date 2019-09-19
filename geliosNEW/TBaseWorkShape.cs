@@ -428,10 +428,10 @@ namespace geliosNEW
             for (i = 0; i <= WorkLines.Count - 1; i++)
             {
                 currLine = (TArrowLine)WorkLines.ElementAt(i);
-             //   if (OnLineCopy) OnLineCopy(currLine, i);
+                if (OnLineCopy!=null) OnLineCopy(currLine, i);
                 OldPenColor = currLine.Color;
                 if (F_DrawFrame) currLine.Color = F_FrameColor;
-           //     currLine.Paint(Canvas);
+                currLine.Paint(Canvas);
                 currLine.Color = OldPenColor;
             }
         }
@@ -663,7 +663,11 @@ namespace geliosNEW
             set { FOnShapeCopy = value; }
             get { return FOnShapeCopy; }
         }
- /*               __property TLineCopy  OnLineCopy = {read = FOnLineCopy, write = FOnLineCopy};*/
+        public TLineCopy  OnLineCopy
+        {
+            set { FOnLineCopy = value; }
+            get { return FOnLineCopy; }
+        }
         public int FirstShapeId
         {
             get { return F_NumberShapeId; }

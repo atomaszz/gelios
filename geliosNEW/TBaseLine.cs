@@ -10,7 +10,7 @@ namespace geliosNEW
 {
     public class TBaseLine
     {
-        public delegate void TFlagCreate (TBaseLine ASender, TFlagShape AFlag, int APosFlag);
+        public delegate void TFlagCreate(TBaseLine ASender, TFlagShape AFlag, int APosFlag);
         public delegate void TFlagDestroy(TBaseLine ASender, TFlagShape AFlag, int APosFlag);
         public delegate void TFlagImport(TBaseLine ASource, TBaseLine ADest, TFlagShape AFlag, int APosFlag);
 
@@ -34,7 +34,7 @@ namespace geliosNEW
         int F_FlagEType;
 
         bool f_LEControl;
-  //      HWND F_WndHandler;
+        //      HWND F_WndHandler;
         Control F_UnderControl;
         bool F_Visible;
         Color f_BasePenColor;
@@ -83,27 +83,27 @@ namespace geliosNEW
             x0 = Value.X;
             y0 = Value.Y;
         }
-        void  SetPointEnd(Point Value)
+        void SetPointEnd(Point Value)
         {
             x1 = Value.X;
             y1 = Value.Y;
         }
-        void  SetDrawFlag(bool Value)
+        void SetDrawFlag(bool Value)
         {
             int pos = 1;
             F_DrawFlag = Value;
-            if (F_DrawFlag && (F_Flag==null))
+            if (F_DrawFlag && (F_Flag == null))
             {
                 F_Flag = new TFlagShape(F_Step, this, 0);
                 F_Flag.LEControl = true;
-               // F_Flag.WndHandler = F_WndHandler;
+                // F_Flag.WndHandler = F_WndHandler;
                 F_Flag.BrushColor = F_FlagColor;
-                if (FOnFlagCreate!=null) OnFlagCreate(this, F_Flag, pos);
+                if (FOnFlagCreate != null) OnFlagCreate(this, F_Flag, pos);
             }
 
-            if ((F_DrawFlag) && (F_Flag!=null))
+            if ((F_DrawFlag) && (F_Flag != null))
             {
-                if (FOnFlagDestroy!=null) OnFlagDestroy(this, F_Flag, pos);
+                if (FOnFlagDestroy != null) OnFlagDestroy(this, F_Flag, pos);
                 F_Flag = null;
             }
         }
@@ -174,7 +174,7 @@ namespace geliosNEW
                     center_S = center;
                 }
             }
-            if (F_Flag!=null)
+            if (F_Flag != null)
             {
                 if (GetCoordLines(ref temp1, ref temp2, ref temp3, ref temp4, ref center))
                 {
@@ -184,7 +184,7 @@ namespace geliosNEW
                     center_C = center;
                 }
             }
-            if (F_FlagE!=null)
+            if (F_FlagE != null)
             {
 
                 if (GetCoordLinesEnd(ref temp1, ref center))
@@ -194,39 +194,38 @@ namespace geliosNEW
                     center_E = center;
                 }
             }
-
-    //        Canvas.MoveTo(m_s.X, m_s.Y);
-            if (F_Flag!=null)
+            if (F_Flag != null)
             {
-                Canvas.DrawLine(new Pen(Color.Black,2),m_s, m_1);
-        /*        Canvas.LineTo(m_1.X, m_1.Y);
-                Canvas.MoveTo(m_2.X, m_2.Y);*/
+                Canvas.DrawLine(new Pen(Color.Black, 2), m_s, m_1);
+                Canvas.DrawLine(new Pen(Color.Black, 2), m_2, m_e);
             }
-            Canvas.DrawLine(new Pen(Color.Black, 2), m_2, m_e);
-    //        Canvas.LineTo(m_e.X, m_e.Y);
+            else
+            {
+                Canvas.DrawLine(new Pen(Color.Black, 2), m_s, m_e);
+            }
             if (p_s)
             {
                 F_FlagS.Center = center_S;
                 F_FlagS.Paint(Canvas);
             }
-            else if (F_FlagS!=null) F_FlagS.Paint(Canvas);
+            else if (F_FlagS != null) F_FlagS.Paint(Canvas);
             if (p_c)
             {
                 F_Flag.Center = center_C;
                 // F_Flag.BrushColor = F_FlagColor;
                 F_Flag.Paint(Canvas);
             }
-            else if (F_Flag!=null) F_Flag.Paint(Canvas);
+            else if (F_Flag != null) F_Flag.Paint(Canvas);
             if (p_e)
             {
                 F_FlagE.Center = center_E;
                 // F_FlagE.BrushColor = F_FlagEColor;
                 F_FlagE.Paint(Canvas);
             }
-            else if (F_FlagE!=null) F_FlagE.Paint(Canvas);
+            else if (F_FlagE != null) F_FlagE.Paint(Canvas);
         }
 
-        bool GetCoordLinesStart(ref Point  p, ref Point Center)
+        bool GetCoordLinesStart(ref Point p, ref Point Center)
         {
             int cnt;
             int x_start, y_start;
@@ -308,42 +307,42 @@ namespace geliosNEW
             }
             return true;
         }
-   /*        Point GetStart();
-           Point GetEnd();*/
-           //void __fastcall SetParentWindow(TWinControl* Value);
-    /*       void SetLEControl(bool Value);
-           void SetWndHandler(const HWND Value);
-           void SetUnderControl(TControl* Value);*/
-        void  SetFlagColor(Color Value)
+        /*        Point GetStart();
+                Point GetEnd();*/
+        //void __fastcall SetParentWindow(TWinControl* Value);
+        /*       void SetLEControl(bool Value);
+               void SetWndHandler(const HWND Value);
+               void SetUnderControl(TControl* Value);*/
+        void SetFlagColor(Color Value)
         {
             F_FlagColor = Value;
         }
-        void  SetFlagSColor(Color Value)
+        void SetFlagSColor(Color Value)
         {
             F_FlagSColor = Value;
         }
-        void  SetFlagEColor(Color Value)
+        void SetFlagEColor(Color Value)
         {
             F_FlagEColor = Value;
         }
-  /*        int __fastcall GetMinX();
-          int __fastcall GetMinY();
-          int __fastcall GetMaxX();
-          int __fastcall GetMaxY();
+        /*        int __fastcall GetMinX();
+                int __fastcall GetMinY();
+                int __fastcall GetMaxX();
+                int __fastcall GetMaxY();
 
-          // void DoSetParentWindow();
-          // void DoSetWndHandler();
-          // void DoSetUnderControl();
-          protected:*/
-        protected  int x0, y0, x1, y1;
+                // void DoSetParentWindow();
+                // void DoSetWndHandler();
+                // void DoSetUnderControl();
+                protected:*/
+        protected int x0, y0, x1, y1;
         Pen Pen;
         Pen OldPenParent;
-           //   public:
+        //   public:
         public TBaseLine(int x0, int y0, int x1, int y1, int step)
         {
             ApplyCoord(x0, y0, x1, y1);
-   //         Pen = new Graphics::TPen;
-         //   OldPenParent = new Graphics::TPen;
+            Pen = new Pen(Color.Black);
+            //   OldPenParent = new Graphics::TPen;
             F_Step = step;
             F_Flag = null;
             F_FlagS = null;
@@ -366,7 +365,7 @@ namespace geliosNEW
             F_FlagSRadius = 0.7;
             F_FlagERadius = 0.7;
 
-      //      F_WndHandler = 0;
+            //      F_WndHandler = 0;
             F_UnderControl = null;
             F_Visible = true;
             FOnFlagCreate = null;
@@ -382,9 +381,9 @@ namespace geliosNEW
         {
             Point p0, p1, p2, p3, Center;
             if (!F_Visible) return;
-   //         OldPenParent.Assign(Canvas.Pen);
-  //          Canvas.Pen.Assign(this.Pen);
-            if ((F_DrawFlag) && (F_Flag!=null))
+            //         OldPenParent.Assign(Canvas.Pen);
+            //          Canvas.Pen.Assign(this.Pen);
+            if ((F_DrawFlag) && (F_Flag != null))
             {
                 F_Flag.TypeFlag = F_FlagType;
                 F_Flag.PenWidth = Width;
@@ -398,7 +397,7 @@ namespace geliosNEW
                 F_FlagS.PenColor = Color;
                 F_FlagS.Radius = F_FlagSRadius;
             }
-            if (F_DrawFlagE && (F_FlagE!=null))
+            if (F_DrawFlagE && (F_FlagE != null))
             {
                 F_FlagE.TypeFlag = F_FlagEType;
                 F_FlagE.PenWidth = Width;
@@ -406,11 +405,95 @@ namespace geliosNEW
                 F_FlagE.Radius = F_FlagERadius;
             }
             DrawLinesAndFlag(Canvas);
-     //       Canvas.Pen.Assign(OldPenParent);
+            //       Canvas.Pen.Assign(OldPenParent);
         }
-  /*            virtual void PaintLine(TCanvas* Canvas);
-              virtual void PaintFlag(TCanvas* Canvas);
-              bool KeepFlag(TBaseShape* Flag, int &type);*/
+        public virtual void PaintLine(Graphics Canvas)
+        {
+            Point p0, p1, p2, p3, Center;
+            if (!F_Visible) return;
+            //      OldPenParent->Assign(Canvas->Pen);
+            //     Canvas->Pen->Assign(this->Pen);
+            Canvas.DrawLine(new Pen(Color.Black, 2), new Point(x0, y0), new Point(x1, y1));
+    //        Canvas->Pen->Assign(OldPenParent);
+        }
+        public virtual void PaintFlag(Graphics Canvas)
+        {
+            Point temp1 = new Point(), temp2 = new Point(), temp3 = new Point(), temp4 = new Point(), center = new Point();
+            Point center_S = new Point(), center_C = new Point(), center_E = new Point();
+            bool p_c, p_s, p_e;
+            p_c = p_s = p_e = false;
+
+            if (F_DrawFlag && F_Flag != null)
+            {
+                F_Flag.TypeFlag = F_FlagType;
+                F_Flag.PenWidth = Width;
+                F_Flag.PenColor = Color;
+                F_Flag.Radius = F_FlagRadius;
+            }
+            if (F_DrawFlagS && F_FlagS != null)
+            {
+                F_FlagS.TypeFlag = F_FlagSType;
+                F_FlagS.PenWidth = Width;
+                F_FlagS.PenColor = Color;
+                F_FlagS.Radius = F_FlagSRadius;
+            }
+            if (F_DrawFlagE && F_FlagE != null)
+            {
+                F_FlagE.TypeFlag = F_FlagEType;
+                F_FlagE.PenWidth = Width;
+                F_FlagE.PenColor = Color;
+                F_FlagE.Radius = F_FlagERadius;
+            }
+            if (F_FlagS != null)
+            {
+                if (GetCoordLinesStart(ref temp1, ref center))
+                {
+                    p_s = true;
+                    center_S = center;
+                }
+            }
+            if (F_Flag!=null)
+            {
+                if (GetCoordLines(ref temp1, ref temp2, ref temp3, ref temp4, ref center))
+                {
+                    p_c = true;
+                    center_C = center;
+                }
+            }
+            if (F_FlagE!=null)
+            {
+                if (GetCoordLinesEnd(ref temp1, ref center))
+                {
+                    p_e = true;
+                    center_E = center;
+                }
+            }
+
+            if (p_s)
+            {
+                F_FlagS.Center = center_S;
+                F_FlagS.Paint(Canvas);
+            }
+            if (p_c)
+            {
+                F_Flag.Center = center_C;
+                F_Flag.Paint(Canvas);
+            }
+            if (p_e)
+            {
+                F_FlagE.Center = center_E;
+                F_FlagE.Paint(Canvas);
+            }
+        }
+        bool KeepFlag(TBaseShape Flag, ref int type)
+        {
+            type = -1;
+            if (Flag == (TBaseShape)F_FlagS) type = 0;
+            if (Flag == (TBaseShape)F_Flag) type = 1;
+            if (Flag == (TBaseShape)F_FlagE) type = 2;
+            return (type != -1);
+        }
+
         public void ApplyCoord(int x0, int y0, int x1, int y1)
         {
             this.x0 = x0;
@@ -425,8 +508,16 @@ namespace geliosNEW
             y0 = y0 + Ay;
             y1 = y1 + Ay;
         }
-   /*             void MoveTo(int Ax, int Ay);
-                void MoveTo(TPoint APoint);*/
+        void MoveTo(int Ax, int Ay)
+        {
+            int m_x = Ax - x0;
+            int m_y = Ay - y0;
+            ApplyOffset(m_x, m_y);
+        }
+        void MoveTo(Point APoint)
+        {
+            MoveTo(APoint.X, APoint.Y);
+        }
         public bool ImportFlag(TFlagShape AFlag, int APos, int ATypeFlag,
                     double ARadius, Color ABrushColor)
         {

@@ -353,7 +353,7 @@ namespace geliosNEW
         {
             CalcCoord();
         }
-        public virtual void Paint(Image Canvas)
+        public virtual void Paint(Graphics Canvas)
         {
             int i;
             TBaseLine line;
@@ -364,18 +364,17 @@ namespace geliosNEW
             {
                 line = (TBaseLine)Lines.ElementAt(i);
                 line.Color = Color;
-//line.Width = Width;
-             //   line.Style = Style;
-           //     line.Mode = Mode;
-
-            //    line.PaintLine(Canvas);
+                line.Width = Width;
+                //   line.Style = Style;
+                //     line.Mode = Mode;
+                line.PaintLine(Canvas);
             }
             for (i = 0; i <= Lines.Count - 1; i++)
             {
                 line = (TBaseLine)Lines.ElementAt(i);
                 line.FlagColor = F_FlagColor;
                 line.FlagType = F_FlagType;
-           //     line.PaintFlag(Canvas);
+                line.PaintFlag(Canvas);
             }
         }
      /*   bool KeepFlag(TBaseShape* Flag, int &type);*/
@@ -416,9 +415,12 @@ namespace geliosNEW
             set { F_Color = value; }
             get { return F_Color; }
         }
-        /*
-            __property int Width = { read = F_Width, write = F_Width };
-            __property TPenStyle Style = {read = F_Style, write = F_Style
+        public int Width
+        {
+            set { F_Width = value; }
+            get { return F_Width; }
+        }
+       /*     __property TPenStyle Style = {read = F_Style, write = F_Style
         };
         __property TPenMode  Mode  = {read = F_PenMode,  write = F_PenMode};*/
         public int Bend
