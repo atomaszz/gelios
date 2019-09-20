@@ -93,8 +93,10 @@
     <Compile Include="TParamAlternativeItem.cs" />
     <Compile Include="TRectLine.cs" />
     <Compile Include="TRectShape.cs" />
+    <Compile Include="TRhombShape.cs" />
     <Compile Include="TTail.cs" />
     <Compile Include="TTfeRectShape.cs" />
+    <Compile Include="TTfeRhombShape.cs" />
     <Compile Include="TTrailer.cs" />
     <Compile Include="TWork.cs" />
     <Compile Include="TZWork.cs" />

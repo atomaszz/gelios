@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace geliosNEW
 {
@@ -119,6 +120,32 @@ namespace geliosNEW
                 return A1;
             else
                 return A2;
+        }
+        public static void PaintVShape(Graphics ACanvas, Point ACenter, int AX, int AY, bool AOR)
+        {
+            Point P0;
+            Point P1;
+            Point P2;
+            if (AOR)
+            {
+                P0 = new Point(ACenter.X - AX, ACenter.Y - AY);
+                P1 = new Point(ACenter.X, AY + ACenter.Y);
+                //    if (ACanvas->Pen->Width == 1)
+                //       P2 = new Point(ACenter.X + AX + 1, ACenter.Y - AY - 1);
+                //      else
+                P2 = new Point(ACenter.X + AX, ACenter.Y - AY);
+            }
+            else
+            {
+                P0 = new Point(ACenter.X - AX, AY + ACenter.Y);
+                P1 = new Point(ACenter.X, ACenter.Y - AY);
+             //   if (ACanvas->Pen->Width == 1)
+             //       P2 = new Point(ACenter.X + AX + 1, AY + ACenter.Y + 1);
+            //    else
+                  P2 = new Point(ACenter.X + AX, AY + ACenter.Y);
+            }
+            ACanvas.DrawLine(new Pen(Color.Black, 2), P0, P1);
+            ACanvas.DrawLine(new Pen(Color.Black, 2), P1, P2);    
         }
     }
 }

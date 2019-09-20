@@ -221,12 +221,36 @@ namespace geliosNEW
             else
                 F_bend = Value;
         }
-        /*     TPoint __fastcall GetPointStart();
-             TPoint __fastcall GetPointEnd();
-             void __fastcall SetPointStart(TPoint Value);
-             void __fastcall SetPointEnd(TPoint Value);
-             void SetDrawFlagS();
-             void SetDrawFlagE();*/
+        Point GetPointStart()
+        {
+            return new Point(x0, y0);
+        }
+        Point GetPointEnd()
+        {
+            return new Point(x1, y1);
+        }
+        void SetPointStart(Point Value)
+        {
+            x0 = Value.X;
+            y0 = Value.Y;
+        }
+        void SetPointEnd(Point Value)
+        {
+            x1 = Value.X;
+            y1 = Value.Y;
+        }
+        void SetDrawFlagS()
+        {
+            int i, res;
+            TBaseLine line;
+            line = (TBaseLine)(Lines.ElementAt(0));
+            line.DrawFlagS = F_DrawFlagS;
+            line.FlagSType = F_FlagSType;
+        }
+        void SetDrawFlagE()
+        {
+
+        }
         void SetColorFlagS()
         {
             int i, res;
@@ -428,18 +452,37 @@ namespace geliosNEW
             set { SetBend(value); }
             get { return F_bend; }
         }
-        /*        __property int ID = { read = F_id, write = F_id };
-                __property TPoint    PointStart = {read  = GetPointStart, write = SetPointStart};
-                     __property TPoint    PointEnd = {read  = GetPointEnd, write = SetPointEnd};*/
+        public int ID
+        {
+            set { F_id = value; }
+            get { return F_id; }
+        }
+        public Point    PointStart
+        {
+            set { SetPointStart(value); }
+            get { return GetPointStart(); }
+        }
+        public Point    PointEnd
+        {
+            set { SetPointEnd(value); }
+            get { return GetPointEnd(); }
+        }
 
         public bool DrawFlag
         {
             set { F_DrawFlag = value; }
             get { return F_DrawFlag; }
         }
-     /*   __property TColor      FlagColor = {read = F_FlagColor, write = F_FlagColor};
-             __property int FlagType = { read = F_FlagType, write = F_FlagType };*/
-
+        public Color FlagColor
+        {
+            set { F_FlagColor = value; }
+            get { return F_FlagColor; }
+        }
+        public int FlagType
+        {
+            set { F_FlagType = value; }
+            get { return F_FlagType; }
+        }
         public bool DrawFlagS
         {
             set { F_DrawFlagS = value; }
@@ -488,7 +531,11 @@ namespace geliosNEW
             set { FOnRctFlagDestroy = value; }
             get { return FOnRctFlagDestroy; }
         }
-        /*    __property bool PaintLine = { read = f_PaintLine, write = f_PaintLine };*/
+        public bool PaintLine
+        {
+            set { f_PaintLine = value; }
+            get { return f_PaintLine; }
+        }
         public Color BaseLineColor
         {
             set { SetBaseLineColor(value); }

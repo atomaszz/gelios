@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace geliosNEW
 {
-    class TColorSetup
+    public class TColorSetup
     {
         Color f_FonColor;
         bool f_BoldTFELine;

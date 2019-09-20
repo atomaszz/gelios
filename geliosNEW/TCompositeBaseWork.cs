@@ -33,13 +33,19 @@ namespace geliosNEW
               protected void FreeListRectLine();
               protected void virtual SetTopBorder(int AValue);
               protected void  SetLineColor(TColor AValue);
-              protected int  GetItemCount();
-              Point  virtual GetEndPoint();*/
+              protected int  GetItemCount();*/
+        public virtual Point GetEndPoint()
+        {
+            return new Point(0, 0);
+        }
         public virtual Point GetStartPoint()
         {
             return new Point(0, 0);
         }
-            /*  virtual TBaseLine  GetEndLine();*/
+        public virtual TBaseLine  GetEndLine()
+        {
+            return null;
+        }
         public virtual void SetStartPoint(Point AValue)
         {
             int m_x, m_y;
@@ -265,9 +271,20 @@ namespace geliosNEW
             get { return GetStartPoint(); }
 
         }
-  /*   __property TPoint EndPoint = {read = GetEndPoint};
-          __property TBaseLine* EndLine = { read = GetEndLine };
-     __property TColorSetup* ColorSetup = { read = f_ColorSetup, write = f_ColorSetup };*/
+        public Point EndPoint
+        {
+            get { return GetEndPoint(); }
+        }
+        public TBaseLine EndLine
+        {
+            get { return GetEndLine(); }
+        }
+        public TColorSetup ColorSetup
+        {
+            set { f_ColorSetup = value; }
+            get { return f_ColorSetup; }
+
+        }
         public bool Selected
         {
             set { f_Selected = value; }

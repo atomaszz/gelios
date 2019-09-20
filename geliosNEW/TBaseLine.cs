@@ -411,10 +411,10 @@ namespace geliosNEW
         {
             Point p0, p1, p2, p3, Center;
             if (!F_Visible) return;
-            //      OldPenParent->Assign(Canvas->Pen);
-            //     Canvas->Pen->Assign(this->Pen);
+            //      OldPenParent.Assign(Canvas.Pen);
+            //     Canvas.Pen.Assign(this.Pen);
             Canvas.DrawLine(new Pen(Color.Black, 2), new Point(x0, y0), new Point(x1, y1));
-    //        Canvas->Pen->Assign(OldPenParent);
+    //        Canvas.Pen.Assign(OldPenParent);
         }
         public virtual void PaintFlag(Graphics Canvas)
         {
@@ -623,10 +623,22 @@ namespace geliosNEW
             get { return F_FlagType; }
         }
 
-  /*    __property bool DrawFlagS = { read = F_DrawFlagS, write = SetDrawFlagS };
-      __property TColor      FlagSColor = {read = F_FlagSColor, write = SetFlagSColor};
-          __property double FlagSRadius = { read = F_FlagSRadius, write = F_FlagSRadius };*/
-      public int FlagSType
+        public bool DrawFlagS
+        {
+            set { F_DrawFlagS = value; }
+            get { return F_DrawFlagS; }
+        }
+        public Color  FlagSColor
+        {
+            set { F_FlagSColor = value; }
+            get { return F_FlagSColor; }
+        }
+        public double FlagSRadius
+        {
+            set { F_FlagSRadius = value; }
+            get { return F_FlagSRadius; }
+        }
+        public int FlagSType
         {
             set { F_FlagSType = value; }
             get { return F_FlagSType; }
