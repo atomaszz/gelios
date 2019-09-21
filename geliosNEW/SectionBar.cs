@@ -130,13 +130,13 @@ namespace geliosNEW
             int i;
             
             int lastBotton = (howButtonFirst+ howButtonShow);
-            if (lastBotton == 12)
+            if (lastBotton == 13)
             {
                 allControl[13].Enabled = false;
             }
-            else if (lastBotton > 12)
+            else if (lastBotton > 13)
             {
-                lastBotton = 12;
+                lastBotton = 13;
                 howButtonFirst = lastBotton - howContr;
             }
             else

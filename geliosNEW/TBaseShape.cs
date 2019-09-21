@@ -186,10 +186,18 @@ namespace geliosNEW
         }
         ~TBaseShape() { }
         /*       public void SetRealRect(int X, int Y, int Width, int Height);
-               public void SetRealRect(TRect Rect);
-
-               public virtual void SetRect(int X, int Y, int Width, int Height);
-               public virtual void SetRect(TRect Rect);*/
+               public void SetRealRect(TRect Rect);*/
+        public virtual void SetRect(int X, int Y, int Width, int Height)
+        {
+            F_Rect.X = X;
+            F_Rect.Y = Y;
+            F_Rect.Width = Width;
+            F_Rect.Height = Height;
+        }
+        public virtual void SetRect(Rectangle Rect)
+        {
+            F_RealRect = Rect;
+        }
         public virtual void SetBaseRect(Rectangle Rect)
         {
             F_Rect = Rect;
@@ -254,11 +262,39 @@ namespace geliosNEW
             }
        //     Canvas.Font = F_Font;
         }
-   /*            public int PointInFrame(int X, int Y);
-               public virtual bool PowerIn();
-               public bool ReactMouse(TPoint APoint);
-               public void ApplyOffset(int Ax, int Ay);
-               public virtual bool CopyObject(TBaseShape ASource);*/
+        /*            public int PointInFrame(int X, int Y);
+                    public virtual bool PowerIn();
+                    public bool ReactMouse(TPoint APoint);
+                    public void ApplyOffset(int Ax, int Ay);*/
+        public virtual bool CopyObject(TBaseShape ASource)
+        {
+            if (ASource==null) return false;
+            ASource.BrushColor = F_BrushColor;
+            ASource.PenColor = F_PenColor;
+            ASource.F_FrameColor = F_FrameColor; //цвет обрамл¤ющего пр¤моугольника
+      //      ASource.F_Font.Assign(F_Font);
+            ASource.F_PenWidth = F_PenWidth;  // ширина пена
+            ASource.F_PenStyle = F_PenStyle;  //стиль пена
+            ASource.F_BrushStyle = F_BrushStyle; //стиль браша
+            ASource.Caption = F_Caption; //подпись фигуры
+            ASource.F_PenMode = F_PenMode;
+            ASource.F_Old_BrushColor = F_Old_BrushColor;
+            ASource.F_Old_PenColor = F_Old_PenColor;
+            ASource.F_Old_BrushStyle = F_Old_BrushStyle;
+    //        ASource.F_Old_Font.Assign(F_Old_Font);
+            ASource.F_Old_PenWidth = F_Old_PenWidth;
+            ASource.F_Old_PenStyle = F_Old_PenStyle;
+            ASource.F_Old_PenMode = F_Old_PenMode;
+
+            ASource.F_Id = F_Id; //номер фигуры
+            ASource.F_DrawCaption = F_DrawCaption;
+            ASource.F_FrameRect = F_FrameRect;
+            ASource.F_Rect = F_Rect;
+            ASource.F_Step = F_Step;
+            ASource.F_TypeShape = F_TypeShape;
+            ASource.F_RealRect = F_RealRect;   //реальный пр¤моугольник рисовани¤
+            return true;
+        }
         public void AddWorkLine(TRectLine ALine)
         {
             f_WorkLines.Add(ALine);

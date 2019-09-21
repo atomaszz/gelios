@@ -487,6 +487,7 @@
             // 
             this.sbY.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.sbY.Cursor = System.Windows.Forms.Cursors.NoMoveVert;
             this.sbY.Location = new System.Drawing.Point(936, 0);
             this.sbY.Name = "sbY";
             this.sbY.Size = new System.Drawing.Size(19, 352);
@@ -496,8 +497,10 @@
             // 
             this.sbX.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.sbX.Cursor = System.Windows.Forms.Cursors.NoMoveHoriz;
             this.sbX.Location = new System.Drawing.Point(0, 352);
             this.sbX.Name = "sbX";
+            this.sbX.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.sbX.Size = new System.Drawing.Size(955, 20);
             this.sbX.TabIndex = 0;
             // 

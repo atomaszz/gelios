@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AltStack.cs" />
+    <Compile Include="CommonGraph.cs" />
     <Compile Include="DynamicArray.cs" />
     <Compile Include="LineCutting.cs" />
     <Compile Include="ListFlag.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="TCycleDoWhileDoFC.cs" />
     <Compile Include="TCycleWhileDo.cs" />
     <Compile Include="TGlsRegistry.cs" />
+    <Compile Include="THexahedronShape.cs" />
     <Compile Include="TInvalidateList.cs" />
     <Compile Include="TListNode.cs" />
     <Compile Include="ListShape.cs" />
@@ -95,6 +97,8 @@
     <Compile Include="TRectShape.cs" />
     <Compile Include="TRhombShape.cs" />
     <Compile Include="TTail.cs" />
+    <Compile Include="TTfeEllShape.cs" />
+    <Compile Include="TTfeHexahedronShape.cs" />
     <Compile Include="TTfeRectShape.cs" />
     <Compile Include="TTfeRhombShape.cs" />
     <Compile Include="TTrailer.cs" />

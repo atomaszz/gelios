@@ -578,10 +578,12 @@ namespace geliosNEW
             set { f_FUNCTION = value; }
             get { return f_FUNCTION; }
         }
- /*       public string ELEMENT 
-            
-            = {read = f_ELEMENT, write = f_ELEMENT};
-        public string PREDICAT 
+        public string ELEMENT
+        {
+            set { f_ELEMENT = value; }
+            get { return f_ELEMENT; }
+        }
+ /*       public string PREDICAT 
             
             = {read = f_PREDICAT, write = f_PREDICAT};
         public double B 

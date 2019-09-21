@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace geliosNEW
 {
-    class TTfeRhombShape : TRhombShape
+    class TTfeHexahedronShape : THexahedronShape
     {
         TTail T0;
         TTail T1;
@@ -18,27 +18,12 @@ namespace geliosNEW
         bool F_TailTop;
         bool F_TailBottom;
         bool F_TailRight;
-
-        void SetTailLeft(bool Value)
-        {
-            F_TailLeft = Value;
-            SetTail();
-        }
-        void SetTailTop(bool Value)
-        {
-            F_TailTop = Value;
-            SetTail();
-        }
-        void SetTailBottom(bool Value)
-        {
-            F_TailBottom = Value;
-            SetTail();
-        }
-        void SetTailRight(bool Value)
-        {
-            F_TailRight = Value;
-            SetTail();
-        }
+/*
+        void __fastcall SetTailLeft(bool Value);
+        void __fastcall SetTailTop(bool Value);
+        void __fastcall SetTailBottom(bool Value);
+        void __fastcall SetTailRight(bool Value);
+        */
         void SetTail()
         {
             Point Point;
@@ -75,28 +60,19 @@ namespace geliosNEW
                 T3.PointStart = Point;
                 Point.Y = Point.Y + F_Step * 2;
                 T3.PointEnd = Point;
-            }
-        }
-        //      void CopyPen();
-        protected Point GetPointTailStartShape()
-        {
-            Point Res = new Point(0, 0);
-            GetTailPoint(0, ref Res);
-            return Res;
-        }
-        protected Point GetPointTailEndShape()
-        {
-            Point Res = new Point(0, 0);
-            GetTailPoint(2, ref Res);
-            return Res;
-        }
 
-        public TTfeRhombShape(int X, int Y, int step, int number = 0) : base(X, Y, step, number)
+            }
+
+        }
+        /*  void CopyPen();
+
+          protected Point __fastcall GetPointTailStartShape();
+          protected Point __fastcall GetPointTailEndShape();*/
+        public TTfeHexahedronShape(int X, int Y, int step, int number = 0) : base(X, Y, step, number)
         {
             Rectangle R;
-            F_TypeShape = 6;
+            F_TypeShape = 8;
             F_TailLeft = F_TailTop = F_TailBottom = F_TailRight = false;
-
             T0 = new TTail(0, 0, 0, 0, step);
             T1 = new TTail(0, 0, 0, 0, step);
             T2 = new TTail(0, 0, 0, 0, step);
@@ -107,7 +83,7 @@ namespace geliosNEW
             R.Width = F_Step * 2;
             BoundRect = R;
         }
-        ~TTfeRhombShape() { }
+        ~TTfeHexahedronShape() { }
         public bool GetTailPoint(int num, ref Point pt)
         {
             bool res = (((num == 0) && (F_TailLeft))
@@ -125,48 +101,42 @@ namespace geliosNEW
 
             return res;
         }
-        public void SetRect(int X, int Y, int Width, int Height)
+        override public void SetRect(int X, int Y, int Width, int Height)
         {
-          //  base.SetRect(X + F_Step * 2, Y, Width, Height);
+            base.SetRect(X + F_Step * 2, Y, Width, Height);
             SetTail();
         }
-        public void SetRect(Rectangle Rect)
+        override public void SetRect(Rectangle Rect)
         {
             Rectangle Temp = Rect;
             Temp.X = Temp.Left + F_Step * 2;
             Temp.Width = F_Step * 2;
-          //  base.SetRect(Temp);
+            base.SetRect(Temp);
             SetTail();
         }
-        public void SetBaseRect(Rectangle Rect)
+        override public void SetBaseRect(Rectangle Rect)
         {
             base.SetBaseRect(Rect);
             SetTail();
         }
-        public void Paint(Graphics Canvas)
+        override public void Paint(Graphics Canvas)
         {
             SetTail();
-          //  CopyPen();
+         //   CopyPen();
             base.Paint(Canvas);
             T0.Paint(Canvas);
             T1.Paint(Canvas);
             T2.Paint(Canvas);
             T3.Paint(Canvas);
+
         }
-        public bool CopyObject(TBaseShape ASource)
-        {
-            /*   base.CopyObject(ASource);
-               dynamic_cast<TTfeRhombShape)(ASource).TailLeft = F_TailLeft;
-               dynamic_cast<TTfeRhombShape)(ASource).TailTop = F_TailTop;
-               dynamic_cast<TTfeRhombShape)(ASource).TailBottom = F_TailBottom;
-               dynamic_cast<TTfeRhombShape)(ASource).TailRight = F_TailRight;*/
-            return true;
-        }
-        /*    public AnsiString Make_One_SimpleItem(int AIndex);*/
-        public  bool TailLeft
+   /*     public bool CopyObject(TBaseShape* ASource);
+        public AnsiString Make_One_SimpleItem(int AIndex);*/
+
+        public bool TailLeft
         {
             set { F_TailLeft = value; }
-            get { return F_TailLeft;  }
+            get { return F_TailLeft; }
         }
         public bool TailTop
         {

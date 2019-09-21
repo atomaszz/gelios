@@ -12,7 +12,7 @@ namespace geliosNEW
         Point f_PStart;
         Point f_PEnd;
         bool f_Includet;
-        int GetType()
+        public new int GetType()
         {
             int res = SharedConst.BL_OTHER;
             if (f_PStart.X == f_PEnd.X)
