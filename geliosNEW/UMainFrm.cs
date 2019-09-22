@@ -230,10 +230,10 @@ namespace geliosNEW
         {
             Point P;
             P = Grid.GetPointPolygon(sbX.Value, sbY.Value);
-            if ((P.X - pbMain.Width - sbX.Value) > 2)
+    /*        if ((P.X - pbMain.Width - sbX.Value) > 2)
                 sbX.Value = P.X - pbMain.Width + (Grid.StepPixels * 4);
             if ((P.Y - pbMain.Height - sbY.Value) > 2)
-                sbY.Maximum = P.Y - pbMain.Height + (Grid.StepPixels * 4);
+                sbY.Maximum = P.Y - pbMain.Height + (Grid.StepPixels * 4);*/
         }
         int GetTypShape()
         {

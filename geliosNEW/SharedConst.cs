@@ -130,7 +130,7 @@ namespace geliosNEW
             {
                 P0 = new Point(ACenter.X - AX, ACenter.Y - AY);
                 P1 = new Point(ACenter.X, AY + ACenter.Y);
-                //    if (ACanvas->Pen->Width == 1)
+                //    if (ACanvas.Pen.Width == 1)
                 //       P2 = new Point(ACenter.X + AX + 1, ACenter.Y - AY - 1);
                 //      else
                 P2 = new Point(ACenter.X + AX, ACenter.Y - AY);
@@ -139,7 +139,7 @@ namespace geliosNEW
             {
                 P0 = new Point(ACenter.X - AX, AY + ACenter.Y);
                 P1 = new Point(ACenter.X, ACenter.Y - AY);
-             //   if (ACanvas->Pen->Width == 1)
+             //   if (ACanvas.Pen.Width == 1)
              //       P2 = new Point(ACenter.X + AX + 1, AY + ACenter.Y + 1);
             //    else
                   P2 = new Point(ACenter.X + AX, AY + ACenter.Y);

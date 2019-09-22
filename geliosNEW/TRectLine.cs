@@ -415,7 +415,9 @@ namespace geliosNEW
 
         public int xEnd
         {
-            set { x1 = value; }
+            set {
+                x1 = value;
+            }
             get { return x1; }
         }
         public int yEnd

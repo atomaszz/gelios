@@ -245,15 +245,15 @@ namespace geliosNEW
             base.Paint(Canvas);
             if (CompositeWorkShape==null)
             {
-                //        F_OldPenParent.Assign(Canvas->Pen);
-                //      Canvas->Pen->Width = LineWidth;
-                //        Canvas->Pen->Style = LineStyle;
-                //        Canvas->Pen->Color = PenColor;
+                //        F_OldPenParent.Assign(Canvas.Pen);
+                //      Canvas.Pen.Width = LineWidth;
+                //        Canvas.Pen.Style = LineStyle;
+                //        Canvas.Pen.Color = PenColor;
                 SharedConst.PaintVShape(Canvas, VPoint, F_Step, F_Step, false);
-     //           Canvas->Pen->Assign(F_OldPenParent);
+     //           Canvas.Pen.Assign(F_OldPenParent);
             }
         }
-        public Point GetEndPoint()
+        override public Point GetEndPoint()
         {
             if (CompositeWorkShape!=null)
                 return CompositeWorkShape.EndPoint;

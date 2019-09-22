@@ -145,12 +145,12 @@ namespace geliosNEW
 
             return res;
         }
-        public void SetRect(int X, int Y, int Width, int Height)
+        override public void SetRect(int X, int Y, int Width, int Height)
         {
             base.SetRect(X + F_Step * 2, Y, Width, Height);
             SetTail();
         }
-        public void SetRect(Rectangle Rect)
+        override public void SetRect(Rectangle Rect)
         {
             Rectangle Temp = Rect;
             Temp.X = Temp.Left + F_Step * 2;

@@ -24,7 +24,10 @@ namespace geliosNEW
             return Line;
         }
 
-     /*     protected int GetTypeShape();*/
+        protected int GetTypeShape()
+        {
+            return 1;
+        }
         public TWork(int X, int Y, int Step, int NumberShape_Id, int Block_Id, int NumberLine_Id) : base(X, Y, Step, NumberShape_Id, Block_Id, NumberLine_Id) { }
         override public void Init()
         {
@@ -105,8 +108,57 @@ namespace geliosNEW
             Line = (TRectLine)(GetWorkLine(1));
             return Line;
         }
-    /*    public TBaseShape GetShapeByLine(TRectLine ALine, int APos);
-        public TPoint GetEndPoint();
-        public bool MakeFlagForShape(TBaseShape AShape, bool ACreate, int APos, int AType, Color AColor);*/
-}
+        override public TBaseShape GetShapeByLine(TRectLine ALine, int APos)
+        {
+            TRectLine Line;
+            Line = (TRectLine)(GetWorkLine(0));
+            if (Line == ALine)
+            {
+                if (APos < 2) return null;
+                if (APos == 2)
+                    return GetWorkShape(0);
+            }
+            Line = (TRectLine)(GetWorkLine(1));
+            if (Line == ALine)
+            {
+                if (APos > 0) return null;
+                if (APos == 0)
+                    return GetWorkShape(1);
+            }
+            return null;
+        }
+        override public Point GetEndPoint()
+        {
+            if (CompositeWorkShape!=null)
+                return CompositeWorkShape.EndPoint;
+            return LastLine.PointEnd;
+        }
+        public bool MakeFlagForShape(TBaseShape AShape, bool ACreate, int APos, int AType, Color AColor)
+        {
+            TRectLine Line;
+            TBaseShape Shape;
+            Shape = (TBaseShape)(GetWorkShape(0));
+            if (Shape != AShape) return false;
+            if (APos == 0)
+            {
+                Line = (TRectLine)(GetWorkLine(0));
+                Line.DrawFlagE = ACreate;
+                Line.FlagEType = AType;
+                Line.FlagEColor = AColor;
+                Line.Prepare();
+                return true;
+            }
+            if (APos == 1)
+            {
+                Line = (TRectLine)(GetWorkLine(1));
+                Line.DrawFlagS = ACreate;
+                Line.FlagSType = AType;
+                Line.FlagSColor = AColor;
+                Line.Prepare();
+                return true;
+            }
+            return false;
+
+        }
+    }
 }

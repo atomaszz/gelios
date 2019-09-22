@@ -41,7 +41,7 @@ namespace geliosNEW
 
             R = BoundRect;
             R.X = R.Left + F_Step * 2;
-       //     R.Width = R.Right - R.X + F_Step * 2;
+       //     R.Width -= F_Step * 2;
             BoundRect = R;
 
             SetTail();
