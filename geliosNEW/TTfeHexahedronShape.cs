@@ -18,12 +18,6 @@ namespace geliosNEW
         bool F_TailTop;
         bool F_TailBottom;
         bool F_TailRight;
-/*
-        void __fastcall SetTailLeft(bool Value);
-        void __fastcall SetTailTop(bool Value);
-        void __fastcall SetTailBottom(bool Value);
-        void __fastcall SetTailRight(bool Value);
-        */
         void SetTail()
         {
             Point Point;

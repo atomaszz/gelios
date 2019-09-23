@@ -244,22 +244,22 @@ namespace geliosNEW
         }
         public bool TailLeft
         {
-            set { F_TailLeft = value; }
+            set { SetTailLeft(value); }
             get { return F_TailLeft;  }
         }
         public bool TailTop
         {
-            set { F_TailTop = value; }
+            set { SetTailTop(value); }
             get { return F_TailTop; }
         }
         public bool TailBottom
         {
-            set { F_TailBottom = value; }
+            set { SetTailBottom(value); }
             get { return F_TailBottom; }
         }
         public bool TailRight
         {
-            set { F_TailRight = value; }
+            set { SetTailRight(value); }
             get { return F_TailRight; }
         }
     }

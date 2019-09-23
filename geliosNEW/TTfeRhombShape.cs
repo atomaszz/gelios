@@ -104,7 +104,7 @@ namespace geliosNEW
 
             R = BoundRect;
             R.X = R.Left + F_Step * 2;
-            R.Width = F_Step * 2;
+            R.Width = F_Step * 4;
             BoundRect = R;
         }
         ~TTfeRhombShape() { }
@@ -125,12 +125,12 @@ namespace geliosNEW
 
             return res;
         }
-        public void SetRect(int X, int Y, int Width, int Height)
+        override public void SetRect(int X, int Y, int Width, int Height)
         {
           //  base.SetRect(X + F_Step * 2, Y, Width, Height);
             SetTail();
         }
-        public void SetRect(Rectangle Rect)
+        override public void SetRect(Rectangle Rect)
         {
             Rectangle Temp = Rect;
             Temp.X = Temp.Left + F_Step * 2;
@@ -138,12 +138,12 @@ namespace geliosNEW
           //  base.SetRect(Temp);
             SetTail();
         }
-        public void SetBaseRect(Rectangle Rect)
+        override public void SetBaseRect(Rectangle Rect)
         {
             base.SetBaseRect(Rect);
             SetTail();
         }
-        public void Paint(Graphics Canvas)
+        new public void Paint(Graphics Canvas)
         {
             SetTail();
           //  CopyPen();
@@ -153,7 +153,7 @@ namespace geliosNEW
             T2.Paint(Canvas);
             T3.Paint(Canvas);
         }
-        public bool CopyObject(TBaseShape ASource)
+        override public bool CopyObject(TBaseShape ASource)
         {
             /*   base.CopyObject(ASource);
                dynamic_cast<TTfeRhombShape)(ASource).TailLeft = F_TailLeft;
@@ -165,22 +165,22 @@ namespace geliosNEW
         /*    public AnsiString Make_One_SimpleItem(int AIndex);*/
         public  bool TailLeft
         {
-            set { F_TailLeft = value; }
+            set { SetTailLeft(value); }
             get { return F_TailLeft;  }
         }
         public bool TailTop
         {
-            set { F_TailTop = value; }
+            set { SetTailTop(value); }
             get { return F_TailTop; }
         }
         public bool TailBottom
         {
-            set { F_TailBottom = value; }
+            set { SetTailBottom(value); }
             get { return F_TailBottom; }
         }
         public bool TailRight
         {
-            set { F_TailRight = value; }
+            set { SetTailRight(value); }
             get { return F_TailRight; }
         }
     }
