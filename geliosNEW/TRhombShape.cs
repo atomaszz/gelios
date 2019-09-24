@@ -35,13 +35,13 @@ namespace geliosNEW
         {
             F_TypeShape = 3;
         }
-        public void Paint(Graphics Canvas)
+        override public void Paint(Graphics Canvas)
         {
             Point[] P = new Point[4];
             GetPointRhomb(ref P, BoundRect);
             SaveCanvas(Canvas);
             base.Paint(Canvas);
-            Canvas.DrawPolygon(new Pen(Color.Black), P);
+            Canvas.DrawPolygon(new Pen(Color.Black,2), P);
             if (DrawCaption)
                 Canvas.DrawString(Caption, new Font("Times New Roman", 10, FontStyle.Regular), new SolidBrush(Color.Black), new PointF(20, 20));
             //      DrawText(Canvas.Handle, Caption.c_str(), -1, &BoundRect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);

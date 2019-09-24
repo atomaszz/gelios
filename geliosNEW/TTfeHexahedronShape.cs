@@ -74,7 +74,7 @@ namespace geliosNEW
 
             R = BoundRect;
             R.X = R.Left + F_Step * 2;
-            R.Width = F_Step * 2;
+            R.Width = F_Step * 4;
             BoundRect = R;
         }
         ~TTfeHexahedronShape() { }
@@ -129,23 +129,44 @@ namespace geliosNEW
 
         public bool TailLeft
         {
-            set { F_TailLeft = value; }
+            set { SetTailLeft(value); }
             get { return F_TailLeft; }
         }
         public bool TailTop
         {
-            set { F_TailTop = value; }
+            set { SetTailTop(value); }
             get { return F_TailTop; }
         }
         public bool TailBottom
         {
-            set { F_TailBottom = value; }
+            set { SetTailBottom(value); }
             get { return F_TailBottom; }
         }
         public bool TailRight
         {
-            set { F_TailRight = value; }
+            set { SetTailRight(value); }
             get { return F_TailRight; }
+        }
+
+        void SetTailLeft(bool Value)
+        {
+            F_TailLeft = Value;
+            SetTail();
+        }
+        void SetTailTop(bool Value)
+        {
+            F_TailTop = Value;
+            SetTail();
+        }
+        void  SetTailBottom(bool Value)
+        {
+            F_TailBottom = Value;
+            SetTail();
+        }
+        void SetTailRight(bool Value)
+        {
+            F_TailRight = Value;
+            SetTail();
         }
     }
 }

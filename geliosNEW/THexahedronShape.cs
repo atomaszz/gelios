@@ -20,15 +20,15 @@ namespace geliosNEW
             int quot;
             x1 = BoundRect.Left;
 
-            quot = (BoundRect.Bottom - BoundRect.Top/2);
+            quot = ((BoundRect.Bottom - BoundRect.Top)/2);
             y1 = BoundRect.Top + quot;
 
-            quot = (BoundRect.Right - BoundRect.Left/3);
+            quot = ((BoundRect.Right - BoundRect.Left)/3);
             x2 = BoundRect.Left + quot;
 
             y2 = BoundRect.Top;
 
-            quot = (BoundRect.Right - BoundRect.Left/3);
+            quot = ((BoundRect.Right - BoundRect.Left)/3);
             x3 = BoundRect.Right - quot;
 
             y3 = BoundRect.Top;
@@ -47,7 +47,8 @@ namespace geliosNEW
 
             SaveCanvas(Canvas);
             base.Paint(Canvas);
-            Canvas.DrawPolygon(new Pen(Color.Black),P);
+            Canvas.DrawPolygon(new Pen(Color.Black,2),P);
+         //   Canvas.DrawLines(new Pen(Color.Black), P);
             if (DrawCaption)
                 Canvas.DrawString(Caption, new Font("Times New Roman", 10, FontStyle.Regular), new SolidBrush(Color.Black), new PointF(20, 20));
             //DrawText(Canvas.Handle, Caption.c_str(), -1, &BoundRect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);

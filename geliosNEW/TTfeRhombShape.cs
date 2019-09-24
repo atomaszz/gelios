@@ -127,7 +127,7 @@ namespace geliosNEW
         }
         override public void SetRect(int X, int Y, int Width, int Height)
         {
-          //  base.SetRect(X + F_Step * 2, Y, Width, Height);
+            base.SetRect(X + F_Step * 2, Y, Width, Height);
             SetTail();
         }
         override public void SetRect(Rectangle Rect)
@@ -135,7 +135,7 @@ namespace geliosNEW
             Rectangle Temp = Rect;
             Temp.X = Temp.Left + F_Step * 2;
             Temp.Width = F_Step * 2;
-          //  base.SetRect(Temp);
+            base.SetRect(Temp);
             SetTail();
         }
         override public void SetBaseRect(Rectangle Rect)
@@ -143,7 +143,7 @@ namespace geliosNEW
             base.SetBaseRect(Rect);
             SetTail();
         }
-        new public void Paint(Graphics Canvas)
+        override public void Paint(Graphics Canvas)
         {
             SetTail();
           //  CopyPen();

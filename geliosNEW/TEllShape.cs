@@ -14,7 +14,7 @@ namespace geliosNEW
         {
             F_TypeShape = 2;
         }
-        public virtual void Paint(Graphics Canvas)
+        override public void Paint(Graphics Canvas)
         {
         //    SaveCanvas(Canvas);
             base.Paint(Canvas);
