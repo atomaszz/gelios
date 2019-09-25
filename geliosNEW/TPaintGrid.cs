@@ -79,7 +79,7 @@ namespace geliosNEW
         }
         public void UpdateGraphics(Graphics ACanvas)
         {
-            f_Canvas = ACanvas;
+                f_Canvas = ACanvas;
         }
         void  SetStepPixelsGrid(int Value)
         {
@@ -178,7 +178,7 @@ namespace geliosNEW
                     WP = (TBaseWorkShape)f_InvalidateList.Items[i];
                     if ((WP == f_LineCutting.WorkShape) && (f_WSMovingCount == 0)) continue;
                     ApplyAttributeForWorkShape(WP);
-                //    WP.Paint(ScrBitmap.Canvas);
+                    WP.Paint(f_Canvas);
                 }
             }
 
@@ -186,20 +186,20 @@ namespace geliosNEW
             {
                 for (i = 0; i <= f_ListForPaint.Count - 1; i++)
                 {
-              //      ItemPaint = f_ListForPaint.Items[i];
-            /*        switch (ItemPaint.Type)
+                    ItemPaint =  (TListForPaintItem)f_ListForPaint.Items[i];
+                    switch (ItemPaint.Type)
                     {
                         case 0:
                             BS = (TBaseShape)ItemPaint.ClassPoint;
-                        //    BS.Paint(ScrBitmap.Canvas);
+                            BS.Paint(f_Canvas);
                             break;
                         case 1:
                             WP = (TBaseWorkShape)ItemPaint.ClassPoint;
                             ApplyAttributeForWorkShape(WP);
                             if ((WP == f_LineCutting.WorkShape) && (f_WSMovingCount == 0)) continue;
-                  //          WP.Paint(ScrBitmap.Canvas);
+                            WP.Paint(f_Canvas);
                             break;
-                    }*/
+                    }
                 }
                 f_ListForPaint.Clear();
             }

@@ -25,7 +25,7 @@ namespace geliosNEW
             base.Paint(Canvas);
             Canvas.DrawRectangle(new Pen(Color.Black,2),BoundRect.Left, BoundRect.Top, BoundRect.Width, BoundRect.Height);
             if (DrawCaption)
-                Canvas.DrawString(Caption, new Font("Times New Roman", 10, FontStyle.Regular), new SolidBrush(Color.Black), new PointF(10, 10));
+                Canvas.DrawString(Caption, new Font("Times New Roman", 12, FontStyle.Bold), new SolidBrush(Color.Black), BoundRect.X+ BoundRect.Width/3, BoundRect.Y+2);
             //        DrawText(Canvas.Handle, Caption.c_str(), -1, &BoundRect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
             RestoreCanvas(Canvas);
         }

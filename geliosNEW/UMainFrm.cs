@@ -407,9 +407,9 @@ namespace geliosNEW
                  g = Graphics.FromImage(buf);   // инициализация g
                  g.DrawRectangle(new Pen(Color.Black, 2), 20, 20, 80, 50);*/
 
-            /*          toolStripStatusLabel1.Text = e.X.ToString();
+                     toolStripStatusLabel1.Text = e.X.ToString();
                       toolStripStatusLabel2.Text = e.Y.ToString();
-                      //     paralWorkOperAnd(g, 40, 20, 1.5f);*/
+                      //     paralWorkOperAnd(g, 40, 20, 1.5f);
 
             /*     Pen workPen = new Pen(Color.Black, 2f);
                  GraphicShapes test = new GraphicShapes(pbMain, workPen);
@@ -486,6 +486,15 @@ namespace geliosNEW
         private void ПреобразоватьВПридиктнуюМодельToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void PbMain_MouseDown(object sender, MouseEventArgs e)
+        {
+        /*    TShiftState St;
+            St << ssLeft;
+            if (Shift != St)
+                SectionBar->DownFalse();*/
+        //    Grid.MouseDown(Sender, Button, Shift, X, Y);
         }
 
         private void ВставитьБлокToolStripMenuItem_Click(object sender, EventArgs e)

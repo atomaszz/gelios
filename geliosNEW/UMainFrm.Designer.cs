@@ -480,6 +480,7 @@
             this.pbMain.TabIndex = 2;
             this.pbMain.TabStop = false;
             this.pbMain.Paint += new System.Windows.Forms.PaintEventHandler(this.PbMain_Paint);
+            this.pbMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PbMain_MouseDown);
             this.pbMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pbMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseUp);
             // 
@@ -517,7 +518,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(615, 450);
             this.Name = "UMainFrm";
-            this.Text = "Form1";
+            this.Text = "GeliosNEW";
             this.SizeChanged += new System.EventHandler(this.UMainFrm_SizeChanged);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.UMainFrm_MouseMove);
             this.menuStrip1.ResumeLayout(false);
