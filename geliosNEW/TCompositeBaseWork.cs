@@ -189,7 +189,19 @@ namespace geliosNEW
                 return Res;
             }
         }
-        /*     public TBaseShape FindTFE(int Ax, int Ay);
+        public TBaseShape FindTFE(int Ax, int Ay)
+        {
+            TCompositeBaseWorkItem Item;
+            TBaseShape BS;
+            for (int i = 0; i <= f_ListItem.Count - 1; i++)
+            {
+                Item = (TCompositeBaseWorkItem)(f_ListItem.ElementAt(i));
+                BS = Item.FindTFE(Ax, Ay);
+                if (BS)
+                    return BS;
+            }
+            return NULL;
+        }
              public TBaseShape CloneShape(TBaseShape* ADest);*/
         virtual public void ApplyOffset(int Ax, int Ay)
         {

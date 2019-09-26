@@ -208,8 +208,25 @@ namespace geliosNEW
         {
             return F_Rect;
         }
-        /*         public TRect GetFrameRect();
-                 public TRect FrameRectToRect(TRect R);*/
+        public Rectangle GetFrameRect()
+        {
+            F_FrameRect.X = F_Rect.X - SharedConst.OFFS_FRAME * F_PenWidth;
+            F_FrameRect.Y = F_Rect.Y - SharedConst.OFFS_FRAME * F_PenWidth;
+            F_FrameRect.Width +=  SharedConst.OFFS_FRAME * F_PenWidth;
+            F_FrameRect.Height += SharedConst.OFFS_FRAME * F_PenWidth;
+
+            return F_FrameRect;
+        }
+        public Rectangle FrameRectToRect(Rectangle R)
+        {
+            Rectangle Res;
+            Res = R;
+            Res.X += SharedConst.OFFS_FRAME * F_PenWidth;
+            Res.Y += SharedConst.OFFS_FRAME * F_PenWidth;
+       /*     Res.Right = Res.Right - SharedConst.OFFS_FRAME * F_PenWidth;
+            Res.Bottom = Res.Bottom - SharedConst.OFFS_FRAME * F_PenWidth;*/
+            return Res;
+        }
         public virtual void Paint(Graphics Canvas)
         {
             Rectangle R = new Rectangle();
@@ -339,7 +356,11 @@ namespace geliosNEW
             set { F_FrameColor = value; }
             get { return F_FrameColor; }
         }
-  /*         __property bool DrawFrame = { read = F_DrawFrame, write = F_DrawFrame };*/
+        public bool DrawFrame
+        {
+            set { F_DrawFrame = value; }
+            get { return F_DrawFrame; }
+        }
        public int TypeShape { get { return GetTypeShape(); } }
        public Point Point_StartShape
         {

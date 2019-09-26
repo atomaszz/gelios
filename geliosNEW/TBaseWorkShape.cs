@@ -643,9 +643,16 @@ namespace geliosNEW
             set { F_FrameColorTFE = value; }
             get { return F_FrameColorTFE; }
         }
-               /*      __property bool DrawFrame = { read = F_DrawFrame, write = F_DrawFrame };
-
-                __property TColor    LineColor = {read = F_LineColor, write = F_LineColor};*/
+        public bool DrawFrame
+        {
+            set { F_DrawFrame = value; }
+            get { return F_DrawFrame; }
+        }
+        public Color LineColor
+        {
+            set { F_LineColor = value; }
+            get { return F_LineColor; }
+        }
         public int LineWidth
         {
             set { F_LineWidth = value; }

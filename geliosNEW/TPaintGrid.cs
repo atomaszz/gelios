@@ -28,13 +28,12 @@ namespace geliosNEW
         Control f_UnderControl;
         IntPtr f_WndHandler;
         Point f_CurrEndPoint; //координаты последней точки
-                              //      TClipPath f_ClipPath; //класс пути отсечения
+        TClipPath f_ClipPath; //класс пути отсечения
         TListForPaint f_ListForPaint; //содержит фигуры для отрисовки
                                       //       TFlagController f_FlagController; //контроллер флагов
         TInvalidateList f_InvalidateList; //список отрисовываемых фигур реально
         TLineCutting f_LineCutting; //фигура при перетаскивании
         TAltWSList f_AltWSList;//содержит ссодержитписок ТФС для показа альтернативы
-
 
         int f_X_offs; //смещение по Х
         int f_Y_offs; //смещение по Y
@@ -49,7 +48,7 @@ namespace geliosNEW
         int f_FlagType;
         int f_CurrentCommand; // 1- добавление ТФЕ
         int f_TypMouseOperation; //тип операции с мышью
-                                 //       TBaseShape f_SelectedTFE; //выбранная ТФЕ
+        TBaseShape f_SelectedTFE; //выбранная ТФЕ
         TBaseWorkShape f_SelectedTFS; //выбранная ТФС
         Color f_FrameColorTFE; //цвет линии обрамления ТФЕ
         Color f_FrameColorTFS; //цвет линии обрамления ТФC
@@ -98,9 +97,28 @@ namespace geliosNEW
             void  SetEnterFlagColor(TColor Value);
             void  SetLeaveFlagColor(TColor Value);
             void  SetFrameColorTFE(TColor Value);
-            void  SetFrameColorTFS(TColor Value);
-            void  SetTypMouseOperation(int Value);
-            void  SetAltFlagColor(TColor Value);
+            void  SetFrameColorTFS(TColor Value);*/
+        void  SetTypMouseOperation(int Value)
+        {
+            if (f_TypMouseOperation != Value)
+            {
+                f_TypMouseOperation = Value;
+                switch (f_TypMouseOperation)
+                {
+                    case 0:
+                        NilTFE();
+                        NilTFS();
+                        break;
+                    case 1:
+                        NilTFS();
+                        break;
+                    case 2:
+                        NilTFE();
+                        break;
+                }
+            }
+        }
+      /*      void  SetAltFlagColor(TColor Value);
             void  SetAltEnterFlagColor(Color Value);
             void  SetAltArrowColor(Color Value);
             void  SetAltEnterArrowColor(Color Value);
@@ -262,12 +280,57 @@ namespace geliosNEW
 
         }
         /*   void  WsFlagCreate(TFlag AFlag, TBaseWorkShape WS);
-           void  WsFlagDestroy(TFlag AFlag, TBaseWorkShape WS);
-           bool SelectTFE(int Ax, int Ay);
-           bool SelectTFS(int Ax, int Ay);
-           void NilTFE();
-           void NilTFS();
-           TBaseWorkShape FindNextWorkShape(TBaseWorkShape W);
+           void  WsFlagDestroy(TFlag AFlag, TBaseWorkShape WS);*/
+        bool SelectTFE(int Ax, int Ay)
+        {
+            bool res;
+            TBaseShape mTFE = FindTFE(Ax, Ay);
+            res = (mTFE!=null && (f_SelectedTFE != mTFE));
+            if (res)
+            {
+                f_ClipPath.Clear();
+                if (f_SelectedTFE!=null)
+                {
+                    f_SelectedTFE.DrawFrame = false;
+                    f_ClipPath.Add(f_SelectedTFE.GetFrameRect(), 4);
+                }
+                f_SelectedTFE = mTFE;
+                f_SelectedTFE.DrawFrame = true;
+                f_ClipPath.Add(f_SelectedTFE.GetFrameRect(), 4);
+            //    SendMessage(f_OwnerForm, WM_GD_PAINT, 1, LPARAM(f_ClipPath->GetCliptRgn()));
+            }
+            return res;
+        }
+       /*    bool SelectTFS(int Ax, int Ay);*/
+        void NilTFE()
+        {
+            if (f_SelectedTFE!=null)
+            {
+                if (f_SelectedTFE.DrawFrame)
+                {
+                    f_SelectedTFE.DrawFrame = false;
+                    f_ClipPath.Clear();
+                    f_ClipPath.Add(f_SelectedTFE.GetFrameRect(), 4);
+                   // SendMessage(f_OwnerForm, WM_GD_PAINT, 1, LPARAM(f_ClipPath.GetCliptRgn()));
+                }
+                f_SelectedTFE = null;
+            }
+        }
+        void NilTFS()
+        {
+            if (f_SelectedTFS!=null)
+            {
+                if (f_SelectedTFS.DrawFrame)
+                {
+                    f_SelectedTFS.DrawFrame = false;
+                    f_ClipPath.Clear();
+                    f_ClipPath.Add(f_SelectedTFS.GetFrameRectWithLines(), 4);
+                    //SendMessage(f_OwnerForm, WM_GD_PAINT, 1, LPARAM(f_ClipPath.GetCliptRgn()));
+                }
+                f_SelectedTFS = null;
+            }
+        }
+    /*       TBaseWorkShape FindNextWorkShape(TBaseWorkShape W);
            TBaseWorkShape FindPriorWorkShape(TBaseWorkShape W);*/
         TBaseWorkShape  GetLastWorkShape()
         {
@@ -351,14 +414,12 @@ namespace geliosNEW
                 }
             }
         }
-        /*      int GetMainTabCount();
-
-
-              int TypMouseOperation 
+        /*      int GetMainTabCount();*/
+        public int TypMouseOperation 
               {
                   get { return f_TypMouseOperation; }
-                  //          set { SetTypMouseOperation(value); }
-              }*/
+                  set { SetTypMouseOperation(value); }
+              }
 
         public TPainterList g_PainterList; //класс содержащие рабочие блоки
         public TAlternateList g_AlternateList;
@@ -389,7 +450,7 @@ namespace geliosNEW
             f_CurrentCommand = 0;
             f_FlagType = 0;
             f_TypMouseOperation = 0;
-            //         f_SelectedTFE = null;
+            f_SelectedTFE = null;
             f_SelectedTFS = null;
             //         f_FrameColorTFE = null;
             //        f_FrameColorTFS = null;
@@ -523,41 +584,76 @@ namespace geliosNEW
         void ReapintFlag(bool AEnter, TBaseShape* AFlag);
         void ReactMouse(TPoint APoint);
         void MouseUp(TObject* Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
-        void MouseMove(TObject* Sender, TShiftState Shift, int X, int Y);
-        void MouseDown(TObject* Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
-        void PrepareLevel();
+        void MouseMove(TObject* Sender, TShiftState Shift, int X, int Y);*/
+        public void MouseDown(object sender, MouseEventArgs e, Keys ModifierKeys)
+        {
+            //(((e.Button == MouseButtons.Left)  && (ModifierKeys & Keys.Shift) == Keys.Shift))
+            if ((e.Button == MouseButtons.Left)  || (e.Button == MouseButtons.Right))
+            {
+                TypMouseOperation = 0;
+                if (SelectTFE(X, Y))
+                    TypMouseOperation = 1;   //перемещение ТФЕ
+                return;
+            }
+        }
+    /*    void PrepareLevel();
         void PrepareLevelOnOffset();
         void ClearAltWSList();
         void AddToAltWSList(TBaseWorkShape* AWS);
         HRGN GetRGNAltWSList();
-        bool IsAltWSListEmpty();
-        TBaseShape* FindTFE(int Ax, int Ay);
-        TBaseWorkShape* FindTFS(int Ax, int Ay);*/
-     /*   TAlternateItem FindAlternateItem(int Ax, int Ay)
+        bool IsAltWSListEmpty();*/
+        TBaseShape FindTFE(int Ax, int Ay)
         {
-            TAlternateItem Item;
-            Item = g_AlternateList.First();
-            while (Item!=null)
+            TBaseShape CurrShape;
+            TBaseWorkShape TempWork;
+            TempWork = g_PainterList.First();
+            while (TempWork!=null)
             {
-                if (PtInRect(&Item.ArrowWorkShape.GetSmallRegionRect(), new Point(Ax, Ay)))
-                    return Item;
-                Item = g_AlternateList.Next();
+                if (TempWork.CompositeWorkShape!=null)
+                {
+                    CurrShape = TempWork.CompositeWorkShape.FindTFE(Ax, Ay);
+                    if (CurrShape)
+                        return CurrShape;
+                }
+                else
+                {
+                    for (int i = 0; i <= TempWork->WorkShapesCount - 1; i++)
+                    {
+                        CurrShape = static_cast<TBaseShape*>(TempWork->GetWorkShape(i));
+                        if (PtInRect(&CurrShape->GetRect(), TPoint(Ax, Ay)))
+                            return CurrShape;
+                    }
+                }
+                TempWork = g_PainterList->Next();
             }
-            return null;
-        }*/
-    /*    void ClearAll();
-        void RecalcAfterDeleted(bool AFirst, TPoint FPoint);
-        void SetWSFlagEvent(TBaseWorkShape* WS);
-        void RecalcBaseOffsetPosition();
-        void RecalcFollowWorkShape(TBaseWorkShape* ABeforeInsertWork, TPoint AEndPoint);
-        void RecalcAfterConverted(bool AFirst, TPoint FPoint);
-        TBaseWorkShape* FindShapeFromCompositeWork(int AShapeID);
-        void CoordinateCorrectForCompositeWork();
-        TCompositeBaseWorkItem* FindComositeBaseWork2(int ATFEID, TCompositeBaseWork** AFind);
-        TBaseWorkShape* CreateTempWorkShape(int AType, TPoint AStart, int ANumberShapeId = 0);
+            return NULL;
+        }
+        /*    TBaseWorkShape* FindTFS(int Ax, int Ay);*/
+        /*   TAlternateItem FindAlternateItem(int Ax, int Ay)
+           {
+               TAlternateItem Item;
+               Item = g_AlternateList.First();
+               while (Item!=null)
+               {
+                   if (PtInRect(&Item.ArrowWorkShape.GetSmallRegionRect(), new Point(Ax, Ay)))
+                       return Item;
+                   Item = g_AlternateList.Next();
+               }
+               return null;
+           }*/
+        /*    void ClearAll();
+            void RecalcAfterDeleted(bool AFirst, TPoint FPoint);
+            void SetWSFlagEvent(TBaseWorkShape* WS);
+            void RecalcBaseOffsetPosition();
+            void RecalcFollowWorkShape(TBaseWorkShape* ABeforeInsertWork, TPoint AEndPoint);
+            void RecalcAfterConverted(bool AFirst, TPoint FPoint);
+            TBaseWorkShape* FindShapeFromCompositeWork(int AShapeID);
+            void CoordinateCorrectForCompositeWork();
+            TCompositeBaseWorkItem* FindComositeBaseWork2(int ATFEID, TCompositeBaseWork** AFind);
+            TBaseWorkShape* CreateTempWorkShape(int AType, TPoint AStart, int ANumberShapeId = 0);
 
-        __property int Width = { read = f_Width };
-        __property int Height = { read = f_Height };*/
+            __property int Width = { read = f_Width };
+            __property int Height = { read = f_Height };*/
         public int StepPixels
         {
             get { return f_StepPixels; }
@@ -617,8 +713,11 @@ __property TColor LeaveFlagColor  = {read = f_LeaveFlagColor, write = SetLeaveFl
         {
             get { return f_Y_offsSum; }
         }
-  /*      __property TBaseShape* SelectedTFE = { read = f_SelectedTFE };
-        __property TBaseWorkShape* SelectedTFS = { read = f_SelectedTFS, write = f_SelectedTFS };
+        public TBaseShape SelectedTFE
+        {
+            get { return f_SelectedTFE; }
+        }
+   /*     __property TBaseWorkShape* SelectedTFS = { read = f_SelectedTFS, write = f_SelectedTFS };
         __property TColor AltFlagColor = {read = f_AltFlagColor, write = SetAltFlagColor};
            __property TColor AltEnterFlagColor = {read = f_AltEnterFlagColor, write = SetAltEnterFlagColor};
            __property TColor AltArrowColor = {read = f_AltArrowColor, write = SetAltArrowColor};

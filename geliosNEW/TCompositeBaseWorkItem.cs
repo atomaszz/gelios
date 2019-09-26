@@ -67,7 +67,22 @@ namespace geliosNEW
                 Item.Paint(ACanvas);
             }
         }
-  /*      public TBaseShape FindTFE(int Ax, int Ay);*/
+        public TBaseShape FindTFE(int Ax, int Ay)
+        {
+            TBaseShape Res = null;
+            if (f_Shape!=null)
+                if (PtInRect(&f_Shape.GetRect(), Point(Ax, Ay)))
+                    return f_Shape;
+            TCompositeBaseWork Item;
+            for (int i = CompositeWork.Count - 1; i >= 0; i--)
+            {
+                Item = (TCompositeBaseWork)(CompositeWork.ElementAt(i));
+                Res = Item.FindTFE(Ax, Ay);
+                if (Res!=null)
+                    return Res;
+            }
+            return null;
+        }
         public void ApplyOffset(int Ax, int Ay)
         {
             Rectangle R;

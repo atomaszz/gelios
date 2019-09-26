@@ -490,11 +490,16 @@ namespace geliosNEW
 
         private void PbMain_MouseDown(object sender, MouseEventArgs e)
         {
-        /*    TShiftState St;
-            St << ssLeft;
-            if (Shift != St)
-                SectionBar->DownFalse();*/
-        //    Grid.MouseDown(Sender, Button, Shift, X, Y);
+            Grid.MouseDown(sender, e, ModifierKeys);
+
+            //Keys.Control
+            //Keys.Shift
+
+
+            if (e.Button == MouseButtons.Left && (ModifierKeys & Keys.Shift) == Keys.Shift)
+            {
+                MessageBox.Show("Control key was held down.");
+            }
         }
 
         private void ВставитьБлокToolStripMenuItem_Click(object sender, EventArgs e)
