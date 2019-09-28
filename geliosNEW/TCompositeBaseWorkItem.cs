@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace geliosNEW
 {
-    class TCompositeBaseWorkItem
+    public class TCompositeBaseWorkItem
     {
         TBaseShape f_Shape;
         TBaseShape f_SavedShape;

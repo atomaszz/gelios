@@ -648,14 +648,103 @@ namespace geliosNEW
             void SetWSFlagEvent(TBaseWorkShape* WS);
             void RecalcBaseOffsetPosition();
             void RecalcFollowWorkShape(TBaseWorkShape* ABeforeInsertWork, TPoint AEndPoint);
-            void RecalcAfterConverted(bool AFirst, TPoint FPoint);
-            TBaseWorkShape* FindShapeFromCompositeWork(int AShapeID);
-            void CoordinateCorrectForCompositeWork();
-            TCompositeBaseWorkItem* FindComositeBaseWork2(int ATFEID, TCompositeBaseWork** AFind);
-            TBaseWorkShape* CreateTempWorkShape(int AType, TPoint AStart, int ANumberShapeId = 0);
+            void RecalcAfterConverted(bool AFirst, TPoint FPoint);*/
+        public TBaseWorkShape FindShapeFromCompositeWork(int AShapeID)
+        {
+            TBaseWorkShape TempWork;
+            TempWork = g_PainterList.First();
+            while (TempWork!=null)
+            {
+                if (TempWork.CompositeWorkShape!=null)
+                {
+                    if (TempWork.CompositeWorkShape.ContainedShape(AShapeID))
+                        return TempWork;
+                }
+                else
+                {
+                    if (TempWork->ShapeSupportID(AShapeID))
+                        return TempWork;
+                }
+                TempWork = g_PainterList->Next();
+            }
+            return NULL;
+        }
+        /*     void CoordinateCorrectForCompositeWork();*/
+        public TCompositeBaseWorkItem FindComositeBaseWork2(int ATFEID, ref TCompositeBaseWork AFind)
+        {
+            TBaseWorkShape TempWork;
+            TCompositeBaseWork WF;
+            TCompositeBaseWorkItem Item;
+            TempWork = g_PainterList.First();
+            while (TempWork!=null)
+            {
+                if (TempWork.CompositeWorkShape!=null)
+                {
+                    Item = TempWork.CompositeWorkShape.FindItem(ATFEID, ref WF);
+                    if (Item!=null)
+                    {
+                        AFind = WF;
+                        return Item;
+                    }
+                }
+                TempWork = g_PainterList.Next();
+            }
+            AFind = null;
+            return null;
+        }
+        public TBaseWorkShape CreateTempWorkShape(int AType, Point AStart, int ANumberShapeId = 0)
+        {
+            TBaseWorkShape m_CurrWorkShape = null;
+            if (AType > 0)
+            {
+                switch (AType)
+                {
+                    case 1:
+                        m_CurrWorkShape = new TWork(AStart.X, AStart.Y, f_StepPixels, ANumberShapeId, 0, 0);
+                        break;
+                    case 2:
+                        m_CurrWorkShape = new TZWork(AStart.X, AStart.Y, f_StepPixels, ANumberShapeId, 0, 0);
+                        break;
+                    case 3:
+                        m_CurrWorkShape = new TZWorkOR(AStart.X, AStart.Y, f_StepPixels, ANumberShapeId, 0, 0);
+                        break;
+                    case 4:
+                        m_CurrWorkShape = new TControlWork(AStart.X, AStart.Y, f_StepPixels, ANumberShapeId, 0, 0);
+                        break;
+                    case 5:
+                        m_CurrWorkShape = new TControlFunc(AStart.X, AStart.Y, f_StepPixels, ANumberShapeId, 0, 0);
+                        break;
+                    case 6:
+                        m_CurrWorkShape = new TBifurcation(AStart.X, AStart.Y, f_StepPixels, ANumberShapeId, 0, 0);
+                        break;
+                    case 7:
+                        m_CurrWorkShape = new TCheckConditionCW(AStart.X, AStart.Y, f_StepPixels, ANumberShapeId, 0, 0);
+                        break;
+                    case 8:
+                        m_CurrWorkShape = new TCycleWhileDo(AStart.X, AStart.Y, f_StepPixels, ANumberShapeId, 0, 0);
+                        break;
+                    case 9:
+                        m_CurrWorkShape = new TCycleDoWhileDo(AStart.X, AStart.Y, f_StepPixels, ANumberShapeId, 0, 0);
+                        break;
+                    case 10:
+                        m_CurrWorkShape = new TCycleDoWhileDoFC(AStart.X, AStart.Y, f_StepPixels, ANumberShapeId, 0, 0);
+                        break;
+                    case 11:
+                        m_CurrWorkShape = new TCheckCondition(AStart.X, AStart.Y, f_StepPixels, ANumberShapeId, 0, 0);
+                        break;
+                }
+            }
+            return m_CurrWorkShape;
+        }
 
-            __property int Width = { read = f_Width };
-            __property int Height = { read = f_Height };*/
+        public int Width
+        {
+            get { return f_Width; }
+        }
+        public int Height
+        {
+            get { return f_Height; }
+        }
         public int StepPixels
         {
             get { return f_StepPixels; }

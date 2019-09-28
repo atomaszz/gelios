@@ -248,10 +248,55 @@ namespace geliosNEW
             }
         }
         /*         public TRect GetAnyRect();
-                 public TRect GetRectSummary(TRect ARect);
-                 public TCompositeBaseWorkItem* FindItem(int ABaseShapeID, TCompositeBaseWork** AFind);
-                 public bool ContainedShape(int ABaseShapeID);
-                 public TCompositeBaseWork CopyRef();
+                 public TRect GetRectSummary(TRect ARect);*/
+        public TCompositeBaseWorkItem FindItem(int ABaseShapeID, TCompositeBaseWork AFind)
+        {
+            TCompositeBaseWorkItem WI;
+            TCompositeBaseWorkItem Res = null;
+            for (int i = 0; i <= f_ListItem.Count - 1; i++)
+            {
+                WI = (TCompositeBaseWorkItem)(f_ListItem.ElementAt(i));
+                if (WI.BaseShape!=null)
+                {
+                    if (WI.BaseShape.ID == ABaseShapeID)
+                    {
+                        AFind = this;
+                        return WI;
+                    }
+                }
+                for (int j = 0; j <= WI.CompositeWorkCount - 1; j++)
+                {
+                    Res = WI.CompositeWork[j].FindItem(ABaseShapeID, AFind);
+                    if (Res!=null)
+                        return Res;
+                }
+            }
+            return null;
+        }
+        public bool ContainedShape(int ABaseShapeID)
+        {
+            TCompositeBaseWorkItem WI;
+            bool Res;
+            for (int i = 0; i <= f_ListItem.Count - 1; i++)
+            {
+                WI = (TCompositeBaseWorkItem)(f_ListItem.ElementAt(i));
+                if (WI.BaseShape!=null)
+                {
+                    if (WI.BaseShape.ID == ABaseShapeID)
+                    {
+                        return true;
+                    }
+                }
+                for (int j = 0; j <= WI.CompositeWorkCount - 1; j++)
+                {
+                    Res = WI.CompositeWork[j].ContainedShape(ABaseShapeID);
+                    if (Res)
+                        return Res;
+                }
+            }
+            return false;
+        }
+           /*      public TCompositeBaseWork CopyRef();
                  public void FreeRef();
                  public void GetAllLines(TDynamicArray* R, bool AMarkFirst);
                  public void GetAllShapes(TDynamicArray* R);
@@ -326,7 +371,11 @@ namespace geliosNEW
          /*   get { return SetSelected(); }*/
         }
         public  TRectLine FirstLine { get { return GetFirstLine(); } }
-/*__property TCompositeStack2* History = { read = f_History };
-__property TBaseWorkShape * ConvertedBWS = { read = f_ConvertedBWS, write = f_ConvertedBWS };*/
+        /*__property TCompositeStack2* History = { read = f_History };*/
+        public TBaseWorkShape ConvertedBWS
+        {
+            set { f_ConvertedBWS = value; }
+            get { return f_ConvertedBWS; }
+        }
     }
 }

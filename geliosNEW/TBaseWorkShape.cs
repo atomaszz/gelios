@@ -183,6 +183,11 @@ namespace geliosNEW
             }
         }
         protected int F_Step;
+
+        int F_TypeShape;
+        Rectangle F_RealRect;   //Реальный прямоугольник рисования
+
+
         protected int F_NumberShapeId;
         protected int F_NumberLineId;
         protected int F_LastShapeId;
@@ -193,7 +198,10 @@ namespace geliosNEW
         {
             WorkShapes.Clear();
         }
-        /*               int __fastcall virtual GetTypeShape();*/
+        public virtual int GetTypeShape()
+        {
+            return F_TypeShape;
+        }
         public virtual Point GetEndPoint()
         {
             return new Point(0, 0);
@@ -664,13 +672,16 @@ namespace geliosNEW
             set { F_LineWidth = value; }
             get { return F_LineWidth; }
         }
-    /*       __property TPenStyle LineStyle = {read = F_LineStyle, write = F_LineStyle};
-                __property TPenMode  LineMode  = {read = F_LineMode,  write = F_LineMode};
-                __property bool IsLineCopy = { read = F_IsLineCopy, write = F_IsLineCopy };
-           __property bool IsBrushCopy = { read = F_IsBrushCopy, write = F_IsBrushCopy };
-           __property bool IsFontCopy = { read = F_IsFontCopy, write = F_IsFontCopy };
-           __property bool IsPenCopy = { read = F_IsPenCopy, write = F_IsPenCopy };
-           __property int TypeShape = { read = GetTypeShape };*/
+        /*       __property TPenStyle LineStyle = {read = F_LineStyle, write = F_LineStyle};
+                    __property TPenMode  LineMode  = {read = F_LineMode,  write = F_LineMode};
+                    __property bool IsLineCopy = { read = F_IsLineCopy, write = F_IsLineCopy };
+               __property bool IsBrushCopy = { read = F_IsBrushCopy, write = F_IsBrushCopy };
+               __property bool IsFontCopy = { read = F_IsFontCopy, write = F_IsFontCopy };
+               __property bool IsPenCopy = { read = F_IsPenCopy, write = F_IsPenCopy };*/
+        public int TypeShape
+        {
+            get { return GetTypeShape(); }
+        }
         public TShapeCopy  OnShapeCopy
         {
             set { FOnShapeCopy = value; }

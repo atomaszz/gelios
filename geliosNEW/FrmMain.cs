@@ -508,9 +508,26 @@ namespace geliosNEW
 
         private void Button3_Click(object sender, EventArgs e)
         {
-            FmParamAlternative f = new FmParamAlternative(); // создаем
-            f.ShowDialog(); // показываем
-                            //        f.Show() // или так
+            /*       FmParamAlternative f = new FmParamAlternative(); // создаем
+                   f.ShowDialog(); // показываем
+                                   //        f.Show() // или так*/
+            TBaseWorkShape Sel = Grid.FindShapeFromCompositeWork(Grid.SelectedTFE.ID);
+            if (Sel!=null)
+            {
+                if (Sel.CompositeWorkShape!=null)
+                {
+                    TCompositeBaseWork F = new TCompositeBaseWork();
+                    Grid.FindComositeBaseWork2(Grid.SelectedTFE.ID, ref F);
+                    Sel = F.ConvertedBWS;
+                }
+                TBaseWorkShape WN = Grid.CreateTempWorkShape(Sel.TypeShape, new Point(0, 0), Sel.FirstShapeId - 1);
+
+                //Graphics::TBitmap* Glp = new Graphics::TBitmap;
+                BuildGlp(WN, Glp, Grid.SelectedTFE);
+                ShowParamAlternative(Grid->SelectedTFE, LevelController->ParentShapeID, f_TypeParam, Glp, false);
+      //          delete WN;
+       //         delete Glp;
+            }
         }
 
         private void ВставитьБлокToolStripMenuItem_Click(object sender, EventArgs e)
