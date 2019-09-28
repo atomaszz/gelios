@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
+
 namespace geliosNEW
 {
     public class SharedConst
@@ -139,13 +140,20 @@ namespace geliosNEW
             {
                 P0 = new Point(ACenter.X - AX, AY + ACenter.Y);
                 P1 = new Point(ACenter.X, ACenter.Y - AY);
-             //   if (ACanvas.Pen.Width == 1)
-             //       P2 = new Point(ACenter.X + AX + 1, AY + ACenter.Y + 1);
-            //    else
-                  P2 = new Point(ACenter.X + AX, AY + ACenter.Y);
+                //   if (ACanvas.Pen.Width == 1)
+                //       P2 = new Point(ACenter.X + AX + 1, AY + ACenter.Y + 1);
+                //    else
+                P2 = new Point(ACenter.X + AX, AY + ACenter.Y);
             }
             ACanvas.DrawLine(new Pen(Color.Black, 2), P0, P1);
-            ACanvas.DrawLine(new Pen(Color.Black, 2), P1, P2);    
+            ACanvas.DrawLine(new Pen(Color.Black, 2), P1, P2);
+        }
+
+        public static bool PtInRect(Rectangle rec, Point pnt)
+        {
+            if (rec.X > pnt.X || rec.Y > pnt.Y) return false;
+            if ((rec.X+rec.Width)<pnt.X || (rec.Y + rec.Height) < pnt.Y) return false;
+            return true;
         }
     }
 }

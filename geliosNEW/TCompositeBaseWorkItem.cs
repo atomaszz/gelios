@@ -71,7 +71,7 @@ namespace geliosNEW
         {
             TBaseShape Res = null;
             if (f_Shape!=null)
-                if (PtInRect(&f_Shape.GetRect(), Point(Ax, Ay)))
+                if (SharedConst.PtInRect(f_Shape.GetRect(), new Point(Ax, Ay)))
                     return f_Shape;
             TCompositeBaseWork Item;
             for (int i = CompositeWork.Count - 1; i >= 0; i--)

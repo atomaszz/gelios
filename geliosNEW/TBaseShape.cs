@@ -12,7 +12,7 @@ namespace geliosNEW
     {
         Color F_BrushColor;  //цвет кисти
         Color F_PenColor;   //цвет пена
-        Color F_FrameColor; //цвет обрамл¤ющего пр¤моугольника
+        Color F_FrameColor; //цвет обрамляющего прямоугольника
         Font F_Font;
         int F_PenWidth;  // ширина пена
         Pen F_PenStyle;  //стиль пена
@@ -212,8 +212,8 @@ namespace geliosNEW
         {
             F_FrameRect.X = F_Rect.X - SharedConst.OFFS_FRAME * F_PenWidth;
             F_FrameRect.Y = F_Rect.Y - SharedConst.OFFS_FRAME * F_PenWidth;
-            F_FrameRect.Width +=  SharedConst.OFFS_FRAME * F_PenWidth;
-            F_FrameRect.Height += SharedConst.OFFS_FRAME * F_PenWidth;
+            F_FrameRect.Width = F_Rect.Width + SharedConst.OFFS_FRAME * F_PenWidth;
+            F_FrameRect.Height = F_Rect.Height + SharedConst.OFFS_FRAME * F_PenWidth;
 
             return F_FrameRect;
         }
@@ -233,18 +233,18 @@ namespace geliosNEW
             Point Pt = new Point();
             if (F_DrawFrame)
             {
-             //   Canvas.Pen.Width = F_PenWidth;
+             ////   Canvas.Pen.Width = F_PenWidth;
             //    Canvas.Pen.Color = F_FrameColor;
             //    Canvas.Brush.Style = bsClear;
             //    Canvas.Pen.Mode = F_PenMode;
-                Pen tpen = new Pen(F_FrameColor, F_PenWidth);
-                F_FrameRect.X = F_Rect.Left - SharedConst.OFFS_FRAME * F_PenWidth;
-                F_FrameRect.Y = F_Rect.Top - SharedConst.OFFS_FRAME * F_PenWidth;
-                F_FrameRect.Width = F_Rect.Right + SharedConst.OFFS_FRAME * F_PenWidth;
-                F_FrameRect.Height = F_Rect.Bottom + SharedConst.OFFS_FRAME * F_PenWidth;
+                Pen tpen = new Pen(Color.Red, F_PenWidth);
+                F_FrameRect.X = F_Rect.Left - SharedConst.OFFS_FRAME * F_PenWidth * 2;
+                F_FrameRect.Y = F_Rect.Top - SharedConst.OFFS_FRAME * F_PenWidth * 2;
+                F_FrameRect.Width = F_Rect.Width + SharedConst.OFFS_FRAME * F_PenWidth*4;
+                F_FrameRect.Height = F_Rect.Height + SharedConst.OFFS_FRAME * F_PenWidth*4;
                 Canvas.DrawRectangle(tpen, F_FrameRect);
 
-                R.X = F_FrameRect.Left - SharedConst.D_FRAME * F_PenWidth;
+              /*  R.X = F_FrameRect.Left - SharedConst.D_FRAME * F_PenWidth;
                 R.Width = F_FrameRect.Left + SharedConst.D_FRAME * F_PenWidth;
                 R.Y = F_FrameRect.Top - SharedConst.D_FRAME * F_PenWidth;
                 R.Height = F_FrameRect.Top + SharedConst.D_FRAME * F_PenWidth;
@@ -266,7 +266,7 @@ namespace geliosNEW
                 R.Width = F_FrameRect.Left + SharedConst.D_FRAME * F_PenWidth;
                 R.Y = F_FrameRect.Bottom - SharedConst.D_FRAME * F_PenWidth;
                 R.Height = F_FrameRect.Bottom + SharedConst.D_FRAME * F_PenWidth;
-                Canvas.DrawEllipse(tpen, R);
+                Canvas.DrawEllipse(tpen, R);*/
             }
             if (f_ApplyAttribute)
             {
@@ -408,7 +408,11 @@ namespace geliosNEW
         {
             get { return f_ParamAlt; }
         }
-            
-/*__property TBaseShape* Clon = { read = f_Clon, write = f_Clon }; */
+
+        public TBaseShape Clon
+        {
+            set { f_Clon = value; }
+            get { return f_Clon; }
+        }
     }
 }

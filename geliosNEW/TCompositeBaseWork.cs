@@ -197,12 +197,35 @@ namespace geliosNEW
             {
                 Item = (TCompositeBaseWorkItem)(f_ListItem.ElementAt(i));
                 BS = Item.FindTFE(Ax, Ay);
-                if (BS)
+                if (BS!=null)
                     return BS;
             }
-            return NULL;
+            return null;
         }
-             public TBaseShape CloneShape(TBaseShape* ADest);*/
+        public TBaseShape CloneShape(TBaseShape ADest)
+        {
+            TBaseShape mShape = null;
+            if (ADest == null) return null;
+            switch (ADest.TypeShape)
+            {
+                case 5:
+                    mShape = new TTfeRectShape(0, 0, 0, 0);
+                    break;
+                case 6:
+                    mShape = new TTfeRhombShape(0, 0, 0, 0);
+                    break;
+                case 7:
+                    mShape = new TTfeEllShape(0, 0, 0, 0);
+                    break;
+                case 8:
+                    mShape = new TTfeHexahedronShape(0, 0, 0, 0);
+                    break;
+            }
+            if (mShape==null) return null;
+            mShape.Clon = ADest;
+            ADest.CopyObject(mShape);
+            return mShape;
+        }
         virtual public void ApplyOffset(int Ax, int Ay)
         {
             TCompositeBaseWorkItem Item;

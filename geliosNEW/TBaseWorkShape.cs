@@ -150,17 +150,17 @@ namespace geliosNEW
             bool res = false;
             TBaseShape Shape = GetShapeByLine(ASender, APosFlag);
             TFlag Flag = ListFlag.AddFlag(AFlag, Shape, ASender, APosFlag, ref res);
-            if (!res && FOnWSFlagCreate!=null) OnWSFlagCreate(Flag, this);
+            if (!res && FOnWSFlagCreate != null) OnWSFlagCreate(Flag, this);
 
         }
         void FlagDestroy(TRectLine ASender, TFlagShape AFlag, int APosFlag)
         {
             TFlag Flag = ListFlag.DeleteFlagByShape(AFlag);
-            if (Flag!=null && FOnWSFlagDestroy!=null) OnWSFlagDestroy(Flag, this);
+            if (Flag != null && FOnWSFlagDestroy != null) OnWSFlagDestroy(Flag, this);
         }
 
-           /*           TRectLine* __fastcall GetRectLineItem(int AIndex);
-                      int __fastcall GetRectLineCount();*/
+        /*           TRectLine* __fastcall GetRectLineItem(int AIndex);
+                   int __fastcall GetRectLineCount();*/
         void DoSetLEActive()
         {
             int i;
@@ -198,8 +198,14 @@ namespace geliosNEW
         {
             return new Point(0, 0);
         }
-        /*           int __fastcall GetWorkLinesCount();
-                   int __fastcall GetWorkShapesCount();*/
+        int GetWorkLinesCount()
+        {
+            return WorkLines.Count;
+        }
+        int  GetWorkShapesCount()
+        {
+            return WorkShapes.Count;
+        }
         public virtual void SetStartPoint(Point Value)
         {
             F_StartPoint = Value;
@@ -697,11 +703,18 @@ namespace geliosNEW
         {
             get { return GetEndPoint(); }
         }
-/*           __property int WorkShapesCount = { read = GetWorkShapesCount };
-      __property int WorkLinesCount = { read = GetWorkLinesCount };*/
+        public int WorkShapesCount
+        {
+            get { return GetWorkShapesCount(); }
+        }
+        public int WorkLinesCount
+        {
+            get { return GetWorkLinesCount(); }
+        }   
       public bool DrawCaption
-        { set { SetDrawCaption(value); }
-            get { return GetDrawCaption(); }
+        {
+          set { SetDrawCaption(value); }
+          get { return GetDrawCaption(); }
         }
  /*     __property bool DrawFirstFlag = { read = F_DrawFirstFlag, write = SetDrawFirstFlag };
       __property bool DrawLastFlag = { read = F_DrawLastFlag, write = SetDrawLastFlag };

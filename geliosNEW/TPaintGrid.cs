@@ -19,7 +19,7 @@ namespace geliosNEW
         Color f_FonColor; //цвет фона
         Color f_PixelColor; //цвет пиксела
         Graphics f_Canvas; //канва
-        Form f_OwnerForm;  //форма владельца
+        FrmMain f_OwnerForm;  //форма владельца
         bool f_RefreshFon; //нужно ли перерисовывать фон
         int f_WSPenWidth; //толщина линий ТФЕ
         Graphics ScrBitmap;
@@ -297,6 +297,7 @@ namespace geliosNEW
                 f_SelectedTFE = mTFE;
                 f_SelectedTFE.DrawFrame = true;
                 f_ClipPath.Add(f_SelectedTFE.GetFrameRect(), 4);
+                f_OwnerForm.SetPanelActiveVisible(true);
             //    SendMessage(f_OwnerForm, WM_GD_PAINT, 1, LPARAM(f_ClipPath->GetCliptRgn()));
             }
             return res;
@@ -309,6 +310,7 @@ namespace geliosNEW
                 if (f_SelectedTFE.DrawFrame)
                 {
                     f_SelectedTFE.DrawFrame = false;
+                    f_OwnerForm.SetPanelActiveVisible(false);
                     f_ClipPath.Clear();
                     f_ClipPath.Add(f_SelectedTFE.GetFrameRect(), 4);
                    // SendMessage(f_OwnerForm, WM_GD_PAINT, 1, LPARAM(f_ClipPath.GetCliptRgn()));
@@ -424,7 +426,7 @@ namespace geliosNEW
         public TPainterList g_PainterList; //класс содержащие рабочие блоки
         public TAlternateList g_AlternateList;
 
-        public TPaintGrid(UMainFrm AOwnerForm/*TCanvas* ACanvas, HWND AOwnerForm*/)
+        public TPaintGrid(FrmMain AOwnerForm/*TCanvas* ACanvas, HWND AOwnerForm*/)
         {
             f_Width = f_Height = 0;
             f_StepPixels = 6;
@@ -465,8 +467,8 @@ namespace geliosNEW
 
             /*        f_FontTFE = new Font();
                     ScrBitmap = new Graphics::TBitmap;
-                    ScrBitmapCopy = new Graphics::TBitmap;
-                    f_ClipPath = new TClipPath;*/
+                    ScrBitmapCopy = new Graphics::TBitmap;*/
+            f_ClipPath = new TClipPath ();
             g_PainterList = new TPainterList();
             f_ListForPaint = new TListForPaint();
             /*   f_FlagController = new TFlagController();*/
@@ -591,7 +593,7 @@ namespace geliosNEW
             if ((e.Button == MouseButtons.Left)  || (e.Button == MouseButtons.Right))
             {
                 TypMouseOperation = 0;
-                if (SelectTFE(X, Y))
+                if (SelectTFE(e.X, e.Y))
                     TypMouseOperation = 1;   //перемещение ТФЕ
                 return;
             }
@@ -612,21 +614,21 @@ namespace geliosNEW
                 if (TempWork.CompositeWorkShape!=null)
                 {
                     CurrShape = TempWork.CompositeWorkShape.FindTFE(Ax, Ay);
-                    if (CurrShape)
+                    if (CurrShape!=null)
                         return CurrShape;
                 }
                 else
                 {
-                    for (int i = 0; i <= TempWork->WorkShapesCount - 1; i++)
+                    for (int i = 0; i <= TempWork.WorkShapesCount - 1; i++)
                     {
-                        CurrShape = static_cast<TBaseShape*>(TempWork->GetWorkShape(i));
-                        if (PtInRect(&CurrShape->GetRect(), TPoint(Ax, Ay)))
+                        CurrShape = (TBaseShape)(TempWork.GetWorkShape(i));
+                        if (SharedConst.PtInRect(CurrShape.GetRect(), new Point(Ax, Ay)))
                             return CurrShape;
                     }
                 }
-                TempWork = g_PainterList->Next();
+                TempWork = g_PainterList.Next();
             }
-            return NULL;
+            return null;
         }
         /*    TBaseWorkShape* FindTFS(int Ax, int Ay);*/
         /*   TAlternateItem FindAlternateItem(int Ax, int Ay)

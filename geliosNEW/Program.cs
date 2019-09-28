@@ -16,7 +16,7 @@ namespace geliosNEW
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UMainFrm());
+            Application.Run(new FrmMain());
         }
     }
 }

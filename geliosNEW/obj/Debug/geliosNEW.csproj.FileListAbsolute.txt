@@ -43,7 +43,6 @@ C:\Users\Atom\Desktop\geliosNEW — копия\geliosNEW\bin\Debug\geliosNEW.exe
 C:\Users\Atom\Desktop\geliosNEW — копия\geliosNEW\bin\Debug\geliosNEW.pdb
 C:\Users\Atom\Desktop\geliosNEW — копия\geliosNEW\obj\Debug\geliosNEW.csprojAssemblyReference.cache
 C:\Users\Atom\Desktop\geliosNEW — копия\geliosNEW\obj\Debug\geliosNEW.Properties.Resources.resources
-C:\Users\Atom\Desktop\geliosNEW — копия\geliosNEW\obj\Debug\geliosNEW.UMainFrm.resources
 C:\Users\Atom\Desktop\geliosNEW — копия\geliosNEW\obj\Debug\geliosNEW.csproj.GenerateResource.cache
 C:\Users\Atom\Desktop\geliosNEW — копия\geliosNEW\obj\Debug\geliosNEW.csproj.CoreCompileInputs.cache
 C:\Users\Atom\Desktop\geliosNEW — копия\geliosNEW\obj\Debug\geliosNEW.exe
@@ -58,3 +57,5 @@ C:\Users\a2078\Desktop\geliosNEW\geliosNEW\geliosNEW\obj\Debug\geliosNEW.csproj.
 C:\Users\a2078\Desktop\geliosNEW\geliosNEW\geliosNEW\obj\Debug\geliosNEW.csproj.CoreCompileInputs.cache
 C:\Users\a2078\Desktop\geliosNEW\geliosNEW\geliosNEW\obj\Debug\geliosNEW.exe
 C:\Users\a2078\Desktop\geliosNEW\geliosNEW\geliosNEW\obj\Debug\geliosNEW.pdb
+C:\Users\Atom\Desktop\geliosNEW — копия\geliosNEW\obj\Debug\geliosNEW.FmParamAlternative.resources
+C:\Users\Atom\Desktop\geliosNEW — копия\geliosNEW\obj\Debug\geliosNEW.FrmMain.resources
