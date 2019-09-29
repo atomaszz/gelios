@@ -124,7 +124,7 @@ namespace geliosNEW
             L = (TRectLine)GetWorkLine(5);
             return L;
         }
-        protected int  GetTypeShape()
+        override public int  GetTypeShape()
         {
             return 6;
         }

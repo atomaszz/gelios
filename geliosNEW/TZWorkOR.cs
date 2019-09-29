@@ -133,7 +133,7 @@ namespace geliosNEW
             if (t_x1 > t_x2) res = 3;
             return res;
         }
-        protected int GetTypeShape()
+        override public int GetTypeShape()
         {
             return 3;
         }

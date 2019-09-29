@@ -23,7 +23,7 @@ namespace geliosNEW
                 F_TypeFlag = Value;
         }
 
-        protected int GetTypeShape()
+        override protected int GetTypeShape()
         {
             return 100;
         }

@@ -505,31 +505,6 @@ namespace geliosNEW
                 MessageBox.Show("Control key was held down.");
             }*/
         }
-
-        private void Button3_Click(object sender, EventArgs e)
-        {
-            /*       FmParamAlternative f = new FmParamAlternative(); // создаем
-                   f.ShowDialog(); // показываем
-                                   //        f.Show() // или так*/
-            TBaseWorkShape Sel = Grid.FindShapeFromCompositeWork(Grid.SelectedTFE.ID);
-            if (Sel!=null)
-            {
-                if (Sel.CompositeWorkShape!=null)
-                {
-                    TCompositeBaseWork F = new TCompositeBaseWork();
-                    Grid.FindComositeBaseWork2(Grid.SelectedTFE.ID, ref F);
-                    Sel = F.ConvertedBWS;
-                }
-                TBaseWorkShape WN = Grid.CreateTempWorkShape(Sel.TypeShape, new Point(0, 0), Sel.FirstShapeId - 1);
-
-                //Graphics::TBitmap* Glp = new Graphics::TBitmap;
-                BuildGlp(WN, Glp, Grid.SelectedTFE);
-                ShowParamAlternative(Grid->SelectedTFE, LevelController->ParentShapeID, f_TypeParam, Glp, false);
-      //          delete WN;
-       //         delete Glp;
-            }
-        }
-
         private void ВставитьБлокToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -539,6 +514,85 @@ namespace geliosNEW
         {
             Grid.UpdateGraphics(e.Graphics);
             Grid.Paint();
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            TBaseWorkShape Sel = Grid.FindShapeFromCompositeWork(Grid.SelectedTFE.ID);
+                      if (Sel != null)
+                      {
+                          if (Sel.CompositeWorkShape != null)
+                          {
+                              TCompositeBaseWork F = new TCompositeBaseWork();
+                              Grid.FindComositeBaseWork2(Grid.SelectedTFE.ID, ref F);
+                              Sel = F.ConvertedBWS;
+                          }
+                          TBaseWorkShape WN = Grid.CreateTempWorkShape(Sel.TypeShape, new Point(0, 0), Sel.FirstShapeId - 1);
+
+                          DrawObject imageTfe = new DrawObject ();
+                          //     fmParamAlternative.pbTfs.BackgroundImage = Glbmp;
+                          BuildGlp(WN, imageTfe , Grid.SelectedTFE);
+                          ShowParamAlternative(Grid.SelectedTFE, LevelController.ParentShapeID, f_TypeParam, imageTfe, false);
+            }
+        }
+        void BuildGlp(TBaseWorkShape AWN, DrawObject Glp, TBaseShape ASel)
+        {
+            TBaseShape BS;
+            FmParamAlternative fmParamAlternative = new FmParamAlternative();
+            Glp.SetBitMap(fmParamAlternative.pbTfs.Width, fmParamAlternative.pbTfs.Height);
+
+            //            Glp->Canvas->Brush->Color = f_FonColor;
+            //          Glp->Canvas->FillRect(TRect(0, 0, Glp->Width, Glp->Height));
+            AWN.StartPoint = new Point(0, 0);
+            AWN.Init();
+            AWN.Prepare();
+         /*   if (f_BrushTFE)
+                AWN->BrushStyle = bsSolid;
+            else
+                AWN->BrushStyle = bsClear;*/
+            AWN.BrushColor = f_BrushColor;
+            AWN.LineWidth = f_WSPenWidth;
+            AWN.PenWidth = f_WSPenWidth;
+       //     AWN.Font->Assign(f_FontTFE);
+            AWN.FrameColorTFE = f_FrameColorTFE;
+            AWN.PenColor = f_LineColor;
+
+            Rectangle R = AWN.GetFrameRectWithLines();
+            int rx = (Glp.bmp.Width - R.Width) / 2 - R.Left;
+            int ry = (Glp.bmp.Height - R.Height) / 2 - R.Top;
+            AWN.SetOffsetPosition(rx, ry);
+            AWN.StartPoint = new Point(rx, ry);
+
+            if (ASel.Clon!=null)
+                BS = ASel.Clon;
+            else
+                BS = ASel;
+
+            BS = AWN.ShapeSupportID(BS.ID);
+            if (BS!=null)
+                BS.DrawFrame = true;
+
+            AWN.Prepare();
+            AWN.Paint(Glp.gr);
+        }
+        void ShowParamAlternative(TBaseShape ATFE, int AParentID, int AType_Char,
+  DrawObject AGlp, bool AReadOnly)
+        {
+            //    Application.CreateForm(__classid(TfmParamAlternative), &fmParamAlternative);
+            FmParamAlternative fmParamAlternative = new FmParamAlternative();
+            if (ATFE.Clon!=null)
+                fmParamAlternative.TFE = ATFE.Clon;
+            else
+                fmParamAlternative.TFE = ATFE;
+            fmParamAlternative.Type_Char = AType_Char;
+            fmParamAlternative.ParentShapeID = AParentID;
+            fmParamAlternative.Glp = AGlp.gr;
+            fmParamAlternative.FReadOnly = AReadOnly;
+            //      fmParamAlternative.acAdd.Enabled = !AReadOnly;
+            //        fmParamAlternative.acDel.Enabled = !AReadOnly;
+            fmParamAlternative.pbTfs.Image = AGlp.bmp;
+            fmParamAlternative.ShowDialog();
+     //       fmParamAlternative.Release();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace geliosNEW
         {
             F_Step = Step;
         }
-        public void Prepare()
+        override public void Prepare()
         {
             base.Prepare();
         }

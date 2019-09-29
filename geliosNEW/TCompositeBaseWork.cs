@@ -249,7 +249,7 @@ namespace geliosNEW
         }
         /*         public TRect GetAnyRect();
                  public TRect GetRectSummary(TRect ARect);*/
-        public TCompositeBaseWorkItem FindItem(int ABaseShapeID, TCompositeBaseWork AFind)
+        public TCompositeBaseWorkItem FindItem(int ABaseShapeID, ref TCompositeBaseWork AFind)
         {
             TCompositeBaseWorkItem WI;
             TCompositeBaseWorkItem Res = null;
@@ -266,7 +266,7 @@ namespace geliosNEW
                 }
                 for (int j = 0; j <= WI.CompositeWorkCount - 1; j++)
                 {
-                    Res = WI.CompositeWork[j].FindItem(ABaseShapeID, AFind);
+                    Res = WI.CompositeWork[j].FindItem(ABaseShapeID, ref AFind);
                     if (Res!=null)
                         return Res;
                 }

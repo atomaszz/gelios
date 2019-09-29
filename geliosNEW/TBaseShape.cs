@@ -130,7 +130,7 @@ namespace geliosNEW
         }
         protected virtual int GetTypeShape()
         {
-            return 1;//F_TypeShape;
+            return F_TypeShape;
         }
   /*      void SetLEActive(bool AValue);
         virtual TBaseLine  GetBaseLine(int AIndex);

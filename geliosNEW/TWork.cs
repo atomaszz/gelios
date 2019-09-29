@@ -24,7 +24,7 @@ namespace geliosNEW
             return Line;
         }
 
-        protected int GetTypeShape()
+        override public int GetTypeShape()
         {
             return 1;
         }

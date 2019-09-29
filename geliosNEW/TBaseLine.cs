@@ -201,7 +201,7 @@ namespace geliosNEW
             }
             else
             {
-                Canvas.DrawLine(new Pen(Color.Black, 2), m_s, m_e);
+                Canvas.DrawLine(new Pen(Color.Yellow, 2), m_s, m_e);
             }
             if (p_s)
             {
@@ -413,7 +413,7 @@ namespace geliosNEW
             if (!F_Visible) return;
             //      OldPenParent.Assign(Canvas.Pen);
             //     Canvas.Pen.Assign(this.Pen);
-            Canvas.DrawLine(new Pen(Color.Black, 2), new Point(x0, y0), new Point(x1, y1));
+            Canvas.DrawLine(new Pen(Color.Green, 2), new Point(x0, y0), new Point(x1, y1));
     //        Canvas.Pen.Assign(OldPenParent);
         }
         public virtual void PaintFlag(Graphics Canvas)

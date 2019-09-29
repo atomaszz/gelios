@@ -102,7 +102,7 @@ namespace geliosNEW
             L = (TRectLine)(GetWorkLine(4));
             return L;
         }
-        int GetTypeShape()
+        override public int GetTypeShape()
         {
             return 7;
         }

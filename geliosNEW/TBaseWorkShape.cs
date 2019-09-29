@@ -482,9 +482,9 @@ namespace geliosNEW
                 Res = (TArrowLine)(WorkLines.ElementAt(num));
             return Res;
         }
-        void SetOffsetPosition(int X_Ofs, int Y_Ofs)
+        public void SetOffsetPosition(int X_Ofs, int Y_Ofs)
         {
-            Rectangle R;
+            TRect R;
             TBaseShape baseShape;
             TRectLine baseLine;
             if (CompositeWorkShape!=null)
@@ -495,12 +495,12 @@ namespace geliosNEW
             for (int i = 0; i <= WorkShapes.Count - 1; i++)
             {
                 baseShape = (TBaseShape)(WorkShapes.ElementAt(i));
-                R = baseShape.BoundRect;
-                R.X = R.Left + X_Ofs;
-                R.Width = R.Right + X_Ofs;
-                R.Y = R.Top + Y_Ofs;
-                R.Width = R.Bottom + Y_Ofs;
-                baseShape.BoundRect = R;
+                R = new TRect (baseShape.BoundRect);
+                R.Left = R.Left + X_Ofs;
+                R.Right = R.Right + X_Ofs;
+                R.Top = R.Top + Y_Ofs;
+                R.Bottom = R.Bottom + Y_Ofs;
+                baseShape.BoundRect = R.GetRec();
             }
         }
         void SetBaseOffsetPosition(int X_Ofs, int Y_Ofs)
@@ -510,7 +510,7 @@ namespace geliosNEW
         }
         public Rectangle GetFrameRectWithLines()
         {
-            Rectangle Res, R_tmp;
+            TRect Res, R_tmp;
             TBaseShape baseShape;
             TArrowLine currLine;
             int i;
@@ -518,16 +518,16 @@ namespace geliosNEW
                 return CompositeWorkShape.GetMaxRect();
 
             baseShape = (TBaseShape)WorkShapes.ElementAt(0);
-            Res = baseShape.GetRect();
+            Res = new TRect(baseShape.GetRect());
 
             for (i = 1; i <= WorkShapes.Count - 1; i++)
             {
                 baseShape = (TBaseShape)WorkShapes.ElementAt(i);
-                R_tmp = baseShape.GetRect();
-                if (R_tmp.Left < Res.Left) Res.X = R_tmp.Left;
-                if (R_tmp.Right > Res.Right) Res.Width = R_tmp.Right;
-                if (R_tmp.Top < Res.Top) Res.Y = R_tmp.Top;
-                if (R_tmp.Bottom > Res.Bottom) Res.Height = R_tmp.Bottom;
+                R_tmp = new TRect(baseShape.GetRect());
+                if (R_tmp.Left < Res.Left) Res.Left = R_tmp.Left;
+                if (R_tmp.Right > Res.Right) Res.Right = R_tmp.Right;
+                if (R_tmp.Top < Res.Top) Res.Top = R_tmp.Top;
+                if (R_tmp.Bottom > Res.Bottom) Res.Bottom = R_tmp.Bottom;
             }
 
 
@@ -543,16 +543,15 @@ namespace geliosNEW
                 if (currLine.yEnd < Res.Top) Res.Y = currLine.yEnd;
                 if (currLine.yStart > Res.Bottom) Res.Width = currLine.yStart;
                 if (currLine.yEnd > Res.Bottom) Res.Width = currLine.yEnd;
-
             }
 
-            Res.X = Res.Left - SharedConst.OFFS_FRAME * PenWidth;
-            Res.Y = Res.Top - SharedConst.OFFS_FRAME * PenWidth;
-            Res.Width = Res.Right + SharedConst.OFFS_FRAME * PenWidth;
-            Res.Height = Res.Bottom + SharedConst.OFFS_FRAME * PenWidth;
+            Res.Left = Res.Left - SharedConst.OFFS_FRAME * PenWidth;
+            Res.Top = Res.Top - SharedConst.OFFS_FRAME * PenWidth;
+            Res.Right = Res.Right + SharedConst.OFFS_FRAME * PenWidth;
+            Res.Bottom = Res.Bottom + SharedConst.OFFS_FRAME * PenWidth;
             F_Ofs_Point.X = Res.Left - F_StartPoint.X;
             F_Ofs_Point.Y = Res.Top - F_StartPoint.Y;
-            return Res;
+            return Res.GetRec();
         }
               /*       TRect FrameRectToRect(TRect R);
                      TPoint GetStartPointFromFrameRect(TRect R);*/
@@ -604,10 +603,19 @@ namespace geliosNEW
         {
             WorkLines.Clear();
         }
-       /*          virtual bool MakeFlagForShape(TBaseShape* AShape, bool ACreate, int APos, int AType, TColor AColor);
-                 int ShapeSupport(TBaseShape* AShape);
-                 TBaseShape* ShapeSupportID(int AShapeID);
-                 void ShowAllFlagForSahpe(int AType, TColor AColor);
+        /*          virtual bool MakeFlagForShape(TBaseShape* AShape, bool ACreate, int APos, int AType, TColor AColor);
+                  int ShapeSupport(TBaseShape* AShape);*/
+        public TBaseShape ShapeSupportID(int AShapeID)
+        {
+            TBaseShape bs;
+            for (int i = 0; i <= WorkShapes.Count - 1; i++)
+            {
+                bs = (TBaseShape)(WorkShapes.ElementAt(i));
+                if (bs.ID == AShapeID) return bs;
+            }
+            return null;
+        }
+              /*   void ShowAllFlagForSahpe(int AType, TColor AColor);
                  void HideAllFlagForSahpe();
                  virtual void CreateLines();
                  int ReactMouse(TPoint APoint);

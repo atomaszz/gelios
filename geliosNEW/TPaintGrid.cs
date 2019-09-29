@@ -662,18 +662,18 @@ namespace geliosNEW
                 }
                 else
                 {
-                    if (TempWork->ShapeSupportID(AShapeID))
+                    if (TempWork.ShapeSupportID(AShapeID)!=null)
                         return TempWork;
                 }
-                TempWork = g_PainterList->Next();
+                TempWork = g_PainterList.Next();
             }
-            return NULL;
+            return null;
         }
         /*     void CoordinateCorrectForCompositeWork();*/
         public TCompositeBaseWorkItem FindComositeBaseWork2(int ATFEID, ref TCompositeBaseWork AFind)
         {
             TBaseWorkShape TempWork;
-            TCompositeBaseWork WF;
+            TCompositeBaseWork WF = new TCompositeBaseWork();
             TCompositeBaseWorkItem Item;
             TempWork = g_PainterList.First();
             while (TempWork!=null)

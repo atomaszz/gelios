@@ -179,12 +179,12 @@ namespace geliosNEW
                 line.ApplyCoord(x0, y0, x1, y1);
 
             }
-      /*      if (m_rev)
+            if (m_rev)
                 ReverseLines();
 
             SetDrawFlagS();
             SetDrawFlagE();
-            DoSetLEControl();
+      /*      DoSetLEControl();
             DoSetWndHandler();
             DoSetUnderControl();*/
         }
@@ -259,14 +259,38 @@ namespace geliosNEW
             line = (TBaseLine)Lines.ElementAt(0);
             line.FlagSType = F_FlagSType;
         }
-      /*      void SetColorFlagE();
-            void __fastcall SetLEControl(bool Value);
-            void __fastcall SetWndHandler(const HWND Value);
-            void __fastcall SetUnderControl(TControl* Value);
-            void DoSetLEControl();
-            void DoSetWndHandler();
-            void DoSetUnderControl();
-            void ReverseLines();*/
+        /*      void SetColorFlagE();
+              void __fastcall SetLEControl(bool Value);
+              void __fastcall SetWndHandler(const HWND Value);
+              void __fastcall SetUnderControl(TControl* Value);
+              void DoSetLEControl();
+              void DoSetWndHandler();
+              void DoSetUnderControl();*/
+        void ReverseLines()
+        {
+            {
+                int i, cnt, dln = 0;
+                TBaseLine line, tmp;
+                Point S, E;
+                for (i = 0; i <= Lines.Count - 1; i++)
+                {
+                    line = (TBaseLine)(Lines.ElementAt(i));
+                    if (line.Visible) dln++;
+                }
+                cnt = (dln / 2);
+                for (i = 0; i <= cnt - 1; i++)
+                {
+                    line = (TBaseLine)(Lines.ElementAt(i));
+                    tmp = (TBaseLine)(Lines.ElementAt(dln - i - 1));
+                    S = line.PointStart;
+                    E = line.PointEnd;
+                    line.PointStart = tmp.PointEnd;
+                    line.PointEnd = tmp.PointStart;
+                    tmp.PointStart = E;
+                    tmp.PointEnd = S;
+                }
+            }
+        }
         void CreateMiddleFlagToLine(TBaseLine ALine, bool ADrawFlag)
         {
             if (F_MiddleFlag!=null)
