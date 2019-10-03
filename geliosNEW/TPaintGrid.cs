@@ -298,7 +298,7 @@ namespace geliosNEW
                 f_SelectedTFE.DrawFrame = true;
                 f_ClipPath.Add(f_SelectedTFE.GetFrameRect(), 4);
                 f_OwnerForm.SetPanelActiveVisible(true);
-            //    SendMessage(f_OwnerForm, WM_GD_PAINT, 1, LPARAM(f_ClipPath->GetCliptRgn()));
+            //    SendMessage(f_OwnerForm, WM_GD_PAINT, 1, LPARAM(f_ClipPath.GetCliptRgn()));
             }
             return res;
         }

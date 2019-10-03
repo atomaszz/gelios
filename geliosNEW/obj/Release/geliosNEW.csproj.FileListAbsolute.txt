@@ -1,0 +1,10 @@
+C:\Users\Atom\Desktop\gelios-master\geliosNEW\bin\Release\geliosNEW.exe.config
+C:\Users\Atom\Desktop\gelios-master\geliosNEW\bin\Release\geliosNEW.exe
+C:\Users\Atom\Desktop\gelios-master\geliosNEW\bin\Release\geliosNEW.pdb
+C:\Users\Atom\Desktop\gelios-master\geliosNEW\obj\Release\geliosNEW.FmParamAlternative.resources
+C:\Users\Atom\Desktop\gelios-master\geliosNEW\obj\Release\geliosNEW.Properties.Resources.resources
+C:\Users\Atom\Desktop\gelios-master\geliosNEW\obj\Release\geliosNEW.FrmMain.resources
+C:\Users\Atom\Desktop\gelios-master\geliosNEW\obj\Release\geliosNEW.csproj.GenerateResource.cache
+C:\Users\Atom\Desktop\gelios-master\geliosNEW\obj\Release\geliosNEW.csproj.CoreCompileInputs.cache
+C:\Users\Atom\Desktop\gelios-master\geliosNEW\obj\Release\geliosNEW.exe
+C:\Users\Atom\Desktop\gelios-master\geliosNEW\obj\Release\geliosNEW.pdb

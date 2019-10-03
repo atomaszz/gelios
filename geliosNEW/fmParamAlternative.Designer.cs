@@ -30,32 +30,34 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.acAddExecute = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.button6 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lbTypeParam = new System.Windows.Forms.Label();
+            this.lbType = new System.Windows.Forms.Label();
+            this.lbCount = new System.Windows.Forms.Label();
+            this.lbNum = new System.Windows.Forms.Label();
             this.pbTfs = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.sgParam = new System.Windows.Forms.DataGridView();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbTfs)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sgParam)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(706, 3);
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button1.Location = new System.Drawing.Point(797, 3);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(85, 30);
@@ -69,22 +71,23 @@
             this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 348);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 385);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(794, 37);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(885, 37);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
-            // button2
+            // acAddExecute
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(3, 3);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(112, 44);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Добавить альтернативу";
-            this.button2.UseVisualStyleBackColor = true;
+            this.acAddExecute.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.acAddExecute.Location = new System.Drawing.Point(3, 3);
+            this.acAddExecute.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
+            this.acAddExecute.Name = "acAddExecute";
+            this.acAddExecute.Size = new System.Drawing.Size(112, 44);
+            this.acAddExecute.TabIndex = 1;
+            this.acAddExecute.Text = "Добавить альтернативу";
+            this.acAddExecute.UseVisualStyleBackColor = true;
+            this.acAddExecute.Click += new System.EventHandler(this.AcAddExecute_Click);
             // 
             // button3
             // 
@@ -94,13 +97,14 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(112, 44);
             this.button3.TabIndex = 2;
-            this.button3.Text = "Удалить альтернативу";
+            this.button3.Text = "Редактировать альтернативу";
             this.button3.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
+            this.button4.Enabled = false;
             this.button4.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button4.Location = new System.Drawing.Point(239, 3);
+            this.button4.Location = new System.Drawing.Point(357, 3);
             this.button4.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(160, 44);
@@ -110,8 +114,9 @@
             // 
             // button5
             // 
+            this.button5.Enabled = false;
             this.button5.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button5.Location = new System.Drawing.Point(405, 3);
+            this.button5.Location = new System.Drawing.Point(523, 3);
             this.button5.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(157, 44);
@@ -122,8 +127,9 @@
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.flowLayoutPanel2.Controls.Add(this.button2);
+            this.flowLayoutPanel2.Controls.Add(this.acAddExecute);
             this.flowLayoutPanel2.Controls.Add(this.button3);
+            this.flowLayoutPanel2.Controls.Add(this.button6);
             this.flowLayoutPanel2.Controls.Add(this.button4);
             this.flowLayoutPanel2.Controls.Add(this.button5);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -131,8 +137,19 @@
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(794, 54);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(885, 54);
             this.flowLayoutPanel2.TabIndex = 3;
+            // 
+            // button6
+            // 
+            this.button6.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button6.Location = new System.Drawing.Point(239, 3);
+            this.button6.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(112, 44);
+            this.button6.TabIndex = 5;
+            this.button6.Text = "Удалить альтернативу";
+            this.button6.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
@@ -142,10 +159,10 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.Controls.Add(this.label8, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label6, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lbTypeParam, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lbType, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lbCount, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lbNum, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.pbTfs, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 1);
@@ -158,52 +175,52 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(791, 123);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(882, 123);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
-            // label8
+            // lbTypeParam
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(556, 90);
-            this.label8.Name = "label8";
-            this.label8.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.label8.Size = new System.Drawing.Size(21, 21);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "0";
+            this.lbTypeParam.AutoSize = true;
+            this.lbTypeParam.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbTypeParam.Location = new System.Drawing.Point(619, 90);
+            this.lbTypeParam.Name = "lbTypeParam";
+            this.lbTypeParam.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
+            this.lbTypeParam.Size = new System.Drawing.Size(21, 21);
+            this.lbTypeParam.TabIndex = 8;
+            this.lbTypeParam.Text = "0";
             // 
-            // label7
+            // lbType
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(556, 60);
-            this.label7.Name = "label7";
-            this.label7.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.label7.Size = new System.Drawing.Size(21, 21);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "0";
+            this.lbType.AutoSize = true;
+            this.lbType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbType.Location = new System.Drawing.Point(619, 60);
+            this.lbType.Name = "lbType";
+            this.lbType.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
+            this.lbType.Size = new System.Drawing.Size(21, 21);
+            this.lbType.TabIndex = 7;
+            this.lbType.Text = "0";
             // 
-            // label6
+            // lbCount
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(556, 30);
-            this.label6.Name = "label6";
-            this.label6.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.label6.Size = new System.Drawing.Size(21, 21);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "0";
+            this.lbCount.AutoSize = true;
+            this.lbCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbCount.Location = new System.Drawing.Point(619, 30);
+            this.lbCount.Name = "lbCount";
+            this.lbCount.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
+            this.lbCount.Size = new System.Drawing.Size(21, 21);
+            this.lbCount.TabIndex = 6;
+            this.lbCount.Text = "0";
             // 
-            // label5
+            // lbNum
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(556, 0);
-            this.label5.Name = "label5";
-            this.label5.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.label5.Size = new System.Drawing.Size(21, 21);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "0";
+            this.lbNum.AutoSize = true;
+            this.lbNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbNum.Location = new System.Drawing.Point(619, 0);
+            this.lbNum.Name = "lbNum";
+            this.lbNum.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
+            this.lbNum.Size = new System.Drawing.Size(21, 21);
+            this.lbNum.TabIndex = 5;
+            this.lbNum.Text = "0";
             // 
             // pbTfs
             // 
@@ -218,7 +235,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(319, 0);
+            this.label1.Location = new System.Drawing.Point(355, 0);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
             this.label1.Size = new System.Drawing.Size(132, 18);
@@ -228,7 +245,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(319, 30);
+            this.label2.Location = new System.Drawing.Point(355, 30);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
             this.label2.Size = new System.Drawing.Size(208, 18);
@@ -238,7 +255,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(319, 60);
+            this.label3.Location = new System.Drawing.Point(355, 60);
             this.label3.Name = "label3";
             this.label3.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
             this.label3.Size = new System.Drawing.Size(85, 18);
@@ -248,31 +265,33 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(319, 90);
+            this.label4.Location = new System.Drawing.Point(355, 90);
             this.label4.Name = "label4";
             this.label4.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
             this.label4.Size = new System.Drawing.Size(98, 18);
             this.label4.TabIndex = 4;
             this.label4.Text = "Тип параметров:";
             // 
-            // dataGridView1
+            // sgParam
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.sgParam.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 181);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(788, 164);
-            this.dataGridView1.TabIndex = 5;
+            this.sgParam.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.sgParam.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.sgParam.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.sgParam.Location = new System.Drawing.Point(3, 181);
+            this.sgParam.Name = "sgParam";
+            this.sgParam.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.sgParam.Size = new System.Drawing.Size(879, 201);
+            this.sgParam.TabIndex = 5;
             // 
             // FmParamAlternative
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(794, 385);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(885, 422);
+            this.Controls.Add(this.sgParam);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.flowLayoutPanel2);
@@ -281,12 +300,13 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Формирование параметрических альтернатив";
+            this.Shown += new System.EventHandler(this.FmParamAlternative_Shown);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbTfs)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sgParam)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -295,21 +315,22 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button acAddExecute;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView sgParam;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lbTypeParam;
+        private System.Windows.Forms.Label lbType;
+        private System.Windows.Forms.Label lbCount;
+        private System.Windows.Forms.Label lbNum;
         public System.Windows.Forms.PictureBox pbTfs;
+        private System.Windows.Forms.Button button6;
     }
 }

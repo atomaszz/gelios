@@ -18,6 +18,7 @@ namespace geliosNEW
         public const int BL_OTHER = 2;
         public const int BL_POINT = 3;
 
+
         /*---------------------------------------------------*/
 
         //значения для типов блоков

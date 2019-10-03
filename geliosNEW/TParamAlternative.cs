@@ -8,7 +8,7 @@ namespace geliosNEW
 {
     public class TParamAlternative
     {
-        public List<object> Items;
+        public List<TParamAlternativeItem> Items;
         void FreeList()
         {
             Items.Clear();
@@ -27,7 +27,7 @@ namespace geliosNEW
         }
         public TParamAlternative()
         {
-            Items = new List<object>();
+            Items = new List<TParamAlternativeItem>();
         }
         ~TParamAlternative() { }
         public void AddItem(TParamAlternativeItem AItem)
@@ -42,7 +42,7 @@ namespace geliosNEW
                 Items.RemoveAt(AIndex);
             }
         }
-        public void Delete2(object APointer)
+        public void Delete2(TParamAlternativeItem APointer)
         {
             int index = Items.IndexOf(APointer);
             Delete(index);

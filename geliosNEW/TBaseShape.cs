@@ -316,12 +316,23 @@ namespace geliosNEW
         {
             f_WorkLines.Add(ALine);
         }
-   /*            public void ClearWorkLine();
-               public void AddParamAlternativeItem(TParamAlternativeItem* AItem);
-               public void DeleteParamAlternativeItem(int AIndex);
-               public void DeleteParamAlternativeItem2(void* APointer);
-               public virtual AnsiString Make_One_Simple();
-               public virtual AnsiString Make_One_SimpleItem(int AIndex);*/
+        public void ClearWorkLine()
+        {
+            f_WorkLines.Clear();
+        }
+        public void AddParamAlternativeItem(TParamAlternativeItem AItem)
+        {
+            if (AItem!=null)
+            {
+                if (f_ParamAlt==null)
+                    f_ParamAlt = new TParamAlternative();
+                f_ParamAlt.AddItem(AItem);
+            }
+        }
+        /*    public void DeleteParamAlternativeItem(int AIndex);
+            public void DeleteParamAlternativeItem2(void* APointer);
+            public virtual AnsiString Make_One_Simple();
+            public virtual AnsiString Make_One_SimpleItem(int AIndex);*/
 
 
         public  Color  BrushColor

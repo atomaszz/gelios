@@ -555,10 +555,10 @@ namespace geliosNEW
         }
         public int NUMBER
         {
-            set { f_NUMBER = value;  }
+            set { f_NUMBER = value; }
             get { return f_NUMBER; }
         }
-        public string  PRED_ISTOR
+        public string PRED_ISTOR
         {
             set { f_PRED_ISTOR = value; }
             get { return f_PRED_ISTOR; }
@@ -583,259 +583,273 @@ namespace geliosNEW
             set { f_ELEMENT = value; }
             get { return f_ELEMENT; }
         }
- /*       public string PREDICAT 
-            
-            = {read = f_PREDICAT, write = f_PREDICAT};
-        public double B 
-            
-            = { read = f_B, write = f_B };
-        public double T 
-            
-            = { read = f_T, write = f_T };
-        public double V 
-            
-            = { read = f_V, write = f_V };
-        public double A1_B_F 
-            
-            = { read = f_A1_B_F, write = f_A1_B_F };
-        public double B_F1N 
-            
-            = { read = f_B_F1N, write = f_B_F1N };
-        public double B_F1B 
-            
-            = { read = f_B_F1B, write = f_B_F1B };
-        public double A2_B_F 
-            
-            = { read = f_A2_B_F, write = f_A2_B_F };
-        public double B_F2N 
-            
-            = { read = f_B_F2N, write = f_B_F2N };
-        public double B_F2B 
-            
-            = { read = f_B_F2B, write = f_B_F2B };
-        public double A3_B_F 
-            
-            = { read = f_A3_B_F, write = f_A3_B_F };
-        public double B_F3N 
-            
-            = { read = f_B_F3N, write = f_B_F3N };
-        public double B_F3B 
-            
-            = { read = f_B_F3B, write = f_B_F3B };
-        public double A1_T_F 
-            
-            = { read = f_A1_T_F, write = f_A1_T_F };
-        public double T_F1N 
-            
-            = { read = f_T_F1N, write = f_T_F1N };
-        public double T_F1B 
-            
-            = { read = f_T_F1B, write = f_T_F1B };
-        public double A2_T_F 
-            
-            = { read = f_A2_T_F, write = f_A2_T_F };
-        public double T_F2N 
-            
-            = { read = f_T_F2N, write = f_T_F2N };
-        public double T_F2B 
-            
-            = { read = f_T_F2B, write = f_T_F2B };
-        public double A3_T_F 
-            
-            = { read = f_A3_T_F, write = f_A3_T_F };
-        public double T_F3N 
-            
-            = { read = f_T_F3N, write = f_T_F3N };
-        public double T_F3B 
-            
-            = { read = f_T_F3B, write = f_T_F3B };
-        public double A1_V_F 
-            
-            = { read = f_A1_V_F, write = f_A1_V_F };
-        public double V_F1N 
-            
-            = { read = f_V_F1N, write = f_V_F1N };
-        public double V_F1B 
-            
-            = { read = f_V_F1B, write = f_V_F1B };
-        public double A2_V_F 
-            
-            = { read = f_A2_V_F, write = f_A2_V_F };
-        public double V_F2N 
-            
-            = { read = f_V_F2N, write = f_V_F2N };
-        public double V_F2B 
-            
-            = { read = f_V_F2B, write = f_V_F2B };
-        public double A3_V_F 
-            
-            = { read = f_A3_V_F, write = f_A3_V_F };
-        public double V_F3N 
-            
-            = { read = f_V_F3N, write = f_V_F3N };
+        public string PREDICAT
+        {
+            set { f_PREDICAT = value; }
+            get { return f_PREDICAT; }
+        }
+        public double B
+        {
+            set { f_B = value; }
+            get { return f_B; }
+        }
+        public double T
+        {
+            set { f_T = value; }
+            get { return f_T; }
+        }
+        public double V
+        {
+            set { f_V = value; }
+            get { return f_V; }
+        }
+        public double A1_B_F
+        {
+            set { f_A1_B_F = value; }
+            get { return f_A1_B_F; }
+        }
+        public double B_F1N
+        {
+            set { f_B_F1N = value; }
+            get { return f_B_F1N; }
+        }
+        public double B_F1B
+        {
+            set { f_B_F1B = value; }
+            get { return f_B_F1B; }
+        }
+        public double A2_B_F
+
+        { set { f_A2_B_F = value; } get { return f_A2_B_F; } }
+        public double B_F2N
+
+        { set { f_B_F2N = value; } get { return f_B_F2N; } }
+        public double B_F2B
+
+        { set { f_B_F2B = value; } get { return f_B_F2B; } }
+        public double A3_B_F
+
+        { set { f_A3_B_F = value; } get { return f_A3_B_F; } }
+        public double B_F3N
+
+        { set { f_B_F3N = value; } get { return f_B_F3N; } }
+        public double B_F3B
+
+        { set { f_B_F3B = value; } get { return f_B_F3B; } }
+        public double A1_T_F
+
+        { set { f_A1_T_F = value; } get { return f_A1_T_F; } }
+        public double T_F1N
+
+        { set { f_T_F1N = value; } get { return f_T_F1N; } }
+        public double T_F1B
+
+        { set { f_T_F1B = value; } get { return f_T_F1B; } }
+        public double A2_T_F
+
+        { set { f_A2_T_F = value; } get { return f_A2_T_F; } }
+        public double T_F2N
+
+        { set { f_T_F2N = value; } get { return f_T_F2N; } }
+        public double T_F2B
+
+        { set { f_T_F2B = value; } get { return f_T_F2B; } }
+        public double A3_T_F
+
+        { set { f_A3_T_F = value; } get { return f_A3_T_F; } }
+        public double T_F3N
+
+        { set { f_T_F3N = value; } get { return f_T_F3N; } }
+        public double T_F3B
+
+        { set { f_T_F3B = value; } get { return f_T_F3B; } }
+        public double A1_V_F
+
+        { set { f_A1_V_F = value; } get { return f_A1_V_F; } }
+        public double V_F1N
+
+        { set { f_V_F1N = value; } get { return f_V_F1N; } }
+        public double V_F1B
+
+        { set { f_V_F1B = value; } get { return f_V_F1B; } }
+        public double A2_V_F
+
+        { set { f_A2_V_F = value; } get { return f_A2_V_F; } }
+        public double V_F2N
+
+        { set { f_V_F2N = value; } get { return f_V_F2N; } }
+        public double V_F2B
+
+        { set { f_V_F2B = value; } get { return f_V_F2B; } }
+        public double A3_V_F
+
+        { set { f_A3_V_F = value; } get { return f_A3_V_F; } }
+        public double V_F3N
+
+        { set { f_V_F3N = value; } get { return f_V_F3N; } }
         public double V_F3B
-            
-            = { read = f_V_F3B, write = f_V_F3B };
-        public double K_11 
-            
-            = { read = f_K_11, write = f_K_11 };
-        public double K_00 
-            
-            = { read = f_K_00, write = f_K_00 };
-        public double T_F 
-            
-            = { read = f_T_F, write = f_T_F };
-        public double V_F 
-            
-            = { read = f_V_F, write = f_V_F };
-        public double A1_K11_F 
-            
-            = { read = f_A1_K11_F, write = f_A1_K11_F };
+
+        { set { f_V_F3B = value; } get { return f_V_F3B; } }
+        public double K_11
+
+        { set { f_K_11 = value; } get { return f_K_11; } }
+        public double K_00
+
+        { set { f_K_00 = value; } get { return f_K_00; } }
+        public double T_F
+
+        { set { f_T_F = value; } get { return f_T_F; } }
+        public double V_F
+
+        { set { f_V_F = value; } get { return f_V_F; } }
+        public double A1_K11_F
+
+        { set { f_A1_K11_F = value; } get { return f_A1_K11_F; } }
         public double K11_F1N
-            
-            = { read = f_K11_F1N, write = f_K11_F1N };
+
+        { set { f_K11_F1N = value; } get { return f_K11_F1N; } }
         public double K11_F1B
-            
-            = { read = f_K11_F1B, write = f_K11_F1B };
+
+        { set { f_K11_F1B = value; } get { return f_K11_F1B; } }
         public double A2_K11_F
-            
-            = { read = f_A2_K11_F, write = f_A2_K11_F };
-        public double K11_F2N 
-            
-            = { read = f_K11_F2N, write = f_K11_F2N };
-        public double K11_F2B 
-            
-            = { read = f_K11_F2B, write = f_K11_F2B };
+
+        { set { f_A2_K11_F = value; } get { return f_A2_K11_F; } }
+        public double K11_F2N
+
+        { set { f_K11_F2N = value; } get { return f_K11_F2N; } }
+        public double K11_F2B
+
+        { set { f_K11_F2B = value; } get { return f_K11_F2B; } }
         public double A3_K11_F
-            
-            = { read = f_A3_K11_F, write = f_A3_K11_F };
+
+        { set { f_A3_K11_F = value; } get { return f_A3_K11_F; } }
         public double K11_F3N
-            
-            = { read = f_K11_F3N, write = f_K11_F3N };
-        public double K11_F3B 
-            
-            = { read = f_K11_F3B, write = f_K11_F3B };
+
+        { set { f_K11_F3N = value; } get { return f_K11_F3N; } }
+        public double K11_F3B
+
+        { set { f_K11_F3B = value; } get { return f_K11_F3B; } }
         public double A1_K00_F
-            
-            = { read = f_A1_K00_F, write = f_A1_K00_F };
+
+        { set { f_A1_K00_F = value; } get { return f_A1_K00_F; } }
         public double K00_F1N
-            
-            = { read = f_K00_F1N, write = f_K00_F1N };
+
+        { set { f_K00_F1N = value; } get { return f_K00_F1N; } }
         public double K00_F1B
-            
-            = { read = f_K00_F1B, write = f_K00_F1B };
+
+        { set { f_K00_F1B = value; } get { return f_K00_F1B; } }
         public double A2_K00_F
-            
-            = { read = f_A2_K00_F, write = f_A2_K00_F };
+
+        { set { f_A2_K00_F = value; } get { return f_A2_K00_F; } }
         public double K00_F2N
-            
-            = { read = f_K00_F2N, write = f_K00_F2N };
+
+        { set { f_K00_F2N = value; } get { return f_K00_F2N; } }
         public double K00_F2B
-            
-            = { read = f_K00_F2B, write = f_K00_F2B };
+
+        { set { f_K00_F2B = value; } get { return f_K00_F2B; } }
         public double A3_K00_F
-            
-            = { read = f_A3_K00_F, write = f_A3_K00_F };
-        public double K00_F3N 
-            
-            = { read = f_K00_F3N, write = f_K00_F3N };
+
+        { set { f_A3_K00_F = value; } get { return f_A3_K00_F; } }
+        public double K00_F3N
+
+        { set { f_K00_F3N = value; } get { return f_K00_F3N; } }
         public double K00_F3B
-            
-            = { read = f_K00_F3B, write = f_K00_F3B };
-        public double A1_TF_F 
-            
-            = { read = f_A1_TF_F, write = f_A1_TF_F };
-        public double TF_F1N 
-            
-            = { read = f_TF_F1N, write = f_TF_F1N };
-        public double TF_F1B 
-            
-            = { read = f_TF_F1B, write = f_TF_F1B };
-        public double A2_TF_F 
-            
-            = { read = f_A2_TF_F, write = f_A2_TF_F };
-        public double TF_F2N 
-            
-            = { read = f_TF_F2N, write = f_TF_F2N };
-        public double TF_F2B 
-            
-            = { read = f_TF_F2B, write = f_TF_F2B };
+
+        { set { f_K00_F3B = value; } get { return f_K00_F3B; } }
+        public double A1_TF_F
+
+        { set { f_A1_TF_F = value; } get { return f_A1_TF_F; } }
+        public double TF_F1N
+
+        { set { f_TF_F1N = value; } get { return f_TF_F1N; } }
+        public double TF_F1B
+
+        { set { f_TF_F1B = value; } get { return f_TF_F1B; } }
+        public double A2_TF_F
+
+        { set { f_A2_TF_F = value; } get { return f_A2_TF_F; } }
+        public double TF_F2N
+
+        { set { f_TF_F2N = value; } get { return f_TF_F2N; } }
+        public double TF_F2B
+
+        { set { f_TF_F2B = value; } get { return f_TF_F2B; } }
         public double A3_TF_F
-            
-            = { read = f_A3_TF_F, write = f_A3_TF_F };
-        public double TF_F3N 
-            
-            = { read = f_TF_F3N, write = f_TF_F3N };
-        public double TF_F3B 
-            
-            = { read = f_TF_F3B, write = f_TF_F3B };
+
+        { set { f_A3_TF_F = value; } get { return f_A3_TF_F; } }
+        public double TF_F3N
+
+        { set { f_TF_F3N = value; } get { return f_TF_F3N; } }
+        public double TF_F3B
+
+        { set { f_TF_F3B = value; } get { return f_TF_F3B; } }
         public double A1_VF_F
-            
-            = { read = f_A1_VF_F, write = f_A1_VF_F };
-        public double VF_F1N = { read = f_VF_F1N, write = f_VF_F1N };
-        public double VF_F1B = { read = f_VF_F1B, write = f_VF_F1B };
-        public double A2_VF_F = { read = f_A2_VF_F, write = f_A2_VF_F };
-        public double VF_F2N = { read = f_VF_F2N, write = f_VF_F2N };
-        public double VF_F2B = { read = f_VF_F2B, write = f_VF_F2B };
-        public double A3_VF_F = { read = f_A3_VF_F, write = f_A3_VF_F };
-        public double VF_F3N = { read = f_VF_F3N, write = f_VF_F3N };
-        public double VF_F3B = { read = f_VF_F3B, write = f_VF_F3B };
-        public double P_11 = { read = f_P_11, write = f_P_11 };
-        public double P_00 = { read = f_P_00, write = f_P_00 };
-        public double T_D = { read = f_T_D, write = f_T_D };
-        public double V_D = { read = f_V_D, write = f_V_D };
-        public double A1_P11_F = { read = f_A1_P11_F, write = f_A1_P11_F };
-        public double P11_F1N = { read = f_P11_F1N, write = f_P11_F1N };
-        public double P11_F1B = { read = f_P11_F1B, write = f_P11_F1B };
-        public double A2_P11_F = { read = f_A2_P11_F, write = f_A2_P11_F };
-        public double P11_F2N = { read = f_P11_F2N, write = f_P11_F2N };
-        public double P11_F2B = { read = f_P11_F2B, write = f_P11_F2B };
-        public double A3_P11_F = { read = f_A3_P11_F, write = f_A3_P11_F };
-        public double P11_F3N = { read = f_P11_F3N, write = f_P11_F3N };
-        public double P11_F3B = { read = f_P11_F3B, write = f_P11_F3B };
-        public double A1_P00_F = { read = f_A1_P00_F, write = f_A1_P00_F };
-        public double P00_F1N = { read = f_P00_F1N, write = f_P00_F1N };
-        public double P00_F1B = { read = f_P00_F1B, write = f_P00_F1B };
-        public double A2_P00_F = { read = f_A2_P00_F, write = f_A2_P00_F };
-        public double P00_F2N = { read = f_P00_F2N, write = f_P00_F2N };
-        public double P00_F2B = { read = f_P00_F2B, write = f_P00_F2B };
-        public double A3_P00_F = { read = f_A3_P00_F, write = f_A3_P00_F };
-        public double P00_F3N = { read = f_P00_F3N, write = f_P00_F3N };
-        public double P00_F3B = { read = f_P00_F3B, write = f_P00_F3B };
-        public double A1_TD_F = { read = f_A1_TD_F, write = f_A1_TD_F };
-        public double TD_F1N = { read = f_TD_F1N, write = f_TD_F1N };
-        public double TD_F1B = { read = f_TD_F1B, write = f_TD_F1B };
-        public double A2_TD_F = { read = f_A2_TD_F, write = f_A2_TD_F };
-        public double TD_F2N = { read = f_TD_F2N, write = f_TD_F2N };
-        public double TD_F2B = { read = f_TD_F2B, write = f_TD_F2B };
-        public double A3_TD_F = { read = f_A3_TD_F, write = f_A3_TD_F };
-        public double TD_F3N = { read = f_TD_F3N, write = f_TD_F3N };
-        public double TD_F3B = { read = f_TD_F3B, write = f_TD_F3B };
-        public double A1_VD_F = { read = f_A1_VD_F, write = f_A1_VD_F };
-        public double VD_F1N = { read = f_VD_F1N, write = f_VD_F1N };
-        public double VD_F1B = { read = f_VD_F1B, write = f_VD_F1B };
-        public double A2_VD_F = { read = f_A2_VD_F, write = f_A2_VD_F };
-        public double VD_F2N = { read = f_VD_F2N, write = f_VD_F2N };
-        public double VD_F2B = { read = f_VD_F2B, write = f_VD_F2B };
-        public double A3_VD_F = { read = f_A3_VD_F, write = f_A3_VD_F };
-        public double VD_F3N = { read = f_VD_F3N, write = f_VD_F3N };
-        public double VD_F3B = { read = f_VD_F3B, write = f_VD_F3B };
-        public int TYPE = { read = f_TYPE, write = f_TYPE };
-        public string  ELEM_DIAGN = {read = f_ELEM_DIAGN, write = f_ELEM_DIAGN};
-        public double P_DIAGN_EL = { read = f_P_DIAGN_EL, write = f_P_DIAGN_EL };
-        public double A1_P_EL_F = { read = f_A1_P_EL_F, write = f_A1_P_EL_F };
-        public double P_EL_F1N = { read = f_P_EL_F1N, write = f_P_EL_F1N };
-        public double P_EL_F1B = { read = f_P_EL_F1B, write = f_P_EL_F1B };
-        public double A2_P_EL_F = { read = f_A2_P_EL_F, write = f_A2_P_EL_F };
-        public double P_EL_F2N = { read = f_P_EL_F2N, write = f_P_EL_F2N };
-        public double P_EL_F2B = { read = f_P_EL_F2B, write = f_P_EL_F2B };
-        public double A3_P_EL_F = { read = f_A3_P_EL_F, write = f_A3_P_EL_F };
-        public double P_EL_F3N = { read = f_P_EL_F3N, write = f_P_EL_F3N };
-        public double P_EL_F3B = { read = f_P_EL_F3B, write = f_P_EL_F3B };
-        public double SOVM = { read = f_SOVM, write = f_SOVM };
-        public double SOVM0 = { read = f_SOVM0, write = f_SOVM0 };
-        public double SOVM1 = { read = f_SOVM1, write = f_SOVM1 };
-        public int Tag = { read = f_Tag, write = f_Tag };*/
+
+        { set { f_A1_VF_F = value; } get { return f_A1_VF_F; } }
+        public double VF_F1N { set { f_VF_F1N = value; } get { return f_VF_F1N; } }
+        public double VF_F1B { set { f_VF_F1B = value; } get { return f_VF_F1B; } }
+        public double A2_VF_F { set { f_A2_VF_F = value; } get { return f_A2_VF_F; } }
+        public double VF_F2N { set { f_VF_F2N = value; } get { return f_VF_F2N; } }
+        public double VF_F2B { set { f_VF_F2B = value; } get { return f_VF_F2B; } }
+        public double A3_VF_F { set { f_A3_VF_F = value; } get { return f_A3_VF_F; } }
+        public double VF_F3N { set { f_VF_F3N = value; } get { return f_VF_F3N; } }
+        public double VF_F3B { set { f_VF_F3B = value; } get { return f_VF_F3B; } }
+        public double P_11 { set { f_P_11 = value; } get { return f_P_11; } }
+        public double P_00 { set { f_P_00 = value; } get { return f_P_00; } }
+        public double T_D { set { f_T_D = value; } get { return f_T_D; } }
+        public double V_D { set { f_V_D = value; } get { return f_V_D; } }
+        public double A1_P11_F { set { f_A1_P11_F = value; } get { return f_A1_P11_F; } }
+        public double P11_F1N { set { f_P11_F1N = value; } get { return f_P11_F1N; } }
+        public double P11_F1B { set { f_P11_F1B = value; } get { return f_P11_F1B; } }
+        public double A2_P11_F { set { f_A2_P11_F = value; } get { return f_A2_P11_F; } }
+        public double P11_F2N { set { f_P11_F2N = value; } get { return f_P11_F2N; } }
+        public double P11_F2B { set { f_P11_F2B = value; } get { return f_P11_F2B; } }
+        public double A3_P11_F { set { f_A3_P11_F = value; } get { return f_A3_P11_F; } }
+        public double P11_F3N { set { f_P11_F3N = value; } get { return f_P11_F3N; } }
+        public double P11_F3B { set { f_P11_F3B = value; } get { return f_P11_F3B; } }
+        public double A1_P00_F { set { f_A1_P00_F = value; } get { return f_A1_P00_F; } }
+        public double P00_F1N { set { f_P00_F1N = value; } get { return f_P00_F1N; } }
+        public double P00_F1B { set { f_P00_F1B = value; } get { return f_P00_F1B; } }
+        public double A2_P00_F { set { f_A2_P00_F = value; } get { return f_A2_P00_F; } }
+        public double P00_F2N { set { f_P00_F2N = value; } get { return f_P00_F2N; } }
+        public double P00_F2B { set { f_P00_F2B = value; } get { return f_P00_F2B; } }
+        public double A3_P00_F { set { f_A3_P00_F = value; } get { return f_A3_P00_F; } }
+        public double P00_F3N { set { f_P00_F3N = value; } get { return f_P00_F3N; } }
+        public double P00_F3B { set { f_P00_F3B = value; } get { return f_P00_F3B; } }
+        public double A1_TD_F { set { f_A1_TD_F = value; } get { return f_A1_TD_F; } }
+        public double TD_F1N { set { f_TD_F1N = value; } get { return f_TD_F1N; } }
+        public double TD_F1B { set { f_TD_F1B = value; } get { return f_TD_F1B; } }
+        public double A2_TD_F { set { f_A2_TD_F = value; } get { return f_A2_TD_F; } }
+        public double TD_F2N { set { f_TD_F2N = value; } get { return f_TD_F2N; } }
+        public double TD_F2B { set { f_TD_F2B = value; } get { return f_TD_F2B; } }
+        public double A3_TD_F { set { f_A3_TD_F = value; } get { return f_A3_TD_F; } }
+        public double TD_F3N { set { f_TD_F3N = value; } get { return f_TD_F3N; } }
+        public double TD_F3B { set { f_TD_F3B = value; } get { return f_TD_F3B; } }
+        public double A1_VD_F { set { f_A1_VD_F = value; } get { return f_A1_VD_F; } }
+        public double VD_F1N { set { f_VD_F1N = value; } get { return f_VD_F1N; } }
+        public double VD_F1B { set { f_VD_F1B = value; } get { return f_VD_F1B; } }
+        public double A2_VD_F { set { f_A2_VD_F = value; } get { return f_A2_VD_F; } }
+        public double VD_F2N { set { f_VD_F2N = value; } get { return f_VD_F2N; } }
+        public double VD_F2B { set { f_VD_F2B = value; } get { return f_VD_F2B; } }
+        public double A3_VD_F { set { f_A3_VD_F = value; } get { return f_A3_VD_F; } }
+        public double VD_F3N { set { f_VD_F3N = value; } get { return f_VD_F3N; } }
+        public double VD_F3B { set { f_VD_F3B = value; } get { return f_VD_F3B; } }
+        public int TYPE { set { f_TYPE = value; } get { return f_TYPE; } }
+        public string ELEM_DIAGN { set { f_ELEM_DIAGN = value; } get { return f_ELEM_DIAGN; } }
+        public double P_DIAGN_EL { set { f_P_DIAGN_EL = value; } get { return f_P_DIAGN_EL; } }
+        public double A1_P_EL_F { set { f_A1_P_EL_F = value; } get { return f_A1_P_EL_F; } }
+        public double P_EL_F1N { set { f_P_EL_F1N = value; } get { return f_P_EL_F1N; } }
+        public double P_EL_F1B { set { f_P_EL_F1B = value; } get { return f_P_EL_F1B; } }
+        public double A2_P_EL_F { set { f_A2_P_EL_F = value; } get { return f_A2_P_EL_F; } }
+        public double P_EL_F2N { set { f_P_EL_F2N = value; } get { return f_P_EL_F2N; } }
+        public double P_EL_F2B { set { f_P_EL_F2B = value; } get { return f_P_EL_F2B; } }
+        public double A3_P_EL_F { set { f_A3_P_EL_F = value; } get { return f_A3_P_EL_F; } }
+        public double P_EL_F3N { set { f_P_EL_F3N = value; } get { return f_P_EL_F3N; } }
+        public double P_EL_F3B { set { f_P_EL_F3B = value; } get { return f_P_EL_F3B; } }
+        public double SOVM { set { f_SOVM = value; } get { return f_SOVM; } }
+        public double SOVM0 { set { f_SOVM0 = value; } get { return f_SOVM0; } }
+        public double SOVM1 { set { f_SOVM1 = value; } get { return f_SOVM1; } }
+        public int Tag { set { f_Tag = value; } get { return f_Tag; } }
         public bool CheckPLG
         {
             set { f_CheckPLG = value; }
