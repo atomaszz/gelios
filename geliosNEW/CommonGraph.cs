@@ -144,8 +144,9 @@ namespace geliosNEW
         public static void SGCellsByName(DataGridView AStringGrid, int ARow, string AColName, object AValue)
         {
             for (int i = 0; i <= AStringGrid.ColumnCount - 1; i++)
-            {                
-                if (String.Compare(AColName, (AStringGrid.Rows[ARow].Cells[i].Value).ToString())!=0)
+            {
+                // if (String.Compare(AColName, (AStringGrid.Rows[ARow].Cells[i].Value).ToString())!=0)
+                if (String.Compare(AColName, (AStringGrid.Columns[i].HeaderCell.Value).ToString()) == 0)
                 {
                     AStringGrid.Rows[ARow].Cells[i].Value = AValue.ToString();
                     return;

@@ -81,13 +81,13 @@ namespace geliosNEW
             lbNum.Text = ParentShapeID.ToString();
 
             StringInit();
-            //    RefreshData();
+            RefreshData();
         }
         void StringInit()
         {
             int m_type = TFE.TypeShape;
             sgParam.ColumnCount = 4;
-            sgParam.RowCount = 2;
+            sgParam.RowCount = 1;
             sgParam.Rows[0].ReadOnly = true;
 
             CommonGraph.SGCells(sgParam, 0, 0, "НАЗВАНИЕ");
@@ -481,54 +481,55 @@ namespace geliosNEW
         {
             TParamAlternativeItem AI;
             int m_type = TFE.TypeShape;
-        /*    sgParam.RowCount = 1;
-            sgParam.RowCount = 2;
-            sgParam.FixedRows = 1;
-            sgParam.Rows[1].Clear();*/
+      //      sgParam.RowCount = 1;
+     //       sgParam.RowCount = 2;
+      //      sgParam.FixedRows = 1;
+     //       sgParam.Rows[1].Clear();
             if (TFE.ParamAlt != null)
             {
                 int m_cnt = TFE.ParamAlt.Count;
+                sgParam.RowCount = m_cnt;
+         /*       if (m_cnt > sgParam.RowCount)
+                    sgParam.RowCount += 1;*/
                 for (int i = 0; i <= m_cnt - 1; i++)
                 {
-                    if (i + 1 > sgParam.RowCount - 1)
-                        sgParam.RowCount = sgParam.RowCount + 1;
                     AI = TFE.ParamAlt.Items[i];
 
-                    sgParam.Rows[1 + i].Cells[0].Value = (object)AI;
+                    //sgParam->Objects[0][1 + i] = (TObject*)AI;
                     AI.SOSTAV = (TFE.ID).ToString() + ":" + (i + 1).ToString();
-                    CommonGraph.SGCellsByName(sgParam, 1 + i, "НАЗВАНИЕ", AI.NAME);
-                    CommonGraph.SGCellsByName(sgParam, 1 + i, "ФУНКЦИЯ", AI.FUNCTION2);
-                    CommonGraph.SGCellsByName(sgParam, 1 + i, "ЭЛЕМЕНТ", AI.ELEMENT);
-                    CommonGraph.SGCellsByName(sgParam, 1 + i, "СОСТАВ", AI.SOSTAV);
+                    CommonGraph.SGCellsByName(sgParam, i, "НАЗВАНИЕ", AI.NAME);
+                    CommonGraph.SGCellsByName(sgParam, i, "ФУНКЦИЯ", AI.FUNCTION2);
+                    CommonGraph.SGCellsByName(sgParam, i, "ЭЛЕМЕНТ", AI.ELEMENT);
+                    CommonGraph.SGCellsByName(sgParam, i, "СОСТАВ", AI.SOSTAV);
 
                     if (m_type == 5)
                     {
-                        CommonGraph.SGCellsByName(sgParam, 1 + i, "B", AI.B);
-                        CommonGraph.SGCellsByName(sgParam, 1 + i, "T", AI.T);
-                        CommonGraph.SGCellsByName(sgParam, 1 + i, "V", AI.V);
+                        CommonGraph.SGCellsByName(sgParam, i, "B", AI.B);
+                        CommonGraph.SGCellsByName(sgParam, i, "T", AI.T);
+                        CommonGraph.SGCellsByName(sgParam, i, "V", AI.V);
                     }
                     if (m_type == 6)
                     {
-                        CommonGraph.SGCellsByName(sgParam, 1 + i, "ЭЛЕМЕНТ(диагн.)", AI.ELEM_DIAGN);
-                        CommonGraph.SGCellsByName(sgParam, 1 + i, "В(диагн)", AI.P_DIAGN_EL);
-                        CommonGraph.SGCellsByName(sgParam, 1 + i, "П_11", AI.P_11);
-                        CommonGraph.SGCellsByName(sgParam, 1 + i, "П_00", AI.P_00);
-                        CommonGraph.SGCellsByName(sgParam, 1 + i, "T_д", AI.T_D);
-                        CommonGraph.SGCellsByName(sgParam, 1 + i, "V_д", AI.V_D);
+                        CommonGraph.SGCellsByName(sgParam, i, "ЭЛЕМЕНТ(диагн.)", AI.ELEM_DIAGN);
+                        CommonGraph.SGCellsByName(sgParam, i, "В(диагн)", AI.P_DIAGN_EL);
+                        CommonGraph.SGCellsByName(sgParam, i, "П_11", AI.P_11);
+                        CommonGraph.SGCellsByName(sgParam, i, "П_00", AI.P_00);
+                        CommonGraph.SGCellsByName(sgParam, i, "T_д", AI.T_D);
+                        CommonGraph.SGCellsByName(sgParam, i, "V_д", AI.V_D);
                     }
                     if (m_type == 7)
                     {
-                        CommonGraph.SGCellsByName(sgParam, 1 + i, "K_11", AI.K_11);
-                        CommonGraph.SGCellsByName(sgParam, 1 + i, "K_00", AI.K_00);
-                        CommonGraph.SGCellsByName(sgParam, 1 + i, "T_Ф", AI.T_F);
-                        CommonGraph.SGCellsByName(sgParam, 1 + i, "V_Ф", AI.V_F);
+                        CommonGraph.SGCellsByName(sgParam, i, "K_11", AI.K_11);
+                        CommonGraph.SGCellsByName(sgParam, i, "K_00", AI.K_00);
+                        CommonGraph.SGCellsByName(sgParam, i, "T_Ф", AI.T_F);
+                        CommonGraph.SGCellsByName(sgParam, i, "V_Ф", AI.V_F);
                     }
                     if (m_type == 8)
                     {
-                        CommonGraph.SGCellsByName(sgParam, 1 + i, "УСЛОВИЕ", AI.PREDICAT);
+                        CommonGraph.SGCellsByName(sgParam, i, "УСЛОВИЕ", AI.PREDICAT);
                     }
-
                 }
+                sgParam.Rows[sgParam.RowCount - 1].Selected = true;
             }
         }
 
@@ -537,18 +538,19 @@ namespace geliosNEW
             TParamAlternativeItem AI;
             int m_type = TFE.TypeShape;
             sgParam.RowCount = 1;
-            sgParam.RowCount = 2;
+            //sgParam.RowCount = 2;
             //    sgParam.FixedRows = 1;
             //      sgParam.Rows[1].Clear();
             if (TFE.ParamAlt != null)
             {
                 int m_cnt = TFE.ParamAlt.Count;
+                sgParam.RowCount = m_cnt;
+             /*   if (m_cnt > sgParam.RowCount)
+                    sgParam.RowCount += 1;*/
                 for (int i = 0; i <= m_cnt - 1; i++)
                 {
-                    if (i + 1 > sgParam.RowCount - 1)
-                        sgParam.RowCount = sgParam.RowCount + 1;
                     AI = TFE.ParamAlt.Items[i];
-                    sgParam.Rows[1 + i].Cells[0].Value = (object)AI;
+        //            sgParam.Rows[1 + i].Cells[0].Value = (object)AI;
                     AI.SOSTAV = (TFE.ID).ToString() + ":" + (i + 1).ToString();
                     CommonGraph.SGCellsByName(sgParam, 1 + i, "НАЗВАНИЕ", AI.NAME);
                     CommonGraph.SGCellsByName(sgParam, 1 + i, "ФУНКЦИЯ", AI.FUNCTION2);

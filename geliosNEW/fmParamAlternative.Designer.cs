@@ -281,6 +281,7 @@
             this.sgParam.BackgroundColor = System.Drawing.SystemColors.Control;
             this.sgParam.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.sgParam.Location = new System.Drawing.Point(3, 181);
+            this.sgParam.MultiSelect = false;
             this.sgParam.Name = "sgParam";
             this.sgParam.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.sgParam.Size = new System.Drawing.Size(879, 201);
