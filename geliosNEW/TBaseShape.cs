@@ -98,8 +98,15 @@ namespace geliosNEW
         }
         /*     void SetLEControl();
              TRectLine   GetWorkLine(int AIndex);
-             int  GetWorkLineCount();
-             void CheckNullParamAlt();*/
+             int  GetWorkLineCount();*/
+        void CheckNullParamAlt()
+        {
+            if (f_ParamAlt.Count == 0)
+            {
+       //         delete f_ParamAlt;
+                f_ParamAlt = null;
+            }
+        }
 
         protected int F_Step;
 
@@ -329,10 +336,14 @@ namespace geliosNEW
                 f_ParamAlt.AddItem(AItem);
             }
         }
-        /*    public void DeleteParamAlternativeItem(int AIndex);
-            public void DeleteParamAlternativeItem2(void* APointer);
-            public virtual AnsiString Make_One_Simple();
-            public virtual AnsiString Make_One_SimpleItem(int AIndex);*/
+        /*    public void DeleteParamAlternativeItem(int AIndex);*/
+        public void DeleteParamAlternativeItem2(object APointer)
+        {
+            f_ParamAlt.Delete2((TParamAlternativeItem)APointer);
+            CheckNullParamAlt();
+        }
+        /*      public virtual AnsiString Make_One_Simple();
+              public virtual AnsiString Make_One_SimpleItem(int AIndex);*/
 
 
         public  Color  BrushColor

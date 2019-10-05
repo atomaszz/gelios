@@ -35,7 +35,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.button6 = new System.Windows.Forms.Button();
+            this.acDelExecute = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lbTypeParam = new System.Windows.Forms.Label();
             this.lbType = new System.Windows.Forms.Label();
@@ -99,6 +99,7 @@
             this.button3.TabIndex = 2;
             this.button3.Text = "Редактировать альтернативу";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // button4
             // 
@@ -129,7 +130,7 @@
             this.flowLayoutPanel2.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.flowLayoutPanel2.Controls.Add(this.acAddExecute);
             this.flowLayoutPanel2.Controls.Add(this.button3);
-            this.flowLayoutPanel2.Controls.Add(this.button6);
+            this.flowLayoutPanel2.Controls.Add(this.acDelExecute);
             this.flowLayoutPanel2.Controls.Add(this.button4);
             this.flowLayoutPanel2.Controls.Add(this.button5);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -140,16 +141,17 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(885, 54);
             this.flowLayoutPanel2.TabIndex = 3;
             // 
-            // button6
+            // acDelExecute
             // 
-            this.button6.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button6.Location = new System.Drawing.Point(239, 3);
-            this.button6.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(112, 44);
-            this.button6.TabIndex = 5;
-            this.button6.Text = "Удалить альтернативу";
-            this.button6.UseVisualStyleBackColor = true;
+            this.acDelExecute.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.acDelExecute.Location = new System.Drawing.Point(239, 3);
+            this.acDelExecute.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
+            this.acDelExecute.Name = "acDelExecute";
+            this.acDelExecute.Size = new System.Drawing.Size(112, 44);
+            this.acDelExecute.TabIndex = 5;
+            this.acDelExecute.Text = "Удалить альтернативу";
+            this.acDelExecute.UseVisualStyleBackColor = true;
+            this.acDelExecute.Click += new System.EventHandler(this.acDelExecute_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -235,40 +237,44 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(355, 0);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.label1.Size = new System.Drawing.Size(132, 18);
+            this.label1.Size = new System.Drawing.Size(172, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Номер блока-родителя:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(355, 30);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.label2.Size = new System.Drawing.Size(208, 18);
+            this.label2.Size = new System.Drawing.Size(184, 30);
             this.label2.TabIndex = 2;
             this.label2.Text = "Кол-во параметрических альтернатив:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.Location = new System.Drawing.Point(355, 60);
             this.label3.Name = "label3";
             this.label3.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.label3.Size = new System.Drawing.Size(85, 18);
+            this.label3.Size = new System.Drawing.Size(107, 20);
             this.label3.TabIndex = 3;
             this.label3.Text = "Тип подблока:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.Location = new System.Drawing.Point(355, 90);
             this.label4.Name = "label4";
             this.label4.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.label4.Size = new System.Drawing.Size(98, 18);
+            this.label4.Size = new System.Drawing.Size(126, 20);
             this.label4.TabIndex = 4;
             this.label4.Text = "Тип параметров:";
             // 
@@ -332,6 +338,6 @@
         private System.Windows.Forms.Label lbCount;
         private System.Windows.Forms.Label lbNum;
         public System.Windows.Forms.PictureBox pbTfs;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button acDelExecute;
     }
 }

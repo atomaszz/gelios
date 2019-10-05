@@ -81,3 +81,4 @@ C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Debug\geliosNEW.csproj.GenerateResourc
 C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Debug\geliosNEW.csproj.CoreCompileInputs.cache
 C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Debug\geliosNEW.exe
 C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Debug\geliosNEW.pdb
+C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Debug\geliosNEW.FmTredactChar.resources
