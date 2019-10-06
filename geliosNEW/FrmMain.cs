@@ -72,6 +72,8 @@ namespace geliosNEW
         TAlternateController f_AlternateController;
         TAltSelector f_AltSelector;
         TAltStackController f_AltStackController;
+
+        FmOptSadacha opt_sadacha;
         void InitHelp()
         {
        //     fmHelp = null;
@@ -181,16 +183,17 @@ namespace geliosNEW
             GMess.RegistrMessage(7, GLBApplySettingsForOutherGrid);*/
             InitHelp();
             InitPieModule();
-       /*     f_Zadacha = new TZadacha;
-            f_ClipCopyTFS = new TClipCopyTFS(Handle, 0x8000000);
-            f_PredicatePath = new TPredicatePath;
-            f_PredicateDopPrav = new AnsiString;
-            ApplySettings();
-            randomize();*/
+            /*     f_Zadacha = new TZadacha;
+                 f_ClipCopyTFS = new TClipCopyTFS(Handle, 0x8000000);
+                 f_PredicatePath = new TPredicatePath;
+                 f_PredicateDopPrav = new AnsiString;
+                 ApplySettings();
+                 randomize();*/
 
             //      pbGraph = pbMain.CreateGraphics();
             /*       rectMainShow = new Rectangle(0, 0, pbMain.Width, pbMain.Height);
                    pntMainShow = new PaintEventArgs(pbGraph, rectMainShow);*/
+            opt_sadacha = new FmOptSadacha();
         }
         void ListChange()
         {
@@ -535,6 +538,14 @@ namespace geliosNEW
                           ShowParamAlternative(Grid.SelectedTFE, LevelController.ParentShapeID, f_TypeParam, imageTfe, false);
             }
         }
+
+        private void ЗадачаОптимизацииToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MainList.GetAllWorkShape(opt_sadacha.MassWork);
+            opt_sadacha.InitData();
+            opt_sadacha.ShowDialog();
+        }
+
         void BuildGlp(TBaseWorkShape AWN, DrawObject Glp, TBaseShape ASel)
         {
             TBaseShape BS;

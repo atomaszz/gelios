@@ -347,12 +347,21 @@ namespace geliosNEW
         public TNode CheckAlternateWSFirst(TBaseWorkShape AWS);
         public TNode CheckAlternateWSEnd(TBaseWorkShape AWS);
         public void LoadInfoForAlternate(TAltInfo AltIfo, int AParentShapeID);
-        public  bool GetAlternateInfo(int AShapeID, int &AltID, int &NumAlt, int &IDParent);
-        public void GetAllWorkShape(TDynamicArray AMass);
-        public void SaveAllToFileBin(AnsiString AFileName, int ATypeParam, TDischargedMassiv AOgrSovm);
+        public  bool GetAlternateInfo(int AShapeID, int &AltID, int &NumAlt, int &IDParent);*/
+        public void GetAllWorkShape(TDynamicArray AMass)
+        {
+            if (AMass!=null)
+            {
+                AMass.Clear();
+                for (int i = 0; i <= MainList.Count - 1; i++)
+                    AMass.Append(((TNodeMain)(MainList.ElementAt(i))).WorkShape);
+            }
+
+        }
+        /*    public void SaveAllToFileBin(AnsiString AFileName, int ATypeParam, TDischargedMassiv AOgrSovm);
 
 
-        public TStackDustController* StackDustController = {read = f_StackDustController*/
+            public TStackDustController* StackDustController = {read = f_StackDustController*/
         public TListChange OnListChange
         {
             set { FOnListChange = value; }

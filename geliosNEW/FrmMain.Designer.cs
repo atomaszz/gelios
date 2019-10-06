@@ -81,18 +81,18 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pbMain = new System.Windows.Forms.PictureBox();
-            this.sbY = new System.Windows.Forms.VScrollBar();
-            this.sbX = new System.Windows.Forms.HScrollBar();
             this.panelActiveMenu = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.pbMain = new System.Windows.Forms.PictureBox();
+            this.sbY = new System.Windows.Forms.VScrollBar();
+            this.sbX = new System.Windows.Forms.HScrollBar();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             this.panelActiveMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -299,6 +299,7 @@
             this.задачаОптимизацииToolStripMenuItem.Name = "задачаОптимизацииToolStripMenuItem";
             this.задачаОптимизацииToolStripMenuItem.Size = new System.Drawing.Size(134, 20);
             this.задачаОптимизацииToolStripMenuItem.Text = "Задача оптимизации";
+            this.задачаОптимизацииToolStripMenuItem.Click += new System.EventHandler(this.ЗадачаОптимизацииToolStripMenuItem_Click);
             // 
             // решениеЗадачиToolStripMenuItem
             // 
@@ -474,43 +475,6 @@
             this.panel2.Size = new System.Drawing.Size(935, 320);
             this.panel2.TabIndex = 4;
             // 
-            // pbMain
-            // 
-            this.pbMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbMain.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pbMain.Location = new System.Drawing.Point(0, 0);
-            this.pbMain.Name = "pbMain";
-            this.pbMain.Size = new System.Drawing.Size(913, 300);
-            this.pbMain.TabIndex = 2;
-            this.pbMain.TabStop = false;
-            this.pbMain.Paint += new System.Windows.Forms.PaintEventHandler(this.PbMain_Paint);
-            this.pbMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PbMain_MouseDown);
-            this.pbMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
-            this.pbMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseUp);
-            // 
-            // sbY
-            // 
-            this.sbY.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.sbY.Cursor = System.Windows.Forms.Cursors.NoMoveVert;
-            this.sbY.Location = new System.Drawing.Point(916, 0);
-            this.sbY.Name = "sbY";
-            this.sbY.Size = new System.Drawing.Size(19, 300);
-            this.sbY.TabIndex = 1;
-            // 
-            // sbX
-            // 
-            this.sbX.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.sbX.Cursor = System.Windows.Forms.Cursors.NoMoveHoriz;
-            this.sbX.Location = new System.Drawing.Point(0, 300);
-            this.sbX.Name = "sbX";
-            this.sbX.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.sbX.Size = new System.Drawing.Size(935, 20);
-            this.sbX.TabIndex = 0;
-            // 
             // panelActiveMenu
             // 
             this.panelActiveMenu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -571,6 +535,43 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
+            // pbMain
+            // 
+            this.pbMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbMain.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pbMain.Location = new System.Drawing.Point(0, 0);
+            this.pbMain.Name = "pbMain";
+            this.pbMain.Size = new System.Drawing.Size(913, 300);
+            this.pbMain.TabIndex = 2;
+            this.pbMain.TabStop = false;
+            this.pbMain.Paint += new System.Windows.Forms.PaintEventHandler(this.PbMain_Paint);
+            this.pbMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PbMain_MouseDown);
+            this.pbMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            this.pbMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseUp);
+            // 
+            // sbY
+            // 
+            this.sbY.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.sbY.Cursor = System.Windows.Forms.Cursors.NoMoveVert;
+            this.sbY.Location = new System.Drawing.Point(916, 0);
+            this.sbY.Name = "sbY";
+            this.sbY.Size = new System.Drawing.Size(19, 300);
+            this.sbY.TabIndex = 1;
+            // 
+            // sbX
+            // 
+            this.sbX.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.sbX.Cursor = System.Windows.Forms.Cursors.NoMoveHoriz;
+            this.sbX.Location = new System.Drawing.Point(0, 300);
+            this.sbX.Name = "sbX";
+            this.sbX.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.sbX.Size = new System.Drawing.Size(935, 20);
+            this.sbX.TabIndex = 0;
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -592,9 +593,9 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();
             this.panelActiveMenu.ResumeLayout(false);
             this.panelActiveMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

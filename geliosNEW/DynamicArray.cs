@@ -14,7 +14,7 @@ namespace geliosNEW
         public int Int_Value;
     };
 
-    class TDynamicArray
+    public class TDynamicArray
     {
         int f_PosStak;
         List<object> f_List;
@@ -162,9 +162,13 @@ namespace geliosNEW
         public object Pop();
         public TDynamicArrayItem Find(object P);
         public TDynamicArrayItem Last();
-        public int DeleteArray(TDynamicArray AList);
-        public int Count = { read = GetCount };
-        public object Array[int AIndex] = { read = GetArray, write = SetArray };
+        public int DeleteArray(TDynamicArray AList);*/
+        public int Count
+        {
+            get { return GetCount(); }
+        }
+  
+  /*      public object Array[int AIndex] = { read = GetArray, write = SetArray };
         public object Items[int AIndex] = { read = GetItems };
         public object Named[AnsiString AIndex] = { read = GetNamed, write = SetNamed };
         public object Integer[int APos] = { read = GetInteger, write = SetInteger };

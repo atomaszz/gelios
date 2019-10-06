@@ -49,6 +49,12 @@
     <Compile Include="AltStack.cs" />
     <Compile Include="CommonGraph.cs" />
     <Compile Include="DynamicArray.cs" />
+    <Compile Include="FmOptSadacha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FmOptSadacha.Designer.cs">
+      <DependentUpon>FmOptSadacha.cs</DependentUpon>
+    </Compile>
     <Compile Include="FmParamAlternative.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +67,7 @@
     <Compile Include="FmTredactChar.Designer.cs">
       <DependentUpon>FmTredactChar.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlsAtmCommon.cs" />
     <Compile Include="LineCutting.cs" />
     <Compile Include="ListFlag.cs" />
     <Compile Include="ListForPaint.cs" />
@@ -125,6 +132,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FmOptSadacha.resx">
+      <DependentUpon>FmOptSadacha.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FmParamAlternative.resx">
       <DependentUpon>FmParamAlternative.cs</DependentUpon>
       <SubType>Designer</SubType>
