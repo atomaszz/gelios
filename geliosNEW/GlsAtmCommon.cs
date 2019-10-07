@@ -15,14 +15,51 @@ namespace geliosNEW
             _next = this;
             _prev = this;
         }
-             ~TGlsNode() { }
-      /*      public TGlsNode insert(TGlsNode ANode);
-            public TGlsNode remove();
-            public void splice(TGlsNode b);
+        public void TGlsNode1()
+        {
+            _next = this;
+            _prev = this;
+        }
+        ~TGlsNode() { }
+        public TGlsNode insert(TGlsNode ANode)
+        {
+            TGlsNode c = _next;
+            ANode._next = c;
+            ANode._prev = this;
+            _next = ANode;
+            c._prev = ANode;
+            return ANode;
+        }
+        public TGlsNode remove()
+        {
+            _prev._next = _next;
+            _next._prev = _prev;
+            _next = _prev = this;
+            return this;
+        }
+        public void splice(TGlsNode b)
+        {
+            TGlsNode a = this;
+            TGlsNode an = a._next;
+            TGlsNode bn = b._next;
+            a._next = bn;
+            b._next = an;
+            an._prev = b;
+            bn._prev = a;
+        }
 
-            public TGlsNode Next = {read = _next, write = _next
 
-            public TGlsNode Prev = { read = _prev, write = _prev };*/
+        public TGlsNode Next
+        {
+            set { _next = value; }
+            get { return _next; }
+        }
+            
+        public TGlsNode Prev
+        {
+            set { _prev = value; }
+            get { return _prev; }
+        }
     }
     class TGlsListNode : TGlsNode
     {
@@ -79,19 +116,32 @@ namespace geliosNEW
         object _val;
         public TGlsBTreeNode(object T)
         {
-            base.TGlsNode();
+            base.TGlsNode1();
             _val = T;
             _lchild = null;
             _rchild = null;
         }
         ~TGlsBTreeNode() { }
-    /*         public object Val = { read = _val, write = _val };
-             public TGlsBTreeNode lchild = { read = _lchild, write = _lchild };
-             public TGlsBTreeNode rchild = { read = _rchild, write = _rchild };*/
+        public object Val
+        {
+            set { _val = value;  }
+            get { return _val;   }
+        }
+        public TGlsBTreeNode lchild
+        {
+            set { _lchild = value; }
+            get { return _lchild; }
+        }
+        public TGlsBTreeNode rchild
+        {
+            set { _rchild = value; }
+            get { return _rchild; }
+        }
     }
     class TGlsBinaryTree
     {
         public delegate int TCmp (object a, object b);
+        public delegate bool acp(object a);
 
         TGlsBTreeNode root;
         TGlsBTreeNode win;
@@ -104,16 +154,50 @@ namespace geliosNEW
             win = root = new TGlsBTreeNode(null);
         }
         ~TGlsBinaryTree() { }
-     /*         public bool isEmpty();
-              public void* find(void* T);
-              public void* findMin();
-              public void* findMax();
-              public void inorder(bool (*) (void*));
-              public void* insert(void* T);
-              public  void* next();
-              public void* prev();
-              public void* first();
-              public void* last();
-              public void* val();*/
+        /*         public bool isEmpty();
+                 public void* find(void* T);
+                 public void* findMin();
+                 public void* findMax();*/
+        public void inorder(acp acpp)
+        {
+            TGlsBTreeNode n = (TGlsBTreeNode)(root.Next);
+            while (n != root)
+            {
+                if (!(acpp(n.Val))) break;
+                n = (TGlsBTreeNode)(n.Next);
+            }
+        }
+        public object insert(object T)
+        {
+            int res = 1;
+            TGlsBTreeNode p = root;
+            TGlsBTreeNode n = root.rchild;
+            while (n!=null)
+            {
+                p = n;
+                res = cmp(T, p.Val);
+                if (res <= 0)
+                    n = p.lchild;
+                else
+                    n = p.rchild;
+            }
+            win = new TGlsBTreeNode(T);
+            if (res <= 0)
+            {
+                p.lchild = win;
+                p.Prev.insert(win);
+            }
+            else
+            {
+                p.rchild = win;
+                p.insert(win);
+            }
+            return T;
+        }
+        /*    public  void* next();
+            public void* prev();
+            public void* first();
+            public void* last();
+            public void* val();*/
     }
 }

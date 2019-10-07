@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace geliosNEW
 {
-    class TDynamicArrayItem
+    public class TDynamicArrayItem
     {
         public int Index;
         public object P;
@@ -59,7 +59,7 @@ namespace geliosNEW
         {
             return f_List.Count;
         }
-        object  GetItems(int AIndex)
+        public object  GetItems(int AIndex)
         {
             TDynamicArrayItem Item = null;
             if (AIndex >= 0 && AIndex <= f_List.Count - 1)
@@ -159,9 +159,19 @@ namespace geliosNEW
         public bool DeleteInteger(int APos);
         public bool Delete(object P);
         public void InitStack();
-        public object Pop();
-        public TDynamicArrayItem Find(object P);
-        public TDynamicArrayItem Last();
+        public object Pop();*/
+        public TDynamicArrayItem Find(object P)
+        {
+            TDynamicArrayItem Item;
+            for (int i = 0; i <= f_List.Count - 1; i++)
+            {
+                Item = (TDynamicArrayItem)(f_List.ElementAt(i));
+                if (Item.P == P)
+                    return Item;
+            }
+            return null;
+        }
+    /*    public TDynamicArrayItem Last();
         public int DeleteArray(TDynamicArray AList);*/
         public int Count
         {
@@ -169,7 +179,6 @@ namespace geliosNEW
         }
   
   /*      public object Array[int AIndex] = { read = GetArray, write = SetArray };
-        public object Items[int AIndex] = { read = GetItems };
         public object Named[AnsiString AIndex] = { read = GetNamed, write = SetNamed };
         public object Integer[int APos] = { read = GetInteger, write = SetInteger };
         public TDynamicArrayItem Position[int APos] = {read = GetPosition*/

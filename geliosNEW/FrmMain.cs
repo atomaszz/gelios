@@ -73,7 +73,6 @@ namespace geliosNEW
         TAltSelector f_AltSelector;
         TAltStackController f_AltStackController;
 
-        FmOptSadacha opt_sadacha;
         void InitHelp()
         {
        //     fmHelp = null;
@@ -193,7 +192,7 @@ namespace geliosNEW
             //      pbGraph = pbMain.CreateGraphics();
             /*       rectMainShow = new Rectangle(0, 0, pbMain.Width, pbMain.Height);
                    pntMainShow = new PaintEventArgs(pbGraph, rectMainShow);*/
-            opt_sadacha = new FmOptSadacha();
+            SharedConst.opt_sadacha = new FmOptSadacha();
         }
         void ListChange()
         {
@@ -541,9 +540,9 @@ namespace geliosNEW
 
         private void ЗадачаОптимизацииToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MainList.GetAllWorkShape(opt_sadacha.MassWork);
-            opt_sadacha.InitData();
-            opt_sadacha.ShowDialog();
+            MainList.GetAllWorkShape(SharedConst.opt_sadacha.MassWork);
+            SharedConst.opt_sadacha.InitData();
+            SharedConst.opt_sadacha.ShowDialog();
         }
 
         void BuildGlp(TBaseWorkShape AWN, DrawObject Glp, TBaseShape ASel)

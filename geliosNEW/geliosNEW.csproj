@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="AltStack.cs" />
     <Compile Include="CommonGraph.cs" />
+    <Compile Include="DischargedMassiv.cs" />
     <Compile Include="DynamicArray.cs" />
     <Compile Include="FmOptSadacha.cs">
       <SubType>Form</SubType>
@@ -141,6 +142,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FmTredactChar.resx">
       <DependentUpon>FmTredactChar.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -10,6 +10,10 @@ namespace geliosNEW
 {
     public class SharedConst
     {
+        /*---------------------*/
+        public static  FmOptSadacha opt_sadacha;
+        /*--------------------*/
+
         public const int D_FRAME = 1;
         public const int OFFS_FRAME = 2;
 
@@ -104,6 +108,9 @@ namespace geliosNEW
         public const int BTVS = 8;
 
         /*-------------------------------------*/
+
+
+        /*---------------------------------------*/
 
 
         public static TMessangers GMess;
