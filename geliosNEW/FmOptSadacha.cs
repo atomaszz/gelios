@@ -51,7 +51,6 @@ namespace geliosNEW
 
         private void BtShowGridSovm_Click(object sender, EventArgs e)
         {
-
         }
 
         public void InitData()
@@ -174,6 +173,31 @@ namespace geliosNEW
             btShowGridSovm.Enabled = checkBox9.Checked;
         }
 
+        private void checkBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                what_sadacha_check(SharedConst.ZAD_1);
+                type_sadacha = SharedConst.ZAD_1;
+                checkBox2.Checked = false;
+                checkBox3.Checked = false;
+                checkBox4.Checked = false;
+                checkBox6.Checked = false;
+                checkBox5.Checked = false;
+
+                checkBox7.Visible = true;
+                checkBox8.Visible = true;
+                checkBox7.Checked = false;
+                checkBox8.Checked = false;
+                //     all_visible_false();
+            }
+        }
+
         bool OPM_Inorder(object A)
         {
             TBaseShape m_A = (TBaseShape)(A);
@@ -250,8 +274,8 @@ namespace geliosNEW
                     break;
       }
             can_list =false;
-            pictureBox1.Refresh();
-            pictureBox1.Refresh();
+            pictureBox1.Update();
+            pictureBox1.Update();
         }
     }
 }
