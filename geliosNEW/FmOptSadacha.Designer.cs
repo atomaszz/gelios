@@ -152,6 +152,7 @@
             this.checkBox6.TabIndex = 19;
             this.checkBox6.Text = "Обобщенная задача 3";
             this.checkBox6.UseVisualStyleBackColor = true;
+            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
             // 
             // checkBox5
             // 
@@ -163,6 +164,7 @@
             this.checkBox5.TabIndex = 18;
             this.checkBox5.Text = "Обобщенная задача 2";
             this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
             // 
             // checkBox4
             // 
@@ -174,6 +176,7 @@
             this.checkBox4.TabIndex = 17;
             this.checkBox4.Text = "Обобщенная задача 1";
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // checkBox3
             // 
@@ -185,6 +188,7 @@
             this.checkBox3.TabIndex = 16;
             this.checkBox3.Text = "Оптимизация затрат на выполнение";
             this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
             // checkBox2
             // 
@@ -196,6 +200,7 @@
             this.checkBox2.TabIndex = 15;
             this.checkBox2.Text = "Оптимизация времени выполнения";
             this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // checkBox1
             // 
@@ -242,6 +247,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "Закрыть";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel1
             // 

@@ -198,6 +198,83 @@ namespace geliosNEW
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked == true)
+            {
+                what_sadacha_check(SharedConst.ZAD_2);
+                type_sadacha = SharedConst.ZAD_2;
+                checkBox1.Checked = false; checkBox3.Checked = false; checkBox4.Checked = false;
+                checkBox6.Checked = false; checkBox5.Checked = false;
+
+                checkBox7.Visible = true; checkBox8.Visible = true;
+                checkBox7.Checked = false; checkBox8.Checked = false;
+                all_visible_false();
+            }
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox3.Checked == true)
+            {
+                what_sadacha_check(SharedConst.ZAD_3);
+                type_sadacha = SharedConst.ZAD_3;
+                checkBox2.Checked = false; checkBox1.Checked = false; checkBox4.Checked = false;
+                checkBox6.Checked = false; checkBox5.Checked = false;
+
+                checkBox7.Visible = true; checkBox8.Visible = true;
+                checkBox7.Checked = false; checkBox8.Checked = false;
+                all_visible_false();
+            }
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox4.Checked == true)
+            {
+                what_sadacha_check(SharedConst.ZAD_4);
+                type_sadacha = SharedConst.ZAD_4;
+                checkBox2.Checked = false; checkBox3.Checked = false; checkBox1.Checked = false;
+                checkBox6.Checked = false; checkBox5.Checked = false;
+
+                checkBox7.Visible = false; checkBox8.Visible = false;
+                checkBox7.Checked = false; checkBox8.Checked = false;
+            }
+        }
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox5.Checked == true)
+            {
+                what_sadacha_check(SharedConst.ZAD_5);
+                type_sadacha = SharedConst.ZAD_5;
+                checkBox2.Checked = false; checkBox3.Checked = false; checkBox4.Checked = false;
+                checkBox6.Checked = false; checkBox1.Checked = false;
+
+                checkBox7.Visible = false; checkBox8.Visible = false;
+                checkBox7.Checked = false; checkBox8.Checked = false;
+            }
+        }
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox6.Checked == true)
+            {
+                what_sadacha_check(SharedConst.ZAD_6);
+                type_sadacha = SharedConst.ZAD_6;
+                checkBox2.Checked = false; checkBox3.Checked = false; checkBox4.Checked = false;
+                checkBox1.Checked = false; checkBox5.Checked = false;
+
+                checkBox7.Visible = false; checkBox8.Visible = false;
+                checkBox7.Checked = false; checkBox8.Checked = false;
+            }
+        }
+
         bool OPM_Inorder(object A)
         {
             TBaseShape m_A = (TBaseShape)(A);
@@ -276,6 +353,15 @@ namespace geliosNEW
             can_list =false;
             pictureBox1.Update();
             pictureBox1.Update();
+        }
+        void all_visible_false()
+        {
+            label7.Visible = false; label6.Visible = false; textBox1.Visible = false;
+            label10.Visible = false; label8.Visible = false; textBox2.Visible = false;
+            Label17.Visible = false; Label18.Visible = false; Edit9.Visible = false;
+            Label7.Visible = false; Label8.Visible = false; Edit4.Visible = false;
+            Label11.Visible = false; Label12.Visible = false; Edit6.Visible = false;
+            Label15.Visible = false; Label16.Visible = false; Edit8.Visible = false;
         }
     }
 }
