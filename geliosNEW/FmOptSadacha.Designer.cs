@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FmOptSadacha));
             this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
@@ -302,6 +303,7 @@
             this.checkBox9.Size = new System.Drawing.Size(15, 14);
             this.checkBox9.TabIndex = 16;
             this.checkBox9.UseVisualStyleBackColor = true;
+            this.checkBox9.Click += new System.EventHandler(this.checkBox9_Click);
             // 
             // checkBox8
             // 
@@ -334,15 +336,25 @@
             // 
             // imageList1
             // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "0.bmp");
+            this.imageList1.Images.SetKeyName(1, "1.bmp");
+            this.imageList1.Images.SetKeyName(2, "2.bmp");
+            this.imageList1.Images.SetKeyName(3, "3.bmp");
+            this.imageList1.Images.SetKeyName(4, "4.bmp");
+            this.imageList1.Images.SetKeyName(5, "5.bmp");
             // 
             // imageList2
             // 
-            this.imageList2.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList2.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
             this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList2.Images.SetKeyName(0, "0.bmp");
+            this.imageList2.Images.SetKeyName(1, "1.bmp");
+            this.imageList2.Images.SetKeyName(2, "2.bmp");
+            this.imageList2.Images.SetKeyName(3, "3.bmp");
+            this.imageList2.Images.SetKeyName(4, "4.bmp");
+            this.imageList2.Images.SetKeyName(5, "5.bmp");
             // 
             // panel2
             // 
@@ -924,6 +936,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FmOptSadacha";
             this.Text = "Выбор задачи оптимизации";
+            this.Activated += new System.EventHandler(this.FmOptSadacha_Activated);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

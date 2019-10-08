@@ -85,6 +85,95 @@ namespace geliosNEW
 
         }
 
+        private void FmOptSadacha_Activated(object sender, EventArgs e)
+        {
+            can_list = true;
+            switch (type_sadacha)
+            {
+                case SharedConst.ZAD_1:
+                    checkBox1.Checked = true; tabControl1.SelectedIndex = 0;
+                    break;
+                case SharedConst.ZAD_2:
+                    checkBox2.Checked = true; tabControl1.SelectedIndex = 1;
+                    break;
+                case SharedConst.ZAD_3: checkBox3.Checked = true; tabControl1.SelectedIndex = 2; break;
+                case SharedConst.ZAD_4: checkBox4.Checked = true; tabControl1.SelectedIndex = 3; break;
+                case SharedConst.ZAD_5: checkBox5.Checked = true; tabControl1.SelectedIndex = 4; break;
+                case SharedConst.ZAD_6: checkBox6.Checked = true; tabControl1.SelectedIndex = 5; break;
+            }
+            if (type_sadacha == 0 || type_sadacha == 1 || type_sadacha == 2)
+                switch (type_ogr)
+                {
+                    case 0:
+                        checkBox7.Checked = false;
+                        checkBox8.Checked = false;
+                        checkBox9.Checked = false;
+                        break;
+                    case 1:
+                        checkBox7.Checked = true;
+                        checkBox8.Checked = false;
+                        checkBox9.Checked = false;
+                        break;
+                    case 2:
+                        checkBox7.Checked = false;
+                        checkBox8.Checked = true;
+                        checkBox9.Checked = false;
+                        break;
+                    case 3:
+                        checkBox7.Checked = true;
+                        checkBox8.Checked = true;
+                        checkBox9.Checked = false;
+                        break;
+                    case 4:
+                        checkBox7.Checked = false;
+                        checkBox8.Checked = false;
+                        checkBox9.Checked = true;
+                        break;
+                    case 5:
+                        checkBox7.Checked = true;
+                        checkBox8.Checked = false;
+                        checkBox9.Checked = true;
+                        break;
+                    case 6:
+                        checkBox7.Checked = false;
+                        checkBox8.Checked = true;
+                        checkBox9.Checked = true;
+                        break;
+                    case 7:
+                        checkBox7.Checked = true;
+                        checkBox8.Checked = true;
+                        checkBox9.Checked = true;
+                        break;
+                }
+            else
+                switch (type_ogr)
+                {
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                        checkBox9.Checked = false;
+                        break;
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                        checkBox9.Checked = true;
+                        break;
+                }
+            can_list = false;
+            CheckBox9Click();
+        }
+
+        private void checkBox9_Click(object sender, EventArgs e)
+        {
+            CheckBox9Click();
+        }
+        void CheckBox9Click()
+        {
+            btShowGridSovm.Enabled = checkBox9.Checked;
+        }
+
         bool OPM_Inorder(object A)
         {
             TBaseShape m_A = (TBaseShape)(A);
@@ -124,42 +213,45 @@ namespace geliosNEW
             can_list =true;
             switch (i)
             {
-            case SharedConst.ZAD_1: label1.Text="Ограничения";
-             imageList1.Add()
-                        GetBitmap(SharedConst.ZAD_1, Image1.Picture.Bitmap);
-        ImageList2.GetBitmap(ZAD_1, Image2.Picture.Bitmap);
-        TabbedNotebook1.PageIndex=0;
-             break;
-            case SharedConst.ZAD_2:label1.Text = "Ограничения";
-             ImageList1.GetBitmap(SharedConst.ZAD_2, Image1.Picture.Bitmap);
-        ImageList2.GetBitmap(SharedConst.ZAD_2, Image2.Picture.Bitmap);
-        TabbedNotebook1.PageIndex=1;
-             break;
+            case SharedConst.ZAD_1:
+                    label1.Text="Ограничения";
+                    pictureBox1.Image = imageList1.Images[SharedConst.ZAD_1];
+                    pictureBox2.Image = imageList2.Images[SharedConst.ZAD_1];
+                    tabControl1.SelectedIndex = 0;
+                    break;
+            case SharedConst.ZAD_2:
+                    label1.Text = "Ограничения";
+                    pictureBox1.Image = imageList1.Images[SharedConst.ZAD_2];
+                    pictureBox2.Image = imageList2.Images[SharedConst.ZAD_2];
+                    tabControl1.SelectedIndex = 1;
+                    break;
             case SharedConst.ZAD_3:label1.Text = "Ограничения";
-             ImageList1.GetBitmap(SharedConst.ZAD_3, Image1.Picture.Bitmap);
-        ImageList2.GetBitmap(SharedConst.ZAD_3, Image2.Picture.Bitmap);
-        TabbedNotebook1.PageIndex=2;
+                    pictureBox1.Image = imageList1.Images[SharedConst.ZAD_3];
+                    pictureBox2.Image = imageList2.Images[SharedConst.ZAD_3];
+                    tabControl1.SelectedIndex = 2;
+                    break;
+            case SharedConst.ZAD_4:
+                    label1.Text = "Примечания";
+                    pictureBox1.Image = imageList1.Images[SharedConst.ZAD_3];
+                    pictureBox2.Image = imageList2.Images[SharedConst.ZAD_3];
+                    tabControl1.SelectedIndex = 3;
              break;
-            case SharedConst.ZAD_4:label1.Text = "Примечания";
-             ImageList1.GetBitmap(SharedConst.ZAD_4, Image1.Picture.Bitmap);
-        ImageList2.GetBitmap(SharedConst.ZAD_4, Image2.Picture.Bitmap);
-        TabbedNotebook1.PageIndex=3;
-             break;
-            case SharedConst.ZAD_5:label1.Text = "Примечания";
-             ImageList1.GetBitmap(SharedConst.ZAD_5, Image1.Picture.Bitmap);
-        ImageList2.GetBitmap(SharedConst.ZAD_5, Image2.Picture.Bitmap);
-        TabbedNotebook1.PageIndex=4;
-             break;
-            case SharedConst.ZAD_6:label1.Text = "Примечания";
-             ImageList1.GetBitmap(SharedConst.ZAD_6, Image1.Picture.Bitmap);
-        ImageList2.GetBitmap(SharedConst.ZAD_6, Image2.Picture.Bitmap);
-        TabbedNotebook1.PageIndex=5;
-             break;
+            case SharedConst.ZAD_5:
+                    label1.Text = "Примечания";
+                    pictureBox1.Image = imageList1.Images[SharedConst.ZAD_5];
+                    pictureBox2.Image = imageList2.Images[SharedConst.ZAD_5];
+                    tabControl1.SelectedIndex = 4;
+                    break;
+            case SharedConst.ZAD_6:
+                    label1.Text = "Примечания";
+                    pictureBox1.Image = imageList1.Images[SharedConst.ZAD_6];
+                    pictureBox2.Image = imageList2.Images[SharedConst.ZAD_6];
+                    tabControl1.SelectedIndex = 5;
+                    break;
       }
-    can_list=false;
-
- Image1.Refresh();
-    Image2.Refresh();
+            can_list =false;
+            pictureBox1.Refresh();
+            pictureBox1.Refresh();
         }
     }
 }
