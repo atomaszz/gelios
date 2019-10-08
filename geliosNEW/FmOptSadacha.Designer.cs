@@ -599,6 +599,7 @@
             this.textBox6.Size = new System.Drawing.Size(110, 24);
             this.textBox6.TabIndex = 23;
             this.textBox6.Text = "0";
+            this.textBox6.TextChanged += new System.EventHandler(this.TextBox6_TextChanged);
             // 
             // label15
             // 

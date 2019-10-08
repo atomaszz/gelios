@@ -194,13 +194,77 @@ namespace geliosNEW
                 checkBox8.Visible = true;
                 checkBox7.Checked = false;
                 checkBox8.Checked = false;
-                //     all_visible_false();
+                all_visible_false();
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+     /*       if (checkBox1.Checked == false && checkBox2.Checked == false && checkBox3.Checked == false &&
+   checkBox4.Checked == false && checkBox5.Checked == false && checkBox6.Checked == false)
+            {
+                MessageBox.Show("Не выбран тип задачи оптимизации.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            //проверка наличия введеных коэффициентов
+            bool f;
+            f = true;
+            if (checkBox7.Checked && checkBox8.Checked == false && checkBox9.Checked == false) type_ogr = 1;
+            if (checkBox7.Checked == false && checkBox8.Checked && checkBox9.Checked == false) type_ogr = 2;
+            if (checkBox7.Checked && checkBox8.Checked && checkBox9.Checked == false) type_ogr = 3;
+            if (checkBox7.Checked == false && checkBox8.Checked == false && checkBox9.Checked == false) type_ogr = 0;
+            if (checkBox7.Checked && checkBox8.Checked == false && checkBox9.Checked == true) type_ogr = 5;
+            if (checkBox7.Checked == false && checkBox8.Checked && checkBox9.Checked == true) type_ogr = 6;
+            if (checkBox7.Checked && checkBox8.Checked && checkBox9.Checked == true) type_ogr = 7;
+            if (checkBox7.Checked == false && checkBox8.Checked == false && checkBox9.Checked == true) type_ogr = 4;
+            switch (type_sadacha)
+            {
+                case SharedConst.ZAD_1:
+                    if (checkBox7.Checked)
+                        if (textBox4.Text == "") f = false;
+                        else Vd = textBox4.Text;//V
+                    if (checkBox8.Checked)
+                        if (textBox1.Text == "") f = false;
+                        else Td = textBox1.Text;//T
+                    break;
+
+                case SharedConst.ZAD_2:
+                    if (checkBox7.Checked)
+                        if (Edit6.Text == "") f = false;
+                        else Vd = Edit6.Text;//V
+                    if (checkBox8.Checked)
+                        if (Edit7.Text == "") f = false;
+                        else Bd = Edit7.Text;//B
+                    break;
+
+                case SharedConst.ZAD_3:
+                    if (checkBox7.Checked)
+                        if (Edit8.Text == "") f = false;
+                        else Bd = Edit8.Text;//B
+                    if (checkBox8.Checked)
+                        if (Edit9.Text == "") f = false;
+                        else Td = Edit9.Text; //T
+                    break;
+
+                case SharedConst.ZAD_4:
+                    if (Edit10.Text == "" || Edit11.Text == "" || Edit12.Text == "") f = false;
+                    c1 = Edit10.Text; c2 = Edit11.Text; c3 = Edit12.Text;
+                    break;
+                case SharedConst.ZAD_5:
+                    if (Edit1.Text == "" || Edit2.Text == "" || Edit3.Text == "") f = false;
+                    c1 = Edit1.Text; c2 = Edit2.Text; c3 = Edit3.Text;
+                    break;
+                case SharedConst.ZAD_6:
+                    if (Edit13.Text == "" || Edit14.Text == "" || Edit15.Text == "") f = false;
+                    c1 = Edit13.Text; c2 = Edit14.Text; c3 = Edit15.Text;
+                    break;
+            }
+            if (f == false)
+            {
+                MessageBox.Show("Не заданы коэффициенты.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }*/
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -281,6 +345,12 @@ namespace geliosNEW
             SharedConst.opt_sadacha.MassWork.Append((object)m_A.ID);
             return true;
         }
+
+        private void TextBox6_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         int OPM_CompareNode(object A, object B)
         {
             TBaseShape m_A = (TBaseShape)(A);
@@ -358,10 +428,10 @@ namespace geliosNEW
         {
             label7.Visible = false; label6.Visible = false; textBox1.Visible = false;
             label10.Visible = false; label8.Visible = false; textBox2.Visible = false;
-            Label17.Visible = false; Label18.Visible = false; Edit9.Visible = false;
-            Label7.Visible = false; Label8.Visible = false; Edit4.Visible = false;
-            Label11.Visible = false; Label12.Visible = false; Edit6.Visible = false;
-            Label15.Visible = false; Label16.Visible = false; Edit8.Visible = false;
+            label14.Visible = false; label13.Visible = false; textBox5.Visible = false;
+            label4.Visible = false; label5.Visible = false; textBox4.Visible = false;
+            label11.Visible = false; label12.Visible = false; textBox3.Visible = false;
+            label15.Visible = false; label16.Visible = false; textBox6.Visible = false;
         }
     }
 }
