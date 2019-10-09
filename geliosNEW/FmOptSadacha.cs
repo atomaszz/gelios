@@ -200,8 +200,8 @@ namespace geliosNEW
 
         private void button1_Click(object sender, EventArgs e)
         {
-     /*       if (checkBox1.Checked == false && checkBox2.Checked == false && checkBox3.Checked == false &&
-   checkBox4.Checked == false && checkBox5.Checked == false && checkBox6.Checked == false)
+            if (checkBox1.Checked == false && checkBox2.Checked == false && checkBox3.Checked == false &&
+                checkBox4.Checked == false && checkBox5.Checked == false && checkBox6.Checked == false)
             {
                 MessageBox.Show("Не выбран тип задачи оптимизации.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -231,40 +231,40 @@ namespace geliosNEW
 
                 case SharedConst.ZAD_2:
                     if (checkBox7.Checked)
-                        if (Edit6.Text == "") f = false;
-                        else Vd = Edit6.Text;//V
+                        if (textBox3.Text == "") f = false;
+                        else Vd = textBox3.Text;//V
                     if (checkBox8.Checked)
-                        if (Edit7.Text == "") f = false;
-                        else Bd = Edit7.Text;//B
+                        if (textBox2.Text == "") f = false;
+                        else Bd = textBox2.Text;//B
                     break;
 
                 case SharedConst.ZAD_3:
                     if (checkBox7.Checked)
-                        if (Edit8.Text == "") f = false;
-                        else Bd = Edit8.Text;//B
+                        if (textBox2.Text == "") f = false;
+                        else Bd = textBox2.Text;//B
                     if (checkBox8.Checked)
-                        if (Edit9.Text == "") f = false;
-                        else Td = Edit9.Text; //T
+                        if (textBox5.Text == "") f = false;
+                        else Td = textBox5.Text; //T
                     break;
 
                 case SharedConst.ZAD_4:
-                    if (Edit10.Text == "" || Edit11.Text == "" || Edit12.Text == "") f = false;
-                    c1 = Edit10.Text; c2 = Edit11.Text; c3 = Edit12.Text;
+                    if (textBox8.Text == "" || textBox9.Text == "" || textBox7.Text == "") f = false;
+                    c1 = textBox8.Text; c2 = textBox9.Text; c3 = textBox7.Text;
                     break;
                 case SharedConst.ZAD_5:
-                    if (Edit1.Text == "" || Edit2.Text == "" || Edit3.Text == "") f = false;
-                    c1 = Edit1.Text; c2 = Edit2.Text; c3 = Edit3.Text;
+                    if (textBox12.Text == "" || textBox10.Text == "" || textBox11.Text == "") f = false;
+                    c1 = textBox12.Text; c2 = textBox10.Text; c3 = textBox11.Text;
                     break;
                 case SharedConst.ZAD_6:
-                    if (Edit13.Text == "" || Edit14.Text == "" || Edit15.Text == "") f = false;
-                    c1 = Edit13.Text; c2 = Edit14.Text; c3 = Edit15.Text;
+                    if (textBox15.Text == "" || textBox13.Text == "" || textBox14.Text == "") f = false;
+                    c1 = textBox15.Text; c2 = textBox13.Text; c3 = textBox14.Text;
                     break;
             }
             if (f == false)
             {
                 MessageBox.Show("Не заданы коэффициенты.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            }*/
+            }
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -349,6 +349,80 @@ namespace geliosNEW
         private void TextBox6_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void CheckBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox7.Checked)
+            {
+                switch (type_sadacha)
+                {
+                    case SharedConst.ZAD_1:
+                        label4.Visible = true; label5.Visible = true; textBox4.Visible = true;
+                        textBox4.Text = Vd;
+                        break;
+                    case SharedConst.ZAD_2:
+                        label11.Visible = true; label12.Visible = true; textBox3.Visible = true;
+                        textBox3.Text = Vd;
+                        break;
+                    case SharedConst.ZAD_3:
+                        label15.Visible = true; label16.Visible = true; textBox6.Visible = true;
+                        textBox6.Text = Bd;
+                        break;
+                }
+            }
+            else
+            {
+                switch (type_sadacha)
+                {
+                    case SharedConst.ZAD_1:
+                        label4.Visible = true; label5.Visible = true; textBox4.Visible = true;
+                        break;
+                    case SharedConst.ZAD_2:
+                        label11.Visible = true; label12.Visible = true; textBox3.Visible = true;
+                        break;
+                    case SharedConst.ZAD_3:
+                        label15.Visible = true; label16.Visible = true; textBox6.Visible = true;
+                        break;
+                }
+            }
+        }
+
+        private void CheckBox8_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox8.Checked)
+            {
+                switch (type_sadacha)
+                {
+                    case SharedConst.ZAD_1:
+                        label7.Visible = true; label6.Visible = true; textBox1.Visible = true;
+                        textBox1.Text = Td;
+                        break;
+                    case SharedConst.ZAD_2:
+                        label10.Visible = true; label8.Visible = true; textBox2.Visible = true;
+                        textBox2.Text = Bd;
+                        break;
+                    case SharedConst.ZAD_3:
+                        label14.Visible = true; label13.Visible = true; textBox5.Visible = true;
+                        textBox5.Text = Td;
+                        break;
+                }
+            }
+            else
+            {
+                switch (type_sadacha)
+                {
+                    case SharedConst.ZAD_1:
+                        label7.Visible = true; label6.Visible = true; textBox1.Visible = true;
+                        break;
+                    case SharedConst.ZAD_2:
+                        label10.Visible = true; label8.Visible = true; textBox2.Visible = true;
+                        break;
+                    case SharedConst.ZAD_3:
+                        label14.Visible = true; label13.Visible = true; textBox5.Visible = true;
+                        break;
+                }
+            }
         }
 
         int OPM_CompareNode(object A, object B)
