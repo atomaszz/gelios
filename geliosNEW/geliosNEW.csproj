@@ -62,6 +62,12 @@
     <Compile Include="FmParamAlternative.Designer.cs">
       <DependentUpon>FmParamAlternative.cs</DependentUpon>
     </Compile>
+    <Compile Include="FmStartDecision.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FmStartDecision.Designer.cs">
+      <DependentUpon>FmStartDecision.cs</DependentUpon>
+    </Compile>
     <Compile Include="FmTredactChar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,10 @@
     <Compile Include="ListForPaint.cs" />
     <Compile Include="Messangers.cs" />
     <Compile Include="AltSelector.cs" />
+    <Compile Include="PartialDecision.cs" />
+    <Compile Include="PredicateScanner.cs" />
+    <Compile Include="PredicateTrackCreator.cs" />
+    <Compile Include="PredicateTree.cs" />
     <Compile Include="TAltWSList.cs" />
     <Compile Include="TArrowWorkShape.cs" />
     <Compile Include="TClipPath.cs" />
@@ -118,6 +128,7 @@
     <Compile Include="TTfeRhombShape.cs" />
     <Compile Include="TTrailer.cs" />
     <Compile Include="TWork.cs" />
+    <Compile Include="TZadacha.cs" />
     <Compile Include="TZWork.cs" />
     <Compile Include="TZWorkOR.cs" />
     <Compile Include="FrmMain.cs">
@@ -134,6 +145,9 @@
     <EmbeddedResource Include="FmParamAlternative.resx">
       <DependentUpon>FmParamAlternative.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FmStartDecision.resx">
+      <DependentUpon>FmStartDecision.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FmTredactChar.resx">
       <DependentUpon>FmTredactChar.cs</DependentUpon>
