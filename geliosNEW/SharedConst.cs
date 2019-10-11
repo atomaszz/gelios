@@ -13,6 +13,7 @@ namespace geliosNEW
         /*---------------------*/
         public static  FmOptSadacha opt_sadacha;
         /*--------------------*/
+        public static int StrMemSize = 5119;
 
         public const int D_FRAME = 1;
         public const int OFFS_FRAME = 2;

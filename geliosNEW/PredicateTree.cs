@@ -26,16 +26,34 @@ namespace geliosNEW
             set { f_ParentID = value; }
             get { return f_ParentID; }
         }
-            
-     /*         public TBaseWorkShape BaseWorkShape = {read = f_BaseWorkShape, write = f_BaseWorkShape
-
-              public TBaseShape ParentShape = { read = f_ParentShape, write = f_ParentShape };
-              public int TypeWorkShape = { read = f_TypeWorkShape, write = f_TypeWorkShape };
-              public int Count = { read = GetCount };
-              public TBaseShape TFE[int AIndex] = { read = GetTFE };
-              public int TFE_ID[int AIndex] = { read = GetTFE_ID };
-              public bool TReated = { read = f_TReated, write = f_TReated };
-              public int NumAlt = { read = f_NumAlt, write = f_NumAlt };*/
+        public TBaseWorkShape BaseWorkShape
+        {
+            set { f_BaseWorkShape = value; }
+            get { return f_BaseWorkShape; }
+        }     
+        public TBaseShape ParentShape
+        {
+            set { f_ParentShape = value; }
+            get { return f_ParentShape; }
+        }
+        public int TypeWorkShape
+        {
+            set { f_TypeWorkShape = value; }
+            get { return f_TypeWorkShape; }
+        }
+          /*       public int Count = { read = GetCount };
+                 public TBaseShape TFE[int AIndex] = { read = GetTFE };
+                 public int TFE_ID[int AIndex] = { read = GetTFE_ID };*/
+        public bool TReated
+        {
+            set { f_TReated = value; }
+            get { return f_TReated;  }
+        }
+        public int NumAlt
+        {
+            set { f_NumAlt = value; }
+            get { return f_NumAlt; }
+        }
     }
     class TPredicateTree
     {

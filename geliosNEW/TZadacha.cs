@@ -116,7 +116,7 @@ namespace geliosNEW
             TOzenkTFE mOzenk = new TOzenkTFE(f_PartialDecision);
             for (int i = CountPTI - 1; i >= 0; i--)
             {
-                TI = PTI[i];
+                TI = GetPTI(i);
                 mOzenk.AddPredicateTree(TI);
             }
             mOzenk.InitMassiv();

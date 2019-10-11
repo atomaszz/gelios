@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AltStack.cs" />
+    <Compile Include="CommonCulc.cs" />
     <Compile Include="CommonGraph.cs" />
     <Compile Include="DischargedMassiv.cs" />
     <Compile Include="DynamicArray.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="TInvalidateList.cs" />
     <Compile Include="TListNode.cs" />
     <Compile Include="ListShape.cs" />
+    <Compile Include="TOzenkTFE.cs" />
     <Compile Include="TPaintGrid.cs" />
     <Compile Include="TParamAlternative.cs" />
     <Compile Include="TParamAlternativeItem.cs" />

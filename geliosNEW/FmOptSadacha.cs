@@ -19,7 +19,7 @@ namespace geliosNEW
         public string  c1, c2, c3;     //коэффициенты, нужные для задач 4-6
         public string Bd, Td, Vd;     //коэффициенты, нужные для задач 1-3
         public TDynamicArray MassWork;
-        TDischargedMassiv OptSovm;
+        public TDischargedMassiv OptSovm;
         public double Rate;
         int f_TypeMetod;
 

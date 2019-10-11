@@ -18,7 +18,7 @@ namespace geliosNEW
         }
     };
 
-    class TDischargedMassiv
+    public class TDischargedMassiv
     {
         object f_Def;
         public List<object> Val;

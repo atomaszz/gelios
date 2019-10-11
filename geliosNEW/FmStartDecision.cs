@@ -24,7 +24,7 @@ namespace geliosNEW
         {
             this.Close();
         }
-        set_sadacha_edit()
+        void set_sadacha_edit()
         {
             string s;
 
@@ -240,12 +240,12 @@ namespace geliosNEW
                 return;
             }
             SharedConst.opt_sadacha.Rate = d;
-            ModalResult = mrOk;
+         //   ModalResult = mrOk;
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            CreateTrackShow(Zadacha, Zadacha.Track());
+         //   CreateTrackShow(Zadacha, Zadacha.Track());
         }
 
         private void Button4_Click(object sender, EventArgs e)
