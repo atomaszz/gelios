@@ -93,10 +93,17 @@ namespace geliosNEW
                    TrackCreator = new TPredicateTrackCreator();
                    ozenk_t = new TDischargedMassiv(100000000.0);
                    ozenk_v = new TDischargedMassiv(100000000.0);
-               }
-           /*    ~TZadacha() {  }
-               public void Clear();
-               public void Init(int AType_Char, bool ACheckNud, string AFullPredcateModel);
+               }*/
+               ~TZadacha() {  }
+        public void Clear()
+        {
+            f_Tree.Clear();
+            f_Equal.Clear();
+            ClearPTI();
+            TrackCreator.ClearTrack();
+            TrackCreator.ClearBase();
+        }
+        /*       public void Init(int AType_Char, bool ACheckNud, string AFullPredcateModel);
                public void Process();
                public string Check();
                public string CheckTrack();*/
@@ -263,7 +270,10 @@ namespace geliosNEW
           //  delete mOzenk;
         }
 
-        /*  public TPredicateTree Tree = {read = f_Tree*/
+        public TPredicateTree Tree
+        {
+            get { return f_Tree;  }
+        }
 
         /*       public TPredicateTreeItem PTI[int AIndex] = { read = GetPTI };   --.> GetPTI*/
         public int CountPTI

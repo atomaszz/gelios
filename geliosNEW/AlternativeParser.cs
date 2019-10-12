@@ -72,7 +72,7 @@ namespace geliosNEW
         }
         public int Count { get { return GetCount(); } }
     }
-    class TAlternativeParserItemTFE
+    public   class TAlternativeParserItemTFE
     {
         TTreeListItem f_TFE;
         TAlternativeParserItemBig f_Big;
@@ -95,8 +95,15 @@ namespace geliosNEW
             f_Big = null;
         }
     ~TAlternativeParserItemTFE() { }
-   /*     public TTreeListItem  TFE = {read = f_TFE, write = SetTFE
-        public TAlternativeParserItemBig Big = { read = f_Big };*/
+        public TTreeListItem  TFE
+        {
+            set { f_TFE = value; }
+            get { return f_TFE; }
+        }
+        public TAlternativeParserItemBig Big
+        {
+            get { return f_Big; }
+        }
     }
     class TAlternativeParserItemTFS : TAlternativeParserItemBase
     {
@@ -153,28 +160,65 @@ TAlternativeParserItemTFE* __fastcall GetTFEItems(int AIndex);*/
         public override int Who() { return 1; }
         /*void BasisClear();
         void BasisAdd(TTreeListTFS* ATFS);
-        void FillBasisFromGrpItemList(TAlternativeParserGrpItemList* AList);
-        void FillBasisAlternateTreeList(TAlternateTreeList* ALT);
-        void FillBasisFromEnlarge(TAlternativeParserGrpCrossItemEnlarge* AEnl);
-        bool CompareBasisAndAlternateTreeList(TAlternateTreeList* AList);
-        bool CompareBasisAndMassiv(TDynamicArray* AMass);
-        bool IsTailAlternateTreeList(TAlternateTreeList* AList);
-        void AddBig(TAlternativeParserItemBig* ABig);
-        void GetTreeListTFSFromBasis(TAlternateTreeList* Alternative,
-          TDynamicArray* D, bool &AValid);
-        void GetAllFirstBigsNoCheck(TDynamicArray* AMass);
-        void HookBasisBig();
-        __property TAlternativeParserItemList* MainList = { read = f_MainList };
-        __property int BasisCount = { read = GetBasisCount };
-        __property TTreeListTFS* BasisItems[int AIndex] = { read = GetBasisItems };
-        __property int CountBig = { read = GetCountBig };
-        __property TAlternativeParserItemBig* ItemsBig[int AIndex] = { read = GetItemsBig };
-        __property bool Check = { read = f_Check, write = f_Check };
-        __property TAlternativeParserItemTFE* ParentTFE = { read = f_ParentTFE, write = f_ParentTFE };
-        __property bool Cross = { read = f_Cross, write = f_Cross };
-        __property bool BadBasis = { read = f_BadBasis, write = f_BadBasis };
-        __property int Enlarge = { read = f_Enlarge, write = f_Enlarge };
-        __property bool EnlargeSetNum = { read = f_EnlargeSetNum, write = f_EnlargeSetNum };*/
+        void FillBasisFromGrpItemList(TAlternativeParserGrpItemList* AList);*/
+        public void FillBasisAlternateTreeList(TAlternateTreeList ALT)
+        {
+            for (int i = 0; i <= ALT.ItemCount - 1; i++)
+                BasisAdd(ALT.GetTreeTFSItem(i));
+        }
+        /*    void FillBasisFromEnlarge(TAlternativeParserGrpCrossItemEnlarge* AEnl);
+            bool CompareBasisAndAlternateTreeList(TAlternateTreeList* AList);
+            bool CompareBasisAndMassiv(TDynamicArray* AMass);
+            bool IsTailAlternateTreeList(TAlternateTreeList* AList);
+            void AddBig(TAlternativeParserItemBig* ABig);
+            void GetTreeListTFSFromBasis(TAlternateTreeList* Alternative,
+              TDynamicArray* D, bool &AValid);
+            void GetAllFirstBigsNoCheck(TDynamicArray* AMass);
+            void HookBasisBig();
+            __property TAlternativeParserItemList* MainList = { read = f_MainList };
+            __property int BasisCount = { read = GetBasisCount };
+            __property TTreeListTFS* BasisItems[int AIndex] = { read = GetBasisItems };
+            __property int CountBig = { read = GetCountBig };
+            __property TAlternativeParserItemBig* ItemsBig[int AIndex] = { read = GetItemsBig };*/
+        public bool Check
+        {
+            set { f_Check = value; }
+            get { return f_Check; }
+        }
+        public TAlternativeParserItemTFE ParentTFE
+        {
+            set { f_ParentTFE = value; }
+            get { return f_ParentTFE; }
+        }
+        public bool Cross
+        {
+            set { f_Cross = value; }
+            get { return f_Cross; }
+        }
+        public bool BadBasis
+        {
+            set { f_BadBasis = value; }
+            get { return f_BadBasis; }
+        }
+        public int Enlarge
+        {
+            set { f_Enlarge = value; }
+            get { return f_Enlarge; }
+        }
+        public bool EnlargeSetNum
+        {
+            set { f_EnlargeSetNum = value; }
+            get { return f_EnlargeSetNum; }
+        }
+        void BasisAdd(TTreeListTFS ATFS)
+        {
+            for (int i = 0; i <= f_Basis.Count - 1; i++)
+            {
+                if (f_Basis.GetItems(i) == ATFS)
+                    return;
+            }
+            f_Basis.Append(ATFS);
+        }
     }
 
 

@@ -49,6 +49,7 @@
     <Compile Include="AlternativeParser.cs" />
     <Compile Include="AlternativeParserEnlarger.cs" />
     <Compile Include="AlternativeParserGrp.cs" />
+    <Compile Include="AltInfo.cs" />
     <Compile Include="AltStack.cs" />
     <Compile Include="CommonCulc.cs" />
     <Compile Include="CommonGraph.cs" />
@@ -79,6 +80,8 @@
       <DependentUpon>FmTredactChar.cs</DependentUpon>
     </Compile>
     <Compile Include="GlsAtmCommon.cs" />
+    <Compile Include="GraphTFEConvertor.cs" />
+    <Compile Include="GraphTFEConvertorTransNum.cs" />
     <Compile Include="LineCutting.cs" />
     <Compile Include="ListFlag.cs" />
     <Compile Include="ListForPaint.cs" />
@@ -127,6 +130,7 @@
     <Compile Include="TParamAlternativeItem.cs" />
     <Compile Include="TRectLine.cs" />
     <Compile Include="TRectShape.cs" />
+    <Compile Include="TreeList.cs" />
     <Compile Include="TreeListItem.cs" />
     <Compile Include="TRhombShape.cs" />
     <Compile Include="TTail.cs" />

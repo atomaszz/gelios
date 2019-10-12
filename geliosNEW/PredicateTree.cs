@@ -73,7 +73,7 @@ namespace geliosNEW
             get { return f_NumAlt; }
         }
     }
-    class TPredicateTree
+    public class TPredicateTree
     {
         private List<TPredicateTreeItem> f_List;
 

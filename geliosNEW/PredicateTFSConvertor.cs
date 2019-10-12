@@ -28,7 +28,7 @@ namespace geliosNEW
             return f_CurrentNum;
         }
     }
-    class TPredicateItemBase
+    public class TPredicateItemBase
     {
         int f_ID;
         int f_NumAlt;
@@ -43,11 +43,27 @@ namespace geliosNEW
         }
         ~TPredicateItemBase() { }
         public virtual int Who() { return -1; }
-        /*      public virtual void ListIDFill(TDynamicArray AList);
-              __property int NumAlt = { read = f_NumAlt, write = f_NumAlt };
-              __property bool Envelope = { read = f_Envelope, write = f_Envelope };
-              __property int ID = { read = f_ID, write = f_ID };
-              __property TPredicateItemBig* EnvelopeBIG = {read = f_EnvelopeBIG, write = f_EnvelopeBIG*/
+        /*      public virtual void ListIDFill(TDynamicArray AList);*/
+        public int NumAlt
+        {
+            set { f_NumAlt = value; }
+            get { return f_NumAlt; }
+        }
+        public bool Envelope
+        {
+            set { f_Envelope = value; }
+            get { return f_Envelope; }
+        }
+        public int ID
+        {
+            set { f_ID = value; }
+            get { return f_ID; }
+        }
+        public TPredicateItemBig EnvelopeBIG
+        {
+            set { f_EnvelopeBIG = value; }
+            get { return f_EnvelopeBIG; }
+        }
     }
     class TPredicateItemTFE
     {
@@ -81,9 +97,9 @@ namespace geliosNEW
     {
         TTreeListTFS f_TFS;
         List<object> f_ListTFE;
-  /*      void FreeList();
-        int GetTFECount();
-        TPredicateItemTFE GetTFEItems(int AIndex);*/
+        /*      void FreeList();
+              int GetTFECount();
+              TPredicateItemTFE GetTFEItems(int AIndex);*/
         public TPredicateItemTFS()
         {
             f_TFS = null;
@@ -91,20 +107,20 @@ namespace geliosNEW
         }
         ~TPredicateItemTFS() { }
         override public int Who() { return 0; }
-  /*      public void Assign(TAlternativeParserItemTFS ATfs);
-        public void ListIDFill(TDynamicArray AList);
-        public TTreeListTFS TFS = { read = f_TFS };
-        public int TFECount = { read = GetTFECount };
-        public TPredicateItemTFE TFEItems[int AIndex] = { read = GetTFEItems };*/
+        /*      public void Assign(TAlternativeParserItemTFS ATfs);
+              public void ListIDFill(TDynamicArray AList);
+              public TTreeListTFS TFS = { read = f_TFS };
+              public int TFECount = { read = GetTFECount };
+              public TPredicateItemTFE TFEItems[int AIndex] = { read = GetTFEItems };*/
     }
-    class TPredicateItemBig : TPredicateItemBase
+    public class TPredicateItemBig : TPredicateItemBase
     {
         bool f_Print;
         List<object> f_List;
         TAlternativeParserItemBig f_Rfc;
- /*       int GetCount();
-        TPredicateItemBase GetItems(int AIndex);
-        void FreeList();*/
+        /*       int GetCount();
+               TPredicateItemBase GetItems(int AIndex);
+               void FreeList();*/
         public override int Who() { return 1; }
         public TPredicateItemBig()
         {
@@ -117,9 +133,17 @@ namespace geliosNEW
               public void DeleteItemToList(TPredicateItemBase* AItem);
               public bool ValidDescendant();
               public int Count = { read = GetCount };
-              public TPredicateItemBase* Items[int AIndex] = { read = GetItems };
-              public TAlternativeParserItemBig* Rfc = { read = f_Rfc, write = f_Rfc };
-              public bool Print = { read = f_Print, write = f_Print };*/
+              public TPredicateItemBase* Items[int AIndex] = { read = GetItems };*/
+        public TAlternativeParserItemBig Rfc
+        {
+            set { f_Rfc = value;  }
+            get { return f_Rfc; }
+        }
+        public bool Print
+        {
+            set { f_Print = value; }
+            get { return f_Print; }
+        }
     }
     class TPredicateItemPWork : TPredicateItemBase
     {
@@ -132,7 +156,7 @@ namespace geliosNEW
             f_Item2 = null;
         }
         ~TPredicateItemPWork() { }
-  /*      public void ListIDFill(TDynamicArray AList);*/
+        /*      public void ListIDFill(TDynamicArray AList);*/
         public TPredicateItemBase Item1
         {
             set { f_Item1 = value; }
@@ -141,47 +165,55 @@ namespace geliosNEW
         public TPredicateItemBase Item2
         {
             set { f_Item2 = value; }
-            get { return f_Item2;  }
+            get { return f_Item2; }
         }
     }
     class TPredicateTFSConvertor
     {
-    List<object> f_ListEnlarge;
-    TPredicateNumGenerator f_NGen;
-    TPredicateItemBig f_PredicateStart;
-    TPredicatePathItem f_BasePath;
-    TPredicatePathItem f_UsedPath;
-    int f_PathStyle;
-    bool f_TryPath;
-    void FreeHead();
-    TPredicateItemBig* NewBig(TAlternativeParserItemBig* ABig);
-    void DoCopyTree(TPredicateItemBig* ABig, TDynamicArray* AStack);
-    void DoSetID();
-    void DoSetIDItem(TPredicateItemBig* AHead, TDynamicArray* AStack);
-    void DoSetIDItemTFS(TPredicateItemBase* ABase, TDynamicArray* AStack);
-    void PushTFS(TPredicateItemTFS* ATFS, TDynamicArray* AStack);
+        List<object> f_ListEnlarge;
+        TPredicateNumGenerator f_NGen;
+        TPredicateItemBig f_PredicateStart;
+        TPredicatePathItem f_BasePath;
+        TPredicatePathItem f_UsedPath;
+        int f_PathStyle;
+        bool f_TryPath;
+        /*  void FreeHead();
+          TPredicateItemBig* NewBig(TAlternativeParserItemBig* ABig);
+          void DoCopyTree(TPredicateItemBig* ABig, TDynamicArray* AStack);
+          void DoSetID();
+          void DoSetIDItem(TPredicateItemBig* AHead, TDynamicArray* AStack);
+          void DoSetIDItemTFS(TPredicateItemBase* ABase, TDynamicArray* AStack);
+          void PushTFS(TPredicateItemTFS* ATFS, TDynamicArray* AStack);
 
-    void DoProcess();
-    void DoProcessItemTFS(TPredicateItemBase* ABase, TDynamicArray* AStack);
-    void DoProcessItem(TPredicateItemBig* AHead, TDynamicArray* AStack);
-    void SwapNumAlt(TPredicateItemBase* ADest, TPredicateItemBase* ASource);
-    TPredicateItemBase* EnvelopeToBig(TPredicateItemBase* ASource);
-    bool CheckEnlargeNum(TPredicateItemBig* ABig);
-    TPredicatePathNode* FillPathNode(TPredicateItemBig* AHead, TPredicateItemBase* AItem);
-    TPredicatePathNode* FillPathNode(TPredicateItemBig* AHead, TDynamicArray* ADyn);
-    bool CheckPath(TPredicateItemBig* AHead, TPredicateItemBase* AItem);
-    bool CheckPath(TPredicateItemBig* AHead, TDynamicArray* ADyn);
-    void SetPathNode(TPredicateItemBig* AHead, TDynamicArray* ADyn);
-    void ApplyStyle(TPredicateItemBig* AHead, TPredicateItemBase* AItem);
-    void ApplyStyle(TPredicateItemBig* AHead, TDynamicArray* ADyn);
-    public:
-     TPredicateTFSConvertor();
-    ~TPredicateTFSConvertor();
-    void CopyTree(TAlternativeParserItemBig* AHead);
-    void Process(TPredicatePathItem* ABase, TPredicatePathItem* AUsed);
-    __property TPredicateItemBig* Head = {read = f_PredicateStart
-};
-__property int PathStyle = { read = f_PathStyle, write = f_PathStyle };
-__property bool TryPath = { read = f_TryPath };
-};
+          void DoProcess();
+          void DoProcessItemTFS(TPredicateItemBase* ABase, TDynamicArray* AStack);
+          void DoProcessItem(TPredicateItemBig* AHead, TDynamicArray* AStack);
+          void SwapNumAlt(TPredicateItemBase* ADest, TPredicateItemBase* ASource);
+          TPredicateItemBase* EnvelopeToBig(TPredicateItemBase* ASource);
+          bool CheckEnlargeNum(TPredicateItemBig* ABig);
+          TPredicatePathNode* FillPathNode(TPredicateItemBig* AHead, TPredicateItemBase* AItem);
+          TPredicatePathNode* FillPathNode(TPredicateItemBig* AHead, TDynamicArray* ADyn);
+          bool CheckPath(TPredicateItemBig* AHead, TPredicateItemBase* AItem);
+          bool CheckPath(TPredicateItemBig* AHead, TDynamicArray* ADyn);
+          void SetPathNode(TPredicateItemBig* AHead, TDynamicArray* ADyn);
+          void ApplyStyle(TPredicateItemBig* AHead, TPredicateItemBase* AItem);
+          void ApplyStyle(TPredicateItemBig* AHead, TDynamicArray* ADyn);
+          public:*/
+           public TPredicateTFSConvertor()
+        {
+            f_PathStyle = 0;
+            f_TryPath = true;
+            f_PredicateStart = null;
+            f_NGen = new TPredicateNumGenerator();
+            f_ListEnlarge = new List<object>();
+        }
+        ~TPredicateTFSConvertor() { }
+      /*    void CopyTree(TAlternativeParserItemBig* AHead);
+          void Process(TPredicatePathItem* ABase, TPredicatePathItem* AUsed);
+          __property TPredicateItemBig* Head = {read = f_PredicateStart
+      };
+      __property int PathStyle = { read = f_PathStyle, write = f_PathStyle };
+      __property bool TryPath = { read = f_TryPath };
+      };*/
+    }
 }

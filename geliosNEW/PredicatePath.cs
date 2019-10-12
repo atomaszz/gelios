@@ -35,13 +35,13 @@ namespace geliosNEW
         }
     }
 
-class TPredicatePathNode
-{
-    int f_ID;
-    int f_Cnt;
-    int f_NumAlt;
-    List<object> f_List;
-    TPredicateItemBase f_ParentItemBase;
+    class TPredicatePathNode
+    {
+        int f_ID;
+        int f_Cnt;
+        int f_NumAlt;
+        List<object> f_List;
+        TPredicateItemBase f_ParentItemBase;
         /*   void FreeList();
            int  GetCount();
            TPredicatePathNodeItem  GetItems(int AIndex);
@@ -73,62 +73,71 @@ class TPredicatePathNode
       __property int NumAlt = { read = f_NumAlt, write = f_NumAlt };*/
     }
 
-class TPredicatePathItem
-{
-    private:
-     TList* f_List;
-    void FreeList();
-    int __fastcall GetNodeCount();
-    TPredicatePathNode* __fastcall GetNodeItems(int AIndex);
-    AnsiString __fastcall GetText();
-    TPredicatePathNodeItem* FindPathNodeByParent(TPredicateItemBase* AParent);
-    public:
-     TPredicatePathItem();
-    ~TPredicatePathItem();
-    void Clear();
-    TPredicatePathNode* CreatePathNode(TPredicateItemBase* AParentItemBase);
-    TPredicatePathNode* FindLikePathNode(TPredicatePathNode* ANode);
-    TPredicatePathNode* LastPathNode();
-    __property int NodeCount = { read = GetNodeCount };
-    __property TPredicatePathNode* NodeItems[int AIndex] = {read = GetNodeItems
-};
-__property AnsiString Text = {read = GetText};
-};
+    class TPredicatePathItem
+    {
+        List<object> f_List;
+        /*   void FreeList();
+           int  GetNodeCount();
+           TPredicatePathNode  GetNodeItems(int AIndex);
+           string  GetText();
+           TPredicatePathNodeItem FindPathNodeByParent(TPredicateItemBase AParent);*/
+        public TPredicatePathItem()
+        {
+            f_List = new List<object>();
+        }
+        ~TPredicatePathItem() { }
+        /*void Clear();
+        TPredicatePathNode* CreatePathNode(TPredicateItemBase* AParentItemBase);
+        TPredicatePathNode* FindLikePathNode(TPredicatePathNode* ANode);
+        TPredicatePathNode* LastPathNode();
+        __property int NodeCount = { read = GetNodeCount };
+        __property TPredicatePathNode* NodeItems[int AIndex] = {read = GetNodeItems
+    };
+    __property AnsiString Text = {read = GetText};*/
+    }
+    class TPredicatePath
+    {
+        double f_Rate;
+        int f_Max;
+        List<object> f_ListDescendant;
+        TPredicatePathItem f_BasePath;
+        TPredicatePathItem f_CurrentPath;
+        TPredicatePathItem f_UsedPath;
+        /*   void FreeListDescendant();
+           TPredicatePathItem InitDescendant();
+           int __fastcall GetDescendantCount();
+           TPredicatePathItem* __fastcall GetDescendantItems(int AIndex);
+           void Swap(int* m, int i, int j);
+           void Swap_Array(int* m, int i, int j);
+           int Find_Min(int* m, int i, int N);
+           void NextArray(int* m, int N);
+           int Factorial(int N);
+           void DoGenerateDescendant(TPredicatePathItem* AItem, TDynamicArray* AStack);
+           bool CheckRnd();
+           bool AddPredicatePathNodeFromBase(TPredicatePathItem* AItem);
+           public:*/
+           public  TPredicatePath()
+        {
+            f_Max = 10000;
+            f_Rate = 100.0;
+            f_BasePath = new TPredicatePathItem();
+            f_UsedPath = new TPredicatePathItem();
+            f_ListDescendant = new List<object>();
+        }
+        ~TPredicatePath() { }
+        public void Init()
+        {
+            SharedConst.PredicatePathInit();
+        }
+     /*      void GenerateDescendant(double ARate, int AMax);
+           void ClearDescendant();
+           TPredicatePathItem* CloneToDescendant(TPredicatePathItem* ASource);
+           __property TPredicatePathItem* BasePath = {read = f_BasePath
+       };
+       __property TPredicatePathItem* UsedPath = { read = f_UsedPath };
 
-
-class TPredicatePath
-{
-    private:
-     double f_Rate;
-    int f_Max;
-    TList* f_ListDescendant;
-    TPredicatePathItem* f_BasePath;
-    TPredicatePathItem* f_CurrentPath;
-    TPredicatePathItem* f_UsedPath;
-    void FreeListDescendant();
-    TPredicatePathItem* InitDescendant();
-    int __fastcall GetDescendantCount();
-    TPredicatePathItem* __fastcall GetDescendantItems(int AIndex);
-    void Swap(int* m, int i, int j);
-    void Swap_Array(int* m, int i, int j);
-    int Find_Min(int* m, int i, int N);
-    void NextArray(int* m, int N);
-    int Factorial(int N);
-    void DoGenerateDescendant(TPredicatePathItem* AItem, TDynamicArray* AStack);
-    bool CheckRnd();
-    bool AddPredicatePathNodeFromBase(TPredicatePathItem* AItem);
-    public:
-     TPredicatePath();
-    ~TPredicatePath();
-    void Init();
-    void GenerateDescendant(double ARate, int AMax);
-    void ClearDescendant();
-    TPredicatePathItem* CloneToDescendant(TPredicatePathItem* ASource);
-    __property TPredicatePathItem* BasePath = {read = f_BasePath
-};
-__property TPredicatePathItem* UsedPath = { read = f_UsedPath };
-
-__property int DescendantCount = { read = GetDescendantCount };
-__property TPredicatePathItem* Descendants[int AIndex] = { read = GetDescendantItems };
-};
+       __property int DescendantCount = { read = GetDescendantCount };
+       __property TPredicatePathItem* Descendants[int AIndex] = { read = GetDescendantItems };
+       };*/
+    }
 }
