@@ -8,7 +8,7 @@ namespace geliosNEW
 {
     class CommonCulc
     {
-        void calc_RAB(double b1, double t1, double v1, double b, double t, double v)
+        public static void calc_RAB(double b1, double t1, double v1, double b, double t, double v)
         {
             b = b1;
             t = t1;
@@ -16,14 +16,14 @@ namespace geliosNEW
         }
 
         //------------------------------------------------------------------------------
-        void calc_RAB_2(double b1, double t1, double v1, double b2, double t2, double v2, double b, double t, double v)
+        public static void calc_RAB_2(double b1, double t1, double v1, double b2, double t2, double v2, double b, double t, double v)
         {
             b = b1 * b2;
             t = t1 + t2;
             v = v1 + v2;
         }
         //------------------------------------------------------------------------------
-        void calc_RASV_SIM(double b1, double t1, double v1, double b2, double t2, double v2, string pred, double b, double t, double v)
+        public static void calc_RASV_SIM(double b1, double t1, double v1, double b2, double t2, double v2, string pred, double b, double t, double v)
         {
             if (pred == "1")
             {
@@ -40,14 +40,14 @@ namespace geliosNEW
         }
         //------------------------------------------------------------------------------
 
-        void calc_RAB_2par_AND(double b1, double t1, double v1, double b2, double t2, double v2, double b, double t, double v)
+        public static void calc_RAB_2par_AND(double b1, double t1, double v1, double b2, double t2, double v2, double b, double t, double v)
         {
             b = b1 * b2;
             t = Math.Max(t1, t2);
             v = v1 + v2;
         }
         //------------------------------------------------------------------------------
-        void calc_RAB_2par_OR(double b1, double t1, double v1, double b2, double t2, double v2, double b, double t, double v)
+        public static void calc_RAB_2par_OR(double b1, double t1, double v1, double b2, double t2, double v2, double b, double t, double v)
         {
             b = 1 - (1 - b1) * (1 - b2);
             t = Math.Min(t1, t2);
@@ -55,7 +55,7 @@ namespace geliosNEW
         }
         //------------------------------------------------------------------------------
         //контроль работоспособности
-        void calc_DIAGN(double b1, double t1, double v1, double pe, double p11, double p00, double td, double vd, double b, double t, double v)
+        public static void calc_DIAGN(double b1, double t1, double v1, double pe, double p11, double p00, double td, double vd, double b, double t, double v)
         {
             //pe-вероятность того, что контролируемый элемент работоспособен
             double B0, B2;
@@ -68,7 +68,7 @@ namespace geliosNEW
         }
         //------------------------------------------------------------------------------
         //развилка
-        void calc_RASV(double b1, double t1, double v1, double b2, double t2, double v2, double pe, double p11, double p00, double td, double vd, double b, double t, double v)
+        public static void calc_RASV(double b1, double t1, double v1, double b2, double t2, double v2, double pe, double p11, double p00, double td, double vd, double b, double t, double v)
         {
             //pe-вероятность того, что контролируемый элемент работоспособен
 
@@ -79,7 +79,7 @@ namespace geliosNEW
         //------------------------------------------------------------------------------
 
         //функциональный контроль
-        void calc_DIAGN_2(double b1, double t1, double v1, double k11, double k00, double td, double vd, double b, double t, double v)
+        public static void calc_DIAGN_2(double b1, double t1, double v1, double k11, double k00, double td, double vd, double b, double t, double v)
         {
             double L;
             L = b1 * (1 - k11) + (1 - b1) * k00;
@@ -89,7 +89,7 @@ namespace geliosNEW
         }
         //------------------------------------------------------------------------------
         //Цикл WHILE_DO
-        void calc_WHILE_DO(double b1, double t1, double v1, double pe, double p11, double p00, double td, double vd, double b, double t, double v)
+        public static void calc_WHILE_DO(double b1, double t1, double v1, double pe, double p11, double p00, double td, double vd, double b, double t, double v)
         {
             double b0, b2, d2;
             b0 = pe * (1 - p11) + (1 - pe) * p00;
@@ -101,7 +101,7 @@ namespace geliosNEW
             v = v1 + (vd + v1) * b0 * d2;
         }
         //------------------------------------------------------------------------------
-        void calc_RAB_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
+        public static void calc_RAB_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
           double a2_b1_f, double b1_f2n, double b1_f2b, double a3_b1_f, double b1_f3n, double b1_f3b,
           double a1_t1_f, double t1_f1n, double t1_f1b,
           double a2_t1_f, double t1_f2n, double t1_f2b, double a3_t1_f, double t1_f3n, double t1_f3b,
@@ -123,7 +123,7 @@ namespace geliosNEW
         }
 
         //------------------------------------------------------------------------------
-        void calc_RAB_2_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
+        public static void calc_RAB_2_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
           double a2_b1_f, double b1_f2n, double b1_f2b, double a3_b1_f, double b1_f3n, double b1_f3b,
           double a1_t1_f, double t1_f1n, double t1_f1b,
           double a2_t1_f, double t1_f2n, double t1_f2b, double a3_t1_f, double t1_f3n, double t1_f3b,
@@ -154,7 +154,7 @@ namespace geliosNEW
         }
         //------------------------------------------------------------------------------
 
-        void calc_RASV_SIM_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
+        public static void calc_RASV_SIM_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
           double a2_b1_f, double b1_f2n, double b1_f2b, double a3_b1_f, double b1_f3n, double b1_f3b,
           double a1_t1_f, double t1_f1n, double t1_f1b,
           double a2_t1_f, double t1_f2n, double t1_f2b, double a3_t1_f, double t1_f3n, double t1_f3b,
@@ -196,7 +196,7 @@ namespace geliosNEW
         }
 
         //------------------------------------------------------------------------------
-        void calc_RAB_2par_AND_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
+        public static void calc_RAB_2par_AND_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
           double a2_b1_f, double b1_f2n, double b1_f2b, double a3_b1_f, double b1_f3n, double b1_f3b,
           double a1_t1_f, double t1_f1n, double t1_f1b,
           double a2_t1_f, double t1_f2n, double t1_f2b, double a3_t1_f, double t1_f3n, double t1_f3b,
@@ -233,7 +233,7 @@ namespace geliosNEW
             }
         }
         //------------------------------------------------------------------------------
-        void calc_RAB_2par_OR_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
+        public static void calc_RAB_2par_OR_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
           double a2_b1_f, double b1_f2n, double b1_f2b, double a3_b1_f, double b1_f3n, double b1_f3b,
           double a1_t1_f, double t1_f1n, double t1_f1b,
           double a2_t1_f, double t1_f2n, double t1_f2b, double a3_t1_f, double t1_f3n, double t1_f3b,
@@ -270,7 +270,7 @@ namespace geliosNEW
         }
 
         //------------------------------------------------------------------------------
-        void calc_DIAGN_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
+        public static void calc_DIAGN_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
           double a2_b1_f, double b1_f2n, double b1_f2b, double a3_b1_f, double b1_f3n, double b1_f3b,
           double a1_t1_f, double t1_f1n, double t1_f1b,
           double a2_t1_f, double t1_f2n, double t1_f2b, double a3_t1_f, double t1_f3n, double t1_f3b,
@@ -302,7 +302,7 @@ namespace geliosNEW
         }
 
         //------------------------------------------------------------------------------
-        void calc_DIAGN_2_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
+        public static void calc_DIAGN_2_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
           double a2_b1_f, double b1_f2n, double b1_f2b, double a3_b1_f, double b1_f3n, double b1_f3b,
           double a1_t1_f, double t1_f1n, double t1_f1b,
           double a2_t1_f, double t1_f2n, double t1_f2b, double a3_t1_f, double t1_f3n, double t1_f3b,
@@ -361,7 +361,7 @@ namespace geliosNEW
         }
         //------------------------------------------------------------------------------
         //Цикл WHILE_DO
-        void calc_WHILE_DO_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
+        public static void calc_WHILE_DO_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
           double a2_b1_f, double b1_f2n, double b1_f2b, double a3_b1_f, double b1_f3n, double b1_f3b,
           double a1_t1_f, double t1_f1n, double t1_f1b,
           double a2_t1_f, double t1_f2n, double t1_f2b, double a3_t1_f, double t1_f3n, double t1_f3b,
@@ -395,7 +395,7 @@ namespace geliosNEW
 
         //------------------------------------------------------------------------------
         //развилка
-        void calc_RASV_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
+        public static void calc_RASV_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
           double a2_b1_f, double b1_f2n, double b1_f2b, double a3_b1_f, double b1_f3n, double b1_f3b,
           double a1_t1_f, double t1_f1n, double t1_f1b,
           double a2_t1_f, double t1_f2n, double t1_f2b, double a3_t1_f, double t1_f3n, double t1_f3b,
@@ -531,7 +531,7 @@ namespace geliosNEW
         //-------------------------------------------------------------------------------------
 
         //---------------------------------------------------------------------------
-        bool domin_P_B(double b1, double b2)
+        public static bool domin_P_B(double b1, double b2)
         {
             //если частичное решение с b1 доминирует
             //частичное решение с b2, то удаляем част. решение b2
@@ -539,7 +539,7 @@ namespace geliosNEW
             else return false;
         }
         //---------------------------------------------------------------------------
-        bool domin_P_B_S(double b1, double b2, string S1, string S2)
+        public static bool domin_P_B_S(double b1, double b2, string S1, string S2)
         {
             //если частичное решение с b1 доминирует
             //частичное решение с b2, то удаляем част. решение b2
@@ -550,7 +550,7 @@ namespace geliosNEW
         }
         //---------------------------------------------------------------------------
 
-        bool domin_P_BT(double b1, double b2, double t1, double t2)
+        public static bool domin_P_BT(double b1, double b2, double t1, double t2)
         {
             /*if((b1 >= b2  && t1<=t2)  ||
                   (b1 >= b2 && t1<t2)) */
@@ -558,7 +558,7 @@ namespace geliosNEW
             else return false;
         }
         //---------------------------------------------------------------------------
-        bool domin_P_BT_S(double b1, double b2, double t1, double t2, string S1, string S2)
+        public static bool domin_P_BT_S(double b1, double b2, double t1, double t2, string S1, string S2)
         {
             if (domin_S(S1, S2) == 2) return true;
             if (domin_S(S1, S2) == 0) return false;
@@ -567,7 +567,7 @@ namespace geliosNEW
         }
         //---------------------------------------------------------------------------
 
-        bool domin_P_BV(double b1, double b2, double v1, double v2)
+        public static bool domin_P_BV(double b1, double b2, double v1, double v2)
         {
             if (b1 >= b2 && v1 <= v2)
                 return true;
@@ -575,7 +575,7 @@ namespace geliosNEW
         }
         //---------------------------------------------------------------------------
 
-        bool domin_P_BV_S(double b1, double b2, double v1, double v2, string S1, string S2)
+        public static bool domin_P_BV_S(double b1, double b2, double v1, double v2, string S1, string S2)
         {
 
             if (domin_S(S1, S2) == 2) return true;
@@ -584,14 +584,14 @@ namespace geliosNEW
             else return false;
         }
         //---------------------------------------------------------------------------
-        bool domin_P_BTV(double b1, double b2, double t1, double t2, double v1, double v2)
+        public static bool domin_P_BTV(double b1, double b2, double t1, double t2, double v1, double v2)
         {
             if (b1 >= b2 && t1 <= t2 && v1 <= v2) return true;
             else return false;
         }
         //---------------------------------------------------------------------------
 
-        bool domin_P_BTV_S(double b1, double b2, double t1, double t2, double v1, double v2, string S1, string S2)
+        public static bool domin_P_BTV_S(double b1, double b2, double t1, double t2, double v1, double v2, string S1, string S2)
         {
 
             if (domin_S(S1, S2) == 2) return true;
@@ -601,7 +601,7 @@ namespace geliosNEW
         }
         //---------------------------------------------------------------------------
 
-        bool domin_P_B_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
+        public static bool domin_P_B_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
         double a2_b1_f, double b1_f2n, double b1_f2b, double a3_b1_f, double b1_f3n, double b1_f3b,
         double a1_b2_f, double b2_f1n, double b2_f1b,
         double a2_b2_f, double b2_f2n, double b2_f2b, double a3_b2_f, double b2_f3n, double b2_f3b)
@@ -614,7 +614,7 @@ namespace geliosNEW
         }
         //---------------------------------------------------------------------------
 
-        bool domin_P_BS_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
+        public static bool domin_P_BS_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
         double a2_b1_f, double b1_f2n, double b1_f2b, double a3_b1_f, double b1_f3n, double b1_f3b,
         double a1_b2_f, double b2_f1n, double b2_f1b,
         double a2_b2_f, double b2_f2n, double b2_f2b, double a3_b2_f, double b2_f3n, double b2_f3b, string S1, string S2)
@@ -628,7 +628,7 @@ namespace geliosNEW
         }
         //---------------------------------------------------------------------------
 
-        bool domin_P_BT_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
+        public static bool domin_P_BT_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
         double a2_b1_f, double b1_f2n, double b1_f2b, double a3_b1_f, double b1_f3n, double b1_f3b,
         double a1_b2_f, double b2_f1n, double b2_f1b,
         double a2_b2_f, double b2_f2n, double b2_f2b, double a3_b2_f, double b2_f3n, double b2_f3b,
@@ -649,7 +649,7 @@ namespace geliosNEW
             else return false;
         }
         //---------------------------------------------------------------------------
-        bool domin_P_BTS_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
+        public static bool domin_P_BTS_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
         double a2_b1_f, double b1_f2n, double b1_f2b, double a3_b1_f, double b1_f3n, double b1_f3b,
         double a1_b2_f, double b2_f1n, double b2_f1b,
         double a2_b2_f, double b2_f2n, double b2_f2b, double a3_b2_f, double b2_f3n, double b2_f3b,
@@ -671,7 +671,7 @@ namespace geliosNEW
         }
         //---------------------------------------------------------------------------
 
-        bool domin_P_BV_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
+        public static bool domin_P_BV_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
         double a2_b1_f, double b1_f2n, double b1_f2b, double a3_b1_f, double b1_f3n, double b1_f3b,
         double a1_b2_f, double b2_f1n, double b2_f1b,
         double a2_b2_f, double b2_f2n, double b2_f2b, double a3_b2_f, double b2_f3n, double b2_f3b,
@@ -693,7 +693,7 @@ namespace geliosNEW
         }
         //---------------------------------------------------------------------------
 
-        bool domin_P_BVS_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
+        public static bool domin_P_BVS_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
         double a2_b1_f, double b1_f2n, double b1_f2b, double a3_b1_f, double b1_f3n, double b1_f3b,
         double a1_b2_f, double b2_f1n, double b2_f1b,
         double a2_b2_f, double b2_f2n, double b2_f2b, double a3_b2_f, double b2_f3n, double b2_f3b,
@@ -718,7 +718,7 @@ namespace geliosNEW
         }
         //---------------------------------------------------------------------------
 
-        bool domin_P_BTV_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
+        public static bool domin_P_BTV_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
         double a2_b1_f, double b1_f2n, double b1_f2b, double a3_b1_f, double b1_f3n, double b1_f3b,
         double a1_b2_f, double b2_f1n, double b2_f1b,
         double a2_b2_f, double b2_f2n, double b2_f2b, double a3_b2_f, double b2_f3n, double b2_f3b,
@@ -746,7 +746,7 @@ namespace geliosNEW
         }
         //---------------------------------------------------------------------------
 
-        bool domin_P_BTVS_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
+        public static bool domin_P_BTVS_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
         double a2_b1_f, double b1_f2n, double b1_f2b, double a3_b1_f, double b1_f3n, double b1_f3b,
         double a1_b2_f, double b2_f1n, double b2_f1b,
         double a2_b2_f, double b2_f2n, double b2_f2b, double a3_b2_f, double b2_f3n, double b2_f3b,
@@ -776,7 +776,7 @@ namespace geliosNEW
 
 
 
-        int domin_S(string S1, string S2)
+        public static int domin_S(string S1, string S2)
         {
             int i1, I, J;
             char [] n1 = new char[1024], n2 = new char[1024];

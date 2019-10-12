@@ -15,12 +15,29 @@ namespace geliosNEW
         private TBaseWorkShape f_BaseWorkShape;
         private TBaseShape f_ParentShape;
         private TDynamicArray f_List;
-        /*      private int GetCount();
-              private int GetTFE_ID(int AIndex);
-              private TBaseShape GetTFE(int AIndex);
-              public TPredicateTreeItem();
-              ~TPredicateTreeItem() { }
-              public void AddBaseShape(TBaseShape AShape, int AID);*/
+        private int GetCount()
+        {
+            return f_List.Count;
+        }
+        public int GetTFE_ID(int AIndex)
+        {
+            TDynamicArrayItem P = f_List.GetPosition(AIndex);
+            if (P!=null)
+                return P.Int_Value;
+            else
+                return 0;
+        }
+        public TBaseShape GetTFE(int AIndex)
+        {
+            TDynamicArrayItem P = f_List.GetPosition(AIndex);
+            if (P!=null)
+                return (TBaseShape)(P.P);
+            else
+                return null;
+        }
+            /*      public TPredicateTreeItem();
+                  ~TPredicateTreeItem() { }
+                  public void AddBaseShape(TBaseShape AShape, int AID);*/
         public int ParentID
         {
             set { f_ParentID = value; }
@@ -41,9 +58,10 @@ namespace geliosNEW
             set { f_TypeWorkShape = value; }
             get { return f_TypeWorkShape; }
         }
-          /*       public int Count = { read = GetCount };
-                 public TBaseShape TFE[int AIndex] = { read = GetTFE };
-                 public int TFE_ID[int AIndex] = { read = GetTFE_ID };*/
+        public int Count
+        {
+            get { return GetCount(); }
+        }
         public bool TReated
         {
             set { f_TReated = value; }
@@ -58,8 +76,15 @@ namespace geliosNEW
     class TPredicateTree
     {
         private List<TPredicateTreeItem> f_List;
-  /*      private void FreeList();
-        private int  GetCount();*/
+
+        private void FreeList()
+        {
+            f_List.Clear();
+        }
+        private int  GetCount()
+        {
+            return f_List.Count;
+        }
         private TPredicateTreeItem  GetItems(int AIndex)
         {
             if (AIndex >= 0 && AIndex <= f_List.Count - 1)

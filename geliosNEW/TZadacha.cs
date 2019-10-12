@@ -83,12 +83,12 @@ namespace geliosNEW
         public string Track()
         {
             int m_type;
-            string Res;
+            string Res="";
             TPredicateTreeItem TI;
             TPredicateScannerItemKnot Item;
             for (int i = 0; i <= CountPTI - 1; i++)
             {
-                TI = PTI[i];
+                TI = GetPTI(i);
                 Item = new TPredicateScannerItemKnot();
                 Item.ParentID = TI.ParentID;
                 Item.NumAlt = TI.NumAlt;
@@ -96,9 +96,9 @@ namespace geliosNEW
                 if (m_type == 12)
                     m_type = 1;
                 Item.TypeKnot = m_type;
-                Item.TFE_ID1 = TI.TFE_ID[0];
-                Item.TFE_ID2 = TI.TFE_ID[1];
-                Item.TFE_ID3 = TI.TFE_ID[2];
+                Item.TFE_ID1 = TI.GetTFE_ID(0);
+                Item.TFE_ID2 = TI.GetTFE_ID(1);
+                Item.TFE_ID3 = TI.GetTFE_ID(2);
                 Res = Res + Item.ItemName() + "\r\n";
               //  delete Item;
             }
@@ -121,7 +121,7 @@ namespace geliosNEW
             }
             mOzenk.InitMassiv();
             mOzenk.Ozenk();
-            ShowOzenk(FloatToStr(mOzenk.ValueOzenk(0)), FloatToStr(mOzenk.ValueOzenk1(0)));
+            ShowOzenk(mOzenk.ValueOzenk(0).ToString(), mOzenk.ValueOzenk1(0).ToString());
           //  delete mOzenk;
         }
 
@@ -131,6 +131,14 @@ namespace geliosNEW
         public int CountPTI
         {
             get { return GetCountPTI(); }
+        }
+        void ShowOzenk(string APower, string AWork)
+        {
+        /*    TfmOzenkView* F = new TfmOzenkView(Application);
+            F.edPower.Text = APower;
+            F.edWork.Text = AWork;
+            F.ShowModal();
+            F.Release();*/
         }
 
     }

@@ -98,7 +98,7 @@ namespace geliosNEW
         {
         //    AppendInteger(APos, AValue);
         }
-        TDynamicArrayItem  GetPosition(int APos)
+        public TDynamicArrayItem  GetPosition(int APos)
         {
             if (APos >= 0 && APos <= f_List.Count - 1)
                 return (TDynamicArrayItem)f_List.ElementAt(APos);

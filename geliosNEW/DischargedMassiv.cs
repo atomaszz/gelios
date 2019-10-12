@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace geliosNEW
 {
-    class TDischargedMassivItem
+    public class TDischargedMassivItem
     {
         public int f_Col;
         public int f_Row;
@@ -131,10 +131,16 @@ namespace geliosNEW
                int LoCol();
                void Clear();
                bool IsEmpty();
-               Variant ActualValue(int ARow, int ACol, ref bool Actual);
-               double DoubleValue(int ARow, int ACol);
-               double DoubleValue(int AIndex);
-               __property Variant Items[int ARow][int ACol] = {read=GetItems, write=SetItems
+               Variant ActualValue(int ARow, int ACol, ref bool Actual);*/
+        public double DoubleValue(int ARow, int ACol)
+        {
+            return (double)(GetItems(ARow,ACol));
+        }
+        public double DoubleValue(int AIndex)
+        {
+            return (double)Val[AIndex];
+        }
+    /*           __property Variant Items[int ARow][int ACol] = {read=GetItems, write=SetItems
            };/
            */
     }

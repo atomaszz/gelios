@@ -507,5 +507,58 @@ namespace geliosNEW
             label11.Visible = false; label12.Visible = false; textBox3.Visible = false;
             label15.Visible = false; label16.Visible = false; textBox6.Visible = false;
         }
+        public int get_type_metod()
+        {
+            return f_TypeMetod;
+        }
+        public int type_t_v()
+        {
+            switch (type_sadacha)
+            {
+                case SharedConst.ZAD_1:
+                    switch (type_ogr)
+                    {
+                        case 0: return 0;
+                        case 1: return 2;
+                        case 2: return 1;
+                        case 3: return 3;
+                        case 4: return 0;
+                        case 5: return 2;
+                        case 6: return 1;
+                        case 7: return 3;
+                    }
+                    break;
+                case SharedConst.ZAD_2:
+                    switch (type_ogr)
+                    {
+                        case 0: return 0;
+                        case 1: return 2;
+                        case 2: return 0;
+                        case 3: return 2;
+                        case 4: return 0;
+                        case 5: return 2;
+                        case 6: return 0;
+                        case 7: return 2;
+                    }
+                    break;
+                case SharedConst.ZAD_3:
+                    switch (type_ogr)
+                    {
+                        case 0: return 0;
+                        case 1: return 1;
+                        case 2: return 0;
+                        case 3: return 1;
+                        case 4: return 0;
+                        case 5: return 1;
+                        case 6: return 0;
+                        case 7: return 1;
+                    }
+                    break;
+                case SharedConst.ZAD_4://обобщенные задачи
+                case SharedConst.ZAD_5:
+                case SharedConst.ZAD_6: return 0;
+            }
+            return 0;
+        }
     }
 }
