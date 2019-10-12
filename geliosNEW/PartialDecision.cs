@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace geliosNEW
 {
-    class TPartialDecisionItem
+    public class TPartialDecisionItem
     {
         private TPartialDecision f_Parent;
         private TPredicateTreeItem f_WorkItem;
@@ -856,6 +856,43 @@ namespace geliosNEW
         {
             get { return f_WorkItem; }
         }
+
+        void proverka_nud()
+        {
+            double t, v;
+            TParamAlternativeItem AI;
+
+            TDynamicArray mDel = new TDynamicArray();
+            for (int i = 0; i <= f_ParamAlt.Count - 1; i++)
+            {
+                AI = f_ParamAlt.Items[i];
+                if (mDel.Find(AI) == null)
+                {
+                    t = AI.T;
+                    v = AI.V;
+                    switch (SharedConst.opt_sadacha.type_t_v())
+                    {
+                        case 1:
+                            if (f_Parent.CheckOzenk_TFE_t(this, t))
+                                mDel.Append(AI);
+                            break;
+
+                        case 2:
+                            if (f_Parent.CheckOzenk_TFE_v(this, v))
+                                mDel.Append(AI);
+                            break;
+
+                        case 3:
+                            if (f_Parent.CheckOzenk_TFE_t(this, t) || f_Parent.CheckOzenk_TFE_v(this, v))
+                                mDel.Append(AI);
+                            break;
+                    }
+                }
+            }
+            for (int i = 0; i <= mDel.Count - 1; i++)
+                f_ParamAlt.Delete2((TParamAlternativeItem)mDel.GetItems(i));
+         //   delete mDel;
+        }
     }
     public class TPartialDecision
     {
@@ -880,9 +917,15 @@ namespace geliosNEW
               public TPartialDecisionItem FindPartialDecisionItemByTFEID(int AID);
               public  TPartialDecisionItem GetNew(TPredicateTreeItem APTItem);
               public bool FreeItem(TPartialDecisionItem AItem);
-              public TPartialDecisionItem PullAlternate(TPartialDecisionItem AItem);
-              public bool CheckOzenk_TFE_t(TPartialDecisionItem AI, double AValue);
-              public bool CheckOzenk_TFE_v(TPartialDecisionItem AI, double AValue);*/
+              public TPartialDecisionItem PullAlternate(TPartialDecisionItem AItem);*/
+        public bool CheckOzenk_TFE_t(TPartialDecisionItem AI, double AValue)
+        {
+            return f_Owner.CheckOzenk_TFE_t(AI.WorkItem, AValue);
+        }
+        public bool CheckOzenk_TFE_v(TPartialDecisionItem AI, double AValue)
+        {
+            return f_Owner.CheckOzenk_TFE_v(AI.WorkItem, AValue);
+        }
 
         public int Type_Char
         {
