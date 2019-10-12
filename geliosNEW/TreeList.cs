@@ -81,18 +81,18 @@ namespace geliosNEW
                 Res = (TMainTreeList)(Dyn.GetItems(q));
                 for (int i = 0; i <= Res.ItemCount - 1; i++)
                     for (int j = 0; j <= Res.GetAlternateItem(i).ItemCount - 1; j++)
-                        for (int k = 0; k <= Res->AlternateItem[i]->TreeTFSItem[j]->ItemCount - 1; k++)
-                            if (Res->AlternateItem[i]->TreeTFSItem[j]->TreeTFEItem[k]->MainNode)
+                        for (int k = 0; k <= Res.GetAlternateItem(i).GetTreeTFSItem(j).ItemCount - 1; k++)
+                            if (Res.GetAlternateItem(i).GetTreeTFSItem(j).GetTreeTFEItem(k).MainNode != null)
                             {
-                                Dyn->Append(Res->AlternateItem[i]->TreeTFSItem[j]->TreeTFEItem[k]->MainNode);
+                                Dyn.Append(Res.GetAlternateItem(i).GetTreeTFSItem(j).GetTreeTFEItem(k).MainNode);
                             }
                 q++;
             }
 
 
-            for (int i = 0; i <= Dyn->Count - 1; i++)
+            for (int i = 0; i <= Dyn.Count - 1; i++)
             {
-                Res = static_cast<TMainTreeList*>(Dyn->Items[i]);
+                Res = (TMainTreeList)(Dyn.GetItems(i));
                 if (Res.Level == ALevel)
                 {
                     return Res;
@@ -100,8 +100,7 @@ namespace geliosNEW
             }
             return null;
         }
-
-            public void FillTreeFromList(TListNode AListNode)
+        public void FillTreeFromList(TListNode AListNode)
         {
             TTreeStackItem Item;
             TAltInfoItem AltInfoItem;
@@ -121,8 +120,8 @@ namespace geliosNEW
                     AListNode.LoadInfoForAlternate(f_AltInfo, Item.Level);
                     for (int i = 0; i <= f_AltInfo.ItemCount - 1; i++)
                     {
-                        AltInfoItem = f_AltInfo.Item[i];
-                        AT = new TAlternateTreeList;
+                        AltInfoItem = f_AltInfo.GetItem(i);
+                        AT = new TAlternateTreeList();
                         AT.MainAlternative = AltInfoItem.Main;
                         AT.NodeStart = AltInfoItem.NodeStart;
                         AT.NodeEnd = AltInfoItem.NodeEnd;
@@ -135,13 +134,13 @@ namespace geliosNEW
                             AT.AddToAlternate(Tfs);
                             for (int j = 0; j <= Tfs.ItemCount - 1; j++)
                             {
-                                LI = Tfs.TreeTFEItem[j];
+                                LI = Tfs.GetTreeTFEItem(j);
                                 f_Stack.AddToStack(LI.BaseShape.ID);
                                 if (AListNode.IsContainsChildShape(LI.BaseShape.ID))
                                 {
-                                    if (!LI.MainNode)
+                                    if (LI.MainNode==null)
                                     {
-                                        MNew = new TMainTreeList;
+                                        MNew = new TMainTreeList();
                                         MNew.Level = LI.BaseShape.ID;
                                         LI.MainNode = MNew;
                                     }
@@ -156,8 +155,8 @@ namespace geliosNEW
                 Item = f_Stack.GetLevel();
             }
         }
-        public void FillTreeFromList(TListNode AListNode, int AParentShapeID, TBaseWorkShape AStart, TBaseWorkShape AEnd);*/
-   /*     public TTreeList()
+     /*   public void FillTreeFromList(TListNode AListNode, int AParentShapeID, TBaseWorkShape AStart, TBaseWorkShape AEnd);*/
+        public TTreeList()
         {
             f_TreeList = new TMainTreeList();
             f_TreeList.Level = 0;

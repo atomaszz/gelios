@@ -32,22 +32,54 @@ namespace geliosNEW
         {
             return  f_List.Count;
         }
-  /*  void FreeList();
+        void FreeList()
+        {
+            f_List.Clear();
+        }
         public TMainTreeList()
         {
             f_List = new List<object>();
             f_Level = -1;
         }
         ~TMainTreeList() { }
-    /*    public void AddToTree(TAlternateTreeList Item);*/
+        public void AddToTree(TAlternateTreeList Item)
+        {
+            if (Item == null)
+                f_List.Add(Item);
+        }
         public void Clear()
         {
             FreeList();
         }
-  /*      public  TTreeListItem FindTFE(TBaseShape ABaseShape);
-        public void FindAlternate(TBaseWorkShape* ABaseWorkShape, TDynamicArray* D);
-        public void FindAlternate2(TBaseWorkShape* AFirstWorkShape, TBaseWorkShape* AEndWorkShape, TDynamicArray* D);
-        public void GetTreeListTFSFromMainAlternative(TAlternateTreeList* Alternative, TDynamicArray* D);*/
+  /*      public  TTreeListItem FindTFE(TBaseShape ABaseShape);*/
+        public void FindAlternate(TBaseWorkShape ABaseWorkShape, TDynamicArray D)
+        {
+            TBaseWorkShape Tfs;
+            D.Clear();
+            for (int i = 0; i <= ItemCount - 1; i++)
+            {
+                Tfs = GetAlternateItem(i).NodeStart.WorkShape;
+                if (Tfs == ABaseWorkShape)
+                    D.Append(GetAlternateItem(i));
+            }
+        }
+        public void FindAlternate2(TBaseWorkShape AFirstWorkShape, TBaseWorkShape AEndWorkShape, TDynamicArray D)
+        {
+            TBaseWorkShape Tfs1, Tfs2;
+            D.Clear();
+            for (int i = 0; i <= ItemCount - 1; i++)
+            {
+                Tfs1 = null;
+                Tfs2 = null;
+                if (GetAlternateItem(i).NodeStart!=null)
+                    Tfs1 = GetAlternateItem(i).NodeStart.WorkShape;
+                if (GetAlternateItem(i).NodeEnd!=null)
+                    Tfs2 = GetAlternateItem(i).NodeEnd.WorkShape;
+                if ((Tfs1 == AFirstWorkShape) && (Tfs2 == AEndWorkShape))
+                    D.Append(GetAlternateItem(i));
+            }
+        }
+  /*      public void GetTreeListTFSFromMainAlternative(TAlternateTreeList* Alternative, TDynamicArray* D);*/
         public int ItemCount
         {
             get { return GetItemCount(); }
@@ -98,9 +130,13 @@ namespace geliosNEW
             f_Num = -1;
         }
         ~TAlternateTreeList() { }
-        /*     public void AddToAlternate(TTreeListTFS* Item);
-             public TTreeListItem* FindTFE(TBaseShape* ABaseShape);
-             public TTreeListTFS* FindTFS(TBaseWorkShape* AWS);*/
+        public void AddToAlternate(TTreeListTFS Item)
+        {
+            if (Item!=null)
+                f_List.Add(Item);
+        }
+        /*    public TTreeListItem* FindTFE(TBaseShape* ABaseShape);
+            public TTreeListTFS* FindTFS(TBaseWorkShape* AWS);*/
         public int ItemCount
         {
             get { return GetItemCount(); }
@@ -111,10 +147,26 @@ namespace geliosNEW
             set { f_Main = value;  }
             get { return f_Main; }
         }
-      /*       public TNodeMain* NodeStart = { read = f_NodeStart, write = f_NodeStart };
-             public TNodeMain* NodeEnd = { read = f_NodeEnd, write = f_NodeEnd };
-         public int ID = { read = f_ID, write = f_ID };
-             public int Num = { read = f_Num, write = f_Num };*/
+        public TNodeMain NodeStart
+        {
+            set { f_NodeStart = value; }
+            get { return f_NodeStart; }
+        }
+        public TNodeMain NodeEnd
+        {
+            set { f_NodeEnd = value; }
+            get { return f_NodeEnd; }
+        }
+        public int ID
+        {
+            set { f_ID = value; }
+            get { return f_ID; }
+        }
+        public int Num
+        {
+            set { f_Num = value; }
+            get { return f_Num; }
+        }
     }
 
 public class TTreeListTFS
@@ -130,7 +182,7 @@ public class TTreeListTFS
         {
             return f_List.Count;
         }
-    TTreeListItem  GetTreeTFEItem(int AIndex)
+    public TTreeListItem  GetTreeTFEItem(int AIndex)
         {
             if (AIndex >= 0 && AIndex <= f_List.Count - 1)
                 return (TTreeListItem)(f_List.ElementAt(AIndex));
@@ -151,9 +203,15 @@ public class TTreeListTFS
             }
         }
     ~TTreeListTFS() { }
- /*       public TBaseWorkShape BaseWorkShape = {read = f_BaseWorkShape
-        public int ItemCount = { read = GetItemCount };
-        public TTreeListItem TreeTFEItem[int AIndex] = { read = GetTreeTFEItem };*/
+        public TBaseWorkShape BaseWorkShape
+        {
+            get { return f_BaseWorkShape;  }
+        }
+        public int ItemCount
+        {
+            get { return GetItemCount(); }
+        }
+  /*      public TTreeListItem TreeTFEItem[int AIndex] = { read = GetTreeTFEItem };*/
 }
 
 

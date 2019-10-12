@@ -42,58 +42,218 @@ namespace geliosNEW
         int f_NumAlt;
         List<object> f_List;
         TPredicateItemBase f_ParentItemBase;
-        /*   void FreeList();
-           int  GetCount();
-           TPredicatePathNodeItem  GetItems(int AIndex);
-           string  GetText();
-           public:*/
-        public TPredicatePathNode(TPredicateItemBase AParentItemBase, int AID, int ANumAlt)
+        /*   void FreeList();*/
+        int  GetCount()
         {
-            f_Cnt = 0;
-            f_ID = AID;
-            f_ParentItemBase = AParentItemBase;
-            f_NumAlt = ANumAlt;
-            f_List = new List<object>();
+            return f_List.Count;
         }
-        ~TPredicatePathNode() { }
-        /*  TPredicatePathNodeItem* CreateItem();
-          void AddItem(TPredicateItemBase* AItem);
-          bool IsLike(TPredicatePathNode* ANode);
-          TPredicatePathNodeItem* FindIndexFirst(int &APos);
-          TPredicatePathNodeItem* FindIndexNext(int &APos);
-          TPredicatePathNodeItem* FindByBlockID(int ABlockID);
-          void Clear();
-          void Assign(TPredicatePathNode* ASource);
-          __property int Count = { read = GetCount };
-          __property TPredicatePathNodeItem* Items[int AIndex] = {read = GetItems
-      };
-      __property int ID = { read = f_ID, write = f_ID };
-      __property AnsiString Text = {read = GetText};
-           __property TPredicateItemBase* ParentItemBase = { read = f_ParentItemBase };
-      __property int NumAlt = { read = f_NumAlt, write = f_NumAlt };*/
+        public TPredicatePathNodeItem  GetItems(int AIndex)
+        {
+            if (AIndex >= 0 && AIndex <= f_List.Count - 1)
+                return (TPredicatePathNodeItem)(f_List.ElementAt(AIndex));
+            else
+                return null;
+        }
+        string  GetText()
+        {
+            int m_pos = 0, i = 0;
+            TPredicatePathNodeItem T;
+            string Res = "branch(" + f_ID.ToString() + ", " + f_NumAlt.ToString() + ", [";
+            T = FindIndexFirst(ref m_pos);
+            while (T!=null)
+            {
+                if (i != 0)
+                    Res = Res + ", ";
+                Res = Res + T.BlockID.ToString();
+                i++;
+                T = FindIndexNext(ref m_pos);
+            }
+            Res = Res + "]).";
+            return Res;
+        }
+        public TPredicatePathNode(TPredicateItemBase AParentItemBase, int AID, int ANumAlt)
+              {
+                  f_Cnt = 0;
+                  f_ID = AID;
+                  f_ParentItemBase = AParentItemBase;
+                  f_NumAlt = ANumAlt;
+                  f_List = new List<object>();
+              }
+              ~TPredicatePathNode() { }
+              /*  TPredicatePathNodeItem* CreateItem();
+                void AddItem(TPredicateItemBase* AItem);*/
+        public bool IsLike(TPredicatePathNode ANode)
+        {
+            int mCnt = 0;
+            if (f_List.Count == ANode.Count)
+            {
+                if (f_ID == ANode.ID)
+                {
+                    if (f_NumAlt == ANode.NumAlt)
+                    {
+                        for (int i = 0; i <= ANode.Count - 1; i++)
+                            if (FindByBlockID(ANode.GetItems(i).BlockID)!=null)
+                                mCnt++;
+                        return mCnt == ANode.Count;
+                    }
+                }
+            }
+            return false;
+        }
+        public TPredicatePathNodeItem FindIndexFirst(ref int APos)
+        {
+            APos = 0;
+            TPredicatePathNodeItem T;
+            for (int i = APos; i <= f_List.Count - 1; i++)
+            {
+                T = GetItems(i);
+                if (T.Index == 0)
+                    return T;
+            }
+            return null;
+        }
+        TPredicatePathNodeItem FindIndexNext( ref int APos)
+        {
+            APos++;
+            TPredicatePathNodeItem T;
+            for (int i = 0; i <= f_List.Count - 1; i++)
+            {
+                T = GetItems(i);
+                if (T.Index == APos)
+                    return T;
+            }
+            return null;
+        }
+        public TPredicatePathNodeItem FindByBlockID(int ABlockID)
+        {
+            TPredicatePathNodeItem T;
+            for (int i = 0; i <= f_List.Count - 1; i++)
+            {
+                T = GetItems(i);
+                if (T.BlockID == ABlockID)
+                    return T;
+            }
+            return null;
+        }
+    /*    void Clear();
+                void Assign(TPredicatePathNode* ASource);*/
+        public int Count
+        {
+            get { return GetCount(); }
+        }
+        /*       __property TPredicatePathNodeItem* Items[int AIndex] = {read = GetItems*/
+        public int ID
+        {
+            set { f_ID = value;  }
+            get { return f_ID; }
+        }
+      public  string  Text
+        {
+            get { return GetText(); }
+        }
+        public TPredicateItemBase ParentItemBase
+        {
+            get { return f_ParentItemBase; }
+        }
+        public int NumAlt
+        {
+            set { f_NumAlt = value;  }
+            get { return f_NumAlt; }
+        }
     }
 
     class TPredicatePathItem
     {
         List<object> f_List;
-        /*   void FreeList();
-           int  GetNodeCount();
-           TPredicatePathNode  GetNodeItems(int AIndex);
-           string  GetText();
-           TPredicatePathNodeItem FindPathNodeByParent(TPredicateItemBase AParent);*/
+        void FreeList()
+        {
+            f_List.Clear();
+        }
+        int  GetNodeCount()
+        {
+            return f_List.Count;
+        }
+        TPredicatePathNode  GetNodeItems(int AIndex)
+        {
+            if (AIndex >= 0 && AIndex <= f_List.Count - 1)
+                return (TPredicatePathNode)(f_List.ElementAt(AIndex));
+            else
+                return null;
+        }
+        string  GetText()
+        {
+            string Res = "";
+            TPredicatePathNode N;
+            for (int i = 0; i <= f_List.Count - 1; i++)
+            {
+                N = (TPredicatePathNode)(f_List.ElementAt(i));
+                Res = Res + N.Text + "\r\n";
+            }
+            return Res;
+        }
+        TPredicatePathNodeItem FindPathNodeByParent(TPredicateItemBase AParent)
+        {
+            TPredicatePathNode Item;
+            TPredicatePathNodeItem NItem;
+            for (int i = 0; i <= NodeCount - 1; i++)
+            {
+                Item = GetNodeItems(i);
+                for (int j = 0; j <= Item.Count - 1; j++)
+                {
+                    NItem = Item.GetItems(j);
+                    if (NItem.ItemBase == AParent)
+                        return NItem;
+                }
+            }
+            return null;
+        }
         public TPredicatePathItem()
         {
             f_List = new List<object>();
         }
         ~TPredicatePathItem() { }
-        /*void Clear();
-        TPredicatePathNode* CreatePathNode(TPredicateItemBase* AParentItemBase);
-        TPredicatePathNode* FindLikePathNode(TPredicatePathNode* ANode);
-        TPredicatePathNode* LastPathNode();
-        __property int NodeCount = { read = GetNodeCount };
-        __property TPredicatePathNode* NodeItems[int AIndex] = {read = GetNodeItems
-    };
-    __property AnsiString Text = {read = GetText};*/
+        public void Clear()
+        {
+            FreeList();
+        }
+        TPredicatePathNode CreatePathNode(TPredicateItemBase AParentItemBase)
+        {
+            int mID = 0;
+            int Num = 0;
+            if (AParentItemBase!=null)
+            {
+                Num = ((TPredicateItemBig)(AParentItemBase)).NumAlt;
+                TPredicatePathNodeItem NI = FindPathNodeByParent(AParentItemBase);
+                if (NI!=null)
+                    mID = NI.BlockID;
+            }
+            TPredicatePathNode N = new TPredicatePathNode(AParentItemBase, mID, Num);
+            f_List.Add(N);
+            return N;
+        }
+        public TPredicatePathNode FindLikePathNode(TPredicatePathNode ANode)
+        {
+            TPredicatePathNode Item;
+            for (int i = 0; i <= NodeCount - 1; i++)
+            {
+                Item = GetNodeItems(i);
+                if (Item.IsLike(ANode))
+                    return Item;
+            }
+            return null;
+        }
+
+        /*       TPredicatePathNode* LastPathNode();*/
+        public int NodeCount
+        {
+            get { return GetNodeCount();  }
+        }
+        /*     __property TPredicatePathNode* NodeItems[int AIndex] = {read = GetNodeItems
+         };*/
+        public  string  Text
+        {
+            get { return GetText(); }
+        }
     }
     class TPredicatePath
     {
@@ -129,14 +289,19 @@ namespace geliosNEW
         {
             SharedConst.PredicatePathInit();
         }
-     /*      void GenerateDescendant(double ARate, int AMax);
-           void ClearDescendant();
-           TPredicatePathItem* CloneToDescendant(TPredicatePathItem* ASource);
-           __property TPredicatePathItem* BasePath = {read = f_BasePath
-       };
-       __property TPredicatePathItem* UsedPath = { read = f_UsedPath };
+        /*      void GenerateDescendant(double ARate, int AMax);
+              void ClearDescendant();
+              TPredicatePathItem* CloneToDescendant(TPredicatePathItem* ASource);*/
+        public TPredicatePathItem BasePath
+        {
+            get { return f_BasePath; }
+        }        
+       public TPredicatePathItem UsedPath
+        {
+            get { return f_UsedPath;  }
+        }
 
-       __property int DescendantCount = { read = GetDescendantCount };
+  /*     __property int DescendantCount = { read = GetDescendantCount };
        __property TPredicatePathItem* Descendants[int AIndex] = { read = GetDescendantItems };
        };*/
     }

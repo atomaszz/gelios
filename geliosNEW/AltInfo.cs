@@ -25,14 +25,17 @@ namespace geliosNEW
         }
        public int ID
         {
+            set { f_Id = value; }
             get { return f_Id; }
         }
         public int Num
         {
+            set { f_Num = value; }
             get { return f_Num; }
         }
         public int ParentShapeId
         {
+            set { f_ParentShapeId = value; } 
             get { return f_ParentShapeId; }
         }
 
@@ -64,8 +67,24 @@ namespace geliosNEW
         {
             return f_List.Count;
         }
-     /*       TAltInfoItem  GetItem(int AIndex);
-            TAltInfoItem FindItem(int AId, int ANum, int AParentShapeId);*/
+        public TAltInfoItem  GetItem(int AIndex)
+        {
+            if (AIndex >= 0 && AIndex <= f_List.Count - 1)
+                return (TAltInfoItem)(f_List.ElementAt(AIndex));
+            else
+                return null;
+        }
+        TAltInfoItem FindItem(int AId, int ANum, int AParentShapeId)
+        {
+            TAltInfoItem Item;
+            for (int i = f_List.Count - 1; i >= 0; i--)
+            {
+                Item = (TAltInfoItem)(f_List.ElementAt(i));
+                if ((Item.ID == AId) && (Item.Num == ANum) && (Item.ParentShapeId == AParentShapeId))
+                    return Item;
+            }
+            return null;
+        }
 
         public TAltInfo()
         {
@@ -76,7 +95,18 @@ namespace geliosNEW
         {
             FreeList();
         }
-      /*     TAltInfoItem* AddAltIfo(int AId, int ANum, int AParentShapeId, TNodeMain* ANodeStart, TNodeMain* ANodeEnd);*/
+        public TAltInfoItem AddAltIfo(int AId, int ANum, int AParentShapeId, TNodeMain ANodeStart, TNodeMain ANodeEnd)
+        {
+            if (FindItem(AId, ANum, AParentShapeId)!=null) return null;
+            TAltInfoItem Item = new TAltInfoItem();
+            Item.ID = AId;
+            Item.Num = ANum;
+            Item.ParentShapeId = AParentShapeId;
+            Item.NodeStart = ANodeStart;
+            Item.NodeEnd = ANodeEnd;
+            f_List.Add(Item);
+            return Item;
+        }
            public  int ItemCount
         {
             get { return GetItemCount(); }

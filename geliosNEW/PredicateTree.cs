@@ -92,10 +92,16 @@ namespace geliosNEW
             else
                 return null;
         }
-        /*   public  TPredicateTree();
+        public  TPredicateTree()
+        {
+            f_List = new List<TPredicateTreeItem>();
+        }
            ~TPredicateTree() { }
-           public void Clear();
-           public TPredicateTreeItem NewPredicateTreeItem();
+           public void Clear()
+        {
+                FreeList();
+        }
+     /*      public TPredicateTreeItem NewPredicateTreeItem();
            public  TPredicateTreeItem FindByTfeID(int AID, TDynamicArray Arr);
            public TPredicateTreeItem FindByParentID(int AID);
            public void ArrayIDToDelete(TPredicateTreeItem AItem, TDynamicArray Arr);

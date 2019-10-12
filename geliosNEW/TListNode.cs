@@ -99,7 +99,7 @@ namespace geliosNEW
         TNodeAlt GetAlternateItem(int AIndex)
         {
             if (AIndex >= 0 && AIndex <= AlternateList.Count - 1)
-                return (TNodeAlt)(AlternateList.Items[AIndex]);
+                return (TNodeAlt)(AlternateList.ElementAt(AIndex));
             else
                 return null;
         }
@@ -359,7 +359,7 @@ namespace geliosNEW
         public void LoadInfoForAlternate(TAltInfo AltIfo, int AParentShapeID)
         {
             TNodeAlt Itm;
-            TNodeMain Node, First, Last;
+            TNodeMain Node, First=null, Last=null;
             TAltInfoItem AI;
             AltIfo.Clear();
             for (int i = 0; i <= AlternateCount - 1; i++)
@@ -368,15 +368,15 @@ namespace geliosNEW
                 if (Itm.NodeStart.IdParentShape == AParentShapeID)
                 {
                     AI = AltIfo.AddAltIfo(Itm.ID, Itm.Num, AParentShapeID, Itm.NodeStart, Itm.NodeEnd);
-                    if (AI && (Itm.ID == 0) && (Itm.Num == 0) && (AParentShapeID == 0))
+                    if (AI!=null && (Itm.ID == 0) && (Itm.Num == 0) && (AParentShapeID == 0))
                         AI.Main = true;
 
                 }
             }
             for (int i = 0; i <= MainList.Count - 1; i++)
             {
-                Node = static_cast<TNodeMain*>(MainList.Items[i]);
-                if (Node && Node.IdParentShape == AParentShapeID)
+                Node = (TNodeMain)(MainList.ElementAt(i));
+                if (Node!=null && Node.IdParentShape == AParentShapeID)
                 {
                     AI = AltIfo.AddAltIfo(Node.IdAlternate, Node.NumAlt, AParentShapeID, First, Last);
                     if (AI!=null)

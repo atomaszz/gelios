@@ -156,10 +156,40 @@ namespace geliosNEW
     /*    public void AppendNamed(string AName, object P = NULL);
         public bool DeleteNamed(AnsiString AName);
         public  void AppendInteger(int APos, object AValue);
-        public bool DeleteInteger(int APos);
-        public bool Delete(object P);
-        public void InitStack();
-        public object Pop();*/
+        public bool DeleteInteger(int APos);*/
+        public bool Delete(object P)
+        {
+            int m = -1;
+            TDynamicArrayItem Item;
+            for (int i = 0; i <= f_List.Count - 1; i++)
+            {
+                Item = (TDynamicArrayItem)(f_List.ElementAt(i));
+                if (Item.P == P)
+                {
+                    m = i;
+                    break;
+                }
+            }
+            if (m > -1)
+            {
+                f_List.RemoveAt(m);
+            }
+            return (m > -1);
+        }
+ /*       public void InitStack();*/
+        public object Pop()
+        {
+            object res;
+            TDynamicArrayItem Item;
+            if (f_PosStak <= 0) return null;
+            Item = (TDynamicArrayItem)(f_List.ElementAt(f_PosStak - 1));
+            f_PosStak--;
+            res = Item.P;
+           // delete Item;
+            f_List.Remove(f_PosStak);
+            //   Delete(Item->P);
+            return res;
+        }
         public TDynamicArrayItem Find(object P)
         {
             TDynamicArrayItem Item;
