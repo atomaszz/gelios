@@ -72,6 +72,7 @@ namespace geliosNEW
         TAlternateController f_AlternateController;
         TAltSelector f_AltSelector;
         TAltStackController f_AltStackController;
+        TPredicatePath f_PredicatePath;
 
         void InitHelp()
         {
@@ -545,25 +546,69 @@ namespace geliosNEW
             SharedConst.opt_sadacha.ShowDialog();
         }
 
+        private void НайтиРешениеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int StartTime, EndTime;
+            string OptZ = SharedConst.opt_sadacha.make_sadacha() + "\r\n" + SharedConst.opt_sadacha.make_ogrsovm();
+
+            f_PredicatePath.Init();
+            f_Zadacha.Clear();
+            InitTrashCounter();
+            InitTFEConvertor();
+            TTreeList m_TreeList = new TTreeList();
+            TAlternativeParser AP = new TAlternativeParser();
+            TPredicateTFSConvertor TC = new TPredicateTFSConvertor();
+            TGraphTFEConvertor GC = new TGraphTFEConvertor();
+            m_TreeList.FillTreeFromList(MainList);
+            AP.Parse(m_TreeList.MainTreeList);
+            TC.CopyTree(AP.Head);
+            TC.PathStyle = 2;
+            TC.Process(f_PredicatePath.BasePath, f_PredicatePath.UsedPath);
+            GC.Init(TC.Head, f_Zadacha.Tree);
+            f_Zadacha.Init(f_TypeParam, f_CheckNud, FullPredicateModel(GC.PrStruct,
+              GC.PrRab, GC.PrControlRab, GC.PrControlFunc, GC.PrCheckCondition, OptZ, *f_PredicateDopPrav));
+            string S;
+            S = f_Zadacha.Check();
+            if (S.Length() > 0)
+                Application.MessageBox(S.c_str(), "Ошибка", MB_ICONWARNING);
+            else
+            {
+                if (CreateStartDecision(f_Zadacha, f_TypeParam, opt_sadacha.get_type_metod()))
+                {
+                    StartTime = GetTickCount();
+                    f_Zadacha.Process();
+                    EndTime = GetTickCount();
+                    f_Zadacha.ShowDecision(f_VwColorAlt, f_VwColorBadAlt, f_VwColorFont, EndTime - StartTime);
+                }
+                FreeStartDecision();
+            }
+            delete GC;
+            delete TC;
+            delete AP;
+            delete m_TreeList;
+            FreeTFEConvertor();
+
+        }
+
         void BuildGlp(TBaseWorkShape AWN, DrawObject Glp, TBaseShape ASel)
         {
             TBaseShape BS;
             FmParamAlternative fmParamAlternative = new FmParamAlternative();
             Glp.SetBitMap(fmParamAlternative.pbTfs.Width, fmParamAlternative.pbTfs.Height);
 
-            //            Glp->Canvas->Brush->Color = f_FonColor;
-            //          Glp->Canvas->FillRect(TRect(0, 0, Glp->Width, Glp->Height));
+            //            Glp.Canvas.Brush.Color = f_FonColor;
+            //          Glp.Canvas.FillRect(TRect(0, 0, Glp.Width, Glp.Height));
             AWN.StartPoint = new Point(0, 0);
             AWN.Init();
             AWN.Prepare();
          /*   if (f_BrushTFE)
-                AWN->BrushStyle = bsSolid;
+                AWN.BrushStyle = bsSolid;
             else
-                AWN->BrushStyle = bsClear;*/
+                AWN.BrushStyle = bsClear;*/
             AWN.BrushColor = f_BrushColor;
             AWN.LineWidth = f_WSPenWidth;
             AWN.PenWidth = f_WSPenWidth;
-       //     AWN.Font->Assign(f_FontTFE);
+       //     AWN.Font.Assign(f_FontTFE);
             AWN.FrameColorTFE = f_FrameColorTFE;
             AWN.PenColor = f_LineColor;
 

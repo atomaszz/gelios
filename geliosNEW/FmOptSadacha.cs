@@ -560,5 +560,87 @@ namespace geliosNEW
             }
             return 0;
         }
+        //отображение выбранной задачи в предикатной модели
+        public string make_sadacha()
+        {
+            string s="";
+            if (checkBox9.Checked == true)
+            {
+
+            }
+            switch (type_sadacha)
+            {
+                case SharedConst.ZAD_1:
+                    s = "zadacha_opt(" + (type_sadacha + 1);
+                    if ((type_ogr == 3) || (type_ogr == 7)) s = s + ",[[Vd," + Vd + "],[Td," + Td + "]]";
+                    if ((type_ogr == 1) || (type_ogr == 5)) s = s + ",[[Vd," + Vd + "],[]]";
+                    if ((type_ogr == 2) || (type_ogr == 6)) s = s + ",[[],[Td," + Td + "]]";
+                    if ((type_ogr == 0) || (type_ogr == 4)) s = s + ",[[],[]]";
+                    s = s + ").";
+                    break;
+
+                case SharedConst.ZAD_2:
+                    s = "zadacha_opt(" + (type_sadacha + 1);
+                    if ((type_ogr == 3) || (type_ogr == 7)) s = s + ",[[Vd," + Vd + "],[Bd," + Bd + "]]";
+                    if ((type_ogr == 1) || (type_ogr == 5)) s = s + ",[[Vd," + Vd + "],[]]";
+                    if ((type_ogr == 2) || (type_ogr == 6)) s = s + ",[[],[Bd," + Bd + "]]";
+                    if ((type_ogr == 0) || (type_ogr == 4)) s = s + ",[[],[]]";
+                    s = s + ").";
+                    break;
+
+                case SharedConst.ZAD_3:
+                    s = "zadacha_opt(" + (type_sadacha + 1);
+                    if ((type_ogr == 3) || (type_ogr == 7)) s = s + ",[[Bd," + Bd + "],[Td," + Td + "]]";
+                    if ((type_ogr == 1) || (type_ogr == 5)) s = s + ",[[Bd," + Bd + "],[]]";
+                    if ((type_ogr == 2) || (type_ogr == 6)) s = s + ",[[],[Td," + Td + "]]";
+                    if ((type_ogr == 0) || (type_ogr == 4)) s = s + ",[[],[]]";
+                    s = s + ").";
+                    break;
+
+                case SharedConst.ZAD_4:
+                    s = "zadacha_opt(" + (type_sadacha + 1);
+                    s = s + ",[[c1," + c1 + "],[c2," + c2 + "],[c3," + c3 + "]]";
+                    s = s + ").";
+                    break;
+
+                case SharedConst.ZAD_5:
+                    s = "zadacha_opt(" + (type_sadacha + 1);
+                    s = s + ",[[c1," + c1 + "],[c2," + c2 + "],[c3," + c3 + "]]";
+                    s = s + ").";
+                    break;
+
+                case SharedConst.ZAD_6:
+                    s = "zadacha_opt(" + (type_sadacha + 1);
+                    s = s + ",[[l," + c1 + "],[k," + c2 + "],[m," + c3 + "]]";
+                    s = s + ").";
+                    break;
+            }
+            return s;
+        }
+        public string make_ogrsovm()
+        {
+            int v;
+            string Res="", Item;
+            int rc = MassWork.Count;
+            int rw = OptSovm.HiRow();
+            if (checkBox9.Checked)
+            {
+                for (int i = 0; i <= rw; i++)
+                {
+                    Item = "ogr_sovmest([";
+                    for (int j = 0; j <= rc - 1; j++)
+                    {
+                        v = (int)OptSovm.GetItems(i,j + 1);
+                        if (j==0)
+                            Item = Item + v.ToString();
+                        else
+                            Item = Item + "," + v.ToString();
+                    }
+                    Item = Item + "]).";
+                    Res = Res + Item + "\r\n";
+                }
+            }
+            return Res;
+        }
     }
 }
