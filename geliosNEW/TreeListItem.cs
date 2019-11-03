@@ -118,14 +118,7 @@ class TTreeListTFS
             f_MainNode = null;
         }
         ~TTreeListItem() { }
-        public TMainTreeList MainNode
-        {
-            set { f_MainNode = value; }
-            get { return f_MainNode;  }
-        }  
-        public TBaseShape BaseShape
-        {
-            get { return f_BaseShape; }
-        }
+      /*  public TMainTreeList MainNode = {read = f_MainNode, write = f_MainNode
+        public TBaseShape BaseShape = { read = f_BaseShape };*/
     }
 }
