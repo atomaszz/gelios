@@ -139,7 +139,7 @@ namespace geliosNEW
         }
     }
 
-    public class TPredicateScanner
+    class TPredicateScanner
     {
         private bool f_Prop;
         private string f_Simv;

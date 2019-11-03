@@ -96,20 +96,20 @@ namespace geliosNEW
             return AlternateList.Count;
         }
 
-        TNodeAlt GetAlternateItem(int AIndex)
+    /*    TNodeAlt GetAlternateItem(int AIndex)
         {
-            if (AIndex >= 0 && AIndex <= AlternateList.Count - 1)
-                return (TNodeAlt)(AlternateList.ElementAt(AIndex));
+      /*      if (AIndex >= 0 && AIndex <= AlternateList.Count - 1)
+                return (TNodeAlt)(AlternateList.Items[AIndex]);
             else
                 return null;
-        }
+        }*/
     /*        void SaveParamAlternateToXML(TBaseShape ATFE, TGlsXmlElement AElement);
             void SaveParamAlternateToBin(TBaseShape ATFE, SF_TFE A_tfe, THandle AFile);
             void SaveOgrSovmToXML(TDischargedMassiv AOgrSovm, TGlsXmlElement AElement);
             void SaveTypeDecision(TGlsXmlElement AElement);
             void SaveOgrSovmToBin(TDischargedMassiv AOgrSovm, THandle AFile);
             void SaveTypeDecisionToBin(THandle AFile);*/
-        public TListNode()
+  /*      public TListNode()
         {
             TNodeAlt Alt;
             MainList = new List<object>();
@@ -121,7 +121,7 @@ namespace geliosNEW
             f_Update = false;
             f_Changes = false;
             f_StackDustController = new TStackDustController();
-        }
+        }*/
         ~TListNode() { }
         public TNodeMain FindLastNodeToAlternate(int AltId, int ANumAlt, int AIdParenShape)
         {
@@ -280,7 +280,7 @@ namespace geliosNEW
                 Alt.NodeStart = null;
                 Alt.NodeEnd = null;
                 Alt.Num = ANumAlt;
-                AlternateList.Add(Alt);
+          //      AlternateList.Add(Alt);
                 return true;
             }
             NS = FindNode(WS);
@@ -359,24 +359,24 @@ namespace geliosNEW
         public void LoadInfoForAlternate(TAltInfo AltIfo, int AParentShapeID)
         {
             TNodeAlt Itm;
-            TNodeMain Node, First=null, Last=null;
+            TNodeMain Node, First, Last;
             TAltInfoItem AI;
             AltIfo.Clear();
             for (int i = 0; i <= AlternateCount - 1; i++)
             {
-                Itm = GetAlternateItem(i);
-                if (Itm.NodeStart.IdParentShape == AParentShapeID)
+         //       Itm = GetAlternateItem(i);
+            /*    if (Itm.NodeStart.IdParentShape == AParentShapeID)
                 {
-                    AI = AltIfo.AddAltIfo(Itm.ID, Itm.Num, AParentShapeID, Itm.NodeStart, Itm.NodeEnd);
-                    if (AI!=null && (Itm.ID == 0) && (Itm.Num == 0) && (AParentShapeID == 0))
+         /*           AI = AltIfo.AddAltIfo(Itm.ID, Itm.Num, AParentShapeID, Itm.NodeStart, Itm.NodeEnd);
+                    if (AI && (Itm.ID == 0) && (Itm.Num == 0) && (AParentShapeID == 0))
                         AI.Main = true;
 
-                }
+                }*/
             }
             for (int i = 0; i <= MainList.Count - 1; i++)
             {
-                Node = (TNodeMain)(MainList.ElementAt(i));
-                if (Node!=null && Node.IdParentShape == AParentShapeID)
+         /*       Node = static_cast<TNodeMain*>(MainList.Items[i]);
+                if (Node && Node.IdParentShape == AParentShapeID)
                 {
                     AI = AltIfo.AddAltIfo(Node.IdAlternate, Node.NumAlt, AParentShapeID, First, Last);
                     if (AI!=null)
@@ -393,7 +393,7 @@ namespace geliosNEW
                         AI.NodeStart = First;
                         AI.NodeEnd = Last;
                     }
-                }
+                }*/
             }
         }
         /*   public  bool GetAlternateInfo(int AShapeID, int &AltID, int &NumAlt, int &IDParent);*/

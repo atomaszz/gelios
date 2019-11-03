@@ -20,7 +20,7 @@ namespace geliosNEW
             NodeEnd = null;
         }
     }
-    public class TNodeMain
+    class TNodeMain
     {
         public int IdAlternate;
         public int IdBlock;

@@ -97,6 +97,7 @@ namespace geliosNEW
     {
         TTreeListTFS f_TFS;
         List<object> f_ListTFE;
+
         void FreeList()
         {
      //       f_TFS.Clear();
@@ -113,6 +114,9 @@ namespace geliosNEW
             else
                 return null;
         }
+        /*      void FreeList();
+              int GetTFECount();
+              TPredicateItemTFE GetTFEItems(int AIndex);*/
         public TPredicateItemTFS()
         {
             f_TFS = null;
@@ -124,15 +128,15 @@ namespace geliosNEW
         {
             TPredicateItemTFE mTfe;
             FreeList();
-            f_TFS = ATfs.TFS;
+     //       f_TFS = ATfs.TFS;
             NumAlt = ATfs.NumAlt;
-            for (int i = 0; i <= ATfs.TFECount - 1; i++)
+     /*       for (int i = 0; i <= ATfs.TFECount - 1; i++)
             {
                 mTfe = new TPredicateItemTFE();
                 mTfe.RfcTFE = ATfs.GetTFEItems(i);
        ///         mTfe.TFE = ATfs.TFEItems[i].TFE;
                 f_ListTFE.Add(mTfe);
-            }
+            }*/
         }
         //      public void ListIDFill(TDynamicArray AList);
          public TTreeListTFS TFS
@@ -145,27 +149,20 @@ namespace geliosNEW
         }
 
       /*        public TPredicateItemTFE TFEItems[int AIndex] = { read = GetTFEItems };*/
+        /*      public void Assign(TAlternativeParserItemTFS ATfs);
+              public void ListIDFill(TDynamicArray AList);
+              public TTreeListTFS TFS = { read = f_TFS };
+              public int TFECount = { read = GetTFECount };
+              public TPredicateItemTFE TFEItems[int AIndex] = { read = GetTFEItems };*/
     }
     public class TPredicateItemBig : TPredicateItemBase
     {
         bool f_Print;
         List<object> f_List;
         TAlternativeParserItemBig f_Rfc;
-        int GetCount()
-        {
-            return f_List.Count;
-        }
-        public TPredicateItemBase GetItems(int AIndex)
-        {
-            if (AIndex >= 0 && AIndex <= f_List.Count - 1)
-                return (TPredicateItemBase)(f_List.ElementAt(AIndex));
-            else
-                return null;
-        }
-        void FreeList()
-        {
-            f_List.Clear();
-        }
+        /*       int GetCount();
+               TPredicateItemBase GetItems(int AIndex);
+               void FreeList();*/
         public override int Who() { return 1; }
         public TPredicateItemBig()
         {
@@ -174,26 +171,11 @@ namespace geliosNEW
             f_Print = false;
         }
         ~TPredicateItemBig() { }
-        public void AddItem(TPredicateItemBase AItem)
-        {
-            f_List.Add(AItem);
-        }
-        public void DeleteItemToList(TPredicateItemBase AItem)
-        {
-            int index = f_List.IndexOf(AItem);
-            if (index >= 0)
-                f_List.RemoveAt(index);
-        }
-        public bool ValidDescendant()
-        {
-            return true;
-        }
-
-        public int Count
-        {
-            get { return GetCount(); }
-        }
-      /*        public TPredicateItemBase* Items[int AIndex] = { read = GetItems };*/
+        /*      public void AddItem(TPredicateItemBase* AItem);
+              public void DeleteItemToList(TPredicateItemBase* AItem);
+              public bool ValidDescendant();
+              public int Count = { read = GetCount };
+              public TPredicateItemBase* Items[int AIndex] = { read = GetItems };*/
         public TAlternativeParserItemBig Rfc
         {
             set { f_Rfc = value;  }
@@ -261,10 +243,10 @@ namespace geliosNEW
             TPredicateItemTFE mTFE;
             TAlternativeParserItemBig mRfc = ABig.Rfc;
 
-            ML = mRfc.MainList;
+      /*      ML = mRfc.MainList;
             for (int i = 0; i <= ML.Count - 1; i++)
             {
-                mBase = ML.GetItems(i);
+       /*         mBase = ML.GetItems(i);
                 m_who = mBase.Who();
                 if (m_who == 0)
                 {
@@ -282,24 +264,24 @@ namespace geliosNEW
                             AStack.InsertToFirst(iBig);
                         }
                     }
-                }
-                if (m_who == 1)
+                }*/
+         /*       if (m_who == 1)
                 {
                     mBig = (TAlternativeParserItemBig)(mBase);
                     TPredicateItemBig iBig = NewBig(mBig);
                     ABig.AddItem(iBig);
                     AStack.InsertToFirst(iBig);
-                }
+                }*/
             }
 
-            for (int i = 0; i <= mRfc.CountBig - 1; i++)
-            {
+    //        for (int i = 0; i <= mRfc.CountBig - 1; i++)
+            //{
          //       mBig = mRfc.ItemsBig[i];
         //        TPredicateItemBig iBig = NewBig(mBig);
       //          ABig.AddItem(iBig);
        //         AStack.InsertToFirst(iBig);
-            }
-        }
+    //        }
+
         /*     void DoSetID();
              void DoSetIDItem(TPredicateItemBig* AHead, TDynamicArray* AStack);
              void DoSetIDItemTFS(TPredicateItemBase* ABase, TDynamicArray* AStack);
@@ -311,13 +293,13 @@ namespace geliosNEW
             f_TryPath = true;
             TDynamicArray m_Stack = new TDynamicArray();
             m_Stack.InsertToFirst(f_PredicateStart);
-            Big = (TPredicateItemBig)(m_Stack.Pop());
-            while (Big!=null)
+     //       Big = (TPredicateItemBig)(m_Stack.Pop());
+     /*       while (Big!=null)
             {
                 DoProcessItem(Big, m_Stack);
                 if (!f_TryPath) break;
-                Big = (TPredicateItemBig)(m_Stack.Pop());
-            }
+    //            Big = (TPredicateItemBig)(m_Stack.Pop());
+            }*/
         }
         void DoProcessItemTFS(TPredicateItemBase ABase, TDynamicArray AStack)
         {
@@ -353,39 +335,39 @@ namespace geliosNEW
             TDynamicArray m_DTail = new TDynamicArray();
             TDynamicArray m_DLN = new TDynamicArray();
 
-            m_cnt = AHead.Count;
+            m_cnt = 1;/* AHead.Count;*/
             if (m_cnt == 1)
             {
-                m_Base = AHead.GetItems(0);
-                DoProcessItemTFS(m_Base, AStack);
-                if (m_Base.Who() == 1)
-                    ((TPredicateItemBig)(m_Base)).Print = true;
+       //         m_Base = AHead.GetItems(0);
+        //        DoProcessItemTFS(m_Base, AStack);
+       //         if (m_Base.Who() == 1)
+     //               ((TPredicateItemBig)(m_Base)).Print = true;
 
-                ApplyStyle(AHead, m_Base);
+             //   ApplyStyle(AHead, m_Base);
             }
             if (m_cnt > 1)
             {
                 for (int i = 0; i <= m_cnt - 1; i++)
                 {
-                    m_Base = AHead.GetItems(i);
-                    m_type = m_Base.Who();
+                    //              m_Base = AHead.GetItems(i);
+                    m_type = 1;/*m_Base.Who();*/
                     if (m_type == 1)
                     {
-                        m_Big = (TPredicateItemBig)(m_Base);
-                        if (m_Big.NumAlt > 0 || m_Big.Rfc.Cross)
+          //              m_Big = (TPredicateItemBig)(m_Base);
+             /*           if (m_Big.NumAlt > 0 || m_Big.Rfc.Cross)
                         {
                             m_DTail.Append(m_Big);
                             m_Big.Print = true;
                         }
                         else
                         {
-                            m_DLN.Append(m_Base);
+            //                m_DLN.Append(m_Base);
                             // m_Big.Print = m_Big.Rfc.CrossMain;
-                        }
+                        }*/
 
                     }
-                    else
-                        m_DLN.Append(m_Base);
+             /*       else
+                        m_DLN.Append(m_Base);*/
                 }
                 if (m_DLN.Count == 1)
                 {
@@ -404,8 +386,8 @@ namespace geliosNEW
                     for (int i = 2; i <= m_DLN.Count - 1; i++)
                         m_D.Append(m_DLN.GetItems(i));
 
-                    AHead.DeleteItemToList(m_BaseItem1);
-                    AHead.DeleteItemToList(m_BaseItem2);
+            //        AHead.DeleteItemToList(m_BaseItem1);
+           //         AHead.DeleteItemToList(m_BaseItem2);
 
 
                     m_BaseItem1 = EnvelopeToBig(m_BaseItem1);
@@ -424,19 +406,18 @@ namespace geliosNEW
                         m_BaseItem1 = m_Big;
                         m_BaseItem2 = (TPredicateItemBase)(m_D.GetItems(0));
                         DoProcessItemTFS(m_BaseItem2, AStack);
-                        AHead.DeleteItemToList(m_BaseItem2);
+          //              AHead.DeleteItemToList(m_BaseItem2);
 
                         m_PW = new TPredicateItemPWork();
                         //m_PW.Envelope = true;
                         m_PW.Item1 = m_BaseItem1;
                         m_PW.Item2 = EnvelopeToBig(m_BaseItem2);
                         SwapNumAlt(m_PW, m_Big);
-                        m_D.Delete(m_BaseItem2);
+                 //       m_D.Delete(m_BaseItem2);
                         m_PWork = m_PW;
 
                     }
-
-                    AHead.AddItem(m_PWork);
+                    //AHead.AddItem(m_PWork);
                 }
 
                 for (int i = 0; i <= m_DTail.Count - 1; i++)
@@ -462,12 +443,12 @@ namespace geliosNEW
             if (m_who == 0)
             {
                 mTfs = (TPredicateItemTFS)(ASource);
-                if (mTfs.TFS.BaseWorkShape.TypeShape == 1)
-                    return ASource;
+     //           if (mTfs.TFS.BaseWorkShape.TypeShape == 1)
+     //               return ASource;
             }
             nBig = new TPredicateItemBig();
             nBig.Envelope = true;
-            nBig.AddItem(ASource);
+   //         nBig.AddItem(ASource);
             SwapNumAlt(nBig, ASource);
             return nBig;
         }
@@ -478,8 +459,8 @@ namespace geliosNEW
             TPredicatePathNode N = null;
             int m_who = AItem.Who();
             bool valid = m_who == 0;
-            if (m_who == 1)
-                valid = ((TPredicateItemBig)(AItem)).ValidDescendant();
+    //        if (m_who == 1)
+   //             valid = ((TPredicateItemBig)(AItem)).ValidDescendant();
             if (valid)
             {
         //        N = f_BasePath.CreatePathNode(AHead);
@@ -516,15 +497,15 @@ namespace geliosNEW
          bool CheckPath(TPredicateItemBig AHead, TPredicateItemBase AItem)
         {
             TPredicatePathNode N = FillPathNode(AHead, AItem);
-            if (N != null && f_UsedPath.FindLikePathNode(N) == null)
-                return false;
+ //           if (N != null && f_UsedPath.FindLikePathNode(N) == null)
+     //           return false;
             return true;
         }
          bool CheckPath(TPredicateItemBig AHead, TDynamicArray ADyn)
         {
             TPredicatePathNode N = FillPathNode(AHead, ADyn);
-            if (N != null && f_UsedPath.FindLikePathNode(N) == null)
-                return false;
+      //      if (N != null && f_UsedPath.FindLikePathNode(N) == null)
+     //           return false;
             return true;
         }
          void SetPathNode(TPredicateItemBig AHead, TDynamicArray ADyn)
@@ -537,7 +518,7 @@ namespace geliosNEW
             TPredicatePathNode N = FillPathNode(AHead, ADyn);
             if (N!=null)
             {
-                L = f_UsedPath.FindLikePathNode(N);
+       /*         L = f_UsedPath.FindLikePathNode(N);
                 if (L!=null)
                 {
                     NI = L.FindIndexFirst(ref mpos);
@@ -548,7 +529,7 @@ namespace geliosNEW
                             D.Append(FI.ItemBase);
              //           NI = L.FindIndexNext(mpos);
                     }
-                }
+                }*/
             }
             if (D.Count == ADyn.Count)
             {
@@ -572,7 +553,31 @@ namespace geliosNEW
             if (f_PathStyle == 2)
                 SetPathNode(AHead, ADyn);
         }
-    public TPredicateTFSConvertor()
+        /*  public TPredicateTFSConvertor()
+
+                void FreeHead();
+                TPredicateItemBig* NewBig(TAlternativeParserItemBig* ABig);
+                void DoCopyTree(TPredicateItemBig* ABig, TDynamicArray* AStack);
+                void DoSetID();
+                void DoSetIDItem(TPredicateItemBig* AHead, TDynamicArray* AStack);
+                void DoSetIDItemTFS(TPredicateItemBase* ABase, TDynamicArray* AStack);
+                void PushTFS(TPredicateItemTFS* ATFS, TDynamicArray* AStack);
+
+                void DoProcess();
+                void DoProcessItemTFS(TPredicateItemBase* ABase, TDynamicArray* AStack);
+                void DoProcessItem(TPredicateItemBig* AHead, TDynamicArray* AStack);
+                void SwapNumAlt(TPredicateItemBase* ADest, TPredicateItemBase* ASource);
+                TPredicateItemBase* EnvelopeToBig(TPredicateItemBase* ASource);
+                bool CheckEnlargeNum(TPredicateItemBig* ABig);
+                TPredicatePathNode* FillPathNode(TPredicateItemBig* AHead, TPredicateItemBase* AItem);
+                TPredicatePathNode* FillPathNode(TPredicateItemBig* AHead, TDynamicArray* ADyn);
+                bool CheckPath(TPredicateItemBig* AHead, TPredicateItemBase* AItem);
+                bool CheckPath(TPredicateItemBig* AHead, TDynamicArray* ADyn);
+                void SetPathNode(TPredicateItemBig* AHead, TDynamicArray* ADyn);
+                void ApplyStyle(TPredicateItemBig* AHead, TPredicateItemBase* AItem);
+                void ApplyStyle(TPredicateItemBig* AHead, TDynamicArray* ADyn);
+                public:*/
+        public TPredicateTFSConvertor()
         {
             f_PathStyle = 0;
             f_TryPath = true;
@@ -591,14 +596,14 @@ namespace geliosNEW
             while (Big!=null)
             {
                 DoCopyTree(Big, m_Stack);
-                Big = (TPredicateItemBig)(m_Stack.Pop());
+    //            Big = (TPredicateItemBig)(m_Stack.Pop());
             }
         }
         public void Process(TPredicatePathItem ABase, TPredicatePathItem AUsed)
         {
             f_BasePath = ABase;
             f_UsedPath = AUsed;
-            f_BasePath.Clear();
+      //      f_BasePath.Clear();
 
             DoProcess();
             //DoSetID();
@@ -617,5 +622,12 @@ namespace geliosNEW
         {
             get { return f_TryPath; }
         }
+      /*    void CopyTree(TAlternativeParserItemBig* AHead);
+          void Process(TPredicatePathItem* ABase, TPredicatePathItem* AUsed);
+          __property TPredicateItemBig* Head = {read = f_PredicateStart
+      };
+      __property int PathStyle = { read = f_PathStyle, write = f_PathStyle };
+      __property bool TryPath = { read = f_TryPath };
+      };*/
     }
 }

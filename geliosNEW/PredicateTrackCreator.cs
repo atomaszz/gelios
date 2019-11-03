@@ -25,7 +25,7 @@ namespace geliosNEW
         public TPredicateScannerItemKnot* Items[int AIndex] = {read = GetItems
         public AnsiString Text = {read = GetText*/
     }
-    public class TPredicateTrackCreator
+    class TPredicateTrackCreator
     {
         private List<object> f_List;
         private List<object> f_ListBase;

@@ -36,12 +36,9 @@ namespace geliosNEW
                private void get_opt_alt_fuz();
                private  void Nud_podgot();
                private double ozenk_t_min(TBaseShape B);
-               private double ozenk_v_min(TBaseShape B);*/
-               private void ClearPTI()
-        {
-            f_ListPTI.Clear();
-        }
-         /*      private  void AddPTI(TPredicateTreeItem AItem);*/
+               private double ozenk_v_min(TBaseShape B);
+               private void ClearPTI();
+               private  void AddPTI(TPredicateTreeItem AItem);*/
         public TPredicateTreeItem  GetPTI(int AIndex)
         {
             if (AIndex >= 0 && AIndex <= f_ListPTI.Count - 1)
@@ -78,9 +75,10 @@ namespace geliosNEW
             double t2 = (double)ozenk_t.Val[idx]; //aaa
             return Math.Min(t1, t2);
         }
-        public TPredicateScanner Scanner;
-        public TPredicateTrackCreator TrackCreator;
-        public  TZadacha()
+
+      /*         public TPredicateScanner Scanner;
+               public TPredicateTrackCreator TrackCreator;
+               public  TZadacha()
                {
                    f_Cnt_alt = 0;
                    f_CntComm = 0;
@@ -90,18 +88,18 @@ namespace geliosNEW
                    f_Tree = new TPredicateTree();
                    f_Equal = new TDynamicArray();
                    f_PartialDecision = new TPartialDecision(this);
-                   f_ListPTI = new List<TPredicateTreeItem>();
+                   f_ListPTI = new List<object>();
                    Scanner = new TPredicateScanner();
                    TrackCreator = new TPredicateTrackCreator();
                    ozenk_t = new TDischargedMassiv(100000000.0);
                    ozenk_v = new TDischargedMassiv(100000000.0);
-        }
-        ~TZadacha() {  }
+               }*/
+               ~TZadacha() {  }
         public void Clear()
         {
-            f_Tree.Clear();
+     /*       f_Tree.Clear();
             f_Equal.Clear();
-            ClearPTI();
+            ClearPTI();*/
      /*       TrackCreator.ClearTrack();
             TrackCreator.ClearBase();*/
         }

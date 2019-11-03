@@ -559,11 +559,11 @@ namespace geliosNEW
             TAlternativeParser AP = new TAlternativeParser();
             TPredicateTFSConvertor TC = new TPredicateTFSConvertor();
             TGraphTFEConvertor GC = new TGraphTFEConvertor();
-            m_TreeList.FillTreeFromList(MainList);
+       /*     m_TreeList.FillTreeFromList(MainList);
             AP.Parse(m_TreeList.MainTreeList);
             TC.CopyTree(AP.Head);
             TC.PathStyle = 2;
-            TC.Process(f_PredicatePath.BasePath, f_PredicatePath.UsedPath);
+            TC.Process(f_PredicatePath.BasePath, f_PredicatePath.UsedPath);*/
     /*        GC.Init(TC.Head, f_Zadacha.Tree);
             f_Zadacha.Init(f_TypeParam, f_CheckNud, FullPredicateModel(GC.PrStruct,
               GC.PrRab, GC.PrControlRab, GC.PrControlFunc, GC.PrCheckCondition, OptZ, f_PredicateDopPrav));
