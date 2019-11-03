@@ -490,7 +490,7 @@ namespace geliosNEW
 
             }
             f_Grp.Make();
-            FillBigFromGrp(ABig);
+     //       FillBigFromGrp(ABig);
         }
         /* void FillBigFromGrp(TAlternativeParserItemBig ABig);*/
          void CreateParserGrpItemList(TDynamicArray AMass, TAlternateTreeList Alternative)
@@ -498,9 +498,9 @@ namespace geliosNEW
             TAlternativeParserGrpItemList Item;
             if (AMass.Count > 0)
             {
-                Item = f_Grp.GetNewList(Alternative);
-                for (int i = 0; i <= AMass.Count - 1; i++)
-                    Item.AddTfs((TTreeListTFS)(AMass.GetItems(i)));
+     //           Item = f_Grp.GetNewList(Alternative);
+         //       for (int i = 0; i <= AMass.Count - 1; i++)
+       //             Item.AddTfs((TTreeListTFS)(AMass.GetItems(i)));
             }
         }
 

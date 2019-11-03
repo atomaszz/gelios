@@ -102,8 +102,8 @@ namespace geliosNEW
             f_Tree.Clear();
             f_Equal.Clear();
             ClearPTI();
-            TrackCreator.ClearTrack();
-            TrackCreator.ClearBase();
+     /*       TrackCreator.ClearTrack();
+            TrackCreator.ClearBase();*/
         }
         /*       public void Init(int AType_Char, bool ACheckNud, string AFullPredcateModel);
                public void Process();

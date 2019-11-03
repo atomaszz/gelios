@@ -99,7 +99,7 @@ namespace geliosNEW
         List<object> f_ListTFE;
         void FreeList()
         {
-            f_TFS.Clear();
+     //       f_TFS.Clear();
         }
         int GetTFECount()
         {
@@ -130,7 +130,7 @@ namespace geliosNEW
             {
                 mTfe = new TPredicateItemTFE();
                 mTfe.RfcTFE = ATfs.GetTFEItems(i);
-                mTfe.TFE = ATfs.TFEItems[i].TFE;
+       ///         mTfe.TFE = ATfs.TFEItems[i].TFE;
                 f_ListTFE.Add(mTfe);
             }
         }
@@ -294,10 +294,10 @@ namespace geliosNEW
 
             for (int i = 0; i <= mRfc.CountBig - 1; i++)
             {
-                mBig = mRfc.ItemsBig[i];
-                TPredicateItemBig iBig = NewBig(mBig);
-                ABig.AddItem(iBig);
-                AStack.InsertToFirst(iBig);
+         //       mBig = mRfc.ItemsBig[i];
+        //        TPredicateItemBig iBig = NewBig(mBig);
+      //          ABig.AddItem(iBig);
+       //         AStack.InsertToFirst(iBig);
             }
         }
         /*     void DoSetID();
@@ -482,8 +482,8 @@ namespace geliosNEW
                 valid = ((TPredicateItemBig)(AItem)).ValidDescendant();
             if (valid)
             {
-                N = f_BasePath.CreatePathNode(AHead);
-                N.AddItem(AItem);
+        //        N = f_BasePath.CreatePathNode(AHead);
+      //          N.AddItem(AItem);
             }
             return N;
         }
@@ -500,16 +500,16 @@ namespace geliosNEW
                 m_who = Item.Who();
                 valid = m_who == 0;
                 if (m_who == 1)
-                    valid = (TPredicateItemBig)(Item).ValidDescendant();
+         //           valid = (TPredicateItemBig)(Item).ValidDescendant();
                 if (valid)
                     D.Append(Item);
             }
 
             if (D.Count > 0)
             {
-                N = f_BasePath.CreatePathNode(AHead);
-                for (int i = 0; i <= D.Count - 1; i++)
-                    N.AddItem((TPredicateItemBase)(D.GetItems(i)));
+         //       N = f_BasePath.CreatePathNode(AHead);
+      //          for (int i = 0; i <= D.Count - 1; i++)
+           //         N.AddItem((TPredicateItemBase)(D.GetItems(i)));
             }
             return N;
         }
@@ -546,14 +546,14 @@ namespace geliosNEW
                         FI = N.FindByBlockID(NI.BlockID);
                         if (FI != null)
                             D.Append(FI.ItemBase);
-                        NI = L.FindIndexNext(mpos);
+             //           NI = L.FindIndexNext(mpos);
                     }
                 }
             }
             if (D.Count == ADyn.Count)
             {
                 ADyn.Clear();
-                CopyDynamicArray(D, ADyn, false);
+        //        CopyDynamicArray(D, ADyn, false);
             }
         }
          void ApplyStyle(TPredicateItemBig AHead, TPredicateItemBase AItem)
@@ -601,7 +601,7 @@ namespace geliosNEW
             f_BasePath.Clear();
 
             DoProcess();
-            DoSetID();
+            //DoSetID();
         }
         public TPredicateItemBig Head
         {

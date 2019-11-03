@@ -564,7 +564,7 @@ namespace geliosNEW
             TC.CopyTree(AP.Head);
             TC.PathStyle = 2;
             TC.Process(f_PredicatePath.BasePath, f_PredicatePath.UsedPath);
-            GC.Init(TC.Head, f_Zadacha.Tree);
+    /*        GC.Init(TC.Head, f_Zadacha.Tree);
             f_Zadacha.Init(f_TypeParam, f_CheckNud, FullPredicateModel(GC.PrStruct,
               GC.PrRab, GC.PrControlRab, GC.PrControlFunc, GC.PrCheckCondition, OptZ, f_PredicateDopPrav));
             string S;
@@ -578,11 +578,11 @@ namespace geliosNEW
                     StartTime = GetTickCount();
                     f_Zadacha.Process();
                     EndTime = GetTickCount();
-                    f_Zadacha.ShowDecision(f_VwColorAlt, f_VwColorBadAlt, f_VwColorFont, EndTime - StartTime);
+                    f_Zadacha.ShowDecision(f_VwColorAlt, /f_VwColorBadAlt, f_VwColorFont, EndTime - StartTime);
                 }
                 FreeStartDecision();
             }
-            FreeTFEConvertor();
+            FreeTFEConvertor();*/
 
         }
 

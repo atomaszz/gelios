@@ -88,8 +88,6 @@
             this.pbMain = new System.Windows.Forms.PictureBox();
             this.sbY = new System.Windows.Forms.VScrollBar();
             this.sbX = new System.Windows.Forms.HScrollBar();
-            this.menuStrip1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelActiveMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
@@ -572,10 +570,6 @@
             this.Text = "GeliosNEW";
             this.SizeChanged += new System.EventHandler(this.UMainFrm_SizeChanged);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.UMainFrm_MouseMove);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panelActiveMenu.ResumeLayout(false);
             this.panelActiveMenu.PerformLayout();

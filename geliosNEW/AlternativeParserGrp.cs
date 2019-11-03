@@ -248,8 +248,8 @@ class TAlternativeParserGrp
                 {
                     Item = (TAlternativeParserGrpItemBase)(mList.GetItems(j));
                     List2 = (TAlternativeParserGrpItemList)(Item);
-                    if (IdentityAlternate(List1, List2))
-                        mDbl.Append(Item);
+        //            if (IdentityAlternate(List1, List2))
+         //               mDbl.Append(Item);
                 }
             }
             for (int i = 0; i <= mDbl.Count - 1; i++)
@@ -293,11 +293,11 @@ class TAlternativeParserGrp
         {
             FreeListOut();
             CheckList();
-            CheckTFS();
-            MakeCross();
+           // CheckTFS();
+     /*       MakeCross();
             MakeAgregate();
             MakeOUT();
-            MakeCrossDubles();
+            MakeCrossDubles();*/
         }
         public void AddTfs(TTreeListTFS ATFS)
         {
