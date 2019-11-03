@@ -46,9 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlternativeParser.cs" />
-    <Compile Include="AlternativeParserEnlarger.cs" />
-    <Compile Include="AlternativeParserGrp.cs" />
     <Compile Include="AltStack.cs" />
     <Compile Include="CommonCulc.cs" />
     <Compile Include="CommonGraph.cs" />
