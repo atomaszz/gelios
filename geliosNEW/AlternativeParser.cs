@@ -176,6 +176,7 @@ TAlternativeParserItemTFE* __fastcall GetTFEItems(int AIndex);*/
         __property int Enlarge = { read = f_Enlarge, write = f_Enlarge };
         __property bool EnlargeSetNum = { read = f_EnlargeSetNum, write = f_EnlargeSetNum };*/
     }
+<<<<<<< HEAD
 
 
 
@@ -312,6 +313,8 @@ TAlternativeParserItemTFE* __fastcall GetTFEItems(int AIndex);*/
             }
             return true;
         }
+=======
+>>>>>>> parent of 7032bbe... next gen
 
         /*  void FreeHead();
           void CreateHead();

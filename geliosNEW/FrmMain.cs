@@ -583,8 +583,11 @@ namespace geliosNEW
                 FreeStartDecision();
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
             FreeTFEConvertor();*/
 =======
+=======
+>>>>>>> parent of 7032bbe... next gen
             delete GC;
             delete TC;
             delete AP;

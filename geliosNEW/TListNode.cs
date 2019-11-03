@@ -92,6 +92,7 @@ namespace geliosNEW
             return Res;
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         int GetAlternateCount()
         {
             return AlternateList.Count;
@@ -112,6 +113,8 @@ namespace geliosNEW
             void SaveTypeDecisionToBin(THandle AFile);*/
   /*      public TListNode()
 =======
+=======
+>>>>>>> parent of 7032bbe... next gen
     /*    int GetAlternateCount();
         TNode GetAlternateItem(int AIndex);
         void SaveParamAlternateToXML(TBaseShape ATFE, TGlsXmlElement AElement);
@@ -350,6 +353,7 @@ namespace geliosNEW
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             public bool CompareWorkShape(TBaseWorkShape WS, TBaseWorkShape WE);
             public bool GetWSToAlternate(int AId, TBaseWorkShape AWSFirst, TBaseWorkShape AWSLast);
             public void BeginUpdate();
@@ -411,6 +415,13 @@ namespace geliosNEW
         public TNodeMain FindNextNode2(TBaseWorkShape W);
         public TNodeMain FindPriorNode2(TBaseWorkShape W);
 
+=======
+        public TBaseWorkShape FindNextNode(TBaseWorkShape W);
+        public TBaseWorkShape FindPriorNode(TBaseWorkShape W);
+        public TNodeMain FindNextNode2(TBaseWorkShape W);
+        public TNodeMain FindPriorNode2(TBaseWorkShape W);
+
+>>>>>>> parent of 7032bbe... next gen
         public bool CompareWorkShape(TBaseWorkShape WS, TBaseWorkShape WE);
         public bool GetWSToAlternate(int AId, TBaseWorkShape AWSFirst, TBaseWorkShape AWSLast);
         public void BeginUpdate();
@@ -427,6 +438,9 @@ namespace geliosNEW
         public TNode CheckAlternateWSEnd(TBaseWorkShape AWS);
         public void LoadInfoForAlternate(TAltInfo AltIfo, int AParentShapeID);
         public  bool GetAlternateInfo(int AShapeID, int &AltID, int &NumAlt, int &IDParent);*/
+<<<<<<< HEAD
+>>>>>>> parent of 7032bbe... next gen
+=======
 >>>>>>> parent of 7032bbe... next gen
         public void GetAllWorkShape(TDynamicArray AMass)
         {

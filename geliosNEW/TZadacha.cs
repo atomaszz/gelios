@@ -94,6 +94,7 @@ namespace geliosNEW
                    ozenk_t = new TDischargedMassiv(100000000.0);
                    ozenk_v = new TDischargedMassiv(100000000.0);
 <<<<<<< HEAD
+<<<<<<< HEAD
                }*/
                ~TZadacha() {  }
         public void Clear()
@@ -106,10 +107,15 @@ namespace geliosNEW
         }
         /*       public void Init(int AType_Char, bool ACheckNud, string AFullPredcateModel);
 =======
+=======
+>>>>>>> parent of 7032bbe... next gen
                }
            /*    ~TZadacha() {  }
                public void Clear();
                public void Init(int AType_Char, bool ACheckNud, string AFullPredcateModel);
+<<<<<<< HEAD
+>>>>>>> parent of 7032bbe... next gen
+=======
 >>>>>>> parent of 7032bbe... next gen
                public void Process();
                public string Check();

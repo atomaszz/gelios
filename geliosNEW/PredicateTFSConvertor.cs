@@ -82,6 +82,7 @@ namespace geliosNEW
         TTreeListTFS f_TFS;
         List<object> f_ListTFE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         void FreeList()
         {
@@ -107,6 +108,11 @@ namespace geliosNEW
         int GetTFECount();
         TPredicateItemTFE GetTFEItems(int AIndex);*/
 >>>>>>> parent of 7032bbe... next gen
+=======
+  /*      void FreeList();
+        int GetTFECount();
+        TPredicateItemTFE GetTFEItems(int AIndex);*/
+>>>>>>> parent of 7032bbe... next gen
         public TPredicateItemTFS()
         {
             f_TFS = null;
@@ -114,6 +120,7 @@ namespace geliosNEW
         }
         ~TPredicateItemTFS() { }
         override public int Who() { return 0; }
+<<<<<<< HEAD
 <<<<<<< HEAD
         public void Assign(TAlternativeParserItemTFS ATfs)
         {
@@ -146,11 +153,16 @@ namespace geliosNEW
               public int TFECount = { read = GetTFECount };
               public TPredicateItemTFE TFEItems[int AIndex] = { read = GetTFEItems };*/
 =======
+=======
+>>>>>>> parent of 7032bbe... next gen
   /*      public void Assign(TAlternativeParserItemTFS ATfs);
         public void ListIDFill(TDynamicArray AList);
         public TTreeListTFS TFS = { read = f_TFS };
         public int TFECount = { read = GetTFECount };
         public TPredicateItemTFE TFEItems[int AIndex] = { read = GetTFEItems };*/
+<<<<<<< HEAD
+>>>>>>> parent of 7032bbe... next gen
+=======
 >>>>>>> parent of 7032bbe... next gen
     }
     class TPredicateItemBig : TPredicateItemBase
@@ -202,6 +214,7 @@ namespace geliosNEW
     }
     class TPredicateTFSConvertor
     {
+<<<<<<< HEAD
 <<<<<<< HEAD
         List<object> f_ListEnlarge;
         TPredicateNumGenerator f_NGen;
@@ -622,6 +635,8 @@ namespace geliosNEW
       };*/
     }
 =======
+=======
+>>>>>>> parent of 7032bbe... next gen
     List<object> f_ListEnlarge;
     TPredicateNumGenerator f_NGen;
     TPredicateItemBig f_PredicateStart;
@@ -660,5 +675,8 @@ namespace geliosNEW
 __property int PathStyle = { read = f_PathStyle, write = f_PathStyle };
 __property bool TryPath = { read = f_TryPath };
 };
+<<<<<<< HEAD
+>>>>>>> parent of 7032bbe... next gen
+=======
 >>>>>>> parent of 7032bbe... next gen
 }

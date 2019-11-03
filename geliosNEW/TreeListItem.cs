@@ -21,12 +21,18 @@ namespace geliosNEW
         }
         ~TMainTreeList() { }
 <<<<<<< HEAD
+<<<<<<< HEAD
     /*    public void AddToTree(TAlternateTreeList Item);*/
         public void Clear()
         {
             //FreeList();
         }
   /*      public  TTreeListItem FindTFE(TBaseShape ABaseShape);
+=======
+    /*    public void AddToTree(TAlternateTreeList Item);
+        public void Clear();
+        public  TTreeListItem FindTFE(TBaseShape ABaseShape);
+>>>>>>> parent of 7032bbe... next gen
 =======
     /*    public void AddToTree(TAlternateTreeList Item);
         public void Clear();
