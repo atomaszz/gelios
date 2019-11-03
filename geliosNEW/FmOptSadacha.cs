@@ -19,8 +19,13 @@ namespace geliosNEW
         string  c1, c2, c3;     //коэффициенты, нужные для задач 4-6
         string Bd, Td, Vd;     //коэффициенты, нужные для задач 1-3
         public TDynamicArray MassWork;
+<<<<<<< HEAD
+        public TDischargedMassiv OptSovm;
+        public double Rate;
+=======
         TDischargedMassiv OptSovm;
         double Rate;
+>>>>>>> parent of 4b1337c... \|\/
         int f_TypeMetod;
 
         public FmOptSadacha()
@@ -200,8 +205,8 @@ namespace geliosNEW
 
         private void button1_Click(object sender, EventArgs e)
         {
-     /*       if (checkBox1.Checked == false && checkBox2.Checked == false && checkBox3.Checked == false &&
-   checkBox4.Checked == false && checkBox5.Checked == false && checkBox6.Checked == false)
+            if (checkBox1.Checked == false && checkBox2.Checked == false && checkBox3.Checked == false &&
+                checkBox4.Checked == false && checkBox5.Checked == false && checkBox6.Checked == false)
             {
                 MessageBox.Show("Не выбран тип задачи оптимизации.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -231,40 +236,40 @@ namespace geliosNEW
 
                 case SharedConst.ZAD_2:
                     if (checkBox7.Checked)
-                        if (Edit6.Text == "") f = false;
-                        else Vd = Edit6.Text;//V
+                        if (textBox3.Text == "") f = false;
+                        else Vd = textBox3.Text;//V
                     if (checkBox8.Checked)
-                        if (Edit7.Text == "") f = false;
-                        else Bd = Edit7.Text;//B
+                        if (textBox2.Text == "") f = false;
+                        else Bd = textBox2.Text;//B
                     break;
 
                 case SharedConst.ZAD_3:
                     if (checkBox7.Checked)
-                        if (Edit8.Text == "") f = false;
-                        else Bd = Edit8.Text;//B
+                        if (textBox2.Text == "") f = false;
+                        else Bd = textBox2.Text;//B
                     if (checkBox8.Checked)
-                        if (Edit9.Text == "") f = false;
-                        else Td = Edit9.Text; //T
+                        if (textBox5.Text == "") f = false;
+                        else Td = textBox5.Text; //T
                     break;
 
                 case SharedConst.ZAD_4:
-                    if (Edit10.Text == "" || Edit11.Text == "" || Edit12.Text == "") f = false;
-                    c1 = Edit10.Text; c2 = Edit11.Text; c3 = Edit12.Text;
+                    if (textBox8.Text == "" || textBox9.Text == "" || textBox7.Text == "") f = false;
+                    c1 = textBox8.Text; c2 = textBox9.Text; c3 = textBox7.Text;
                     break;
                 case SharedConst.ZAD_5:
-                    if (Edit1.Text == "" || Edit2.Text == "" || Edit3.Text == "") f = false;
-                    c1 = Edit1.Text; c2 = Edit2.Text; c3 = Edit3.Text;
+                    if (textBox12.Text == "" || textBox10.Text == "" || textBox11.Text == "") f = false;
+                    c1 = textBox12.Text; c2 = textBox10.Text; c3 = textBox11.Text;
                     break;
                 case SharedConst.ZAD_6:
-                    if (Edit13.Text == "" || Edit14.Text == "" || Edit15.Text == "") f = false;
-                    c1 = Edit13.Text; c2 = Edit14.Text; c3 = Edit15.Text;
+                    if (textBox15.Text == "" || textBox13.Text == "" || textBox14.Text == "") f = false;
+                    c1 = textBox15.Text; c2 = textBox13.Text; c3 = textBox14.Text;
                     break;
             }
             if (f == false)
             {
                 MessageBox.Show("Не заданы коэффициенты.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            }*/
+            }
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -351,6 +356,80 @@ namespace geliosNEW
 
         }
 
+        private void CheckBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox7.Checked)
+            {
+                switch (type_sadacha)
+                {
+                    case SharedConst.ZAD_1:
+                        label4.Visible = true; label5.Visible = true; textBox4.Visible = true;
+                        textBox4.Text = Vd;
+                        break;
+                    case SharedConst.ZAD_2:
+                        label11.Visible = true; label12.Visible = true; textBox3.Visible = true;
+                        textBox3.Text = Vd;
+                        break;
+                    case SharedConst.ZAD_3:
+                        label15.Visible = true; label16.Visible = true; textBox6.Visible = true;
+                        textBox6.Text = Bd;
+                        break;
+                }
+            }
+            else
+            {
+                switch (type_sadacha)
+                {
+                    case SharedConst.ZAD_1:
+                        label4.Visible = true; label5.Visible = true; textBox4.Visible = true;
+                        break;
+                    case SharedConst.ZAD_2:
+                        label11.Visible = true; label12.Visible = true; textBox3.Visible = true;
+                        break;
+                    case SharedConst.ZAD_3:
+                        label15.Visible = true; label16.Visible = true; textBox6.Visible = true;
+                        break;
+                }
+            }
+        }
+
+        private void CheckBox8_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox8.Checked)
+            {
+                switch (type_sadacha)
+                {
+                    case SharedConst.ZAD_1:
+                        label7.Visible = true; label6.Visible = true; textBox1.Visible = true;
+                        textBox1.Text = Td;
+                        break;
+                    case SharedConst.ZAD_2:
+                        label10.Visible = true; label8.Visible = true; textBox2.Visible = true;
+                        textBox2.Text = Bd;
+                        break;
+                    case SharedConst.ZAD_3:
+                        label14.Visible = true; label13.Visible = true; textBox5.Visible = true;
+                        textBox5.Text = Td;
+                        break;
+                }
+            }
+            else
+            {
+                switch (type_sadacha)
+                {
+                    case SharedConst.ZAD_1:
+                        label7.Visible = true; label6.Visible = true; textBox1.Visible = true;
+                        break;
+                    case SharedConst.ZAD_2:
+                        label10.Visible = true; label8.Visible = true; textBox2.Visible = true;
+                        break;
+                    case SharedConst.ZAD_3:
+                        label14.Visible = true; label13.Visible = true; textBox5.Visible = true;
+                        break;
+                }
+            }
+        }
+
         int OPM_CompareNode(object A, object B)
         {
             TBaseShape m_A = (TBaseShape)(A);
@@ -432,6 +511,141 @@ namespace geliosNEW
             label4.Visible = false; label5.Visible = false; textBox4.Visible = false;
             label11.Visible = false; label12.Visible = false; textBox3.Visible = false;
             label15.Visible = false; label16.Visible = false; textBox6.Visible = false;
+        }
+        public int get_type_metod()
+        {
+            return f_TypeMetod;
+        }
+        public int type_t_v()
+        {
+            switch (type_sadacha)
+            {
+                case SharedConst.ZAD_1:
+                    switch (type_ogr)
+                    {
+                        case 0: return 0;
+                        case 1: return 2;
+                        case 2: return 1;
+                        case 3: return 3;
+                        case 4: return 0;
+                        case 5: return 2;
+                        case 6: return 1;
+                        case 7: return 3;
+                    }
+                    break;
+                case SharedConst.ZAD_2:
+                    switch (type_ogr)
+                    {
+                        case 0: return 0;
+                        case 1: return 2;
+                        case 2: return 0;
+                        case 3: return 2;
+                        case 4: return 0;
+                        case 5: return 2;
+                        case 6: return 0;
+                        case 7: return 2;
+                    }
+                    break;
+                case SharedConst.ZAD_3:
+                    switch (type_ogr)
+                    {
+                        case 0: return 0;
+                        case 1: return 1;
+                        case 2: return 0;
+                        case 3: return 1;
+                        case 4: return 0;
+                        case 5: return 1;
+                        case 6: return 0;
+                        case 7: return 1;
+                    }
+                    break;
+                case SharedConst.ZAD_4://обобщенные задачи
+                case SharedConst.ZAD_5:
+                case SharedConst.ZAD_6: return 0;
+            }
+            return 0;
+        }
+        //отображение выбранной задачи в предикатной модели
+        public string make_sadacha()
+        {
+            string s="";
+            if (checkBox9.Checked == true)
+            {
+
+            }
+            switch (type_sadacha)
+            {
+                case SharedConst.ZAD_1:
+                    s = "zadacha_opt(" + (type_sadacha + 1);
+                    if ((type_ogr == 3) || (type_ogr == 7)) s = s + ",[[Vd," + Vd + "],[Td," + Td + "]]";
+                    if ((type_ogr == 1) || (type_ogr == 5)) s = s + ",[[Vd," + Vd + "],[]]";
+                    if ((type_ogr == 2) || (type_ogr == 6)) s = s + ",[[],[Td," + Td + "]]";
+                    if ((type_ogr == 0) || (type_ogr == 4)) s = s + ",[[],[]]";
+                    s = s + ").";
+                    break;
+
+                case SharedConst.ZAD_2:
+                    s = "zadacha_opt(" + (type_sadacha + 1);
+                    if ((type_ogr == 3) || (type_ogr == 7)) s = s + ",[[Vd," + Vd + "],[Bd," + Bd + "]]";
+                    if ((type_ogr == 1) || (type_ogr == 5)) s = s + ",[[Vd," + Vd + "],[]]";
+                    if ((type_ogr == 2) || (type_ogr == 6)) s = s + ",[[],[Bd," + Bd + "]]";
+                    if ((type_ogr == 0) || (type_ogr == 4)) s = s + ",[[],[]]";
+                    s = s + ").";
+                    break;
+
+                case SharedConst.ZAD_3:
+                    s = "zadacha_opt(" + (type_sadacha + 1);
+                    if ((type_ogr == 3) || (type_ogr == 7)) s = s + ",[[Bd," + Bd + "],[Td," + Td + "]]";
+                    if ((type_ogr == 1) || (type_ogr == 5)) s = s + ",[[Bd," + Bd + "],[]]";
+                    if ((type_ogr == 2) || (type_ogr == 6)) s = s + ",[[],[Td," + Td + "]]";
+                    if ((type_ogr == 0) || (type_ogr == 4)) s = s + ",[[],[]]";
+                    s = s + ").";
+                    break;
+
+                case SharedConst.ZAD_4:
+                    s = "zadacha_opt(" + (type_sadacha + 1);
+                    s = s + ",[[c1," + c1 + "],[c2," + c2 + "],[c3," + c3 + "]]";
+                    s = s + ").";
+                    break;
+
+                case SharedConst.ZAD_5:
+                    s = "zadacha_opt(" + (type_sadacha + 1);
+                    s = s + ",[[c1," + c1 + "],[c2," + c2 + "],[c3," + c3 + "]]";
+                    s = s + ").";
+                    break;
+
+                case SharedConst.ZAD_6:
+                    s = "zadacha_opt(" + (type_sadacha + 1);
+                    s = s + ",[[l," + c1 + "],[k," + c2 + "],[m," + c3 + "]]";
+                    s = s + ").";
+                    break;
+            }
+            return s;
+        }
+        public string make_ogrsovm()
+        {
+            int v;
+            string Res="", Item;
+            int rc = MassWork.Count;
+            int rw = OptSovm.HiRow();
+            if (checkBox9.Checked)
+            {
+                for (int i = 0; i <= rw; i++)
+                {
+                    Item = "ogr_sovmest([";
+                    for (int j = 0; j <= rc - 1; j++)
+                    {
+                        v = (int)OptSovm.GetItems(i,j + 1);
+                        if (j==0)
+                            Item = Item + v.ToString();
+                        else
+                            Item = Item + "," + v.ToString();
+                    }
+                    Item = Item + "]).";
+                    Res = Res + Item + "\r\n";
+                }
+            }
+            return Res;
         }
     }
 }

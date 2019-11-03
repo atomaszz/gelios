@@ -470,12 +470,12 @@ namespace geliosNEW
         {
             if (Type_Char == SharedConst.PROP)
                 RefreshDataPROP();
-     /*       if (Type_Char == SharedConst.FUZZY)
+            if (Type_Char == SharedConst.FUZZY)
                 RefreshDataFUZZY();
             if (TFE.ParamAlt != null)
                 lbCount.Text = (TFE.ParamAlt.Count).ToString();
             else
-                lbCount.Text = "0";*/
+                lbCount.Text = "0";
         }
         void RefreshDataPROP()
         {
@@ -678,7 +678,6 @@ namespace geliosNEW
                     {
                         CommonGraph.SGCellsByName(sgParam, 1 + i, "УСЛОВИЕ", AI.PREDICAT);
                     }
-
                 }
             }
         }
@@ -770,7 +769,60 @@ namespace geliosNEW
                                                  s_predicat, 1.0, 1, 1);
             TFE.AddParamAlternativeItem(NI);
             RefreshData();
+
+            if (!FReadOnly && NI != null)
+            {
+                ShowParamAlternativeEditor(TFE, NI, Type_Char, false);
+                RefreshData();
+                LocateRow(NI);
+            }
         }
 
+<<<<<<< HEAD
+        private void acDelExecute_Click(object sender, EventArgs e)
+        {
+            object pd = (object)sgObjects[sgParam.CurrentRow.Index];
+            TFE.DeleteParamAlternativeItem2(pd);
+            RefreshData();
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            object pd = (object)sgObjects[sgParam.CurrentRow.Index];
+            if (!FReadOnly && pd!=null)
+            {
+                TParamAlternativeItem T = (TParamAlternativeItem)(pd);
+                ShowParamAlternativeEditor(TFE, T, Type_Char, false);
+                RefreshData();
+                LocateRow(pd);
+            }
+        }
+        void ShowParamAlternativeEditor(TBaseShape ATFE, TParamAlternativeItem AItem, int AType_Char, bool ACan_list)
+        {
+            FmTredactChar redact_char = new FmTredactChar();
+      //     Application.CreateForm(__classid(Tredact_char), &redact_char);
+            redact_char.TFE = ATFE;
+            redact_char.PAItem = AItem;
+            redact_char.Type_Char = AType_Char;
+            redact_char.Can_list = ACan_list;
+            redact_char.ShowDialog();
+            /*       redact_char.ShowModal();
+                   redact_char.Release();*/
+        }
+        void LocateRow(object Bm)
+        {
+            object t;
+            for (int i = 0; i <= sgParam.RowCount - 1; i++)
+            {
+                t = (object)sgObjects[i];
+                if (t == Bm)
+                {
+                    sgParam.Rows[i].Selected = true;
+                    return;
+                }
+            }
+        }
+=======
+>>>>>>> parent of 8496e56... Окно редактирования объектов в ТФЕ
     }
 }
