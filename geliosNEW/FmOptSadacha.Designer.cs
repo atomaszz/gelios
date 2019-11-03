@@ -321,6 +321,7 @@
             this.checkBox8.Size = new System.Drawing.Size(15, 14);
             this.checkBox8.TabIndex = 15;
             this.checkBox8.UseVisualStyleBackColor = true;
+            this.checkBox8.CheckedChanged += new System.EventHandler(this.CheckBox8_CheckedChanged);
             // 
             // checkBox7
             // 
@@ -330,6 +331,7 @@
             this.checkBox7.Size = new System.Drawing.Size(15, 14);
             this.checkBox7.TabIndex = 14;
             this.checkBox7.UseVisualStyleBackColor = true;
+            this.checkBox7.CheckedChanged += new System.EventHandler(this.CheckBox7_CheckedChanged);
             // 
             // label1
             // 
@@ -942,7 +944,9 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel3);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FmOptSadacha";
             this.Text = "Выбор задачи оптимизации";
             this.Activated += new System.EventHandler(this.FmOptSadacha_Activated);
