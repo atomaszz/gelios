@@ -91,30 +91,6 @@ namespace geliosNEW
             }
             return Res;
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-        int GetAlternateCount()
-        {
-            return AlternateList.Count;
-        }
-
-    /*    TNodeAlt GetAlternateItem(int AIndex)
-        {
-      /*      if (AIndex >= 0 && AIndex <= AlternateList.Count - 1)
-                return (TNodeAlt)(AlternateList.Items[AIndex]);
-            else
-                return null;
-        }*/
-    /*        void SaveParamAlternateToXML(TBaseShape ATFE, TGlsXmlElement AElement);
-            void SaveParamAlternateToBin(TBaseShape ATFE, SF_TFE A_tfe, THandle AFile);
-            void SaveOgrSovmToXML(TDischargedMassiv AOgrSovm, TGlsXmlElement AElement);
-            void SaveTypeDecision(TGlsXmlElement AElement);
-            void SaveOgrSovmToBin(TDischargedMassiv AOgrSovm, THandle AFile);
-            void SaveTypeDecisionToBin(THandle AFile);*/
-  /*      public TListNode()
-=======
-=======
->>>>>>> parent of 7032bbe... next gen
     /*    int GetAlternateCount();
         TNode GetAlternateItem(int AIndex);
         void SaveParamAlternateToXML(TBaseShape ATFE, TGlsXmlElement AElement);
@@ -124,7 +100,6 @@ namespace geliosNEW
         void SaveOgrSovmToBin(TDischargedMassiv AOgrSovm, THandle AFile);
         void SaveTypeDecisionToBin(THandle AFile);*/
         public TListNode()
->>>>>>> parent of 7032bbe... next gen
         {
             TNodeAlt Alt;
             MainList = new List<object>();
@@ -136,7 +111,7 @@ namespace geliosNEW
             f_Update = false;
             f_Changes = false;
             f_StackDustController = new TStackDustController();
-        }*/
+        }
         ~TListNode() { }
         public TNodeMain FindLastNodeToAlternate(int AltId, int ANumAlt, int AIdParenShape)
         {
@@ -295,7 +270,7 @@ namespace geliosNEW
                 Alt.NodeStart = null;
                 Alt.NodeEnd = null;
                 Alt.Num = ANumAlt;
-          //      AlternateList.Add(Alt);
+                AlternateList.Add(Alt);
                 return true;
             }
             NS = FindNode(WS);
@@ -352,76 +327,11 @@ namespace geliosNEW
         public void FillNodeAncestor(TNodeMain ANode);
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-            public bool CompareWorkShape(TBaseWorkShape WS, TBaseWorkShape WE);
-            public bool GetWSToAlternate(int AId, TBaseWorkShape AWSFirst, TBaseWorkShape AWSLast);
-            public void BeginUpdate();
-            public void EndUpdate();
-            public void ClearAll();
-            public void PrepareDeleteWorkShape(TBaseWorkShape AWS);
-            public int DeleteWorkShape();
-            public void SaveAllToFile(AnsiString AFileName, int ATypeParam, TDischargedMassiv AOgrSovm);
-            public TNodeMain CreateNode(TBaseWorkShape WS);
-            public TNodeAncestor CreateNodeAncestor(int AId, int AIdAncestor);
-            public void PrepareAddNode(TNodeMain Nd);
-            public void ClearNodeTypeCreate();
-            public TNode CheckAlternateWSFirst(TBaseWorkShape AWS);
-            public TNode CheckAlternateWSEnd(TBaseWorkShape AWS);*/
-        public void LoadInfoForAlternate(TAltInfo AltIfo, int AParentShapeID)
-        {
-            TNodeAlt Itm;
-            TNodeMain Node, First, Last;
-            TAltInfoItem AI;
-            AltIfo.Clear();
-            for (int i = 0; i <= AlternateCount - 1; i++)
-            {
-         //       Itm = GetAlternateItem(i);
-            /*    if (Itm.NodeStart.IdParentShape == AParentShapeID)
-                {
-         /*           AI = AltIfo.AddAltIfo(Itm.ID, Itm.Num, AParentShapeID, Itm.NodeStart, Itm.NodeEnd);
-                    if (AI && (Itm.ID == 0) && (Itm.Num == 0) && (AParentShapeID == 0))
-                        AI.Main = true;
-
-                }*/
-            }
-            for (int i = 0; i <= MainList.Count - 1; i++)
-            {
-         /*       Node = static_cast<TNodeMain*>(MainList.Items[i]);
-                if (Node && Node.IdParentShape == AParentShapeID)
-                {
-                    AI = AltIfo.AddAltIfo(Node.IdAlternate, Node.NumAlt, AParentShapeID, First, Last);
-                    if (AI!=null)
-                    {
-                        AI.Main = true;
-                        First = Node;
-                        while (First.Prior != null)
-                            First = First.Prior;
-
-                        Last = Node;
-                        while (Last.Next != null)
-                            Last = Last.Next;
-
-                        AI.NodeStart = First;
-                        AI.NodeEnd = Last;
-                    }
-                }*/
-            }
-        }
-        /*   public  bool GetAlternateInfo(int AShapeID, int &AltID, int &NumAlt, int &IDParent);*/
-=======
         public TBaseWorkShape FindNextNode(TBaseWorkShape W);
         public TBaseWorkShape FindPriorNode(TBaseWorkShape W);
         public TNodeMain FindNextNode2(TBaseWorkShape W);
         public TNodeMain FindPriorNode2(TBaseWorkShape W);
 
-=======
-        public TBaseWorkShape FindNextNode(TBaseWorkShape W);
-        public TBaseWorkShape FindPriorNode(TBaseWorkShape W);
-        public TNodeMain FindNextNode2(TBaseWorkShape W);
-        public TNodeMain FindPriorNode2(TBaseWorkShape W);
-
->>>>>>> parent of 7032bbe... next gen
         public bool CompareWorkShape(TBaseWorkShape WS, TBaseWorkShape WE);
         public bool GetWSToAlternate(int AId, TBaseWorkShape AWSFirst, TBaseWorkShape AWSLast);
         public void BeginUpdate();
@@ -438,10 +348,6 @@ namespace geliosNEW
         public TNode CheckAlternateWSEnd(TBaseWorkShape AWS);
         public void LoadInfoForAlternate(TAltInfo AltIfo, int AParentShapeID);
         public  bool GetAlternateInfo(int AShapeID, int &AltID, int &NumAlt, int &IDParent);*/
-<<<<<<< HEAD
->>>>>>> parent of 7032bbe... next gen
-=======
->>>>>>> parent of 7032bbe... next gen
         public void GetAllWorkShape(TDynamicArray AMass)
         {
             if (AMass!=null)

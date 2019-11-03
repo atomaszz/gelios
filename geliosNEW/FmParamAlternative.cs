@@ -16,6 +16,7 @@ namespace geliosNEW
         private int f_ParentShapeID;
         private TBaseShape f_TFE;
         private Graphics f_Glp;
+        private List<object> sgObjects;
 
 
         public bool FReadOnly;
@@ -48,6 +49,7 @@ namespace geliosNEW
         public FmParamAlternative()
         {
             InitializeComponent();
+            sgObjects = new List<object>();
         }
 
 
@@ -495,7 +497,10 @@ namespace geliosNEW
                 {
                     AI = TFE.ParamAlt.Items[i];
 
-                    //sgParam->Objects[0][1 + i] = (TObject*)AI;
+                    if (sgObjects.Count <= i + 1)
+                        sgObjects.Add((object)AI);
+                    else
+                        sgObjects[i] = (object)AI;
                     AI.SOSTAV = (TFE.ID).ToString() + ":" + (i + 1).ToString();
                     CommonGraph.SGCellsByName(sgParam, i, "НАЗВАНИЕ", AI.NAME);
                     CommonGraph.SGCellsByName(sgParam, i, "ФУНКЦИЯ", AI.FUNCTION2);
@@ -778,7 +783,6 @@ namespace geliosNEW
             }
         }
 
-<<<<<<< HEAD
         private void acDelExecute_Click(object sender, EventArgs e)
         {
             object pd = (object)sgObjects[sgParam.CurrentRow.Index];
@@ -822,7 +826,5 @@ namespace geliosNEW
                 }
             }
         }
-=======
->>>>>>> parent of 8496e56... Окно редактирования объектов в ТФЕ
     }
 }

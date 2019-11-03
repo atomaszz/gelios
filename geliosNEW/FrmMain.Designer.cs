@@ -88,6 +88,8 @@
             this.pbMain = new System.Windows.Forms.PictureBox();
             this.sbY = new System.Windows.Forms.VScrollBar();
             this.sbX = new System.Windows.Forms.HScrollBar();
+            this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelActiveMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
@@ -95,6 +97,14 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.файлToolStripMenuItem,
+            this.опцииToolStripMenuItem,
+            this.альтернативаToolStripMenuItem,
+            this.задачаОптимизацииToolStripMenuItem,
+            this.решениеЗадачиToolStripMenuItem,
+            this.настройкиToolStripMenuItem,
+            this.справкаToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(938, 24);
@@ -293,6 +303,10 @@
             // 
             // решениеЗадачиToolStripMenuItem
             // 
+            this.решениеЗадачиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.методПостроенияСуперпозицииToolStripMenuItem,
+            this.методОптимизацииToolStripMenuItem,
+            this.найтиРешениеToolStripMenuItem});
             this.решениеЗадачиToolStripMenuItem.Name = "решениеЗадачиToolStripMenuItem";
             this.решениеЗадачиToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
             this.решениеЗадачиToolStripMenuItem.Text = "Решение задачи";
@@ -314,7 +328,6 @@
             this.найтиРешениеToolStripMenuItem.Name = "найтиРешениеToolStripMenuItem";
             this.найтиРешениеToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
             this.найтиРешениеToolStripMenuItem.Text = "Найти решение";
-            this.найтиРешениеToolStripMenuItem.Click += new System.EventHandler(this.НайтиРешениеToolStripMenuItem_Click);
             // 
             // настройкиToolStripMenuItem
             // 
@@ -402,6 +415,11 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2,
+            this.toolStripStatusLabel3,
+            this.toolStripStatusLabel4});
             this.statusStrip1.Location = new System.Drawing.Point(0, 467);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(938, 22);
@@ -570,6 +588,10 @@
             this.Text = "GeliosNEW";
             this.SizeChanged += new System.EventHandler(this.UMainFrm_SizeChanged);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.UMainFrm_MouseMove);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panelActiveMenu.ResumeLayout(false);
             this.panelActiveMenu.PerformLayout();
