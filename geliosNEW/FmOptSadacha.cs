@@ -51,7 +51,6 @@ namespace geliosNEW
 
         private void BtShowGridSovm_Click(object sender, EventArgs e)
         {
-
         }
 
         public void InitData()
@@ -174,7 +173,6 @@ namespace geliosNEW
             btShowGridSovm.Enabled = checkBox9.Checked;
         }
 
-<<<<<<< HEAD
         private void checkBox1_Click(object sender, EventArgs e)
         {
 
@@ -341,8 +339,6 @@ namespace geliosNEW
             }
         }
 
-=======
->>>>>>> parent of cc35d81... goo oon
         bool OPM_Inorder(object A)
         {
             TBaseShape m_A = (TBaseShape)(A);
@@ -425,8 +421,8 @@ namespace geliosNEW
                     break;
       }
             can_list =false;
-            pictureBox1.Refresh();
-            pictureBox1.Refresh();
+            pictureBox1.Update();
+            pictureBox1.Update();
         }
         void all_visible_false()
         {

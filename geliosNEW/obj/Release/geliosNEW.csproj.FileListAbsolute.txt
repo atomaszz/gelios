@@ -21,16 +21,3 @@ C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Release\geliosNEW.csproj.GenerateResou
 C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Release\geliosNEW.csproj.CoreCompileInputs.cache
 C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Release\geliosNEW.exe
 C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Release\geliosNEW.pdb
-C:\Users\Atom\Desktop\gelios\geliosNEW\bin\Release\geliosNEW.exe.config
-C:\Users\Atom\Desktop\gelios\geliosNEW\bin\Release\geliosNEW.exe
-C:\Users\Atom\Desktop\gelios\geliosNEW\bin\Release\geliosNEW.pdb
-C:\Users\Atom\Desktop\gelios\geliosNEW\obj\Release\geliosNEW.csprojAssemblyReference.cache
-C:\Users\Atom\Desktop\gelios\geliosNEW\obj\Release\geliosNEW.FmOptSadacha.resources
-C:\Users\Atom\Desktop\gelios\geliosNEW\obj\Release\geliosNEW.FmParamAlternative.resources
-C:\Users\Atom\Desktop\gelios\geliosNEW\obj\Release\geliosNEW.FmTredactChar.resources
-C:\Users\Atom\Desktop\gelios\geliosNEW\obj\Release\geliosNEW.Properties.Resources.resources
-C:\Users\Atom\Desktop\gelios\geliosNEW\obj\Release\geliosNEW.FrmMain.resources
-C:\Users\Atom\Desktop\gelios\geliosNEW\obj\Release\geliosNEW.csproj.GenerateResource.cache
-C:\Users\Atom\Desktop\gelios\geliosNEW\obj\Release\geliosNEW.csproj.CoreCompileInputs.cache
-C:\Users\Atom\Desktop\gelios\geliosNEW\obj\Release\geliosNEW.exe
-C:\Users\Atom\Desktop\gelios\geliosNEW\obj\Release\geliosNEW.pdb
