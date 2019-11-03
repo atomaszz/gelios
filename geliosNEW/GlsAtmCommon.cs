@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace geliosNEW
 {
-    public class TGlsNode
+    class TGlsNode
     {
         protected TGlsNode _next;
         protected TGlsNode _prev;
@@ -71,7 +71,7 @@ namespace geliosNEW
             get { return _val; }
         }
     }
-    public class TGlsList : TGlsNode
+    class TGlsList : TGlsNode
     {
         TGlsListNode header;
         TGlsListNode win;

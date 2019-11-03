@@ -93,6 +93,7 @@ namespace geliosNEW
                    TrackCreator = new TPredicateTrackCreator();
                    ozenk_t = new TDischargedMassiv(100000000.0);
                    ozenk_v = new TDischargedMassiv(100000000.0);
+<<<<<<< HEAD
                }*/
                ~TZadacha() {  }
         public void Clear()
@@ -104,6 +105,12 @@ namespace geliosNEW
             TrackCreator.ClearBase();*/
         }
         /*       public void Init(int AType_Char, bool ACheckNud, string AFullPredcateModel);
+=======
+               }
+           /*    ~TZadacha() {  }
+               public void Clear();
+               public void Init(int AType_Char, bool ACheckNud, string AFullPredcateModel);
+>>>>>>> parent of 7032bbe... next gen
                public void Process();
                public string Check();
                public string CheckTrack();*/
@@ -270,10 +277,7 @@ namespace geliosNEW
           //  delete mOzenk;
         }
 
-        public TPredicateTree Tree
-        {
-            get { return f_Tree;  }
-        }
+        /*  public TPredicateTree Tree = {read = f_Tree*/
 
         /*       public TPredicateTreeItem PTI[int AIndex] = { read = GetPTI };   --.> GetPTI*/
         public int CountPTI

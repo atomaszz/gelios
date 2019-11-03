@@ -73,8 +73,7 @@ namespace geliosNEW
         TAltSelector f_AltSelector;
         TAltStackController f_AltStackController;
         TPredicatePath f_PredicatePath;
-        TZadacha f_Zadacha;
-        string f_PredicateDopPrav;
+
         void InitHelp()
         {
        //     fmHelp = null;
@@ -184,10 +183,11 @@ namespace geliosNEW
             GMess.RegistrMessage(7, GLBApplySettingsForOutherGrid);*/
             InitHelp();
             InitPieModule();
-            f_Zadacha = new TZadacha();
-            //   f_ClipCopyTFS = new TClipCopyTFS(Handle, 0x8000000);
-            f_PredicatePath = new TPredicatePath();
-            /*     ApplySettings();
+            /*     f_Zadacha = new TZadacha;
+                 f_ClipCopyTFS = new TClipCopyTFS(Handle, 0x8000000);
+                 f_PredicatePath = new TPredicatePath;
+                 f_PredicateDopPrav = new AnsiString;
+                 ApplySettings();
                  randomize();*/
 
             //      pbGraph = pbMain.CreateGraphics();
@@ -553,8 +553,8 @@ namespace geliosNEW
 
             f_PredicatePath.Init();
             f_Zadacha.Clear();
-            SharedConst.InitTrashCounter();
-            SharedConst.InitTFEConvertor();
+            InitTrashCounter();
+            InitTFEConvertor();
             TTreeList m_TreeList = new TTreeList();
             TAlternativeParser AP = new TAlternativeParser();
             TPredicateTFSConvertor TC = new TPredicateTFSConvertor();
@@ -566,14 +566,14 @@ namespace geliosNEW
             TC.Process(f_PredicatePath.BasePath, f_PredicatePath.UsedPath);*/
     /*        GC.Init(TC.Head, f_Zadacha.Tree);
             f_Zadacha.Init(f_TypeParam, f_CheckNud, FullPredicateModel(GC.PrStruct,
-              GC.PrRab, GC.PrControlRab, GC.PrControlFunc, GC.PrCheckCondition, OptZ, f_PredicateDopPrav));
+              GC.PrRab, GC.PrControlRab, GC.PrControlFunc, GC.PrCheckCondition, OptZ, *f_PredicateDopPrav));
             string S;
             S = f_Zadacha.Check();
-            if (S.Length > 0)
-                MessageBox.Show(S, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            if (S.Length() > 0)
+                Application.MessageBox(S.c_str(), "Ошибка", MB_ICONWARNING);
             else
             {
-                if (CreateStartDecision(f_Zadacha, f_TypeParam, SharedConst.opt_sadacha.get_type_metod()))
+                if (CreateStartDecision(f_Zadacha, f_TypeParam, opt_sadacha.get_type_metod()))
                 {
                     StartTime = GetTickCount();
                     f_Zadacha.Process();
@@ -582,7 +582,15 @@ namespace geliosNEW
                 }
                 FreeStartDecision();
             }
+<<<<<<< HEAD
             FreeTFEConvertor();*/
+=======
+            delete GC;
+            delete TC;
+            delete AP;
+            delete m_TreeList;
+            FreeTFEConvertor();
+>>>>>>> parent of 7032bbe... next gen
 
         }
 
