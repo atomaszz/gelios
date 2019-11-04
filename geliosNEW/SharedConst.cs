@@ -163,5 +163,39 @@ namespace geliosNEW
             if ((rec.X+rec.Width)<pnt.X || (rec.Y + rec.Height) < pnt.Y) return false;
             return true;
         }
+
+        /*------------------------------------------------------------*/
+        public static int PredicatePathCnt;
+        public static void PredicatePathInit()
+        {
+            PredicatePathCnt = 0;
+        }
+        public static int PredicatePathNextNum()
+        {
+            --PredicatePathCnt;
+            return PredicatePathCnt;
+        }
+
+        public static int g_TrashCounter;
+        public static void InitTrashCounter()
+        {
+            g_TrashCounter = 0;
+        }
+
+        public static int NextTrashItemID()
+        {
+            return (++g_TrashCounter);
+        }
+
+        public static TGlsList lcList;
+        public static void InitTFEConvertor()
+        {
+            lcList = new TGlsList();
+        }
+
+        public static void FreeTFEConvertor()
+        {
+            lcList.clear();
+        }
     }
 }

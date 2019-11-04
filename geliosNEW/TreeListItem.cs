@@ -6,30 +6,65 @@ using System.Threading.Tasks;
 
 namespace geliosNEW
 {
-    class TMainTreeList
+    public class TMainTreeList
     {
         List<object> f_List;
         int f_Level;
-        /*    TAlternateTreeList  GetAlternateItem(int AIndex);
-            TAlternateTreeList  GetMainAlternative();
-            int __fastcall GetItemCount();
-            void FreeList();
-            public:
+        public TAlternateTreeList  GetAlternateItem(int AIndex)
+        {
+            if (AIndex >= 0 && AIndex <= f_List.Count - 1)
+                return (TAlternateTreeList)(f_List.ElementAt(AIndex));
+            else
+                return null;
+        }
+        TAlternateTreeList  GetMainAlternative()
+        {
+            TAlternateTreeList Res;
+            for (int i = 0; i <= ItemCount - 1; i++)
+            {
+                Res = GetAlternateItem(i);
+                if (Res.MainAlternative)
+                    return Res;
+            }
+            return null;
+        }
+        int GetItemCount()
+        {
+            return f_List.Count;
+        }
+        void FreeList()
+        {
+            f_List.Clear();
+        }
+   /*         public:
          TMainTreeList();
             ~TMainTreeList();
-            void AddToTree(TAlternateTreeList* Item);
-            void Clear();
-            TTreeListItem* FindTFE(TBaseShape* ABaseShape);
-            void FindAlternate(TBaseWorkShape* ABaseWorkShape, TDynamicArray* D);
-            void FindAlternate2(TBaseWorkShape* AFirstWorkShape, TBaseWorkShape* AEndWorkShape, TDynamicArray* D);
-            void GetTreeListTFSFromMainAlternative(TAlternateTreeList* Alternative, TDynamicArray* D);
-            __property int ItemCount = { read = GetItemCount };
-            __property TAlternateTreeList* AlternateItem[int AIndex] = {read = GetAlternateItem
-        };
-        __property int Level = { read = f_Level, write = f_Level };
-        __property TAlternateTreeList* MainAlternative = { read = GetMainAlternative };*/
+            void AddToTree(TAlternateTreeList* Item);*/
+        public void Clear()
+        {
+            FreeList();
+        }
+        /*         TTreeListItem* FindTFE(TBaseShape* ABaseShape);
+                 void FindAlternate(TBaseWorkShape* ABaseWorkShape, TDynamicArray* D);
+                 void FindAlternate2(TBaseWorkShape* AFirstWorkShape, TBaseWorkShape* AEndWorkShape, TDynamicArray* D);
+                 void GetTreeListTFSFromMainAlternative(TAlternateTreeList* Alternative, TDynamicArray* D);*/
+        public int ItemCount
+        {
+            get { return GetItemCount(); }
+        }
+      /*           __property TAlternateTreeList* AlternateItem[int AIndex] = {read = GetAlternateItem
+             };*/
+        public int Level
+        {
+            set { f_Level = value; }
+            get { return f_Level; }
+        }
+        public TAlternateTreeList MainAlternative
+        {
+            get { return GetMainAlternative(); }
+        }
     }
-    class TAlternateTreeList
+    public class TAlternateTreeList
     {
         int f_ID;
         int f_Num;
@@ -37,47 +72,106 @@ namespace geliosNEW
         bool f_Main;
         TNodeMain f_NodeStart;
         TNodeMain f_NodeEnd;
-        /* TTreeListTFS* __fastcall GetTreeTFSItem(int AIndex);
-         int __fastcall GetItemCount();
-         void FreeList();
-         public:
-          TAlternateTreeList();
-         ~TAlternateTreeList();
-         void AddToAlternate(TTreeListTFS* Item);
-         TTreeListItem* FindTFE(TBaseShape* ABaseShape);
-         TTreeListTFS* FindTFS(TBaseWorkShape* AWS);
-         __property int ItemCount = { read = GetItemCount };
-         __property TTreeListTFS* TreeTFSItem[int AIndex] = {read = GetTreeTFSItem
-     };
-     __property bool MainAlternative = { read = f_Main, write = f_Main };
-     __property TNodeMain* NodeStart = { read = f_NodeStart, write = f_NodeStart };
-     __property TNodeMain* NodeEnd = { read = f_NodeEnd, write = f_NodeEnd };
-     __property int ID = { read = f_ID, write = f_ID };
-     __property int Num = { read = f_Num, write = f_Num };*/
+        public TTreeListTFS GetTreeTFSItem(int AIndex)
+        {
+            if (AIndex >= 0 && AIndex <= f_List.Count - 1)
+                return (TTreeListTFS)(f_List.ElementAt(AIndex));
+            else
+                return null;
+        }
+        int GetItemCount()
+        {
+            return f_List.Count;
+        }
+
+        /*      void FreeList();
+              public:
+               TAlternateTreeList();
+              ~TAlternateTreeList();
+              void AddToAlternate(TTreeListTFS* Item);
+              TTreeListItem* FindTFE(TBaseShape* ABaseShape);
+              TTreeListTFS* FindTFS(TBaseWorkShape* AWS);*/
+        public int ItemCount
+        {
+            get { return GetItemCount(); }
+        }
+    /*     __property TTreeListTFS* TreeTFSItem[int AIndex] = {read = GetTreeTFSItem
+     };*/
+        public bool MainAlternative
+        {
+            set { f_Main = value; }
+            get { return f_Main;  }
+        }
+        public TNodeMain NodeStart
+        {
+            set { f_NodeStart = value; }
+            get { return f_NodeStart; }
+        }
+        public TNodeMain NodeEnd
+        {
+            set { f_NodeEnd = value; }
+            get { return f_NodeEnd; }
+        }
+        public int ID
+        {
+            set { f_ID = value; }
+            get { return f_ID; }
+        }
+        public int Num
+        {
+            set { f_Num = value; }
+            get { return f_Num; }
+        }
     }
-    class TTreeListTFS
+    public class TTreeListTFS
     {
         TBaseWorkShape f_BaseWorkShape;
         List<object> f_List;
-        /*  void FreeList();
-          int __fastcall GetItemCount();
-          TTreeListItem* __fastcall GetTreeTFEItem(int AIndex);
-          public:
-           TTreeListTFS(TBaseWorkShape* ABaseWorkShape);
-          ~TTreeListTFS();
-          __property TBaseWorkShape* BaseWorkShape = {read = f_BaseWorkShape
-      };
-      __property int ItemCount = { read = GetItemCount };
-      __property TTreeListItem* TreeTFEItem[int AIndex] = { read = GetTreeTFEItem };*/
+        /*  void FreeList();*/
+        int GetItemCount()
+        {
+            return f_List.Count;
+        }
+        public TTreeListItem GetTreeTFEItem(int AIndex)
+        {
+            if (AIndex >= 0 && AIndex <= f_List.Count - 1)
+                return (TTreeListItem)(f_List.ElementAt(AIndex));
+            else
+                return null;
+        }
+        public TTreeListTFS(TBaseWorkShape ABaseWorkShape)
+        {
+            TBaseShape mBS;
+            TTreeListItem TL;
+            f_BaseWorkShape = ABaseWorkShape;
+            f_List = new List<object>();
+            for (int i = 0; i <= f_BaseWorkShape.WorkShapesCount - 1; i++)
+            {
+                mBS = f_BaseWorkShape.GetWorkShape(i);
+                TL = new TTreeListItem(mBS);
+                f_List.Add(TL);
+            }
+        }
+        ~TTreeListTFS() { }
+        public TBaseWorkShape BaseWorkShape
+        {
+            get { return f_BaseWorkShape;  }
+        }
+        public int ItemCount{ get { return GetItemCount(); } }
+
+   /*   __property TTreeListItem* TreeTFEItem[int AIndex] = { read = GetTreeTFEItem };*/
     }
-    class TTreeListItem
+    public class TTreeListItem
     {
         TBaseShape f_BaseShape;
         TMainTreeList f_MainNode;
-        /*  TTreeListItem(TBaseShape* ABaseShape);
-         ~TTreeListItem();
-         __property TMainTreeList* MainNode = {read = f_MainNode, write = f_MainNode
-     };
-     __property TBaseShape* BaseShape = { read = f_BaseShape };*/
+        public TTreeListItem(TBaseShape ABaseShape)
+        {
+            f_BaseShape = ABaseShape;
+            f_MainNode = null;
+        }
+        ~TTreeListItem() { }
+        public TMainTreeList MainNode { get { return f_MainNode; } set { f_MainNode = value; } }
+        public TBaseShape BaseShape { get { return f_BaseShape; } }
     }
 }

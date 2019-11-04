@@ -91,14 +91,24 @@ namespace geliosNEW
             }
             return Res;
         }
-    /*    int GetAlternateCount();
-        TNode GetAlternateItem(int AIndex);
-        void SaveParamAlternateToXML(TBaseShape ATFE, TGlsXmlElement AElement);
-        void SaveParamAlternateToBin(TBaseShape ATFE, SF_TFE A_tfe, THandle AFile);
-        void SaveOgrSovmToXML(TDischargedMassiv AOgrSovm, TGlsXmlElement AElement);
-        void SaveTypeDecision(TGlsXmlElement AElement);
-        void SaveOgrSovmToBin(TDischargedMassiv AOgrSovm, THandle AFile);
-        void SaveTypeDecisionToBin(THandle AFile);*/
+        int GetAlternateCount()
+        {
+            return AlternateList.Count;
+        }
+        TNodeAlt GetAlternateItem(int AIndex)
+        {
+            if (AIndex >= 0 && AIndex <= AlternateList.Count - 1)
+                return (TNodeAlt)(AlternateList.ElementAt(AIndex));
+            else
+                return null;
+        }
+
+        /*      void SaveParamAlternateToXML(TBaseShape ATFE, TGlsXmlElement AElement);
+              void SaveParamAlternateToBin(TBaseShape ATFE, SF_TFE A_tfe, THandle AFile);
+              void SaveOgrSovmToXML(TDischargedMassiv AOgrSovm, TGlsXmlElement AElement);
+              void SaveTypeDecision(TGlsXmlElement AElement);
+              void SaveOgrSovmToBin(TDischargedMassiv AOgrSovm, THandle AFile);
+              void SaveTypeDecisionToBin(THandle AFile);*/
         public TListNode()
         {
             TNodeAlt Alt;
@@ -345,9 +355,49 @@ namespace geliosNEW
         public void PrepareAddNode(TNodeMain Nd);
         public void ClearNodeTypeCreate();
         public TNode CheckAlternateWSFirst(TBaseWorkShape AWS);
-        public TNode CheckAlternateWSEnd(TBaseWorkShape AWS);
-        public void LoadInfoForAlternate(TAltInfo AltIfo, int AParentShapeID);
-        public  bool GetAlternateInfo(int AShapeID, int &AltID, int &NumAlt, int &IDParent);*/
+        public TNode CheckAlternateWSEnd(TBaseWorkShape AWS);*/
+        public void LoadInfoForAlternate(TAltInfo AltIfo, int AParentShapeID)
+        {
+            TNodeAlt Itm;
+            TNodeMain Node, First= null, Last = null;
+            TAltInfoItem AI;
+            AltIfo.Clear();
+            for (int i = 0; i <= AlternateCount - 1; i++)
+            {
+                Itm = GetAlternateItem(i);
+                if (Itm.NodeStart.IdParentShape == AParentShapeID)
+                {
+                    AI = AltIfo.AddAltIfo(Itm.ID, Itm.Num, AParentShapeID, Itm.NodeStart, Itm.NodeEnd);
+                    if (AI!=null && (Itm.ID == 0) && (Itm.Num == 0) && (AParentShapeID == 0))
+                        AI.Main = true;
+
+                }
+            }
+            for (int i = 0; i <= MainList.Count - 1; i++)
+            {
+                Node = (TNodeMain)(MainList.GetItems(i));
+                if (Node!=null && Node.IdParentShape == AParentShapeID)
+                {
+                    AI = AltIfo.AddAltIfo(Node.IdAlternate, Node.NumAlt, AParentShapeID, First, Last);
+                    if (AI!=null)
+                    {
+                        AI.Main = true;
+                        First = Node;
+                        while (First.Prior!=null)
+                            First = First.Prior;
+
+                        Last = Node;
+                        while (Last.Next != null)
+                            Last = Last.Next;
+
+                        AI.NodeStart = First;
+                        AI.NodeEnd = Last;
+                    }
+                }
+            }
+
+        }
+        /*     public  bool GetAlternateInfo(int AShapeID, int &AltID, int &NumAlt, int &IDParent);*/
         public void GetAllWorkShape(TDynamicArray AMass)
         {
             if (AMass!=null)
@@ -370,9 +420,12 @@ namespace geliosNEW
 
 /*        public int NodeMaxID = { read = GetNodeMaxID };
         public int TFEMaxID = { read = GetTFEMaxID };
-        public int AlternateMaxID = { read = GetAlternateMaxID };
-        public int AlternateCount = { read = GetAlternateCount };
-        public TNode AlternateItem[int AIndex] = { read = GetAlternateItem };
+        public int AlternateMaxID = { read = GetAlternateMaxID };*/
+        public int AlternateCount
+        {
+            get { return GetAlternateCount(); }
+        }
+ /*       public TNode AlternateItem[int AIndex] = { read = GetAlternateItem };
         public bool Changes = { read = f_Changes, write = f_Changes }; */
     }
 }

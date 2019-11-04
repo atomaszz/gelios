@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace geliosNEW
 {
-    class TGlsNode
+    public class TGlsNode
     {
         protected TGlsNode _next;
         protected TGlsNode _prev;
@@ -71,7 +71,7 @@ namespace geliosNEW
             get { return _val; }
         }
     }
-    class TGlsList : TGlsNode
+    public class TGlsList : TGlsNode
     {
         TGlsListNode header;
         TGlsListNode win;
@@ -84,17 +84,42 @@ namespace geliosNEW
              public TpublicGlsList* append(TGlsList* T);
              public void* prepend(void* T);
              public void* remove();
-             public void val(void* T);
-             public void* val();
-             public void* next();
-             public void* prev();
-             public void* first();
-             public void* last();
-             public int length();
-             public bool isFirst();
-             public bool isLast();
-             public bool isHead();
-             public void clear();*/
+             public void val(void* T);*/
+        public object val()
+        {
+            return win.Val;
+        }
+        public object next()
+        {
+            win = (TGlsListNode)(win.Next);
+            return win.Val;
+        }
+        public object prev()
+        {
+            win = (TGlsListNode)(win.Prev);
+            return win.Val;
+        }
+        public object first()
+        {
+            win = new TGlsListNode(header.Next);
+            return win.Val;
+        }
+        /*    public void* last();*/
+        public int length()
+        {
+            return _length;
+        }
+        /*       public bool isFirst();
+               public bool isLast();
+               public bool isHead();*/
+        public void clear()
+        {
+            while (length() > 0)
+            {
+                first();
+                remove();
+            }
+        }
     }
     class TGlsStack
     {

@@ -73,6 +73,7 @@ namespace geliosNEW
         TAltSelector f_AltSelector;
         TAltStackController f_AltStackController;
         TPredicatePath f_PredicatePath;
+        TZadacha f_Zadacha;
         void InitHelp()
         {
        //     fmHelp = null;
@@ -550,21 +551,21 @@ namespace geliosNEW
             int StartTime, EndTime;
             string OptZ = SharedConst.opt_sadacha.make_sadacha() + "\r\n" + SharedConst.opt_sadacha.make_ogrsovm();
 
-    /*        f_PredicatePath.Init();
+            f_PredicatePath.Init();
             f_Zadacha.Clear();
-            InitTrashCounter();
-            InitTFEConvertor();
-            TTreeList* m_TreeList = new TTreeList;
-            TAlternativeParser* AP = new TAlternativeParser;
-            TPredicateTFSConvertor* TC = new TPredicateTFSConvertor;
-            TGraphTFEConvertor* GC = new TGraphTFEConvertor;
+            SharedConst.InitTrashCounter();
+            SharedConst.InitTFEConvertor();
+            TTreeList m_TreeList = new TTreeList();
+            TAlternativeParser AP = new TAlternativeParser();
+            TPredicateTFSConvertor TC = new TPredicateTFSConvertor();
+            TGraphTFEConvertor GC = new TGraphTFEConvertor();
             m_TreeList.FillTreeFromList(MainList);
             AP.Parse(m_TreeList.MainTreeList);
             TC.CopyTree(AP.Head);
             TC.PathStyle = 2;
             TC.Process(f_PredicatePath.BasePath, f_PredicatePath.UsedPath);
             GC.Init(TC.Head, f_Zadacha.Tree);
-            f_Zadacha.Init(f_TypeParam, f_CheckNud, FullPredicateModel(GC.PrStruct,
+     /*       f_Zadacha.Init(f_TypeParam, f_CheckNud, FullPredicateModel(GC.PrStruct,
               GC.PrRab, GC.PrControlRab, GC.PrControlFunc, GC.PrCheckCondition, OptZ, *f_PredicateDopPrav));
             AnsiString S;
             S = f_Zadacha.Check();

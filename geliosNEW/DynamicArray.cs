@@ -158,8 +158,19 @@ namespace geliosNEW
         public  void AppendInteger(int APos, object AValue);
         public bool DeleteInteger(int APos);
         public bool Delete(object P);
-        public void InitStack();
-        public object Pop();*/
+        public void InitStack();*/
+        public object Pop()
+        {
+            object res;
+            TDynamicArrayItem Item;
+            if (f_PosStak <= 0) return null;
+            Item = (TDynamicArrayItem)(f_List.ElementAt(f_PosStak - 1));
+            f_PosStak--;
+            res = Item.P;
+            Item = null;
+            f_List.RemoveAt(f_PosStak);
+            return res;
+        }
         public TDynamicArrayItem Find(object P)
         {
             TDynamicArrayItem Item;
