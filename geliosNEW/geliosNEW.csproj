@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlternativeParser.cs" />
+    <Compile Include="AlternativeParserEnlarger.cs" />
+    <Compile Include="AlternativeParserGrp.cs" />
     <Compile Include="AltStack.cs" />
     <Compile Include="CommonGraph.cs" />
     <Compile Include="DischargedMassiv.cs" />
@@ -79,6 +82,9 @@
     <Compile Include="ListFlag.cs" />
     <Compile Include="ListForPaint.cs" />
     <Compile Include="Messangers.cs" />
+    <Compile Include="PredicateNumGenerator.cs" />
+    <Compile Include="PredicatePath.cs" />
+    <Compile Include="PredicateTFSConvertor.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -121,6 +127,7 @@
     <Compile Include="TParamAlternativeItem.cs" />
     <Compile Include="TRectLine.cs" />
     <Compile Include="TRectShape.cs" />
+    <Compile Include="TreeListItem.cs" />
     <Compile Include="TRhombShape.cs" />
     <Compile Include="TTail.cs" />
     <Compile Include="TTfeEllShape.cs" />
