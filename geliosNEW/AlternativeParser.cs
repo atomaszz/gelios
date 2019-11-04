@@ -53,7 +53,7 @@ namespace geliosNEW
         /*    public:
               TAlternativeParserItemList();
             ~TAlternativeParserItemList();*/
-        void Append(TAlternativeParserItemBase AItem)
+        public void Append(TAlternativeParserItemBase AItem)
         {
             TAlternativeParserItemBase Item;
             for (int i = 0; i <= f_List.Count - 1; i++)
@@ -163,13 +163,23 @@ namespace geliosNEW
         {
             return (TTreeListTFS)(f_Basis.GetItems(AIndex));
         }
-        /*      TTreeListTFS* FirstFromBasis();
-              TTreeListTFS* LastFromBasis();
-              public:
-                    TAlternativeParserItemBig();
-              ~TAlternativeParserItemBig();
-              int Who() { return 1; }
-              void BasisClear();*/
+        TTreeListTFS FirstFromBasis()
+        {
+            return GetBasisItems(0);
+        }
+        TTreeListTFS LastFromBasis()
+        {
+            return GetBasisItems(BasisCount - 1);
+        }
+/*
+        public:
+                   TAlternativeParserItemBig();
+             ~TAlternativeParserItemBig();*/
+         public override int Who() { return 1; }
+        public void BasisClear()
+        {
+            f_Basis.Clear();
+        }
         void BasisAdd(TTreeListTFS ATFS)
         {
             for (int i = 0; i <= f_Basis.Count - 1; i++)
@@ -179,13 +189,21 @@ namespace geliosNEW
             }
             f_Basis.Append(ATFS);
         }
-        /*     void FillBasisFromGrpItemList(TAlternativeParserGrpItemList* AList);*/
+        public void FillBasisFromGrpItemList(TAlternativeParserGrpItemList AList)
+        {
+            for (int i = 0; i <= AList.Count - 1; i++)
+                BasisAdd(AList.GetItems(i).TFS);
+        }
         public void FillBasisAlternateTreeList(TAlternateTreeList ALT)
         {
             for (int i = 0; i <= ALT.ItemCount - 1; i++)
                 BasisAdd(ALT.GetTreeTFSItem(i));
         }
-        /*   void FillBasisFromEnlarge(TAlternativeParserGrpCrossItemEnlarge* AEnl);*/
+        public void FillBasisFromEnlarge(TAlternativeParserGrpCrossItemEnlarge AEnl)
+        {
+            for (int i = 0; i <= AEnl.Count - 1; i++)
+                BasisAdd(AEnl.GetItems(i).TFS);
+        }
         public bool CompareBasisAndAlternateTreeList(TAlternateTreeList AList)
         {
             int LenB = BasisCount;
@@ -199,11 +217,59 @@ namespace geliosNEW
             }
             return true;
         }
-       /*    bool CompareBasisAndMassiv(TDynamicArray* AMass);
-           bool IsTailAlternateTreeList(TAlternateTreeList* AList);
-           void AddBig(TAlternativeParserItemBig* ABig);
-           void GetTreeListTFSFromBasis(TAlternateTreeList* Alternative,
-             TDynamicArray* D, bool &AValid);*/
+        public bool CompareBasisAndMassiv(TDynamicArray AMass)
+        {
+            int LenB = BasisCount;
+            int LenA = AMass.Count;
+            if (LenA != LenB)
+                return false;
+            for (int i = 0; i <= LenA - 1; i++)
+            {
+                if (GetBasisItems(i) != AMass.GetItems(i))
+                    return false;
+            }
+            return true;
+        }
+        public bool IsTailAlternateTreeList(TAlternateTreeList AList)
+        {
+            TTreeListTFS FT, ET;
+            TBaseWorkShape FW, EW;
+            if (AList.NodeEnd==null) return true;
+            FW = AList.NodeStart.WorkShape;
+            EW = AList.NodeEnd.WorkShape;
+            FT = FirstFromBasis();
+            ET = LastFromBasis();
+            bool res = ((FT.BaseWorkShape == FW) && (ET.BaseWorkShape == EW));
+            return res;
+        }
+        public void AddBig(TAlternativeParserItemBig ABig)
+        {
+            f_List.Add(ABig);
+        }
+        public void GetTreeListTFSFromBasis(TAlternateTreeList Alternative,
+                 TDynamicArray D, ref bool AValid)
+        {
+            TBaseWorkShape NS, NE, CR;
+            TTreeListTFS Tmp;
+            bool f = false;
+            bool e = false;
+            NS = Alternative.NodeStart.WorkShape;
+            NE = Alternative.NodeEnd.WorkShape;
+            for (int i = 0; i <= BasisCount - 1; i++)
+            {
+                Tmp = GetBasisItems(i);
+                CR = Tmp.BaseWorkShape;
+                if (!f && (CR == NS))
+                    f = true;
+
+                if (f && !e)
+                    D.Append(Tmp);
+
+                if (!e && (CR == NE))
+                    e = true;
+            }
+            AValid = f && e;
+        }
         public void GetAllFirstBigsNoCheck(TDynamicArray AMass)
         {
             TAlternativeParserItemBig mTemp;
@@ -221,7 +287,6 @@ namespace geliosNEW
                     mTemp.MainTreeList = MainTreeList;
                     if (!mTemp.Check)
                         AMass.InsertToFirst(mTemp);
-                    //if (mTemp.Enlarge > 0)
                 }
                 if (m_who == 0)
                 {
@@ -245,8 +310,20 @@ namespace geliosNEW
 
             }
         }
+        public void HookBasisBig()
+        {
+            TAlternativeParserItemBig m_F;
+            BasisClear();
+            m_F = GetItemsBig(0);
+            for (int i = 0; i <= m_F.BasisCount - 1; i++)
+                BasisAdd(m_F.GetBasisItems(i));
+            f_List.RemoveAt(f_List.IndexOf(m_F));
+            m_F = null;
 
-     /*      void HookBasisBig();*/
+            for (int i = 0; i <= CountBig - 1; i++)
+                GetItemsBig(i).NumAlt = i + 1;
+
+        }
         public TAlternativeParserItemList MainList
         {
             get { return f_MainList;  }
@@ -361,7 +438,7 @@ namespace geliosNEW
                             if (!b_basis && !b_main)
                             {
                                 Mass.Clear();
-                                ABig.GetTreeListTFSFromBasis(AItem, Mass, b_valid);
+                                ABig.GetTreeListTFSFromBasis(AItem, Mass, ref b_valid);
                                 if (!b_valid)
                                     continue;
                                 b_cbm = ABig.CompareBasisAndMassiv(Mass);
@@ -421,7 +498,7 @@ namespace geliosNEW
 
             TAlternativeParserItemBig mBig = new TAlternativeParserItemBig();
             for (int i = 0; i <= ACrossItem.CountBasis - 1; i++)
-                FillItemGrp(ACrossItem.ItemsBasis[i], mBig);
+                FillItemGrp(ACrossItem.GetItemsBasis(i), mBig);
             mBig.Check = true;
             mBig.OwnerBig = mHeadBig;
             mBig.NumAlt = 0;
@@ -430,11 +507,11 @@ namespace geliosNEW
             for (int i = 0; i <= ACrossItem.CountOut - 1; i++)
             {
                 mBig = new TAlternativeParserItemBig();
-                Cross = ACrossItem.ItemsOut[i];
+                Cross = ACrossItem.GetItemsOut(i);
                 mBig.Check = true;
                 mBig.Cross = true;
                 for (int j = 0; j <= Cross.Count - 1; j++)
-                    FillItemGrp(Cross.Items[j], mBig);
+                    FillItemGrp(Cross.GetItems(j), mBig);
                 mBig.NumAlt = i + 1;
                 mBig.OwnerBig = mHeadBig;
                 mHeadBig.AddBig(mBig);

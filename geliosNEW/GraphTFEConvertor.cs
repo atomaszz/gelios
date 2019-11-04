@@ -125,9 +125,24 @@ namespace geliosNEW
                    f_Out = f_Out + GetAlias() + ", " + "[" + ListIDFromTFE() + "]).";
                }
            }
-           /*       TBaseShape* __fastcall GetParentBaseShape();
-                  public:
-               TGraphTFEConvertorItem();*/
+        public TBaseShape GetParentBaseShape()
+        {
+            if (f_Parent == null)
+                return null;
+            if (f_Parent.Rfc!=null)
+            {
+                TAlternativeParserItemTFE ITE = f_Parent.Rfc.ParentTFE;
+                if (ITE!=null)
+                    return ITE.TFE.BaseShape;
+            }
+            return null;
+        }
+        public TGraphTFEConvertorItem()
+        {
+            f_Out = "";
+            f_Item = null;
+            f_Parent = null;
+        }
         public void Make(TPredicateItemBase AItem, TPredicateItemBig AParent)
         {
             f_Item = AItem;
@@ -142,12 +157,26 @@ namespace geliosNEW
         {
             get { return f_Out;  }
         }
-      /*     __property TPredicateItemBase* Item = { read = f_Item };
-           __property TPredicateItemBig* Parent = { read = f_Parent };
-           __property int ParentID = { read = GetParentID };
-           __property AnsiString Alias = {read = GetAlias
-       };
-       __property TBaseShape* ParentBaseShape = { read = GetParentBaseShape };*/
+        public TPredicateItemBase Item
+        {
+            get { return f_Item; }
+        }
+        public TPredicateItemBig Parent
+        {
+            get { return f_Parent; }
+        }
+        public int ParentID
+        {
+            get { return GetParentID(); }
+        }
+        public string Alias
+        {
+            get { return GetAlias(); }
+        }
+        public TBaseShape ParentBaseShape
+        {
+            get { return GetParentBaseShape(); }
+        }
     }
     class TGraphTFEConvertor
     {

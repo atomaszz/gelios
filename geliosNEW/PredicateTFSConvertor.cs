@@ -47,9 +47,12 @@ namespace geliosNEW
         TAlternativeParserItemTFE f_RfcTFE;
         /*  public:
            TPredicateItemTFE();
-          ~TPredicateItemTFE();
-          __property TTreeListItem* TFE = {read = f_TFE, write = f_TFE
-      };*/
+          ~TPredicateItemTFE();*/
+        public TTreeListItem TFE
+        {
+            set { f_TFE = value; }
+            get { return f_TFE; }
+        }
         public TPredicateItemBig Big
         {
             set { f_Big = value;  }

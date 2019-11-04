@@ -21,11 +21,18 @@ namespace geliosNEW
              public:
          TPredicateTreeItem();
              ~TPredicateTreeItem();
-             void AddBaseShape(TBaseShape* AShape, int AID);
-             __property int ParentID = { read = f_ParentID, write = f_ParentID };
-             __property TBaseWorkShape* BaseWorkShape = {read = f_BaseWorkShape, write = f_BaseWorkShape
-         };
-         __property TBaseShape* ParentShape = { read = f_ParentShape, write = f_ParentShape };
+             void AddBaseShape(TBaseShape* AShape, int AID);*/
+        public int ParentID
+        {
+            set { f_ParentID = value; }
+            get { return f_ParentID; }
+        }
+        public TBaseWorkShape BaseWorkShape
+        {
+            set { f_BaseWorkShape = value; }
+            get { return f_BaseWorkShape; }
+        }
+     /*    __property TBaseShape* ParentShape = { read = f_ParentShape, write = f_ParentShape };
          __property int TypeWorkShape = { read = f_TypeWorkShape, write = f_TypeWorkShape };
          __property int Count = { read = GetCount };
          __property TBaseShape* TFE[int AIndex] = { read = GetTFE };
