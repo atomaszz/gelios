@@ -321,6 +321,7 @@
             this.checkBox8.Size = new System.Drawing.Size(15, 14);
             this.checkBox8.TabIndex = 15;
             this.checkBox8.UseVisualStyleBackColor = true;
+            this.checkBox8.CheckedChanged += new System.EventHandler(this.CheckBox8_CheckedChanged);
             // 
             // checkBox7
             // 
@@ -330,6 +331,7 @@
             this.checkBox7.Size = new System.Drawing.Size(15, 14);
             this.checkBox7.TabIndex = 14;
             this.checkBox7.UseVisualStyleBackColor = true;
+            this.checkBox7.CheckedChanged += new System.EventHandler(this.CheckBox7_CheckedChanged);
             // 
             // label1
             // 
@@ -391,8 +393,8 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.textBox1);
             this.tabPage1.Controls.Add(this.label6);
+            this.tabPage1.Controls.Add(this.textBox1);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.textBox4);
             this.tabPage1.Controls.Add(this.label5);
@@ -413,6 +415,7 @@
             this.textBox1.Size = new System.Drawing.Size(110, 24);
             this.textBox1.TabIndex = 20;
             this.textBox1.Text = "0";
+            this.textBox1.Visible = false;
             // 
             // label6
             // 
@@ -424,6 +427,7 @@
             this.label6.Size = new System.Drawing.Size(17, 18);
             this.label6.TabIndex = 19;
             this.label6.Text = "d";
+            this.label6.Visible = false;
             // 
             // label7
             // 
@@ -435,6 +439,7 @@
             this.label7.Size = new System.Drawing.Size(30, 29);
             this.label7.TabIndex = 18;
             this.label7.Text = "T";
+            this.label7.Visible = false;
             // 
             // textBox4
             // 
@@ -444,6 +449,7 @@
             this.textBox4.Size = new System.Drawing.Size(110, 24);
             this.textBox4.TabIndex = 17;
             this.textBox4.Text = "0";
+            this.textBox4.Visible = false;
             // 
             // label5
             // 
@@ -455,6 +461,7 @@
             this.label5.Size = new System.Drawing.Size(17, 18);
             this.label5.TabIndex = 15;
             this.label5.Text = "d";
+            this.label5.Visible = false;
             // 
             // label4
             // 
@@ -466,11 +473,12 @@
             this.label4.Size = new System.Drawing.Size(29, 29);
             this.label4.TabIndex = 14;
             this.label4.Text = "V";
+            this.label4.Visible = false;
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.textBox2);
             this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.textBox2);
             this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.textBox3);
             this.tabPage2.Controls.Add(this.label11);
@@ -491,6 +499,7 @@
             this.textBox2.Size = new System.Drawing.Size(110, 24);
             this.textBox2.TabIndex = 26;
             this.textBox2.Text = "0";
+            this.textBox2.Visible = false;
             // 
             // label8
             // 
@@ -502,6 +511,7 @@
             this.label8.Size = new System.Drawing.Size(17, 18);
             this.label8.TabIndex = 25;
             this.label8.Text = "d";
+            this.label8.Visible = false;
             // 
             // label10
             // 
@@ -513,6 +523,7 @@
             this.label10.Size = new System.Drawing.Size(30, 29);
             this.label10.TabIndex = 24;
             this.label10.Text = "B";
+            this.label10.Visible = false;
             // 
             // textBox3
             // 
@@ -522,6 +533,7 @@
             this.textBox3.Size = new System.Drawing.Size(110, 24);
             this.textBox3.TabIndex = 23;
             this.textBox3.Text = "0";
+            this.textBox3.Visible = false;
             // 
             // label11
             // 
@@ -533,6 +545,7 @@
             this.label11.Size = new System.Drawing.Size(17, 18);
             this.label11.TabIndex = 22;
             this.label11.Text = "d";
+            this.label11.Visible = false;
             // 
             // label12
             // 
@@ -544,11 +557,12 @@
             this.label12.Size = new System.Drawing.Size(29, 29);
             this.label12.TabIndex = 21;
             this.label12.Text = "V";
+            this.label12.Visible = false;
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.textBox5);
             this.tabPage3.Controls.Add(this.label13);
+            this.tabPage3.Controls.Add(this.textBox5);
             this.tabPage3.Controls.Add(this.label14);
             this.tabPage3.Controls.Add(this.textBox6);
             this.tabPage3.Controls.Add(this.label15);
@@ -568,28 +582,32 @@
             this.textBox5.Size = new System.Drawing.Size(110, 24);
             this.textBox5.TabIndex = 26;
             this.textBox5.Text = "0";
+            this.textBox5.Visible = false;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label13.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label13.Location = new System.Drawing.Point(431, 29);
+            this.label13.Location = new System.Drawing.Point(432, 29);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(17, 18);
             this.label13.TabIndex = 25;
             this.label13.Text = "d";
+            this.label13.Visible = false;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label14.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label14.Location = new System.Drawing.Point(413, 14);
+            this.label14.Location = new System.Drawing.Point(411, 14);
+            this.label14.Margin = new System.Windows.Forms.Padding(0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(30, 29);
             this.label14.TabIndex = 24;
             this.label14.Text = "T";
+            this.label14.Visible = false;
             // 
             // textBox6
             // 
@@ -599,6 +617,7 @@
             this.textBox6.Size = new System.Drawing.Size(110, 24);
             this.textBox6.TabIndex = 23;
             this.textBox6.Text = "0";
+            this.textBox6.Visible = false;
             // 
             // label15
             // 
@@ -610,6 +629,7 @@
             this.label15.Size = new System.Drawing.Size(17, 18);
             this.label15.TabIndex = 22;
             this.label15.Text = "d";
+            this.label15.Visible = false;
             // 
             // label16
             // 
@@ -621,6 +641,7 @@
             this.label16.Size = new System.Drawing.Size(30, 29);
             this.label16.TabIndex = 21;
             this.label16.Text = "B";
+            this.label16.Visible = false;
             // 
             // tabPage4
             // 

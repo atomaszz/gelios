@@ -555,6 +555,11 @@ namespace geliosNEW
 
         }
 
+        private void МетодПостроенияСуперпозицииToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
         void BuildGlp(TBaseWorkShape AWN, DrawObject Glp, TBaseShape ASel)
         {
             TBaseShape BS;
