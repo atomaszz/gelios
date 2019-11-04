@@ -321,7 +321,6 @@
             this.checkBox8.Size = new System.Drawing.Size(15, 14);
             this.checkBox8.TabIndex = 15;
             this.checkBox8.UseVisualStyleBackColor = true;
-            this.checkBox8.CheckedChanged += new System.EventHandler(this.CheckBox8_CheckedChanged);
             // 
             // checkBox7
             // 
@@ -331,7 +330,6 @@
             this.checkBox7.Size = new System.Drawing.Size(15, 14);
             this.checkBox7.TabIndex = 14;
             this.checkBox7.UseVisualStyleBackColor = true;
-            this.checkBox7.CheckedChanged += new System.EventHandler(this.CheckBox7_CheckedChanged);
             // 
             // label1
             // 
@@ -601,7 +599,6 @@
             this.textBox6.Size = new System.Drawing.Size(110, 24);
             this.textBox6.TabIndex = 23;
             this.textBox6.Text = "0";
-            this.textBox6.TextChanged += new System.EventHandler(this.TextBox6_TextChanged);
             // 
             // label15
             // 

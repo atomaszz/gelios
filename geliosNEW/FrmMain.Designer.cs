@@ -322,12 +322,14 @@
             this.методОптимизацииToolStripMenuItem.Name = "методОптимизацииToolStripMenuItem";
             this.методОптимизацииToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
             this.методОптимизацииToolStripMenuItem.Text = "Метод оптимизации";
+            this.методОптимизацииToolStripMenuItem.Click += new System.EventHandler(this.МетодОптимизацииToolStripMenuItem_Click);
             // 
             // найтиРешениеToolStripMenuItem
             // 
             this.найтиРешениеToolStripMenuItem.Name = "найтиРешениеToolStripMenuItem";
             this.найтиРешениеToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
             this.найтиРешениеToolStripMenuItem.Text = "Найти решение";
+            this.найтиРешениеToolStripMenuItem.Click += new System.EventHandler(this.найтиРешениеToolStripMenuItem_Click);
             // 
             // настройкиToolStripMenuItem
             // 
