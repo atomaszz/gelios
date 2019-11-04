@@ -346,6 +346,43 @@ namespace geliosNEW
             return true;
         }
 
+        private void CheckBox8_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox8.Checked)
+            {
+                switch (type_sadacha)
+                {
+                    case SharedConst.ZAD_1:
+                        label7.Visible = true; label6.Visible = true; textBox1.Visible = true;
+                        textBox1.Text = Td;
+                        break;
+                    case SharedConst.ZAD_2:
+                        label10.Visible = true; label8.Visible = true; textBox2.Visible = true;
+                        textBox2.Text = Bd;
+                        break;
+                    case SharedConst.ZAD_3:
+                        label13.Visible = true; label14.Visible = true; textBox5.Visible = true;
+                        textBox5.Text = Td;
+                        break;
+                }
+            }
+            else
+            {
+                switch (type_sadacha)
+                {
+                    case SharedConst.ZAD_1:
+                        label7.Visible = false; label6.Visible = false; textBox1.Visible = false;
+                        break;
+                    case SharedConst.ZAD_2:
+                        label10.Visible = false; label8.Visible = false; textBox2.Visible = false;
+                        break;
+                    case SharedConst.ZAD_3:
+                        label13.Visible = false; label14.Visible = false; textBox5.Visible = false;
+                        break;
+                }
+            }
+        }
+
         private void TextBox6_TextChanged(object sender, EventArgs e)
         {
 
@@ -376,8 +413,48 @@ namespace geliosNEW
                 }
             }
         }
+
+        private void CheckBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            {
+                if (checkBox7.Checked)
+                {
+                    switch (type_sadacha)
+                    {
+                        case SharedConst.ZAD_1:
+                            label4.Visible = true; label5.Visible = true; textBox4.Visible = true;
+                            textBox4.Text = Vd;
+                            break;
+                        case SharedConst.ZAD_2:
+                            label11.Visible = true; label12.Visible = true; textBox3.Visible = true;
+                            textBox3.Text = Vd;
+                            break;
+                        case SharedConst.ZAD_3:
+                            label15.Visible = true; label16.Visible = true; textBox6.Visible = true;
+                            textBox6.Text = Bd;
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (type_sadacha)
+                    {
+                        case SharedConst.ZAD_1:
+                            label4.Visible = false; label5.Visible = false; textBox4.Visible = false;
+                            break;
+                        case SharedConst.ZAD_2:
+                            label11.Visible = false; label12.Visible = false; textBox3.Visible = false;
+                            break;
+                        case SharedConst.ZAD_3:
+                            label15.Visible = false; label16.Visible = false; textBox6.Visible = false;
+                            break;
+                    }
+                }
+            }
+        }
+
         //получение картинки задачи в зависимости от выбора
-        void  what_sadacha_check(int i)
+        void what_sadacha_check(int i)
         {
             pictureBox1.Image = null;
             pictureBox2.Image = null;
@@ -432,6 +509,88 @@ namespace geliosNEW
             label4.Visible = false; label5.Visible = false; textBox4.Visible = false;
             label11.Visible = false; label12.Visible = false; textBox3.Visible = false;
             label15.Visible = false; label16.Visible = false; textBox6.Visible = false;
+        }
+        //отображение выбранной задачи в предикатной модели
+        public string make_sadacha()
+        {
+            string s = "";
+            if (checkBox9.Checked == true)
+            {
+
+            }
+            switch (type_sadacha)
+            {
+                case SharedConst.ZAD_1:
+                    s = "zadacha_opt(" + (type_sadacha + 1);
+                    if ((type_ogr == 3) || (type_ogr == 7)) s = s + ",[[Vd," + Vd + "],[Td," + Td + "]]";
+                    if ((type_ogr == 1) || (type_ogr == 5)) s = s + ",[[Vd," + Vd + "],[]]";
+                    if ((type_ogr == 2) || (type_ogr == 6)) s = s + ",[[],[Td," + Td + "]]";
+                    if ((type_ogr == 0) || (type_ogr == 4)) s = s + ",[[],[]]";
+                    s = s + ").";
+                    break;
+
+                case SharedConst.ZAD_2:
+                    s = "zadacha_opt(" + (type_sadacha + 1);
+                    if ((type_ogr == 3) || (type_ogr == 7)) s = s + ",[[Vd," + Vd + "],[Bd," + Bd + "]]";
+                    if ((type_ogr == 1) || (type_ogr == 5)) s = s + ",[[Vd," + Vd + "],[]]";
+                    if ((type_ogr == 2) || (type_ogr == 6)) s = s + ",[[],[Bd," + Bd + "]]";
+                    if ((type_ogr == 0) || (type_ogr == 4)) s = s + ",[[],[]]";
+                    s = s + ").";
+                    break;
+
+                case SharedConst.ZAD_3:
+                    s = "zadacha_opt(" + (type_sadacha + 1);
+                    if ((type_ogr == 3) || (type_ogr == 7)) s = s + ",[[Bd," + Bd + "],[Td," + Td + "]]";
+                    if ((type_ogr == 1) || (type_ogr == 5)) s = s + ",[[Bd," + Bd + "],[]]";
+                    if ((type_ogr == 2) || (type_ogr == 6)) s = s + ",[[],[Td," + Td + "]]";
+                    if ((type_ogr == 0) || (type_ogr == 4)) s = s + ",[[],[]]";
+                    s = s + ").";
+                    break;
+
+                case SharedConst.ZAD_4:
+                    s = "zadacha_opt(" + (type_sadacha + 1);
+                    s = s + ",[[c1," + c1 + "],[c2," + c2 + "],[c3," + c3 + "]]";
+                    s = s + ").";
+                    break;
+
+                case SharedConst.ZAD_5:
+                    s = "zadacha_opt(" + (type_sadacha + 1);
+                    s = s + ",[[c1," + c1 + "],[c2," + c2 + "],[c3," + c3 + "]]";
+                    s = s + ").";
+                    break;
+
+                case SharedConst.ZAD_6:
+                    s = "zadacha_opt(" + (type_sadacha + 1);
+                    s = s + ",[[l," + c1 + "],[k," + c2 + "],[m," + c3 + "]]";
+                    s = s + ").";
+                    break;
+            }
+            return s;
+        }
+        public string make_ogrsovm()
+        {
+            int v;
+            string Res="", Item;
+            int rc = MassWork.Count;
+            int rw = OptSovm.HiRow();
+            if (checkBox9.Checked)
+            {
+                for (int i = 0; i <= rw; i++)
+                {
+                    Item = "ogr_sovmest([";
+                    for (int j = 0; j <= rc - 1; j++)
+                    {
+                        v = (int)OptSovm.GetItems(i,j + 1);
+                        if (j==0)
+                            Item = Item + v.ToString();
+                        else
+                            Item = Item + "," + v.ToString();
+                    }
+                    Item = Item + "]).";
+                    Res = Res + Item + "\r\n";
+                }
+            }
+            return Res;
         }
     }
 }
