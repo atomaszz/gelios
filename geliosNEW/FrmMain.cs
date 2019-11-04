@@ -550,11 +550,6 @@ namespace geliosNEW
 
         }
 
-        private void МетодОптимизацииToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         void BuildGlp(TBaseWorkShape AWN, DrawObject Glp, TBaseShape ASel)
         {
             TBaseShape BS;

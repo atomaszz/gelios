@@ -322,7 +322,6 @@
             this.методОптимизацииToolStripMenuItem.Name = "методОптимизацииToolStripMenuItem";
             this.методОптимизацииToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
             this.методОптимизацииToolStripMenuItem.Text = "Метод оптимизации";
-            this.методОптимизацииToolStripMenuItem.Click += new System.EventHandler(this.МетодОптимизацииToolStripMenuItem_Click);
             // 
             // найтиРешениеToolStripMenuItem
             // 
