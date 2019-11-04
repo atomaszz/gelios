@@ -134,7 +134,7 @@ namespace geliosNEW
                             AT.AddToAlternate(Tfs);
                             for (int j = 0; j <= Tfs.ItemCount - 1; j++)
                             {
-                                LI = Tfs.TreeTFEItem[j];
+                                LI = Tfs.GetTreeTFEItem(j);
                                 f_Stack.AddToStack(LI.BaseShape.ID);
                                 if (AListNode.IsContainsChildShape(LI.BaseShape.ID))
                                 {

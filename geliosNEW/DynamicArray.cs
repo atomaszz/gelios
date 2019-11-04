@@ -98,7 +98,7 @@ namespace geliosNEW
         {
         //    AppendInteger(APos, AValue);
         }
-        TDynamicArrayItem  GetPosition(int APos)
+        public TDynamicArrayItem  GetPosition(int APos)
         {
             if (APos >= 0 && APos <= f_List.Count - 1)
                 return (TDynamicArrayItem)f_List.ElementAt(APos);
@@ -154,11 +154,30 @@ namespace geliosNEW
             f_PosStak++;
         }
     /*    public void AppendNamed(string AName, object P = NULL);
-        public bool DeleteNamed(AnsiString AName);
-        public  void AppendInteger(int APos, object AValue);
-        public bool DeleteInteger(int APos);
-        public bool Delete(object P);
-        public void InitStack();*/
+        public bool DeleteNamed(AnsiString AName);*/
+        public  void AppendInteger(int APos, object AValue)
+        {
+            int m = -1;
+            TDynamicArrayItem Item;
+            if (f_List.Count > 0)
+                m = (TDynamicArrayItem)(f_List.ElementAt(0)).Index;
+            for (int i = 1; i <= f_List.Count - 1; i++)
+            {
+                Item = (TDynamicArrayItem)(f_List.ElementAt(i));
+                if (Item.Index > m)
+                    m = Item.Index;
+            }
+            m++;
+            Item = new TDynamicArrayItem();
+            Item.Index = m;
+            Item.P = AValue;
+            Item.Int_Value = APos;
+            f_List.Add(Item);
+            f_PosStak++;
+        }
+        /*     public bool DeleteInteger(int APos);
+             public bool Delete(object P);
+             public void InitStack();*/
         public object Pop()
         {
             object res;

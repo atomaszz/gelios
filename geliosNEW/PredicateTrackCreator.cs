@@ -19,7 +19,7 @@ namespace geliosNEW
             void AddKnot(TPredicateScannerItemKnot* AKnot);
             void PushKnot(TPredicateScannerItemKnot* AKnot);
             void DeleteKnot(TPredicateScannerItemKnot* AKnot);*/
-            void Clear() { f_List.Clear(); }
+            public void Clear() { f_List.Clear(); }
      /*       int CountKnotByParentID(int AID);
             void GetBadKnot(TDynamicArray* OutKnot);
             __property int Count = { read = GetCount };

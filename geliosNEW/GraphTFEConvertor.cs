@@ -11,23 +11,143 @@ namespace geliosNEW
         string f_Out;
         TPredicateItemBase f_Item;
         TPredicateItemBig f_Parent;
-        /*      int __fastcall GetParentID();
-              AnsiString __fastcall GetAlias();
-              AnsiString ListIDFromTFE();
-              void DoMake();
-              TBaseShape* __fastcall GetParentBaseShape();
-              public:
-           TGraphTFEConvertorItem();
-              void Make(TPredicateItemBase* AItem, TPredicateItemBig* AParent);
-              void ListIDFromTFE(TDynamicArray* AL);
-              __property AnsiString OutString = {read = f_Out
-          };
-          __property TPredicateItemBase* Item = { read = f_Item };
-          __property TPredicateItemBig* Parent = { read = f_Parent };
-          __property int ParentID = { read = GetParentID };
-          __property AnsiString Alias = {read = GetAlias
-      };
-      __property TBaseShape* ParentBaseShape = { read = GetParentBaseShape };*/
+        int GetParentID()
+        {
+            if (f_Parent==null)
+                return 0;
+            if (f_Parent.Rfc!=null)
+            {
+                TAlternativeParserItemTFE ITE = f_Parent.Rfc.ParentTFE;
+                if (ITE!=null)
+                    return ITE.TFE.BaseShape.ID;
+            }
+            return f_Parent.ID;
+        }
+        string GetAlias()
+        {
+            string Res = "";
+            int mType = f_Item.Who();
+            if (mType == 1)
+                return "rab_oper";
+            if (mType == 2)
+                return "rab_oper_posl";
+            mType = ((TPredicateItemTFS)(f_Item)).TFS.BaseWorkShape.TypeShape;
+            switch (mType)
+            {
+                case 1:
+                    {
+                        Res = "rab_oper";
+                        break;
+                    }
+                case 2:
+                    {
+                        Res = "rab_oper_par_AND";
+                        break;
+                    }
+                case 3:
+                    {
+                        Res = "rab_oper_par_OR";
+                        break;
+                    }
+
+                case 4:
+                    {
+                        Res = "diagn_control_rab";
+                        break;
+                    }
+                case 5:
+                    {
+                        Res = "diagn_func_coltrol";
+                        break;
+                    }
+                case 6:
+                    {
+                        Res = "rasvilka";
+                        break;
+                    }
+
+                case 7:
+                    {
+                        Res = "proverka_if";
+                        break;
+                    }
+
+                case 8:
+                    {
+                        Res = "while_do_control_rab";
+                        break;
+                    }
+
+                case 9:
+                    {
+                        Res = "do_while_do_control_rab";
+                        break;
+                    }
+
+                case 10:
+                    {
+                        Res = "do_while_do_control_func";
+                        break;
+                    }
+
+
+                case 11:
+                    {
+                        Res = "proverka_uslovia";
+                        break;
+                    }
+            }
+            return Res;
+        }
+        string ListIDFromTFE()
+        {
+            int n, cnt;
+            string Res = "";
+            TDynamicArray D = new TDynamicArray();
+            f_Item.ListIDFill(D);
+            cnt = D.Count;
+            for (int i = 0; i <= cnt - 1; i++)
+            {
+                n = D.GetPosition(i).Int_Value;
+                Res = Res + n.ToString();
+                if ((i != cnt - 1) && (cnt > 1))
+                    Res = Res + ", ";
+            }
+            D = null;
+            return Res;
+        }
+        void DoMake()
+           {
+               f_Out = "";
+               if (f_Item!=null)
+               {
+                   f_Out = "knot(" + GetParentID().ToString() + "," + (f_Item.NumAlt + 1).ToString() + ", ";
+                   f_Out = f_Out + GetAlias() + ", " + "[" + ListIDFromTFE() + "]).";
+               }
+           }
+           /*       TBaseShape* __fastcall GetParentBaseShape();
+                  public:
+               TGraphTFEConvertorItem();*/
+        public void Make(TPredicateItemBase AItem, TPredicateItemBig AParent)
+        {
+            f_Item = AItem;
+            f_Parent = AParent;
+            DoMake();
+        }
+        public void ListIDFromTFE(TDynamicArray AL)
+        {
+            f_Item.ListIDFill(AL);
+        }
+        public string  OutString
+        {
+            get { return f_Out;  }
+        }
+      /*     __property TPredicateItemBase* Item = { read = f_Item };
+           __property TPredicateItemBig* Parent = { read = f_Parent };
+           __property int ParentID = { read = GetParentID };
+           __property AnsiString Alias = {read = GetAlias
+       };
+       __property TBaseShape* ParentBaseShape = { read = GetParentBaseShape };*/
     }
     class TGraphTFEConvertor
     {
@@ -80,10 +200,13 @@ namespace geliosNEW
             else
                 AStack.InsertToFirst(ABig);
         }
-        /*    void PushPWork(TPredicateItemPWork* APWork, TDynamicArray* AStack);
-            AnsiString PrintPWork(TPredicateItemPWork* APWork, TDynamicArray* AStack);
-            AnsiString PrintBig(TPredicateItemBig* ABig, TDynamicArray* AStack);
-            AnsiString ParseItem(TPredicateItemBase* ABase, TDynamicArray* AStack);*/
+        void PushPWork(TPredicateItemPWork APWork, TDynamicArray AStack)
+        {
+            AStack.InsertToFirst(APWork);
+        }
+        /*        AnsiString PrintPWork(TPredicateItemPWork* APWork, TDynamicArray* AStack);
+                AnsiString PrintBig(TPredicateItemBig* ABig, TDynamicArray* AStack);
+                AnsiString ParseItem(TPredicateItemBase* ABase, TDynamicArray* AStack);*/
 
         TPredicateItemBase DoParseItem(TPredicateItemBase ABase, TDynamicArray AStack)
         {
@@ -127,10 +250,80 @@ namespace geliosNEW
             }
             return Res;
         }
-         /*     void MakeElement(TPredicateItemBase* AElement);
-              void MakeElementTFS(TPredicateItemTFS* ATFS);
-              void AddElementToTree(TPredicateTree* APredicateTree);
-              public:
+        void MakeElement(TPredicateItemBase AElement)
+        {
+            int m_who = AElement.Who();
+            if (m_who == 1)
+            {
+                //throw(Exception("недопустимо использование MakeElement(TPredicateItemBase* AElement). Обратитесь к разработчикам!"));
+            }
+            if (m_who == 2)
+            {
+                TPredicateItemPWork m_PW = (TPredicateItemPWork)(AElement);
+                MakeElement(m_PW.Item1);
+                MakeElement(m_PW.Item2);
+            }
+            if (m_who == 0)
+            {
+                TPredicateItemTFS m_TFS = (TPredicateItemTFS)(AElement);
+                MakeElementTFS(m_TFS);
+            }
+        }
+        void MakeElementTFS(TPredicateItemTFS ATFS)
+        {
+            int n, m_who;
+            TBaseShape B;
+            string S;
+            TDynamicArray D = new TDynamicArray();
+            TBaseWorkShape WS = ATFS.TFS.BaseWorkShape;
+            ATFS.ListIDFill(D);
+            for (int i = 0; i <= D.Count - 1; i++)
+            {
+                n = D.GetPosition(i).Int_Value;
+                B = WS.ShapeSupportID(n);
+                m_who = B.TypeShape;
+                S = B.Make_One_Simple();
+                if (S.Length > 0)
+                {
+                    if (m_who == 5)
+                        f_PrRab = f_PrRab + S + "\r\n";
+                    if (m_who == 6)
+                        f_PrControlRab = f_PrControlRab + S + "\r\n";
+                    if (m_who == 7)
+                        f_PrControlFunc = f_PrControlFunc + S + "\r\n";
+                    if (m_who == 8)
+                        f_PrCheckCondition = f_PrCheckCondition + S + "\r\n";
+                }
+            }
+            D = null;
+        }
+        void AddElementToTree(TPredicateTree APredicateTree)
+        {
+            TPredicateTreeItem N = APredicateTree.NewPredicateTreeItem();
+            N.ParentID = f_Item.ParentID;
+            N.ParentShape = f_Item.ParentBaseShape;
+            N.NumAlt = f_Item.Item.NumAlt + 1;
+            int m_type, m_who = f_Item.Item.Who();
+            m_type = -1;
+            if (m_who == 0)
+            {
+                N.BaseWorkShape = (TPredicateItemTFS)(f_Item.Item).TFS.BaseWorkShape;
+                m_type = N.BaseWorkShape.TypeShape;
+            }
+            if (m_who == 1)
+                m_type = 12;
+            if (m_who == 2)
+                m_type = 13;
+            N.TypeWorkShape = m_type;
+
+            TDynamicArray D = new TDynamicArray();
+            f_Item.Item.ListIDFill(D);
+            int cnt = D.Count;
+            for (int i = 0; i <= cnt - 1; i++)
+                N.AddBaseShape((TBaseShape)(D.Position[i].P), D.Position[i].Int_Value);
+            D = null;
+        }
+     /*   public:
                TGraphTFEConvertor();
               ~TGraphTFEConvertor();*/
         public void Init(TPredicateItemBig AHead, TPredicateTree APredicateTree)
@@ -174,6 +367,12 @@ namespace geliosNEW
                 //  MakeElement(Base);
                 //  f_Tran.AddGTItem(f_Item);
                 SharedConst.lcList.next();
+            }
+
+            bool acp(object A)
+            {
+                SharedConst.lcList.append(A);
+                return true;
             }
             // f_TextRecalc = f_Tran.Make();
 

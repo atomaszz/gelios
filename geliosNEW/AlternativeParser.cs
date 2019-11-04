@@ -78,27 +78,57 @@ namespace geliosNEW
         /*   void __fastcall SetTFE(TTreeListItem* ATFE);
            public:
              TAlternativeParserItemTFE();
-           ~TAlternativeParserItemTFE();
-           public TTreeListItem*  TFE = {read = f_TFE, write = SetTFE
-       };
-       public TAlternativeParserItemBig* Big = { read = f_Big };*/
+           ~TAlternativeParserItemTFE();*/
+        public TTreeListItem  TFE
+        {
+            set { f_TFE = value; }
+            get { return f_TFE; }
+        }
+        public TAlternativeParserItemBig Big
+        {
+            get { return f_Big; }
+        }
     }
     class TAlternativeParserItemTFS : TAlternativeParserItemBase
     {
         TTreeListTFS f_TFS;
         List<object> f_List;
-        /*void FreeList();
-        void __fastcall SetTFS(TTreeListTFS* ATFS);*/
+        void FreeList()
+        {
+            f_List.Clear();
+        }
+        void SetTFS(TTreeListTFS ATFS)
+        {
+            f_TFS = ATFS;
+            TAlternativeParserItemTFE Item;
+            FreeList();
+            for (int i = 0; i <= ATFS.ItemCount - 1; i++)
+            {
+                Item = new TAlternativeParserItemTFE();
+                Item.TFE = ATFS.GetTreeTFEItem(i);
+                f_List.Add(Item);
+            }
+        }
         int GetTFECount()
         {
             return f_List.Count;
         }
-    /*    TAlternativeParserItemTFE* __fastcall GetTFEItems(int AIndex);
-        public:
-              TAlternativeParserItemTFS();
-        ~TAlternativeParserItemTFS();
-        int Who() { return 0; }
-        public TTreeListTFS* TFS = { read = f_TFS, write = SetTFS };*/
+        public TAlternativeParserItemTFE  GetTFEItems(int AIndex)
+        {
+            if (AIndex >= 0 && AIndex <= f_List.Count - 1)
+                return (TAlternativeParserItemTFE)(f_List.ElementAt(AIndex));
+            else
+                return null;
+        }
+        /*      public:
+                    TAlternativeParserItemTFS();
+              ~TAlternativeParserItemTFS();
+              int Who() { return 0; }*/
+        public TTreeListTFS TFS
+        {
+            set { SetTFS(value);  }
+            get { return f_TFS; }
+        }
         public int TFECount { get { return GetTFECount(); } }
      /*   public TAlternativeParserItemTFE* TFEItems[int AIndex] = { read = GetTFEItems };*/
     }
@@ -114,17 +144,32 @@ namespace geliosNEW
         /*void FreeList();*/
         TAlternativeParserItemList f_MainList;
         TAlternativeParserItemTFE f_ParentTFE;
-      /*  int __fastcall GetCountBig();
-        TAlternativeParserItemBig* __fastcall GetItemsBig(int AIndex);
-        int __fastcall GetBasisCount();
-        TTreeListTFS* __fastcall GetBasisItems(int AIndex);
-        TTreeListTFS* FirstFromBasis();
-        TTreeListTFS* LastFromBasis();
-        public:
-              TAlternativeParserItemBig();
-        ~TAlternativeParserItemBig();
-        int Who() { return 1; }
-        void BasisClear();*/
+        int GetCountBig()
+        {
+            return f_List.Count;
+        }
+        TAlternativeParserItemBig  GetItemsBig(int AIndex)
+        {
+            if (AIndex >= 0 && AIndex <= f_List.Count - 1)
+                return (TAlternativeParserItemBig)(f_List.ElementAt(AIndex));
+            else
+                return null;
+        }
+        int GetBasisCount()
+        {
+            return f_Basis.Count;
+        }
+        public TTreeListTFS GetBasisItems(int AIndex)
+        {
+            return (TTreeListTFS)(f_Basis.GetItems(AIndex));
+        }
+        /*      TTreeListTFS* FirstFromBasis();
+              TTreeListTFS* LastFromBasis();
+              public:
+                    TAlternativeParserItemBig();
+              ~TAlternativeParserItemBig();
+              int Who() { return 1; }
+              void BasisClear();*/
         void BasisAdd(TTreeListTFS ATFS)
         {
             for (int i = 0; i <= f_Basis.Count - 1; i++)
@@ -140,14 +185,26 @@ namespace geliosNEW
             for (int i = 0; i <= ALT.ItemCount - 1; i++)
                 BasisAdd(ALT.GetTreeTFSItem(i));
         }
-        /*   void FillBasisFromEnlarge(TAlternativeParserGrpCrossItemEnlarge* AEnl);
-           bool CompareBasisAndAlternateTreeList(TAlternateTreeList* AList);
-           bool CompareBasisAndMassiv(TDynamicArray* AMass);
+        /*   void FillBasisFromEnlarge(TAlternativeParserGrpCrossItemEnlarge* AEnl);*/
+        public bool CompareBasisAndAlternateTreeList(TAlternateTreeList AList)
+        {
+            int LenB = BasisCount;
+            int LenA = AList.ItemCount;
+            if (LenA != LenB)
+                return false;
+            for (int i = 0; i <= LenA - 1; i++)
+            {
+                if (GetBasisItems(i) != AList.GetTreeTFSItem(i))
+                    return false;
+            }
+            return true;
+        }
+       /*    bool CompareBasisAndMassiv(TDynamicArray* AMass);
            bool IsTailAlternateTreeList(TAlternateTreeList* AList);
            void AddBig(TAlternativeParserItemBig* ABig);
            void GetTreeListTFSFromBasis(TAlternateTreeList* Alternative,
              TDynamicArray* D, bool &AValid);*/
-        void GetAllFirstBigsNoCheck(TDynamicArray AMass)
+        public void GetAllFirstBigsNoCheck(TDynamicArray AMass)
         {
             TAlternativeParserItemBig mTemp;
             TAlternativeParserItemBase mBase;
@@ -172,14 +229,14 @@ namespace geliosNEW
                     for (int j = 0; j <= mTfs.TFECount - 1; j++)
                     {
                         mTfe = mTfs.GetTFEItems(j);
-                        if (mTfe.Big && !mTfe.Big.Check)
+                        if (mTfe.Big != null && !mTfe.Big.Check)
                             AMass.InsertToFirst(mTfe.Big);
                     }
                 }
             }
             for (i = 0; i <= CountBig - 1; i++)
             {
-                mTemp = ItemsBig[i];
+                mTemp = GetItemsBig(i);
                 mTemp.MainTreeList = MainTreeList;
                 if (!mTemp.Check)
                     AMass.InsertToFirst(mTemp);
@@ -194,10 +251,16 @@ namespace geliosNEW
         {
             get { return f_MainList;  }
         }
-   /*     public int BasisCount = { read = GetBasisCount };
-        public TTreeListTFS* BasisItems[int AIndex] = { read = GetBasisItems };
-        public int CountBig = { read = GetCountBig };
-        public TAlternativeParserItemBig* ItemsBig[int AIndex] = { read = GetItemsBig };*/
+        public int BasisCount
+        {
+            get { return GetBasisCount(); }
+        }
+      /*  public TTreeListTFS* BasisItems[int AIndex] = { read = GetBasisItems };*/
+        public int CountBig
+        {
+            get { return GetCountBig(); }
+        }
+     /*   public TAlternativeParserItemBig* ItemsBig[int AIndex] = { read = GetItemsBig };*/
         public bool Check
         {
             set { f_Check = value; }
@@ -284,13 +347,13 @@ namespace geliosNEW
                 f_Grp.Clear();
                 for (int i = 0; i <= ABig.BasisCount - 1; i++)
                 {
-                    TFS = ABig.BasisItems[i];
+                    TFS = ABig.GetBasisItems(i);
                     m_Tree.FindAlternate(TFS.BaseWorkShape, D);
                     b_go = false;
                     if (D.Count > 0)
                         for (int j = 0; j <= D.Count - 1; j++)
                         {
-                            AItem = (TAlternateTreeList)(D.Items[j]);
+                            AItem = (TAlternateTreeList)(D.GetItems(j));
                             b_basis = ABig.CompareBasisAndAlternateTreeList(AItem);
                             b_main = AItem.MainAlternative;
                             b_tail = ABig.IsTailAlternateTreeList(AItem);
@@ -333,10 +396,89 @@ namespace geliosNEW
             D = null;
             Mass = null;
         }
-   /*               void FillBigFromGrp(TAlternativeParserItemBig* ABig);
-                  void CreateParserGrpItemList(TDynamicArray* AMass, TAlternateTreeList* Alternative);
-                  void CrossToBigs(TAlternativeParserGrpCrossItem* ACrossItem, TAlternativeParserItemBig* ABig);
-                  void FillItemGrp(TAlternativeParserGrpItemBase* AItem, TAlternativeParserItemBig* ABig);*/
+        void FillBigFromGrp(TAlternativeParserItemBig ABig)
+        {
+            for (int i = 0; i <= f_Grp.CountOUT - 1; i++)
+                FillItemGrp(f_Grp.GetItemsOUT(i), ABig);
+        }
+        void CreateParserGrpItemList(TDynamicArray AMass, TAlternateTreeList Alternative)
+        {
+            TAlternativeParserGrpItemList Item;
+            if (AMass.Count > 0)
+            {
+                Item = f_Grp.GetNewList(Alternative);
+                for (int i = 0; i <= AMass.Count - 1; i++)
+                    Item.AddTfs((TTreeListTFS)(AMass.GetItems(i)));
+            }
+        }
+        void CrossToBigs(TAlternativeParserGrpCrossItem ACrossItem, TAlternativeParserItemBig ABig)
+        {
+            TAlternativeParserGrpItemBase Base;
+            TAlternativeParserGrpCrossItemOut Cross;
+            TAlternativeParserItemBig mHeadBig = new TAlternativeParserItemBig();
+            mHeadBig.OwnerBig = ABig;
+            ABig.MainList.Append(mHeadBig);
+
+            TAlternativeParserItemBig mBig = new TAlternativeParserItemBig();
+            for (int i = 0; i <= ACrossItem.CountBasis - 1; i++)
+                FillItemGrp(ACrossItem.ItemsBasis[i], mBig);
+            mBig.Check = true;
+            mBig.OwnerBig = mHeadBig;
+            mBig.NumAlt = 0;
+            mBig.Cross = true;
+            mHeadBig.AddBig(mBig);
+            for (int i = 0; i <= ACrossItem.CountOut - 1; i++)
+            {
+                mBig = new TAlternativeParserItemBig();
+                Cross = ACrossItem.ItemsOut[i];
+                mBig.Check = true;
+                mBig.Cross = true;
+                for (int j = 0; j <= Cross.Count - 1; j++)
+                    FillItemGrp(Cross.Items[j], mBig);
+                mBig.NumAlt = i + 1;
+                mBig.OwnerBig = mHeadBig;
+                mHeadBig.AddBig(mBig);
+            }
+        }
+        void FillItemGrp(TAlternativeParserGrpItemBase AItem, TAlternativeParserItemBig ABig)
+        {
+            TAlternativeParserGrpItemTFS GTfs;
+            TAlternativeParserGrpItemList GList;
+            TAlternativeParserItemTFS mTfs;
+            TAlternativeParserItemBig mBig;
+            TAlternativeParserGrpCrossItemEnlarge Enl;
+
+            int m_who = AItem.Who();
+            if (m_who == 0)
+            {
+                GTfs = (TAlternativeParserGrpItemTFS)(AItem);
+                mTfs = new TAlternativeParserItemTFS();
+                mTfs.TFS = GTfs.TFS;
+                mTfs.OwnerBig = ABig;
+                ABig.MainList.Append(mTfs);
+            }
+            if (m_who == 1)
+            {
+                GList = (TAlternativeParserGrpItemList)(AItem);
+                mBig = new TAlternativeParserItemBig();
+                mBig.FillBasisFromGrpItemList(GList);
+                mBig.OwnerBig = ABig;
+                ABig.MainList.Append(mBig);
+                mBig.BadBasis = ABig.Cross;
+            }
+            if (m_who == 2)
+                CrossToBigs((TAlternativeParserGrpCrossItem)(AItem), ABig);
+            if (m_who == 3)
+            {
+                Enl = (TAlternativeParserGrpCrossItemEnlarge)(AItem);
+                mBig = new TAlternativeParserItemBig();
+                mBig.Enlarge = Enl.ID;
+                mBig.FillBasisFromEnlarge(Enl);
+                mBig.OwnerBig = ABig;
+                ABig.MainList.Append(mBig);
+            }
+
+        }
         bool CheckEnlarge(TAlternativeParserItemBig ABig)
         {
             TAlternativeParserItemBig Item;

@@ -375,7 +375,7 @@ namespace geliosNEW
             }
             for (int i = 0; i <= MainList.Count - 1; i++)
             {
-                Node = (TNodeMain)(MainList.GetItems(i));
+                Node = (TNodeMain)(MainList.ElementAt(i));
                 if (Node!=null && Node.IdParentShape == AParentShapeID)
                 {
                     AI = AltIfo.AddAltIfo(Node.IdAlternate, Node.NumAlt, AParentShapeID, First, Last);

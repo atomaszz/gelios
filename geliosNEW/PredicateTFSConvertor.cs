@@ -15,7 +15,10 @@ namespace geliosNEW
 /*        TPredicateItemBase();
         virtual ~TPredicateItemBase() { return; }*/
         public virtual int Who() { return -1; }
-    /*    virtual void ListIDFill(TDynamicArray* AList);*/
+       public virtual void ListIDFill(TDynamicArray AList)
+        {
+            AList.AppendInteger(f_ID, null);
+        }
         public int NumAlt
         {
             set { f_NumAlt = value; }
@@ -129,9 +132,13 @@ namespace geliosNEW
         }
            public override int Who() { return 1; }
         /*      TPredicateItemBig();
-      ~TPredicateItemBig();
-      void AddItem(TPredicateItemBase* AItem);
-      void DeleteItemToList(TPredicateItemBase* AItem);*/
+      ~TPredicateItemBig();*/
+      public void AddItem(TPredicateItemBase AItem)
+        {
+            f_List.Add(AItem);
+        }
+
+        /*    void DeleteItemToList(TPredicateItemBase* AItem);*/
         public bool ValidDescendant()
         {
             return true;
@@ -220,7 +227,7 @@ namespace geliosNEW
                     for (int j = 0; j <= iTfs.TFECount - 1; j++)
                     {
                         mTFE = iTfs.TFEItems[j];
-                        if (mTFE.RfcTFE.Big)
+                        if (mTFE.RfcTFE.Big!=null)
                         {
                             TPredicateItemBig iBig = NewBig(mTFE.RfcTFE.Big);
                             mTFE.Big = iBig;
@@ -245,10 +252,114 @@ namespace geliosNEW
                 AStack.InsertToFirst(iBig);
             }
         }
-        /*    void DoSetID();
-            void DoSetIDItem(TPredicateItemBig* AHead, TDynamicArray* AStack);
-            void DoSetIDItemTFS(TPredicateItemBase* ABase, TDynamicArray* AStack);
-            void PushTFS(TPredicateItemTFS* ATFS, TDynamicArray* AStack);*/
+        void DoSetID()
+        {
+            TPredicateItemBig Big;
+            f_NGen.InitNum();
+            TDynamicArray m_Stack = new TDynamicArray();
+            m_Stack.InsertToFirst(f_PredicateStart);
+            Big = (TPredicateItemBig)(m_Stack.Pop());
+            while (Big!=null)
+            {
+                DoSetIDItem(Big, m_Stack);
+                Big = (TPredicateItemBig)(m_Stack.Pop());
+            }
+            m_Stack = null;
+        }
+        void DoSetIDItem(TPredicateItemBig AHead, TDynamicArray AStack)
+        {
+            int m_who;
+            TPredicateItemBase m_Base;
+            TPredicateItemPWork m_PW;
+            int m_cnt = AHead.Count;
+            for (int i = 0; i <= m_cnt - 1; i++)
+            {
+                m_Base = AHead.GetItems(i);
+                m_who = m_Base.Who();
+                if (m_who == 1)
+                {
+                    TPredicateItemBig mBig = (TPredicateItemBig)(m_Base);
+                    if (CheckEnlargeNum(mBig))
+                        return;
+                    m_Base.ID = f_NGen.NextLowNum();
+                }
+                if (m_who == 2)
+                {
+                    m_PW = (TPredicateItemPWork)(m_Base);
+
+                    m_who = m_PW.Item1.Who();
+                    if (m_who == 1)
+                    {
+                        TPredicateItemBig mBig = (TPredicateItemBig)(m_PW.Item1);
+                        if (mBig.Rfc!=null && mBig.Rfc.Enlarge > 0)
+                        {
+                            if (!CheckEnlargeNum(mBig))
+                                m_PW.Item1.ID = f_NGen.NextLowNum();
+                        }
+                        else
+                            m_PW.Item1.ID = f_NGen.NextLowNum();
+
+                    }
+
+                    m_who = m_PW.Item2.Who();
+                    if (m_who == 1)
+                    {
+                        TPredicateItemBig mBig = (TPredicateItemBig)(m_PW.Item2);
+                        if (mBig.Rfc!=null && mBig.Rfc.Enlarge > 0)
+                        {
+                            if (!CheckEnlargeNum(mBig))
+                                m_PW.Item2.ID = f_NGen.NextLowNum();
+                        }
+                        else
+                            m_PW.Item2.ID = f_NGen.NextLowNum();
+                    }
+
+
+                    //        m_PW.Item2.ID = f_NGen.NextLowNum();
+                }
+                DoSetIDItemTFS(m_Base, AStack);
+            }
+
+        }
+        void DoSetIDItemTFS(TPredicateItemBase ABase, TDynamicArray AStack)
+        {
+            int m_type;
+            TPredicateItemPWork m_PW;
+            if (ABase!=null)
+            {
+                m_type = ABase.Who();
+                if (m_type == 0)
+                    PushTFS((TPredicateItemTFS)(ABase), AStack);
+
+                if (m_type == 1)
+                    AStack.InsertToFirst(ABase);
+                if (m_type == 2)
+                {
+                    m_PW = (TPredicateItemPWork)(ABase);
+                    //1
+                    m_type = m_PW.Item1.Who();
+                    if (m_type == 0)
+                        PushTFS((TPredicateItemTFS)(m_PW.Item1), AStack);
+
+                    if (m_type == 1)
+                        AStack.InsertToFirst(m_PW.Item1);
+
+                    //2
+                    m_type = m_PW.Item2.Who();
+                    if (m_type == 0)
+                        PushTFS((TPredicateItemTFS)(m_PW.Item2), AStack);
+                    if (m_type == 1)
+                        AStack.InsertToFirst(m_PW.Item2);
+
+                }
+            }
+        }
+        void PushTFS(TPredicateItemTFS ATFS, TDynamicArray AStack)
+        {
+            for (int i = 0; i <= ATFS.TFECount - 1; i++)
+                if (ATFS.GetTFEItems(i).Big!=null)
+                    AStack.InsertToFirst(ATFS.GetTFEItems(i).Big);
+        }
         void DoProcess()
         {
             TPredicateItemBig Big;
@@ -403,8 +514,44 @@ namespace geliosNEW
             ADest.NumAlt = ASource.NumAlt;
             ASource.NumAlt = 0;
         }
-        /*          TPredicateItemBase EnvelopeToBig(TPredicateItemBase ASource);
-                  bool CheckEnlargeNum(TPredicateItemBig ABig)*/
+        TPredicateItemBase EnvelopeToBig(TPredicateItemBase ASource)
+        {
+            TPredicateItemTFS mTfs;
+            TPredicateItemBig nBig;
+            int m_who = ASource.Who();
+            if (m_who == 1)
+                return ASource;
+            if (m_who == 0)
+            {
+                mTfs = (TPredicateItemTFS)(ASource);
+                if (mTfs.TFS.BaseWorkShape.TypeShape == 1)
+                    return ASource;
+            }
+            nBig = new TPredicateItemBig();
+            nBig.Envelope = true;
+            nBig.AddItem(ASource);
+            SwapNumAlt(nBig, ASource);
+            return nBig;
+        }
+        bool CheckEnlargeNum(TPredicateItemBig ABig)
+        {
+            TPredicateItemBig Item;
+            if (ABig.Rfc.Enlarge > 0)
+            {
+                for (int i = 0; i <= f_ListEnlarge.Count - 1; i++)
+                {
+                    Item = (TPredicateItemBig)(f_ListEnlarge.ElementAt(i));
+                    if ((Item.Rfc.Enlarge == ABig.Rfc.Enlarge) && (Item.Rfc.EnlargeSetNum))
+                    {
+                        ABig.ID = Item.ID;
+                        return true;
+                    }
+                }
+                ABig.Rfc.EnlargeSetNum = true;
+                f_ListEnlarge.Add(ABig);
+            }
+            return false;
+        }
 
         TPredicatePathNode FillPathNode(TPredicateItemBig AHead, TPredicateItemBase AItem)
         {
@@ -450,20 +597,20 @@ namespace geliosNEW
         bool CheckPath(TPredicateItemBig AHead, TPredicateItemBase AItem)
         {
             TPredicatePathNode N = FillPathNode(AHead, AItem);
-            if (N != null && !f_UsedPath.FindLikePathNode(N))
+            if (N != null && f_UsedPath.FindLikePathNode(N)==null)
                 return false;
             return true;
         }
         bool CheckPath(TPredicateItemBig AHead, TDynamicArray ADyn)
         {
             TPredicatePathNode N = FillPathNode(AHead, ADyn);
-            if (N != null && !f_UsedPath.FindLikePathNode(N))
+            if (N != null && f_UsedPath.FindLikePathNode(N) ==null)
                 return false;
             return true;
         }
         void SetPathNode(TPredicateItemBig AHead, TDynamicArray ADyn)
         {
-            int mpos;
+            int mpos = -1;
             TPredicatePathNode L;
             TPredicatePathNodeItem NI;
             TPredicatePathNodeItem FI;
@@ -475,10 +622,10 @@ namespace geliosNEW
                 if (L!=null)
                 {
                     NI = L.FindIndexFirst(mpos);
-                    while (NI)
+                    while (NI!=null)
                     {
                         FI = N.FindByBlockID(NI.BlockID);
-                        if (FI)
+                        if (FI != null)
                             D.Append(FI.ItemBase);
                         NI = L.FindIndexNext(mpos);
                     }
@@ -487,9 +634,9 @@ namespace geliosNEW
             if (D.Count == ADyn.Count)
             {
                 ADyn.Clear();
-                CopyDynamicArray(D, ADyn, false);
+                SharedConst.CopyDynamicArray(D, ADyn, false);
             }
-            delete D;
+            D = null;
         }
         public void ApplyStyle(TPredicateItemBig AHead, TPredicateItemBase AItem)
         {

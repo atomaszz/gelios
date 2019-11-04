@@ -49,8 +49,13 @@ namespace geliosNEW
         {
             FreeList();
         }
-        /*      TPredicateTreeItem* NewPredicateTreeItem();
-              TPredicateTreeItem* FindByTfeID(int AID, TDynamicArray* Arr);
+        public TPredicateTreeItem NewPredicateTreeItem()
+        {
+            TPredicateTreeItem N = new TPredicateTreeItem();
+            f_List.Add(N);
+            return N;
+        }
+      /*  TPredicateTreeItem* FindByTfeID(int AID, TDynamicArray* Arr);
               TPredicateTreeItem* FindByParentID(int AID);
               void ArrayIDToDelete(TPredicateTreeItem* AItem, TDynamicArray* Arr);
               __property int Count = { read = GetCount };

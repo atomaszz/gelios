@@ -79,10 +79,24 @@ namespace geliosNEW
 
         /*     public TGlsList();
              ~TGlsList() { }
-             public void* insert(void* T);
-             public void* append(void* T);
-             public TpublicGlsList* append(TGlsList* T);
-             public void* prepend(void* T);
+             public void* insert(void* T);*/
+        public object append(object T)
+        {
+            header.Prev.insert(new TGlsListNode(T));
+            ++_length;
+            return T;
+        }
+        public TGlsList append(TGlsList T)
+        {
+            TGlsListNode a = (TGlsListNode)(header.Prev);
+            a.splice(T.header);
+            _length += T._length;
+            T.header.remove();
+            T._length = 0;
+            T.win = header;
+            return this;
+        }
+        /*     public void* prepend(void* T);
              public void* remove();
              public void val(void* T);*/
         public object val()

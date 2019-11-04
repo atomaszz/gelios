@@ -197,5 +197,15 @@ namespace geliosNEW
         {
             lcList.clear();
         }
+        public static void CopyDynamicArray(TDynamicArray ASource, TDynamicArray ADest, bool AInsertToFirst)
+        {
+            for (int i = 0; i <= ASource.Count - 1; i++)
+            {
+                if (AInsertToFirst)
+                    ADest.InsertToFirst(ASource.GetItems(i));
+                else
+                    ADest.Append(ASource.GetItems(i));
+            }
+        }
     }
 }

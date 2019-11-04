@@ -57,23 +57,48 @@ namespace geliosNEW
     class TPredicatePathItem
     {
      List<object> f_List;
-        /* void FreeList();
-         int __fastcall GetNodeCount();
-         TPredicatePathNode* __fastcall GetNodeItems(int AIndex);
-         AnsiString __fastcall GetText();
-         TPredicatePathNodeItem* FindPathNodeByParent(TPredicateItemBase* AParent);
-         public:
-          TPredicatePathItem();
-         ~TPredicatePathItem();*/
+     void FreeList()
+        {
+            f_List.Clear();
+        }
+        int GetNodeCount()
+        {
+            return f_List.Count;
+        }
+        TPredicatePathNode  GetNodeItems(int AIndex)
+        {
+            if (AIndex >= 0 && AIndex <= f_List.Count - 1)
+                return (TPredicatePathNode)(f_List.ElementAt(AIndex));
+            else
+                return null;
+        }
+        /*     AnsiString __fastcall GetText();
+             TPredicatePathNodeItem* FindPathNodeByParent(TPredicateItemBase* AParent);
+             public:
+              TPredicatePathItem();
+             ~TPredicatePathItem();*/
         public void Clear()
         {
             FreeList();
         }
-        /*     TPredicatePathNode* CreatePathNode(TPredicateItemBase* AParentItemBase);
-             TPredicatePathNode* FindLikePathNode(TPredicatePathNode* ANode);
-             TPredicatePathNode* LastPathNode();
-             __property int NodeCount = { read = GetNodeCount };
-             __property TPredicatePathNode* NodeItems[int AIndex] = {read = GetNodeItems
+        /*     TPredicatePathNode* CreatePathNode(TPredicateItemBase* AParentItemBase);*/
+        public TPredicatePathNode FindLikePathNode(TPredicatePathNode ANode)
+        {
+            TPredicatePathNode Item;
+            for (int i = 0; i <= NodeCount - 1; i++)
+            {
+                Item = GetNodeItems(i);
+                if (Item.IsLike(ANode))
+                    return Item;
+            }
+            return null;
+        }
+        /*        TPredicatePathNode* LastPathNode();*/
+        public int NodeCount
+        {
+            get { return GetNodeCount();  }
+        }
+    /*         __property TPredicatePathNode* NodeItems[int AIndex] = {read = GetNodeItems
          };
          __property AnsiString Text = {read = GetText};*/
     }
