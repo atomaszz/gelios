@@ -160,7 +160,7 @@ namespace geliosNEW
             int m = -1;
             TDynamicArrayItem Item;
             if (f_List.Count > 0)
-                m = (TDynamicArrayItem)(f_List.ElementAt(0)).Index;
+                m = ((TDynamicArrayItem)f_List.ElementAt(0)).Index;
             for (int i = 1; i <= f_List.Count - 1; i++)
             {
                 Item = (TDynamicArrayItem)(f_List.ElementAt(i));

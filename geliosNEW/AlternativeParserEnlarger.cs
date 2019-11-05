@@ -110,19 +110,26 @@ namespace geliosNEW
          TAlternativeParserEnlargerItem* GetNew(TAlternativeParserGrpCrossItem* AParentMain);
          TAlternativeParserEnlargerItem* FindMax();
          void Restruct();
-         bool IsEmptyTrash();
-         void ClearTrash();
-         void CreateTrashItem(TAlternativeParserGrpItemTFS* APos, int ALength,
-           TAlternativeParserEnlargerItem* AOwner, int AID);
-         int __fastcall GetCount();
-         TAlternativeParserEnlargerItem* __fastcall GetItems(int AIndex);
-         public:
-          TAlternativeParserEnlarger();
-         ~TAlternativeParserEnlarger();
-         void Init();
-         void Enlarge(TAlternativeParserGrpCrossItem* AItem);
-         void FindTrashItem(TAlternativeParserGrpCrossItem* AOwner, TDynamicArray* AOut);
-         __property int Count = { read = GetCount };
-         __property TAlternativeParserEnlargerItem* Items[int AIndex] = {read = GetItems*/
+         bool IsEmptyTrash();*/
+         void ClearTrash()
+        {
+            f_Trash.Clear();
+        }
+        /*   void CreateTrashItem(TAlternativeParserGrpItemTFS* APos, int ALength,
+             TAlternativeParserEnlargerItem* AOwner, int AID);
+           int __fastcall GetCount();
+           TAlternativeParserEnlargerItem* __fastcall GetItems(int AIndex);
+           public:
+            TAlternativeParserEnlarger();
+           ~TAlternativeParserEnlarger();*/
+        public void Init()
+        {
+            ClearTrash();
+            FreeList();//26.08.2007
+        }
+        /*    void Enlarge(TAlternativeParserGrpCrossItem* AItem);
+            void FindTrashItem(TAlternativeParserGrpCrossItem* AOwner, TDynamicArray* AOut);
+            __property int Count = { read = GetCount };
+            __property TAlternativeParserEnlargerItem* Items[int AIndex] = {read = GetItems*/
     }
 }

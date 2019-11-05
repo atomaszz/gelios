@@ -207,5 +207,22 @@ namespace geliosNEW
                     ADest.Append(ASource.GetItems(i));
             }
         }
+        /*-----------*/
+        public static List<object> lc;
+        public static int APC_CompareNode(object A, object B)
+        {
+            TAlternativeParserGrpItemTFS m_A = (TAlternativeParserGrpItemTFS)(A);
+            TAlternativeParserGrpItemTFS m_B = (TAlternativeParserGrpItemTFS)(B);
+            int res = GMess.SendMess(3, int(m_A->TFS->BaseWorkShape), int(m_B->TFS->BaseWorkShape));
+            if (res == -100)
+                throw Exception("Исключителная ошибка в алгоритме программы. Обратитесь к разработчику");
+            return res;
+        }
+
+        public static bool APC_Inorder(object A)
+        {
+            lc.Add(A);
+            return true;
+        }
     }
 }

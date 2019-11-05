@@ -76,9 +76,16 @@ namespace geliosNEW
             set { f_ID = value; }
             get { return f_ID; }
         }
- /*        __property AnsiString Text = {read = GetText};
-              __property TPredicateItemBase* ParentItemBase = { read = f_ParentItemBase };
-         __property int NumAlt = { read = f_NumAlt, write = f_NumAlt };*/
+        /*        __property AnsiString Text = {read = GetText};*/
+        public TPredicateItemBase ParentItemBase
+        {
+            get { return f_ParentItemBase; }
+        }
+        public int NumAlt
+        {
+            set { f_NumAlt = value; }
+            get { return f_NumAlt; }
+        }
     }
     class TPredicatePathItem
     {

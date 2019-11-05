@@ -336,7 +336,7 @@ namespace geliosNEW
             m_type = -1;
             if (m_who == 0)
             {
-                N.BaseWorkShape = (TPredicateItemTFS)(f_Item.Item).TFS.BaseWorkShape;
+                N.BaseWorkShape = ((TPredicateItemTFS)f_Item.Item).TFS.BaseWorkShape;
                 m_type = N.BaseWorkShape.TypeShape;
             }
             if (m_who == 1)

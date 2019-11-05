@@ -129,10 +129,43 @@ public:
         List<object> f_List;
         List<object> f_Basis;
         List<object> f_Out;
-        /*void FreeOut();
+        /*void FreeOut();*/
         void DoCreateList();
-        void DoCreateBasis();
-        void DoCreateListItem(TAlternativeParserGrpItemList* AItem, TAlternativeParserGrpCrossItemOut* ANew);*/
+        void DoCreateBasis()
+        {
+            TGlsBinaryTree mTree;
+            TAlternativeParserGrpItemTFS Tfs;
+            TAlternativeParserGrpItemList Item;
+            TDynamicArray D = new TDynamicArray();
+            SharedConst.lc = new List<object>();
+            f_Basis.Clear();
+            for (int i = 0; i <= Count - 1; i++)
+            {
+                Item = GetItems(i);
+                for (int j = 0; j <= Item.Count - 1; j++)
+                {
+                    Tfs = Item.GetItems(j);
+                    if (!D.Find(Tfs.TFS))
+                        D.AppendInteger((int)Tfs, Tfs.TFS);
+                }
+            }
+            mTree = new TGlsBinaryTree(APC_CompareNode);
+            for (int i = 0; i <= D.Count - 1; i++)
+            {
+                Tfs = (TAlternativeParserGrpItemTFS)D.GetPosition(i).Int_Value;
+                mTree.insert(Tfs);
+            }
+            mTree.inorder(APC_Inorder);
+            for (int i = 0; i <= SharedConst.lc.Count - 1; i++)
+            {
+                Tfs = (TAlternativeParserGrpItemTFS)(SharedConst.lc.ElementAt(i));
+                f_Basis.Add(Tfs);
+            }
+            mTree = null;
+            D = null;
+            SharedConst.lc = null;
+        }
+        /*   void DoCreateListItem(TAlternativeParserGrpItemList* AItem, TAlternativeParserGrpCrossItemOut* ANew);*/
         int GetCount()
         {
             return f_List.Count;
@@ -179,10 +212,17 @@ public:
             if (f_List.IndexOf(AGList) < 0)
                 f_List.Add(AGList);
         }
-        /*        void CreateBasis();
-                void CreateListOut();
-                TAlternativeParserGrpCrossItemEnlarge* FindEnlarge(TAlternativeParserGrpItemTFS* ATfs);
-                TAlternativeParserGrpCrossItemEnlarge* RestructEnlarge(TAlternativeParserEnlargerTrashItem* ATrash);*/
+        public void CreateBasis()
+        {
+            DoCreateBasis();
+        }
+        public void CreateListOut()
+        {
+            DoCreateList();
+        }
+
+        /*         TAlternativeParserGrpCrossItemEnlarge* FindEnlarge(TAlternativeParserGrpItemTFS* ATfs);
+                 TAlternativeParserGrpCrossItemEnlarge* RestructEnlarge(TAlternativeParserEnlargerTrashItem* ATrash);*/
 
         public int Count
         {
@@ -255,8 +295,25 @@ public:
         }
         /*  public:
            TAlternativeParserGrpCross();
-          ~TAlternativeParserGrpCross();
-          TAlternativeParserGrpCrossItem* FindToCross(TAlternativeParserGrpItemList* AItem);*/
+          ~TAlternativeParserGrpCross();*/
+        public TAlternativeParserGrpCrossItem FindToCross(TAlternativeParserGrpItemList AItem)
+        {
+            {
+                TAlternativeParserGrpItemList T;
+                TAlternativeParserGrpCrossItem Item;
+                for (int i = 0; i <= Count - 1; i++)
+                {
+                    Item = GetItems(i);
+                    for (int j = 0; j <= Item.Count - 1; j++)
+                    {
+                        T = Item.GetItems(j);
+                        if (T == AItem)
+                            return Item;
+                    }
+                }
+                return null;
+            }
+        }
         public void AddItem(TAlternativeParserGrpItemList A, TAlternativeParserGrpItemList B)
         {
             TAlternativeParserGrpItemList T;
@@ -607,7 +664,22 @@ public:
             mDbl = null;
             mList = null;
         }
-        /*      void MakeCrossDubles();*/
+        void MakeCrossDubles()
+        {
+            TAlternativeParserGrpItemBase Base;
+            TAlternativeParserGrpCrossItem Cross;
+            f_Enlarger.Init();
+            for (int i = 0; i <= f_ListOut.Count - 1; i++)
+            {
+                Base = (TAlternativeParserGrpItemBase)(f_ListOut.ElementAt(i));
+                if (Base.Who() == 2)
+                {
+                    Cross = (TAlternativeParserGrpCrossItem)(Base);
+                    f_Enlarger.Enlarge(Cross);
+                    RestructEnlarge(Cross);
+                }
+            }
+        }
         void FreeItem(TAlternativeParserGrpItemBase AItem)
         {
             TAlternativeParserGrpItemBase Del;
@@ -617,8 +689,22 @@ public:
                 f_List.RemoveAt(index);
             }
         }
-        /*     TAlternativeParserGrpItemBase* CheckOut(TAlternativeParserGrpItemList* AItem);
-             void RestructEnlarge(TAlternativeParserGrpCrossItem* AItem);
+        TAlternativeParserGrpItemBase CheckOut(TAlternativeParserGrpItemList AItem)
+        {
+            {
+                TAlternativeParserGrpItemBase Res;
+                if (AItem.Agregate!=null)
+                {
+                    Res = f_Cross.FindToCross(AItem.Agregate);
+                    return Res;
+                }
+                Res = f_Cross.FindToCross(AItem);
+                if (Res!=null)
+                    return Res;
+                return AItem;
+            }
+        }
+      /*       void RestructEnlarge(TAlternativeParserGrpCrossItem* AItem);
              void AddToListEnlarge(TAlternativeParserGrpCrossItemEnlarge* AItem);
              public:
                TAlternativeParserGrp();
