@@ -112,11 +112,25 @@ public:
             else
                 return null;
         }
-       /* public:
-              TAlternativeParserGrpCrossItemOut();
-             ~TAlternativeParserGrpCrossItemOut();
-             void AddItem(TAlternativeParserGrpItemBase* AItem);
-             void ReplaceToEnlarge(TAlternativeParserGrpCrossItemEnlarge* AE);*/
+        /* public:
+               TAlternativeParserGrpCrossItemOut();
+              ~TAlternativeParserGrpCrossItemOut();*/
+        public void AddItem(TAlternativeParserGrpItemBase AItem)
+        {
+            if (f_List.IndexOf(AItem) < 0)
+                f_List.Add(AItem);
+        }
+        public void ReplaceToEnlarge(TAlternativeParserGrpCrossItemEnlarge AE)
+        {
+            int index = f_List.IndexOf(AE.Pos);
+            f_List.Insert(index, AE);
+            for (int i = 0; i <= AE.Count - 1; i++)
+            {
+                index = f_List.IndexOf(AE.GetItems(i));
+                if (index >= 0)
+                    f_List.RemoveAt(index);
+            }
+        }
         public int Count
         {
             get { return GetCount(); }
@@ -130,7 +144,16 @@ public:
         List<object> f_Basis;
         List<object> f_Out;
         /*void FreeOut();*/
-        void DoCreateList();
+        void DoCreateList()
+        {
+            TAlternativeParserGrpCrossItemOut mOut;
+            for (int i = 0; i <= Count - 1; i++)
+            {
+                mOut = GetNewCrossOut();
+                DoCreateListItem(GetItems(i), mOut);
+            }
+        }
+
         void DoCreateBasis()
         {
             TGlsBinaryTree mTree;
@@ -145,17 +168,17 @@ public:
                 for (int j = 0; j <= Item.Count - 1; j++)
                 {
                     Tfs = Item.GetItems(j);
-                    if (!D.Find(Tfs.TFS))
-                        D.AppendInteger((int)Tfs, Tfs.TFS);
+                    if (D.Find(Tfs.TFS)==null)
+                        D.AppendInteger((int)Tfs, Tfs.TFS); // ХЗ ДЕЛАЮ на УГАД, эту строчку НУЖНО ДЕБАЖИТЬ
                 }
             }
-            mTree = new TGlsBinaryTree(APC_CompareNode);
+            mTree = new TGlsBinaryTree(SharedConst.APC_CompareNode);
             for (int i = 0; i <= D.Count - 1; i++)
             {
                 Tfs = (TAlternativeParserGrpItemTFS)D.GetPosition(i).Int_Value;
                 mTree.insert(Tfs);
             }
-            mTree.inorder(APC_Inorder);
+            mTree.inorder(SharedConst.APC_Inorder);
             for (int i = 0; i <= SharedConst.lc.Count - 1; i++)
             {
                 Tfs = (TAlternativeParserGrpItemTFS)(SharedConst.lc.ElementAt(i));
@@ -165,7 +188,44 @@ public:
             D = null;
             SharedConst.lc = null;
         }
-        /*   void DoCreateListItem(TAlternativeParserGrpItemList* AItem, TAlternativeParserGrpCrossItemOut* ANew);*/
+        void DoCreateListItem(TAlternativeParserGrpItemList AItem, TAlternativeParserGrpCrossItemOut ANew)
+        {
+            int i;
+            bool f_s = false;
+            TAlternativeParserGrpItemBase Base;
+            TAlternativeParserGrpItemTFS Tfs;
+            TBaseWorkShape WS, WE;
+            WS = AItem.Alternative.NodeStart.WorkShape;
+            WE = AItem.Alternative.NodeEnd.WorkShape;
+            for (i = 0; i <= CountBasis - 1; i++)
+            {
+                Base = GetItemsBasis(i);
+                if (Base.Who()<=0)
+                {
+                    Tfs = (TAlternativeParserGrpItemTFS)(Base);
+                    if (Tfs.TFS.BaseWorkShape == WS)
+                    {
+                        f_s = true;
+                        break;
+                    }
+                    ANew.AddItem(Tfs);
+                }
+            }
+            if (f_s)
+                ANew.AddItem(AItem);
+            for (; i <= CountBasis - 1; i++)
+            {
+                Base = GetItemsBasis(i);
+                if (Base.Who()<=0)
+                {
+                    Tfs = (TAlternativeParserGrpItemTFS)(Base);
+                    if (Tfs.TFS.BaseWorkShape == WE)
+                        break;
+                }
+            }
+            for (++i; i <= CountBasis - 1; i++)
+                ANew.AddItem(GetItemsBasis(i));
+        }
         int GetCount()
         {
             return f_List.Count;
@@ -201,9 +261,24 @@ public:
              else
                  return null;
          }
-        /*      TAlternativeParserGrpCrossItemOut* GetNewCrossOut();
-              void ReplaceToEnlarge(TAlternativeParserGrpCrossItemEnlarge* AE);
-              public:
+        TAlternativeParserGrpCrossItemOut GetNewCrossOut()
+        {
+            TAlternativeParserGrpCrossItemOut Item = new TAlternativeParserGrpCrossItemOut();
+            f_Out.Add(Item);
+            return Item;
+        }
+        void ReplaceToEnlarge(TAlternativeParserGrpCrossItemEnlarge AE)
+        {
+            int index = f_Basis.IndexOf(AE.Pos);
+            f_Basis.Insert(index, AE);
+            for (int i = 0; i <= AE.Count - 1; i++)
+            {
+                index = f_Basis.IndexOf(AE.GetItems(i));
+                if (index >= 0)
+                    f_Basis.RemoveAt(index);
+            }
+        }
+   /*     public:
                    TAlternativeParserGrpCrossItem();
               ~TAlternativeParserGrpCrossItem();*/
         public override int Who() { return 2; }
@@ -221,8 +296,49 @@ public:
             DoCreateList();
         }
 
-        /*         TAlternativeParserGrpCrossItemEnlarge* FindEnlarge(TAlternativeParserGrpItemTFS* ATfs);
-                 TAlternativeParserGrpCrossItemEnlarge* RestructEnlarge(TAlternativeParserEnlargerTrashItem* ATrash);*/
+        /*TAlternativeParserGrpCrossItemEnlarge* FindEnlarge(TAlternativeParserGrpItemTFS* ATfs);*/
+        TAlternativeParserGrpCrossItemEnlarge RestructEnlarge(TAlternativeParserEnlargerTrashItem ATrash)
+        {
+            TAlternativeParserGrpItemTFS  Tfs;
+            TAlternativeParserGrpItemBase  Base;
+            TAlternativeParserGrpCrossItemOut  Outs;
+            TAlternativeParserGrpCrossItemEnlarge  Enl = null;
+            for (int i = 0; i <= CountBasis - 1; i++)
+            {
+                Base = GetItemsBasis(i);
+                if ((Base.Who() == 0) && (Base == ATrash.Pos))
+                {
+                    Enl = new TAlternativeParserGrpCrossItemEnlarge();
+                    Enl.ID = ATrash.ID;
+                    for (int j = i; j <= i + ATrash.Length - 1; j++)
+                        Enl.AddGRPTfs((TAlternativeParserGrpItemTFS)(GetItemsBasis(j)));
+                    ReplaceToEnlarge(Enl);
+                }
+
+            }
+
+            for (int i = 0; i <= CountOut - 1; i++)
+            {
+                Outs = GetItemsOut(i);
+                for (int j = 0; j <= Outs.Count - 1; j++)
+                {
+                    Base = Outs.GetItems(j);
+                    if ((Base.Who() == 0) && (Base == ATrash.Pos))
+                    {
+                        if (Enl==null)
+                        {
+                            Enl = new TAlternativeParserGrpCrossItemEnlarge();
+                            Enl.ID = ATrash.ID;
+                            for (int k = j; k <= j + ATrash.Length - 1; k++)
+                                Enl.AddGRPTfs((TAlternativeParserGrpItemTFS)(Outs.GetItems(k)));
+                        }
+                        Outs.ReplaceToEnlarge(Enl);
+                    }
+                }
+            }
+            return Enl;
+        }
+
 
         public int Count
         {
@@ -260,18 +376,28 @@ public:
             else
                 return null;
         }
-        /*   TAlternativeParserGrpItemTFS* __fastcall GetPos();
-           public:
-                 TAlternativeParserGrpCrossItemEnlarge();
-           ~TAlternativeParserGrpCrossItemEnlarge();
-           int Who() { return 3; }
-           void AddGRPTfs(TAlternativeParserGrpItemTFS* ATFS);*/
+        TAlternativeParserGrpItemTFS GetPos()
+        {
+            return GetItems(0);
+        }
+
+        /*       public:
+                     TAlternativeParserGrpCrossItemEnlarge();
+               ~TAlternativeParserGrpCrossItemEnlarge();*/
+        public override int Who() { return 3; }
+        public void AddGRPTfs(TAlternativeParserGrpItemTFS ATFS)
+        {
+            f_List.Add(ATFS);
+        }
         public int Count
         {
             get { return GetCount(); }
-        }   
-   /*       __property TAlternativeParserGrpItemTFS* Items[int AIndex] = { read = GetItems };
-          __property TAlternativeParserGrpItemTFS* Pos = { read = GetPos };*/
+        }
+        /*       __property TAlternativeParserGrpItemTFS* Items[int AIndex] = { read = GetItems };*/
+        public TAlternativeParserGrpItemTFS Pos
+        {
+            get { return GetPos(); }
+        }
         public int ID
         {
             set { f_ID = value; }
@@ -456,7 +582,29 @@ public:
             else
                 return null;
         }
-        /*       TAlternativeParserGrpItemTFS FindItemTfs(TTreeListTFS ATFS);*/
+        TAlternativeParserGrpItemTFS FindItemTfs(TTreeListTFS ATFS)
+        {
+            TAlternativeParserGrpItemTFS Temp;
+            TAlternativeParserGrpItemBase Item;
+            for (int i = 0; i <= f_List.Count - 1; i++)
+            {
+                Item = (TAlternativeParserGrpItemBase)(f_List.ElementAt(i));
+                int m_who = Item.Who();
+                if (m_who<=0)
+                {
+                    Temp = (TAlternativeParserGrpItemTFS)(Item);
+                    if (Temp.TFS == ATFS)
+                        return Temp;
+                }
+                if (m_who == 1)
+                {
+                    Temp = ((TAlternativeParserGrpItemList)(Item)).FindItemTfs(ATFS);
+                    if (Temp!=null)
+                        return Temp;
+                }
+            }
+            return null;
+        }
         int CompareAlternate(TAlternativeParserGrpItemList AL1,
                     TAlternativeParserGrpItemList AL2, ref TAlternativeParserGrpItemList AMax,
                     ref TAlternativeParserGrpItemList AMin)
@@ -704,8 +852,24 @@ public:
                 return AItem;
             }
         }
-      /*       void RestructEnlarge(TAlternativeParserGrpCrossItem* AItem);
-             void AddToListEnlarge(TAlternativeParserGrpCrossItemEnlarge* AItem);
+        void RestructEnlarge(TAlternativeParserGrpCrossItem AItem)
+        {
+            TAlternativeParserGrpItemTFS mPos;
+            TAlternativeParserGrpCrossItemEnlarge Enl;
+            TAlternativeParserEnlargerTrashItem TrItem;
+            TDynamicArray Mass = new TDynamicArray();
+            f_Enlarger.FindTrashItem(AItem, Mass);
+            for (int i = 0; i <= Mass.Count - 1; i++)
+            {
+                TrItem = (TAlternativeParserEnlargerTrashItem)(Mass.GetItems(i));
+                Enl = AItem.FindEnlarge(TrItem.Pos);
+                if (Enl == null)
+                    AddToListEnlarge(AItem.RestructEnlarge(TrItem));
+            }
+            Mass = null;
+        }
+/*
+        void AddToListEnlarge(TAlternativeParserGrpCrossItemEnlarge* AItem);
              public:
                TAlternativeParserGrp();
              ~TAlternativeParserGrp();*/
@@ -726,7 +890,7 @@ public:
         }
         public void AddTfs(TTreeListTFS ATFS)
         {
-            if (!FindItemTfs(ATFS))
+            if (FindItemTfs(ATFS)==null)
             {
                 TAlternativeParserGrpItemTFS T = new TAlternativeParserGrpItemTFS();
                 T.TFS = ATFS;
