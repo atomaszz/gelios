@@ -185,11 +185,17 @@ namespace geliosNEW
                 }
             }
         }
-        /*      void DoEnlarge();
-              TAlternativeParserEnlargerItem* GetNew(TAlternativeParserGrpCrossItem* AParentMain);
-              TAlternativeParserEnlargerItem* FindMax();
-              void Restruct();
-              bool IsEmptyTrash();*/
+        /*      void DoEnlarge();*/
+              TAlternativeParserEnlargerItem GetNew(TAlternativeParserGrpCrossItem AParentMain)
+        {
+            TPartialDecisionItem Item = new TPartialDecisionItem(this);
+            Item.InitDecision(APTItem);
+            f_List.Add(Item);
+            return Item;
+        }
+        /*       TAlternativeParserEnlargerItem* FindMax();
+               void Restruct();
+               bool IsEmptyTrash();*/
         void ClearTrash()
         {
             f_Trash.Clear();
