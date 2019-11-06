@@ -175,9 +175,32 @@ namespace geliosNEW
             f_List.Add(Item);
             f_PosStak++;
         }
-        /*     public bool DeleteInteger(int APos);
-             public bool Delete(object P);
-             public void InitStack();*/
+        /*    public bool DeleteInteger(int APos);*/
+        public bool Delete(object P)
+        {
+            int m = -1;
+            TDynamicArrayItem Item;
+            for (int i = 0; i <= f_List.Count - 1; i++)
+            {
+                Item = (TDynamicArrayItem)(f_List.ElementAt(i));
+                if (Item.P == P)
+                {
+                    m = i;
+                    break;
+                }
+            }
+            if (m > -1)
+            {
+                Item = null;
+                f_List.RemoveAt(m);
+            }
+            return (m > -1);
+        }
+
+        public void InitStack()
+        {
+            f_PosStak = f_List.Count;
+        }
         public object Pop()
         {
             object res;

@@ -331,7 +331,7 @@ public:
             }
             return null;
         }
-        TAlternativeParserGrpCrossItemEnlarge RestructEnlarge(TAlternativeParserEnlargerTrashItem ATrash)
+        public TAlternativeParserGrpCrossItemEnlarge RestructEnlarge(TAlternativeParserEnlargerTrashItem ATrash)
         {
             TAlternativeParserGrpItemTFS  Tfs;
             TAlternativeParserGrpItemBase  Base;
@@ -905,11 +905,22 @@ public:
             }
             Mass = null;
         }
-/*
-        void AddToListEnlarge(TAlternativeParserGrpCrossItemEnlarge* AItem);
-             public:
-               TAlternativeParserGrp();
-             ~TAlternativeParserGrp();*/
+        void AddToListEnlarge(TAlternativeParserGrpCrossItemEnlarge AItem)
+        {
+            if (f_ListEnlarge.IndexOf(AItem) == -1)
+                f_ListEnlarge.Add(AItem);
+        }
+        public TAlternativeParserGrp()
+        {
+            f_List = new List<object>();
+            f_ListOut = new List<object>();
+            f_ListEnlarge = new List<object>();
+            f_Cross = new TAlternativeParserGrpCross();
+            f_FindListPos = 0;
+            f_FindListPosNoCross = 0;
+            f_Enlarger = new TAlternativeParserEnlarger();
+        }
+        ~TAlternativeParserGrp() { }
         public void Clear()
         {
             FreeList();

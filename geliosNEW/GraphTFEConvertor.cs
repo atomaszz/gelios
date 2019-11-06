@@ -349,7 +349,7 @@ namespace geliosNEW
             f_Item.Item.ListIDFill(D);
             int cnt = D.Count;
             for (int i = 0; i <= cnt - 1; i++)
-                N.AddBaseShape((TBaseShape)(D.Position[i].P), D.Position[i].Int_Value);
+                N.AddBaseShape((TBaseShape)(D.GetPosition(i).P), D.GetPosition(i).Int_Value);
             D = null;
         }
      /*   public:

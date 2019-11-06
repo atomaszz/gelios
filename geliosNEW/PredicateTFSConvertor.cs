@@ -140,8 +140,12 @@ namespace geliosNEW
         {
             f_List.Add(AItem);
         }
-
-        /*    void DeleteItemToList(TPredicateItemBase* AItem);*/
+        public void DeleteItemToList(TPredicateItemBase AItem)
+        {
+            int index = f_List.IndexOf(AItem);
+            if (index >= 0)
+                f_List.RemoveAt(index);
+        }
         public bool ValidDescendant()
         {
             return true;
@@ -249,7 +253,7 @@ namespace geliosNEW
 
             for (int i = 0; i <= mRfc.CountBig - 1; i++)
             {
-                mBig = mRfc.ItemsBig[i];
+                mBig = mRfc.GetItemsBig(i);
                 TPredicateItemBig iBig = NewBig(mBig);
                 ABig.AddItem(iBig);
                 AStack.InsertToFirst(iBig);
@@ -483,7 +487,7 @@ namespace geliosNEW
                         m_Big = (TPredicateItemBig)(EnvelopeToBig(m_PWork));
 
                         m_BaseItem1 = m_Big;
-                        m_BaseItem2 = (TPredicateItemBase)(m_D.Items[0]);
+                        m_BaseItem2 = (TPredicateItemBase)(m_D.GetItems(0));
                         DoProcessItemTFS(m_BaseItem2, AStack);
                         AHead.DeleteItemToList(m_BaseItem2);
 
@@ -624,13 +628,13 @@ namespace geliosNEW
                 L = f_UsedPath.FindLikePathNode(N);
                 if (L!=null)
                 {
-                    NI = L.FindIndexFirst(mpos);
+                    NI = L.FindIndexFirst(ref mpos);
                     while (NI!=null)
                     {
                         FI = N.FindByBlockID(NI.BlockID);
                         if (FI != null)
                             D.Append(FI.ItemBase);
-                        NI = L.FindIndexNext(mpos);
+                        NI = L.FindIndexNext(ref mpos);
                     }
                 }
             }

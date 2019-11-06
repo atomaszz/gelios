@@ -148,7 +148,7 @@ namespace geliosNEW
         {
             return f_List.Count;
         }
-        TAlternativeParserItemBig  GetItemsBig(int AIndex)
+        public TAlternativeParserItemBig  GetItemsBig(int AIndex)
         {
             if (AIndex >= 0 && AIndex <= f_List.Count - 1)
                 return (TAlternativeParserItemBig)(f_List.ElementAt(AIndex));

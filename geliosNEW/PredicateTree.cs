@@ -20,8 +20,12 @@ namespace geliosNEW
              TBaseShape* __fastcall GetTFE(int AIndex);
              public:
          TPredicateTreeItem();
-             ~TPredicateTreeItem();
-             void AddBaseShape(TBaseShape* AShape, int AID);*/
+             ~TPredicateTreeItem();*/
+        public void AddBaseShape(TBaseShape AShape, int AID)
+        {
+            f_List.AppendInteger(AID, AShape);
+        }
+
         public int ParentID
         {
             set { f_ParentID = value; }
