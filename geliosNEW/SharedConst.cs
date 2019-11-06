@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
-
+using System.Windows.Forms;
 
 namespace geliosNEW
 {
@@ -213,9 +213,9 @@ namespace geliosNEW
         {
             TAlternativeParserGrpItemTFS m_A = (TAlternativeParserGrpItemTFS)(A);
             TAlternativeParserGrpItemTFS m_B = (TAlternativeParserGrpItemTFS)(B);
-            int res = GMess.SendMess(3, int(m_A->TFS->BaseWorkShape), int(m_B->TFS->BaseWorkShape));
+            int res = -100; /*** GMess.SendMess(3, int(m_A.TFS.BaseWorkShape), int(m_B.TFS.BaseWorkShape));*/ //НУКЖНО ДЕБАЖИТЬ ИСХОДНИКИ 
             if (res == -100)
-                throw Exception("Исключителная ошибка в алгоритме программы. Обратитесь к разработчику");
+                MessageBox.Show("Исключителная ошибка в алгоритме программы. Обратитесь к разработчику");
             return res;
         }
 

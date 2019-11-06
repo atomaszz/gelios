@@ -87,7 +87,7 @@ namespace geliosNEW
                    TPredicateItemTFS();
              ~TPredicateItemTFS();*/
         public override int Who() { return 0; }
-        void Assign(TAlternativeParserItemTFS ATfs)
+        public void Assign(TAlternativeParserItemTFS ATfs)
         {
             TPredicateItemTFE mTfe;
             FreeList();
@@ -229,7 +229,7 @@ namespace geliosNEW
                     ABig.AddItem(iTfs);
                     for (int j = 0; j <= iTfs.TFECount - 1; j++)
                     {
-                        mTFE = iTfs.TFEItems[j];
+                        mTFE = iTfs.GetTFEItems(j);
                         if (mTFE.RfcTFE.Big!=null)
                         {
                             TPredicateItemBig iBig = NewBig(mTFE.RfcTFE.Big);

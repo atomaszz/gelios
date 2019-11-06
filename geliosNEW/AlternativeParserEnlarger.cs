@@ -42,17 +42,24 @@ namespace geliosNEW
         bool f_Basis;
     TAlternativeParserGrpCrossItem f_ParentMain;
     TAlternativeParserGrpCrossItemOut f_Parent;
-        /*   int __fastcall GetCount();
-           TAlternativeParserGrpItemTFS* __fastcall GetItems(int AIndex);
+        int GetCount()
+        {
+            get { return GetCount(); }
+        }
+        /*   TAlternativeParserGrpItemTFS* __fastcall GetItems(int AIndex);
            public:
             TAlternativeParserEnlargerItem();
            ~TAlternativeParserEnlargerItem();
-           int Pos(TAlternativeParserEnlargerStep* AStep);
-           void AddTfsItem(TAlternativeParserGrpItemTFS* AGrpTfs);
-           void DeleteTfsItem(TAlternativeParserGrpItemTFS* AGrpTfs);
-           void CascadeDelete(TDynamicArray* AMass);
-           int FillStep(TAlternativeParserEnlargerStep* AStep, int APos, int ACount);
-           int Find(TAlternativeParserGrpItemTFS* AGrpTfs);*/
+           int Pos(TAlternativeParserEnlargerStep* AStep);*/
+        public void AddTfsItem(TAlternativeParserGrpItemTFS AGrpTfs)
+        {
+            if (f_List.IndexOf(AGrpTfs) < 0)
+                f_List.Add(AGrpTfs);
+        }
+        /*      void DeleteTfsItem(TAlternativeParserGrpItemTFS* AGrpTfs);
+              void CascadeDelete(TDynamicArray* AMass);
+              int FillStep(TAlternativeParserEnlargerStep* AStep, int APos, int ACount);
+              int Find(TAlternativeParserGrpItemTFS* AGrpTfs);*/
         public bool Basis
         {
             set { f_Basis = value; }
@@ -69,16 +76,22 @@ namespace geliosNEW
             set { f_ParentMain = value; }
             get { return f_ParentMain; }
         }
+        public int Count
+        {
+            get { return GetCount(); }
+        }
 
-    /*   __property int Count = { read = GetCount };
-       __property TAlternativeParserGrpItemTFS* Items[int AIndex] = { read = GetItems };*/
+   /*    __property TAlternativeParserGrpItemTFS* Items[int AIndex] = { read = GetItems };*/
 
     }
     class TAlternativeParserEnlargerStep
     {
         List<object> f_List;
-        /*  int __fastcall GetCount();
-          TAlternativeParserGrpItemTFS* __fastcall GetItems(int AIndex);
+        public int GetCount()
+        {
+            return f_List.Count;
+        }
+       /*   TAlternativeParserGrpItemTFS* __fastcall GetItems(int AIndex);
           public:
            TAlternativeParserEnlargerStep();
           ~TAlternativeParserEnlargerStep();
@@ -185,7 +198,63 @@ namespace geliosNEW
                 }
             }
         }
-        /*      void DoEnlarge();*/
+        void DoEnlarge()
+        {
+            int m, cnt, index, r_f, r_pos, m_id;
+            TAlternativeParserEnlargerStep MStep;
+            TAlternativeParserEnlargerItem A, B;
+            TDynamicArray DM = new TDynamicArray();
+            MStep = new TAlternativeParserEnlargerStep();
+            int c_trash;
+            bool go = true;
+            while (go)
+            {
+                go = false;
+                m = FindMax().Count;
+                cnt = Count;
+                c_trash = 0;
+                for (int i = m; i >= 1; i--)
+                {
+                    DM.Clear();
+                    for (int j = 0; j <= cnt - 1; j++)
+                    {
+                        A = Items[j];
+                        MStep.Clear();
+                        index = 0;
+                        r_f = A.FillStep(MStep, index, i);
+                        DM.Append(A);
+                        while (r_f > 0)
+                        {
+                            m_id = NextTrashItemID();
+                            for (int k = 0; k <= cnt - 1; k++)
+                            {
+                                B = Items[k];
+                                if (!DM.Find(B))
+                                {
+                                    r_pos = B.Pos(MStep);
+                                    if (r_pos >= 0)
+                                    {
+                                        CreateTrashItem(A.Items[index], i, A, m_id);
+                                        CreateTrashItem(B.Items[r_pos], i, B, m_id);
+                                        c_trash++;
+                                    }
+                                }
+                            }
+                            MStep.Clear();
+                            r_f = A.FillStep(MStep, ++index, i);
+                        }
+                    }
+                    if (c_trash>0)
+                    {
+                        Restruct();
+                        go = true;
+                        break;
+                    }
+                }
+            }
+            MStep = null;
+            DM = null;
+        }
               TAlternativeParserEnlargerItem GetNew(TAlternativeParserGrpCrossItem AParentMain)
         {
             TPartialDecisionItem Item = new TPartialDecisionItem(this);
@@ -193,8 +262,22 @@ namespace geliosNEW
             f_List.Add(Item);
             return Item;
         }
-        /*       TAlternativeParserEnlargerItem* FindMax();
-               void Restruct();
+        TAlternativeParserEnlargerItem FindMax()
+        {
+            TAlternativeParserEnlargerItem Res = null;
+            int a, b = 0;
+            for (int i = 0; i <= Count - 1; i++)
+            {
+                a = Items[i]->Count;
+                if (a > b)
+                {
+                    b = a;
+                    Res = Items[i];
+                }
+            }
+            return Res;
+        }
+  /*      void Restruct();
                bool IsEmptyTrash();*/
         void ClearTrash()
         {

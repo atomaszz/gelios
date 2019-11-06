@@ -22,10 +22,16 @@ namespace geliosNEW
            void proverka_nud();
            void proverka_nud_fuz();
            void sovm_naz(int ind);
-           public:
-         TPartialDecisionItem(TPartialDecision* AParent);
-           ~TPartialDecisionItem();
-           void InitDecision(TPredicateTreeItem* AWorkItem);
+           public:*/
+        public TPartialDecisionItem(TPartialDecision AParent)
+        {
+            f_Apd = null;
+            f_WorkItem = null;
+            f_Parent = AParent;
+            f_ParamAlt = new TParamAlternative();
+        }
+        ~TPartialDecisionItem() { }
+    /*      void InitDecision(TPredicateTreeItem* AWorkItem);
            void Make();
            void Proverka_NUOpt();
            __property TPartialDecision* Parent = {read = f_Parent
