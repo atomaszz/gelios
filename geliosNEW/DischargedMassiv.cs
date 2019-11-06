@@ -128,14 +128,17 @@ namespace geliosNEW
             return Res;
         }
         /*       int LoRow();
-               int LoCol();
-               void Clear();
-               bool IsEmpty();
-               Variant ActualValue(int ARow, int ACol, ref bool Actual);
-               double DoubleValue(int ARow, int ACol);
-               double DoubleValue(int AIndex);
-               __property Variant Items[int ARow][int ACol] = {read=GetItems, write=SetItems
-           };/
-           */
+               int LoCol();*/
+        public void Clear()
+        {
+            FreeList();
+        }
+        /*        bool IsEmpty();
+                Variant ActualValue(int ARow, int ACol, ref bool Actual);
+                double DoubleValue(int ARow, int ACol);
+                double DoubleValue(int AIndex);
+                __property Variant Items[int ARow][int ACol] = {read=GetItems, write=SetItems
+            };/
+            */
     }
 }

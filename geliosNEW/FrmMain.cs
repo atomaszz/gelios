@@ -565,13 +565,13 @@ namespace geliosNEW
             TC.PathStyle = 2;
             TC.Process(f_PredicatePath.BasePath, f_PredicatePath.UsedPath);
             GC.Init(TC.Head, f_Zadacha.Tree);
-     /*       f_Zadacha.Init(f_TypeParam, f_CheckNud, FullPredicateModel(GC.PrStruct,
-              GC.PrRab, GC.PrControlRab, GC.PrControlFunc, GC.PrCheckCondition, OptZ, *f_PredicateDopPrav));
-            AnsiString S;
+            f_Zadacha.Init(f_TypeParam, f_CheckNud, SharedConst.FullPredicateModel(this, GC.PrStruct,
+              GC.PrRab, GC.PrControlRab, GC.PrControlFunc, GC.PrCheckCondition, OptZ, f_PredicateDopPrav));
+            string S;
             S = f_Zadacha.Check();
-            if (S.Length() > 0)
-                Application.MessageBox(S.c_str(), "Îøèáêà", MB_ICONWARNING);
-            else
+            if (S.Length > 0)
+                MessageBox.Show(S, "Ошибка");
+    /*        else
             {
                 if (CreateStartDecision(f_Zadacha, f_TypeParam, opt_sadacha.get_type_metod()))
                 {
@@ -595,6 +595,11 @@ namespace geliosNEW
         }
 
         private void МетодПостроенияСуперпозицииToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void РешениеЗадачиToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }

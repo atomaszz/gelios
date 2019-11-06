@@ -15,12 +15,16 @@ namespace geliosNEW
         TBaseWorkShape f_BaseWorkShape;
         TBaseShape f_ParentShape;
         TDynamicArray f_List;
-        /*     int __fastcall GetCount();
-             int __fastcall GetTFE_ID(int AIndex);
-             TBaseShape* __fastcall GetTFE(int AIndex);
-             public:
-         TPredicateTreeItem();
-             ~TPredicateTreeItem();*/
+        int GetCount()
+        {
+            return f_List.Count;
+        }
+
+        /*        int __fastcall GetTFE_ID(int AIndex);
+                TBaseShape* __fastcall GetTFE(int AIndex);
+                public:
+            TPredicateTreeItem();
+                ~TPredicateTreeItem();*/
         public void AddBaseShape(TBaseShape AShape, int AID)
         {
             f_List.AppendInteger(AID, AShape);
@@ -46,8 +50,11 @@ namespace geliosNEW
             set { f_TypeWorkShape = value; }
             get { return f_TypeWorkShape; }
         }
-  /*          __property int Count = { read = GetCount };
-            __property TBaseShape* TFE[int AIndex] = { read = GetTFE };
+        public int Count
+        {
+            get { return GetCount(); }
+        }
+      /*      __property TBaseShape* TFE[int AIndex] = { read = GetTFE };
             __property int TFE_ID[int AIndex] = { read = GetTFE_ID };
             __property bool TReated = { read = f_TReated, write = f_TReated };*/
         public int NumAlt
@@ -64,11 +71,20 @@ namespace geliosNEW
         {
             f_List.Clear();
         }
-        /*     int __fastcall GetCount();
-             TPredicateTreeItem* __fastcall GetItems(int AIndex);
-             public:
-             TPredicateTree();
-             ~TPredicateTree(); */
+        int GetCount()
+        {
+            return f_List.Count();
+        }
+        public TPredicateTreeItem GetItems(int AIndex)
+        {
+            if (AIndex >= 0 && AIndex <= f_List.Count - 1)
+                return (TPredicateTreeItem)(f_List.ElementAt(AIndex));
+            else
+                return null;
+        }
+    /*    public:
+            TPredicateTree();
+            ~TPredicateTree(); */
         public void Clear()
         {
             FreeList();
@@ -79,10 +95,33 @@ namespace geliosNEW
             f_List.Add(N);
             return N;
         }
-      /*  TPredicateTreeItem* FindByTfeID(int AID, TDynamicArray* Arr);
-              TPredicateTreeItem* FindByParentID(int AID);
-              void ArrayIDToDelete(TPredicateTreeItem* AItem, TDynamicArray* Arr);
-              __property int Count = { read = GetCount };
-              __property TPredicateTreeItem* Items[int AIndex] = {read = GetItems*/
+        TPredicateTreeItem FindByTfeID(int AID, TDynamicArray Arr)
+        {
+            TPredicateTreeItem Item, Res = null;
+            if (Arr!=null)
+                Arr.Clear();
+            for (int i = 0; i <= Count - 1; i++)
+            {
+                Item = GetItems(i);
+                for (int j = 0; j <= Item.Count - 1; j++)
+                {
+                    if (Item.TFE_ID[j] == AID)
+                    {
+                        if (Res==null)
+                            Res = Item;
+                        if (Arr!=null)
+                            Arr.Append(Item);
+                    }
+                }
+            }
+            return Res;
+        }
+   /*     TPredicateTreeItem FindByParentID(int AID);
+                void ArrayIDToDelete(TPredicateTreeItem AItem, TDynamicArray Arr);*/
+        public int Count
+        {
+            get { return GetCount();  }
+        }
+        /*      __property TPredicateTreeItem* Items[int AIndex] = {read = GetItems*/
     }
 }

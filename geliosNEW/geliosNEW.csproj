@@ -86,6 +86,7 @@
     <Compile Include="ListForPaint.cs" />
     <Compile Include="Messangers.cs" />
     <Compile Include="PartialDecision.cs" />
+    <Compile Include="PieModule.cs" />
     <Compile Include="PredicateNumGenerator.cs" />
     <Compile Include="PredicatePath.cs" />
     <Compile Include="PredicateScanner.cs" />

@@ -17,7 +17,7 @@ namespace geliosNEW
         bool can_list;
         int type_char;
         string  c1, c2, c3;     //коэффициенты, нужные для задач 4-6
-        string Bd, Td, Vd;     //коэффициенты, нужные для задач 1-3
+        public string Bd, Td, Vd;     //коэффициенты, нужные для задач 1-3
         public TDynamicArray MassWork;
         TDischargedMassiv OptSovm;
         double Rate;

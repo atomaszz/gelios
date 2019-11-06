@@ -46,8 +46,11 @@ namespace geliosNEW
         bool f_CheckNud;
         int f_Type_Char;
         List<object> f_List;
-        /*  void FreeList();
-          int __fastcall GetCount();
+        void FreeList()
+        {
+            f_List.Clear();
+        }
+  /*      int __fastcall GetCount();
           TPartialDecisionItem* __fastcall GetItems(int AIndex);*/
         public TPartialDecision(TZadacha AOwner)
         {
@@ -57,19 +60,30 @@ namespace geliosNEW
             f_Owner = AOwner;
         }
           ~TPartialDecision() { }
-  /*        void Clear();
-          TPartialDecisionItem* FindPartialDecisionItemByParentID(int AID);
-          TPartialDecisionItem* FindPartialDecisionItemByTFEID(int AID);
-          TPartialDecisionItem* GetNew(TPredicateTreeItem* APTItem);
-          bool FreeItem(TPartialDecisionItem* AItem);
-          TPartialDecisionItem* PullAlternate(TPartialDecisionItem* AItem);
-          bool CheckOzenk_TFE_t(TPartialDecisionItem* AI, double AValue);
-          bool CheckOzenk_TFE_v(TPartialDecisionItem* AI, double AValue);
+        public void Clear()
+        {
+            FreeList();
+        }
+        /*     TPartialDecisionItem* FindPartialDecisionItemByParentID(int AID);
+               TPartialDecisionItem* FindPartialDecisionItemByTFEID(int AID);
+               TPartialDecisionItem* GetNew(TPredicateTreeItem* APTItem);
+               bool FreeItem(TPartialDecisionItem* AItem);
+               TPartialDecisionItem* PullAlternate(TPartialDecisionItem* AItem);
+               bool CheckOzenk_TFE_t(TPartialDecisionItem* AI, double AValue);
+               bool CheckOzenk_TFE_v(TPartialDecisionItem* AI, double AValue);*/
 
-          __property int Type_Char = { read = f_Type_Char, write = f_Type_Char };
-          __property bool CheckNud = { read = f_CheckNud, write = f_CheckNud };
-
-          __property int Count = { read = GetCount };
+        public int Type_Char
+        {
+            set { f_Type_Char = value; }
+            get { return f_Type_Char;  }
+        }
+            
+        public bool CheckNud
+        {
+            set { f_CheckNud = value; }
+            get { return f_CheckNud; }
+        }
+     /*     __property int Count = { read = GetCount };
           __property TPartialDecisionItem* Items[int AIndex] = { read =  GetItems*/
     }
 }

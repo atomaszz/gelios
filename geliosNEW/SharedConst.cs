@@ -224,5 +224,56 @@ namespace geliosNEW
             lc.Add(A);
             return true;
         }
+        public static TPieModule gPieModule;
+
+        /*----------------------------------------*/
+        public static string FullPredicateModel(FrmMain frmMain, string AStruct, string ARab,
+  string AControlRab, string AControlFunc, string ACheckCondition,
+  string AOptZadacha, string ADopPrav)
+        {
+            frmMain.GetMainList().GetAllWorkShape(opt_sadacha.MassWork);
+            opt_sadacha.InitData();
+            string S = "%Предикатная модель Альтернативного Графа (структур на основе ТФЕ)\r\n";
+            S = S + "%Дата создания: " + DateToStr(Date()) + "\r\n";
+            S = S + "%----------------------------------------------------\r\n";
+            S = S + "%Задача оптимизации:\r\n";
+            if (AOptZadacha.Length > 0)
+                S = S + AOptZadacha + "\r\n";
+
+            S = S + "%Структура ТФЕ:\r\n";
+            if (AStruct.Length > 0)
+            {
+                S = S + AStruct;
+                S = S + "\r\n";
+            }
+            S = S + "%Параметры подблоков ТФЕ:\r\n";
+            if (ARab.Length > 0)
+            {
+                S = S + ARab;
+                S = S + "\r\n";
+            }
+            if (AControlRab.Length > 0)
+            {
+                S = S + AControlRab;
+                S = S + "\r\n";
+            }
+            if (AControlFunc.Length > 0)
+            {
+                S = S + AControlFunc;
+                S = S + "\r\n";
+            }
+            if (ACheckCondition.Length > 0)
+            {
+                S = S + ACheckCondition;
+                S = S + "\r\n";
+            }
+            S = S + "%Дополнительные (вспомогательные) правила:\r\n";
+            if (ADopPrav.Length > 0)
+            {
+                S = S + ADopPrav;
+                S = S + "\r\n";
+            }
+            return S;
+        }
     }
 }
