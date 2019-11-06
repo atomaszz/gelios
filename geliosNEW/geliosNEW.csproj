@@ -46,6 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlternativeParser.cs" />
+    <Compile Include="AlternativeParserEnlarger.cs" />
+    <Compile Include="AlternativeParserGrp.cs" />
+    <Compile Include="AltInfo.cs" />
     <Compile Include="AltStack.cs" />
     <Compile Include="CommonGraph.cs" />
     <Compile Include="DischargedMassiv.cs" />
@@ -62,6 +66,12 @@
     <Compile Include="FmParamAlternative.Designer.cs">
       <DependentUpon>FmParamAlternative.cs</DependentUpon>
     </Compile>
+    <Compile Include="FmStartDecision.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FmStartDecision.Designer.cs">
+      <DependentUpon>FmStartDecision.cs</DependentUpon>
+    </Compile>
     <Compile Include="FmTredactChar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,10 +79,19 @@
       <DependentUpon>FmTredactChar.cs</DependentUpon>
     </Compile>
     <Compile Include="GlsAtmCommon.cs" />
+    <Compile Include="GraphTFEConvertor.cs" />
+    <Compile Include="GraphTFEConvertorTransNum.cs" />
     <Compile Include="LineCutting.cs" />
     <Compile Include="ListFlag.cs" />
     <Compile Include="ListForPaint.cs" />
     <Compile Include="Messangers.cs" />
+    <Compile Include="PartialDecision.cs" />
+    <Compile Include="PredicateNumGenerator.cs" />
+    <Compile Include="PredicatePath.cs" />
+    <Compile Include="PredicateScanner.cs" />
+    <Compile Include="PredicateTFSConvertor.cs" />
+    <Compile Include="PredicateTrackCreator.cs" />
+    <Compile Include="PredicateTree.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -115,6 +134,8 @@
     <Compile Include="TParamAlternativeItem.cs" />
     <Compile Include="TRectLine.cs" />
     <Compile Include="TRectShape.cs" />
+    <Compile Include="TreeList.cs" />
+    <Compile Include="TreeListItem.cs" />
     <Compile Include="TRhombShape.cs" />
     <Compile Include="TTail.cs" />
     <Compile Include="TTfeEllShape.cs" />
@@ -123,6 +144,7 @@
     <Compile Include="TTfeRhombShape.cs" />
     <Compile Include="TTrailer.cs" />
     <Compile Include="TWork.cs" />
+    <Compile Include="TZadacha.cs" />
     <Compile Include="TZWork.cs" />
     <Compile Include="TZWorkOR.cs" />
     <Compile Include="FrmMain.cs">
@@ -139,6 +161,9 @@
     <EmbeddedResource Include="FmParamAlternative.resx">
       <DependentUpon>FmParamAlternative.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FmStartDecision.resx">
+      <DependentUpon>FmStartDecision.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FmTredactChar.resx">
       <DependentUpon>FmTredactChar.cs</DependentUpon>

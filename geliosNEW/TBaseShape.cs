@@ -342,8 +342,24 @@ namespace geliosNEW
             f_ParamAlt.Delete2((TParamAlternativeItem)APointer);
             CheckNullParamAlt();
         }
-        /*      public virtual AnsiString Make_One_Simple();
-              public virtual AnsiString Make_One_SimpleItem(int AIndex);*/
+        public virtual string Make_One_Simple()
+        {
+            string Res = "";
+            if (f_ParamAlt!=null)
+            {
+                for (int i = 0; i <= f_ParamAlt.Count - 1; i++)
+                {
+                    if (i>0)
+                        Res = Res + "\r\n";
+                    Res = Res + Make_One_SimpleItem(i);
+                }
+            }
+            return Res;
+        }
+        public virtual string Make_One_SimpleItem(int AIndex)
+        {
+            return "empty(nl).";
+        }
 
 
         public  Color  BrushColor

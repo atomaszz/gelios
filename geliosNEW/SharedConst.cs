@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
-
+using System.Windows.Forms;
 
 namespace geliosNEW
 {
@@ -161,6 +161,67 @@ namespace geliosNEW
         {
             if (rec.X > pnt.X || rec.Y > pnt.Y) return false;
             if ((rec.X+rec.Width)<pnt.X || (rec.Y + rec.Height) < pnt.Y) return false;
+            return true;
+        }
+
+        /*------------------------------------------------------------*/
+        public static int PredicatePathCnt;
+        public static void PredicatePathInit()
+        {
+            PredicatePathCnt = 0;
+        }
+        public static int PredicatePathNextNum()
+        {
+            --PredicatePathCnt;
+            return PredicatePathCnt;
+        }
+
+        public static int g_TrashCounter;
+        public static void InitTrashCounter()
+        {
+            g_TrashCounter = 0;
+        }
+
+        public static int NextTrashItemID()
+        {
+            return (++g_TrashCounter);
+        }
+
+        public static TGlsList lcList;
+        public static void InitTFEConvertor()
+        {
+            lcList = new TGlsList();
+        }
+
+        public static void FreeTFEConvertor()
+        {
+            lcList.clear();
+        }
+        public static void CopyDynamicArray(TDynamicArray ASource, TDynamicArray ADest, bool AInsertToFirst)
+        {
+            for (int i = 0; i <= ASource.Count - 1; i++)
+            {
+                if (AInsertToFirst)
+                    ADest.InsertToFirst(ASource.GetItems(i));
+                else
+                    ADest.Append(ASource.GetItems(i));
+            }
+        }
+        /*-----------*/
+        public static List<object> lc;
+        public static int APC_CompareNode(object A, object B)
+        {
+            TAlternativeParserGrpItemTFS m_A = (TAlternativeParserGrpItemTFS)(A);
+            TAlternativeParserGrpItemTFS m_B = (TAlternativeParserGrpItemTFS)(B);
+            int res = -100; /*** GMess.SendMess(3, int(m_A.TFS.BaseWorkShape), int(m_B.TFS.BaseWorkShape));*/ //НУКЖНО ДЕБАЖИТЬ ИСХОДНИКИ 
+            if (res == -100)
+                MessageBox.Show("Исключителная ошибка в алгоритме программы. Обратитесь к разработчику");
+            return res;
+        }
+
+        public static bool APC_Inorder(object A)
+        {
+            lc.Add(A);
             return true;
         }
     }

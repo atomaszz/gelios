@@ -316,6 +316,7 @@
             this.методПостроенияСуперпозицииToolStripMenuItem.Name = "методПостроенияСуперпозицииToolStripMenuItem";
             this.методПостроенияСуперпозицииToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
             this.методПостроенияСуперпозицииToolStripMenuItem.Text = "Метод построения суперпозиции";
+            this.методПостроенияСуперпозицииToolStripMenuItem.Click += new System.EventHandler(this.МетодПостроенияСуперпозицииToolStripMenuItem_Click);
             // 
             // методОптимизацииToolStripMenuItem
             // 
