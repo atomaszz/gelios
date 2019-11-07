@@ -30,27 +30,27 @@
         {
             this.label17 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.edPercent = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -80,6 +80,24 @@
             this.panel1.Size = new System.Drawing.Size(344, 107);
             this.panel1.TabIndex = 15;
             // 
+            // textBox5
+            // 
+            this.textBox5.Enabled = false;
+            this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBox5.Location = new System.Drawing.Point(17, 70);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(312, 24);
+            this.textBox5.TabIndex = 24;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBox1.Location = new System.Drawing.Point(17, 36);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(312, 24);
+            this.textBox1.TabIndex = 23;
+            // 
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -90,6 +108,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "Найти решения";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -105,23 +124,38 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(394, 37);
             this.flowLayoutPanel1.TabIndex = 16;
             // 
-            // textBox1
+            // button3
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(17, 36);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(312, 24);
-            this.textBox1.TabIndex = 23;
+            this.button3.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button3.Location = new System.Drawing.Point(306, 3);
+            this.button3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(85, 30);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "Закрыть";
+            this.button3.UseVisualStyleBackColor = true;
             // 
-            // textBox5
+            // button4
             // 
-            this.textBox5.Enabled = false;
-            this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox5.Location = new System.Drawing.Point(17, 70);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(312, 24);
-            this.textBox5.TabIndex = 24;
+            this.button4.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button4.Location = new System.Drawing.Point(215, 3);
+            this.button4.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(85, 30);
+            this.button4.TabIndex = 3;
+            this.button4.Text = "Оценка";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button2.Location = new System.Drawing.Point(109, 3);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(100, 30);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Ход решения";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -163,6 +197,24 @@
             this.panel3.Size = new System.Drawing.Size(344, 122);
             this.panel3.TabIndex = 26;
             // 
+            // textBox7
+            // 
+            this.textBox7.Enabled = false;
+            this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBox7.Location = new System.Drawing.Point(129, 83);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(200, 24);
+            this.textBox7.TabIndex = 25;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Enabled = false;
+            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBox3.Location = new System.Drawing.Point(129, 48);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(200, 24);
+            this.textBox3.TabIndex = 24;
+            // 
             // textBox2
             // 
             this.textBox2.Enabled = false;
@@ -181,24 +233,6 @@
             this.label2.Size = new System.Drawing.Size(110, 16);
             this.label2.TabIndex = 22;
             this.label2.Text = "Ограничения:";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Enabled = false;
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox3.Location = new System.Drawing.Point(129, 48);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(200, 24);
-            this.textBox3.TabIndex = 24;
-            // 
-            // textBox7
-            // 
-            this.textBox7.Enabled = false;
-            this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox7.Location = new System.Drawing.Point(129, 83);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(200, 24);
-            this.textBox7.TabIndex = 25;
             // 
             // panel4
             // 
@@ -257,39 +291,6 @@
             this.label4.Size = new System.Drawing.Size(134, 16);
             this.label4.TabIndex = 22;
             this.label4.Text = "Тип параметров:";
-            // 
-            // button2
-            // 
-            this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button2.Location = new System.Drawing.Point(109, 3);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 30);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Ход решения";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button3.Location = new System.Drawing.Point(306, 3);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(85, 30);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Закрыть";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button4.Location = new System.Drawing.Point(215, 3);
-            this.button4.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(85, 30);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Оценка";
-            this.button4.UseVisualStyleBackColor = true;
             // 
             // FmStartDecision
             // 

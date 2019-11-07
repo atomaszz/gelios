@@ -7,7 +7,7 @@ using System.IO;
 
 namespace geliosNEW
 {
-    class TZadacha
+    public class TZadacha
     {
         double f_TMax;
         double f_VMax;

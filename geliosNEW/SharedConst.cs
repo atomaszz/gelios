@@ -215,7 +215,7 @@ namespace geliosNEW
             TAlternativeParserGrpItemTFS m_B = (TAlternativeParserGrpItemTFS)(B);
             int res = -100; /*** GMess.SendMess(3, int(m_A.TFS.BaseWorkShape), int(m_B.TFS.BaseWorkShape));*/ //НУКЖНО ДЕБАЖИТЬ ИСХОДНИКИ 
             if (res == -100)
-                MessageBox.Show("Исключителная ошибка в алгоритме программы. Обратитесь к разработчику");
+                MessageBox.Show("Исключителная ошибка в алгоритме программы. Обратитесь к разработчику", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return res;
         }
 
@@ -274,6 +274,25 @@ namespace geliosNEW
                 S = S + "\r\n";
             }
             return S;
+        }
+        /*------------------------------------------------------------*/
+        public static FmStartDecision fmStartDecision;
+        public static bool CreateStartDecision(TZadacha AZadacha, int AType_char, int AType_metod)
+        {
+            bool res;
+            fmStartDecision = new FmStartDecision();
+            fmStartDecision.type_char = AType_char;
+            fmStartDecision.type_metod = AType_metod;
+            fmStartDecision.set_sadacha_edit();
+            fmStartDecision.edPercent.Text = float_2_string(opt_sadacha.Rate, 6, 1);
+            fmStartDecision.Zadacha = AZadacha;
+            res = fmStartDecision.ShowModal() == mrOk;
+            return res;
+        }
+
+        public static void FreeStartDecision()
+        {
+            fmStartDecision.Release();
         }
     }
 }

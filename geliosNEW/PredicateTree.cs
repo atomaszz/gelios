@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace geliosNEW
 {
-    class TPredicateTreeItem
+    public class TPredicateTreeItem
     {
         int f_ParentID;
         int f_TypeWorkShape;
@@ -85,7 +85,7 @@ namespace geliosNEW
         }
 
     }
-    class TPredicateTree
+    public class TPredicateTree
     {
         List<object> f_List;
         public void FreeList()

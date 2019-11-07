@@ -34,7 +34,7 @@ namespace geliosNEW
         };
         __property AnsiString Text = {read = GetText*/
     }
-    class TPredicateTrackCreator
+    public class TPredicateTrackCreator
     {
         List<object> f_List;
         List<object> f_ListBase;

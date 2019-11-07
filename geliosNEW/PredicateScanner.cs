@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace geliosNEW
 {
-    class TPredicateScannerItemKnot
+    public class TPredicateScannerItemKnot
     {
         int f_ParentID;
         int f_NumAlt;
@@ -138,7 +138,7 @@ namespace geliosNEW
         }
     }
 
-    class TPredicateScanner
+    public class TPredicateScanner
     {
         bool f_Prop;
         /*     char f_Simv[256];

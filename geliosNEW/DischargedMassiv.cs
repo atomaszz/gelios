@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace geliosNEW
 {
-    class TDischargedMassivItem
+    public class TDischargedMassivItem
     {
         public int f_Col;
         public int f_Row;
@@ -18,7 +18,7 @@ namespace geliosNEW
         }
     };
 
-    class TDischargedMassiv
+    public class TDischargedMassiv
     {
         object f_Def;
         public List<object> Val;

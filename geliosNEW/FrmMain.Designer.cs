@@ -310,21 +310,18 @@
             this.решениеЗадачиToolStripMenuItem.Name = "решениеЗадачиToolStripMenuItem";
             this.решениеЗадачиToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
             this.решениеЗадачиToolStripMenuItem.Text = "Решение задачи";
-            this.решениеЗадачиToolStripMenuItem.Click += new System.EventHandler(this.РешениеЗадачиToolStripMenuItem_Click);
             // 
             // методПостроенияСуперпозицииToolStripMenuItem
             // 
             this.методПостроенияСуперпозицииToolStripMenuItem.Name = "методПостроенияСуперпозицииToolStripMenuItem";
             this.методПостроенияСуперпозицииToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
             this.методПостроенияСуперпозицииToolStripMenuItem.Text = "Метод построения суперпозиции";
-            this.методПостроенияСуперпозицииToolStripMenuItem.Click += new System.EventHandler(this.МетодПостроенияСуперпозицииToolStripMenuItem_Click);
             // 
             // методОптимизацииToolStripMenuItem
             // 
             this.методОптимизацииToolStripMenuItem.Name = "методОптимизацииToolStripMenuItem";
             this.методОптимизацииToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
             this.методОптимизацииToolStripMenuItem.Text = "Метод оптимизации";
-            this.методОптимизацииToolStripMenuItem.Click += new System.EventHandler(this.МетодОптимизацииToolStripMenuItem_Click);
             // 
             // найтиРешениеToolStripMenuItem
             // 

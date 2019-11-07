@@ -170,7 +170,7 @@ public:
                 {
                     Tfs = Item.GetItems(j);
                     if (D.Find(Tfs.TFS) == null)
-                        MessageBox.Show("ДЕЛАЮ на УГАД, эту строчку НУЖНО ДЕБАЖИТЬ");
+                        MessageBox.Show("ДЕЛАЮ на УГАД, эту строчку НУЖНО ДЕБАЖИТЬ", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                      //   D.AppendInteger((int)Tfs, Tfs.TFS); // ХЗ ДЕЛАЮ на УГАД, эту строчку НУЖНО ДЕБАЖИТЬ
                 }
             }

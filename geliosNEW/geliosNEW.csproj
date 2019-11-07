@@ -54,6 +54,12 @@
     <Compile Include="CommonGraph.cs" />
     <Compile Include="DischargedMassiv.cs" />
     <Compile Include="DynamicArray.cs" />
+    <Compile Include="FmMetodOpt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FmMetodOpt.Designer.cs">
+      <DependentUpon>FmMetodOpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="FmOptSadacha.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,6 +162,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FmMetodOpt.resx">
+      <DependentUpon>FmMetodOpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FmOptSadacha.resx">
       <DependentUpon>FmOptSadacha.cs</DependentUpon>
     </EmbeddedResource>

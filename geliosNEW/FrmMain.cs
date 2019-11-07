@@ -81,15 +81,15 @@ namespace geliosNEW
         }
         void InitHelp()
         {
-       //     fmHelp = null;
+            //     fmHelp = null;
         }
         void InitPieModule()
         {
-   /*         string S = "Îøèáêà çàãðóçêè ìîäóëÿ ÏÐÎËÎÃ ñèñòåìû!\r\n";
-            S = S + "Áåç äàííîé ôóíêöèè óñëîâèÿ ïðåäèêàòîâ ÒÔÅ â çàäà÷àõ îïòèìèçàöèè áóäóò èãíîðèðîâàòüñÿ!";
-            gPieModule = new TPieModule;
-            if (!gPieModule.CheckModule())
-                MessageBox(0, S.c_str(), "Ïðåäóïðåæäåíèå", MB_ICONWARNING);*/
+            /*         string S = "Îøèáêà çàãðóçêè ìîäóëÿ ÏÐÎËÎÃ ñèñòåìû!\r\n";
+                     S = S + "Áåç äàííîé ôóíêöèè óñëîâèÿ ïðåäèêàòîâ ÒÔÅ â çàäà÷àõ îïòèìèçàöèè áóäóò èãíîðèðîâàòüñÿ!";
+                     gPieModule = new TPieModule;
+                     if (!gPieModule.CheckModule())
+                         MessageBox(0, S.c_str(), "Ïðåäóïðåæäåíèå", MB_ICONWARNING);*/
         }
         public FrmMain()
         {
@@ -132,7 +132,7 @@ namespace geliosNEW
             f_LineColor = Color.Black;
             f_BrushTFE = false;
             f_BrushColor = Color.White;
-       //     f_FontTFE = new Graphics::TFont;
+            //     f_FontTFE = new Graphics::TFont;
             f_FlagType = 1;
             f_ColorLeave = Color.Red;
             f_ColorEnter = Color.Yellow;
@@ -160,8 +160,8 @@ namespace geliosNEW
             f_AlternateController.UnderControl = pbMain;
             f_AltSelector = new TAltSelector();
             f_AltStackController = new TAltStackController();
-         //   f_MenuController = new TMenuController;
-         //   f_ContextMenuController = new TMenuController;
+            //   f_MenuController = new TMenuController;
+            //   f_ContextMenuController = new TMenuController;
             Item = f_AltSelector.CreateNewAlternateID(LevelController.ParentShapeID);
             f_IdAlternative = Item.ID;
             f_NumAlternative = f_AltSelector.AddAltItem(f_IdAlternative);
@@ -171,29 +171,29 @@ namespace geliosNEW
             f_AltStackController.Push(f_IdAlternative, f_NumAlternative,
                f_IdAlternativeParent, f_NumAlternativeParent);
             f_ColorSetup = new TColorSetup();
-      /*      f_RSettings = new TGlsRegistry();
-            GMess = new TMessangers();
-            f_AV = new TAlternateView;
-            f_StackHistory = new TDynamicArray();
-            f_ActList = new TGlsActionList;
-            InitActionList();
-            f_RSettings.Path = "\\Software\\TFEGraph\\GLS";
-            RestoreSettings();
-            GMess.RegistrMessage(1, ContainsChildShape);
-            GMess.RegistrMessage(2, SaveHideBar);
-            GMess.RegistrMessage(3, CompareWS);
-            GMess.RegistrMessage(4, GLBCheckUsedPath);
-            GMess.RegistrMessage(5, GLBShowPredicateModel);
-            GMess.RegistrMessage(6, GLBFindTFS);
-            GMess.RegistrMessage(7, GLBApplySettingsForOutherGrid);*/
+            /*      f_RSettings = new TGlsRegistry();
+                  GMess = new TMessangers();
+                  f_AV = new TAlternateView;
+                  f_StackHistory = new TDynamicArray();
+                  f_ActList = new TGlsActionList;
+                  InitActionList();
+                  f_RSettings.Path = "\\Software\\TFEGraph\\GLS";
+                  RestoreSettings();
+                  GMess.RegistrMessage(1, ContainsChildShape);
+                  GMess.RegistrMessage(2, SaveHideBar);
+                  GMess.RegistrMessage(3, CompareWS);
+                  GMess.RegistrMessage(4, GLBCheckUsedPath);
+                  GMess.RegistrMessage(5, GLBShowPredicateModel);
+                  GMess.RegistrMessage(6, GLBFindTFS);
+                  GMess.RegistrMessage(7, GLBApplySettingsForOutherGrid);*/
             InitHelp();
             InitPieModule();
             /*     f_Zadacha = new TZadacha;
                  f_ClipCopyTFS = new TClipCopyTFS(Handle, 0x8000000);
                  f_PredicatePath = new TPredicatePath;*/
             f_PredicateDopPrav = "";
-         /*        ApplySettings();
-                 randomize();*/
+            /*        ApplySettings();
+                    randomize();*/
 
             //      pbGraph = pbMain.CreateGraphics();
             /*       rectMainShow = new Rectangle(0, 0, pbMain.Width, pbMain.Height);
@@ -209,7 +209,7 @@ namespace geliosNEW
             Rectangle R;
             TBaseWorkShape W;
             W = Grid.LastWorkShape;
-            if (W!=null)
+            if (W != null)
             {
                 R = W.GetFrameRectWithLines();
                 if ((R.Right + Math.Abs(Grid.OffsetSumX) - pbMain.Width - sbX.Value) > (Grid.StepPixels * 2))
@@ -222,7 +222,7 @@ namespace geliosNEW
         {
             if (MainList.IsContainsChildShape(Shape.ID))
                 Shape.PenColor = f_HaveChildColor;
-            if (Shape.ParamAlt!=null)
+            if (Shape.ParamAlt != null)
             {
                 if (f_AltParamShapeColorEnable)
                 {
@@ -238,10 +238,10 @@ namespace geliosNEW
         {
             Point P;
             P = Grid.GetPointPolygon(sbX.Value, sbY.Value);
-    /*        if ((P.X - pbMain.Width - sbX.Value) > 2)
-                sbX.Value = P.X - pbMain.Width + (Grid.StepPixels * 4);
-            if ((P.Y - pbMain.Height - sbY.Value) > 2)
-                sbY.Maximum = P.Y - pbMain.Height + (Grid.StepPixels * 4);*/
+            /*        if ((P.X - pbMain.Width - sbX.Value) > 2)
+                        sbX.Value = P.X - pbMain.Width + (Grid.StepPixels * 4);
+                    if ((P.Y - pbMain.Height - sbY.Value) > 2)
+                        sbY.Maximum = P.Y - pbMain.Height + (Grid.StepPixels * 4);*/
         }
         int GetTypShape()
         {
@@ -265,14 +265,14 @@ namespace geliosNEW
             Grid.PreparePaint();
             SetNewPolygon();
             SetNewPosition();
-    //        InvalidateRgn(pbMain.Parent.Handle, Grid.GetRegion(WH, 4), false);
+            //        InvalidateRgn(pbMain.Parent.Handle, Grid.GetRegion(WH, 4), false);
             if (AType == 2)
             {
                 pbMain.Invalidate();
                 WH = Grid.AddWorkShape(AType, f_CurrIDShape, f_CurrIDBlock, f_CurrIDLine);
                 WH.OnShapeCopy = ShapeCopy;
                 WH.ParentShapeID = LevelController.ParentShapeID;
-       //         assert(WH);
+                //         assert(WH);
                 f_CurrIDShape = WH.LastShapeId;
                 f_CurrIDLine = WH.LastLineId;
                 f_CurrIDBlock++;
@@ -280,15 +280,15 @@ namespace geliosNEW
                 Grid.PreparePaint();
                 SetNewPolygon();
                 SetNewPosition();
-      //          InvalidateRgn(pbMain.Parent.Handle, Grid.GetRegion(WH, 4), false);
+                //          InvalidateRgn(pbMain.Parent.Handle, Grid.GetRegion(WH, 4), false);
             }
         }
         void CreateSectionBar()
         {
-            menuBar = new SectionBar(pnlButton,8,10,150,100);
+            menuBar = new SectionBar(pnlButton, 8, 10, 150, 100);
             menuBar.addControlLeft();
             Section tmp = new Section("Раб. оперция", "Рабочая операция", 1);
-            tmp.iniShape(21,23,18,18);
+            tmp.iniShape(21, 23, 18, 18);
             menuBar.addSection(tmp);
 
             tmp = new Section("Послед. рабочая", "Последовательная рабочая операция", 2);
@@ -336,7 +336,7 @@ namespace geliosNEW
             menuBar.addSection(tmp);
 
             menuBar.addControlRight();
-            menuBar.showControls(this.Width,0);
+            menuBar.showControls(this.Width, 0);
         }
         private void вероятностныеToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -415,9 +415,9 @@ namespace geliosNEW
                  g = Graphics.FromImage(buf);   // инициализация g
                  g.DrawRectangle(new Pen(Color.Black, 2), 20, 20, 80, 50);*/
 
-                     toolStripStatusLabel1.Text = e.X.ToString();
-                      toolStripStatusLabel2.Text = e.Y.ToString();
-                      //     paralWorkOperAnd(g, 40, 20, 1.5f);
+            toolStripStatusLabel1.Text = e.X.ToString();
+            toolStripStatusLabel2.Text = e.Y.ToString();
+            //     paralWorkOperAnd(g, 40, 20, 1.5f);
 
             /*     Pen workPen = new Pen(Color.Black, 2f);
                  GraphicShapes test = new GraphicShapes(pbMain, workPen);
@@ -436,7 +436,7 @@ namespace geliosNEW
 
         private void UMainFrm_SizeChanged(object sender, EventArgs e)
         {
-            menuBar.showControls(this.Width,0);
+            menuBar.showControls(this.Width, 0);
         }
 
         private void PictureBox1_MouseUp(object sender, MouseEventArgs e)
@@ -461,19 +461,19 @@ namespace geliosNEW
                 AddWorkShape(typ);
                 menuBar.DownFalse();
             }
-          /*  else
-                Grid.MouseUp(Sender, Button, Shift, X, Y);*/
-       /*     Item = Grid.FindAlternateItem(X, Y);
-            if ((Button == mbRight) && (Item))
-            {
-                MenuAlternateItemCreate(Item, X, Y);
-                return;
-            }
-            if (Button == mbRight)
-            {
-                MenuContextCreate(X, Y);
-                return;
-            }*/
+            /*  else
+                  Grid.MouseUp(Sender, Button, Shift, X, Y);*/
+            /*     Item = Grid.FindAlternateItem(X, Y);
+                 if ((Button == mbRight) && (Item))
+                 {
+                     MenuAlternateItemCreate(Item, X, Y);
+                     return;
+                 }
+                 if (Button == mbRight)
+                 {
+                     MenuContextCreate(X, Y);
+                     return;
+                 }*/
         }
 
 
@@ -508,10 +508,10 @@ namespace geliosNEW
             //Keys.Shift
 
 
-      /*      if (e.Button == MouseButtons.Left && (ModifierKeys & Keys.Shift) == Keys.Shift)
-            {
-                MessageBox.Show("Control key was held down.");
-            }*/
+            /*      if (e.Button == MouseButtons.Left && (ModifierKeys & Keys.Shift) == Keys.Shift)
+                  {
+                      MessageBox.Show("Control key was held down.");
+                  }*/
         }
         private void ВставитьБлокToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -527,20 +527,20 @@ namespace geliosNEW
         private void Button3_Click(object sender, EventArgs e)
         {
             TBaseWorkShape Sel = Grid.FindShapeFromCompositeWork(Grid.SelectedTFE.ID);
-                      if (Sel != null)
-                      {
-                          if (Sel.CompositeWorkShape != null)
-                          {
-                              TCompositeBaseWork F = new TCompositeBaseWork();
-                              Grid.FindComositeBaseWork2(Grid.SelectedTFE.ID, ref F);
-                              Sel = F.ConvertedBWS;
-                          }
-                          TBaseWorkShape WN = Grid.CreateTempWorkShape(Sel.TypeShape, new Point(0, 0), Sel.FirstShapeId - 1);
+            if (Sel != null)
+            {
+                if (Sel.CompositeWorkShape != null)
+                {
+                    TCompositeBaseWork F = new TCompositeBaseWork();
+                    Grid.FindComositeBaseWork2(Grid.SelectedTFE.ID, ref F);
+                    Sel = F.ConvertedBWS;
+                }
+                TBaseWorkShape WN = Grid.CreateTempWorkShape(Sel.TypeShape, new Point(0, 0), Sel.FirstShapeId - 1);
 
-                          DrawObject imageTfe = new DrawObject ();
-                          //     fmParamAlternative.pbTfs.BackgroundImage = Glbmp;
-                          BuildGlp(WN, imageTfe , Grid.SelectedTFE);
-                          ShowParamAlternative(Grid.SelectedTFE, LevelController.ParentShapeID, f_TypeParam, imageTfe, false);
+                DrawObject imageTfe = new DrawObject();
+                //     fmParamAlternative.pbTfs.BackgroundImage = Glbmp;
+                BuildGlp(WN, imageTfe, Grid.SelectedTFE);
+                ShowParamAlternative(Grid.SelectedTFE, LevelController.ParentShapeID, f_TypeParam, imageTfe, false);
             }
         }
 
@@ -575,40 +575,25 @@ namespace geliosNEW
             string S;
             S = f_Zadacha.Check();
             if (S.Length > 0)
-                MessageBox.Show(S, "Ошибка");
-    /*        else
+                MessageBox.Show(S, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else
             {
-                if (CreateStartDecision(f_Zadacha, f_TypeParam, opt_sadacha.get_type_metod()))
+                if (SharedConst.CreateStartDecision(f_Zadacha, f_TypeParam, SharedConst.opt_sadacha.get_type_metod()))
                 {
-                    StartTime = GetTickCount();
-                    f_Zadacha.Process();
-                    EndTime = GetTickCount();
-                    f_Zadacha.ShowDecision(f_VwColorAlt, f_VwColorBadAlt, f_VwColorFont, EndTime - StartTime);
+                    /*   StartTime = GetTickCount();
+                       f_Zadacha.Process();
+                       EndTime = GetTickCount();
+                       f_Zadacha.ShowDecision(f_VwColorAlt, f_VwColorBadAlt, f_VwColorFont, EndTime - StartTime);
+                   }
+                   FreeStartDecision();*/
                 }
-                FreeStartDecision();
+                GC = null;
+                TC = null;
+                AP = null;
+                m_TreeList = null;
+                /*    FreeTFEConvertor();*/
             }
-            delete GC;
-            delete TC;
-            delete AP;
-            delete m_TreeList;
-            FreeTFEConvertor();*/
         }
-
-        private void МетодОптимизацииToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void МетодПостроенияСуперпозицииToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void РешениеЗадачиToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         void BuildGlp(TBaseWorkShape AWN, DrawObject Glp, TBaseShape ASel)
         {
             TBaseShape BS;
@@ -620,14 +605,14 @@ namespace geliosNEW
             AWN.StartPoint = new Point(0, 0);
             AWN.Init();
             AWN.Prepare();
-         /*   if (f_BrushTFE)
-                AWN.BrushStyle = bsSolid;
-            else
-                AWN.BrushStyle = bsClear;*/
+            /*   if (f_BrushTFE)
+                   AWN.BrushStyle = bsSolid;
+               else
+                   AWN.BrushStyle = bsClear;*/
             AWN.BrushColor = f_BrushColor;
             AWN.LineWidth = f_WSPenWidth;
             AWN.PenWidth = f_WSPenWidth;
-       //     AWN.Font.Assign(f_FontTFE);
+            //     AWN.Font.Assign(f_FontTFE);
             AWN.FrameColorTFE = f_FrameColorTFE;
             AWN.PenColor = f_LineColor;
 
@@ -637,24 +622,24 @@ namespace geliosNEW
             AWN.SetOffsetPosition(rx, ry);
             AWN.StartPoint = new Point(rx, ry);
 
-            if (ASel.Clon!=null)
+            if (ASel.Clon != null)
                 BS = ASel.Clon;
             else
                 BS = ASel;
 
             BS = AWN.ShapeSupportID(BS.ID);
-            if (BS!=null)
+            if (BS != null)
                 BS.DrawFrame = true;
 
             AWN.Prepare();
             AWN.Paint(Glp.gr);
         }
         void ShowParamAlternative(TBaseShape ATFE, int AParentID, int AType_Char,
-  DrawObject AGlp, bool AReadOnly)
+DrawObject AGlp, bool AReadOnly)
         {
             //    Application.CreateForm(__classid(TfmParamAlternative), &fmParamAlternative);
             FmParamAlternative fmParamAlternative = new FmParamAlternative();
-            if (ATFE.Clon!=null)
+            if (ATFE.Clon != null)
                 fmParamAlternative.TFE = ATFE.Clon;
             else
                 fmParamAlternative.TFE = ATFE;
@@ -666,7 +651,19 @@ namespace geliosNEW
             //        fmParamAlternative.acDel.Enabled = !AReadOnly;
             fmParamAlternative.pbTfs.Image = AGlp.bmp;
             fmParamAlternative.ShowDialog();
-     //       fmParamAlternative.Release();
+            //       fmParamAlternative.Release();
+        }
+        bool ShowMetodOpt(int AType, double ARate, ref int OutType, ref double OutRate)
+        {
+            /*     FmMetodOpt = new TFmMetodOpt(Application);
+                 FmMetodOpt.set_type_metod(AType);
+                 FmMetodOpt.edPercent.Text = float_2_string(ARate, 6, 1);
+                 bool res = (FmMetodOpt.ShowModal() == mrOk);
+                 OutType = FmMetodOpt.get_type_metod();
+                 OutRate = StrToFloat(FmMetodOpt.edPercent.Text);
+                 FmMetodOpt.Release();
+                 return res;*/
+            return false;
         }
     }
 }
