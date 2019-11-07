@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace geliosNEW
 {
 
-    class TListNode
+    public class TListNode
     {
         public delegate void TListChange();
 

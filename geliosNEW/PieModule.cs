@@ -40,7 +40,7 @@ namespace geliosNEW
                             f_Run1 = Trun1(Fpointer);
                     }*/
                 }
-        int Run1(string ARunStr)
+        public int Run1(string ARunStr)
         {
                 int res = -1;
                 /*        if (CheckModule())

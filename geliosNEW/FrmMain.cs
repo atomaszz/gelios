@@ -74,6 +74,11 @@ namespace geliosNEW
         TAltStackController f_AltStackController;
         TPredicatePath f_PredicatePath;
         TZadacha f_Zadacha;
+        string f_PredicateDopPrav;
+        public TListNode GetMainList()
+        {
+            return MainList;
+        }
         void InitHelp()
         {
        //     fmHelp = null;
@@ -185,9 +190,9 @@ namespace geliosNEW
             InitPieModule();
             /*     f_Zadacha = new TZadacha;
                  f_ClipCopyTFS = new TClipCopyTFS(Handle, 0x8000000);
-                 f_PredicatePath = new TPredicatePath;
-                 f_PredicateDopPrav = new AnsiString;
-                 ApplySettings();
+                 f_PredicatePath = new TPredicatePath;*/
+            f_PredicateDopPrav = "";
+         /*        ApplySettings();
                  randomize();*/
 
             //      pbGraph = pbMain.CreateGraphics();

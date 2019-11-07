@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace geliosNEW
 {
-    class TAltInfoItem
+    public class TAltInfoItem
     {
         public int f_Id;
         public int f_Num;
@@ -43,7 +43,7 @@ namespace geliosNEW
             get { return f_Main; }
         }
     }
-    class TAltInfo
+    public class TAltInfo
     {
         List<object> f_List;
         void FreeList()

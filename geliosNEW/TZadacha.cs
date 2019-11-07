@@ -37,7 +37,7 @@ namespace geliosNEW
                 TI = f_Tree.GetItems(i);
                 for (int j = 0; j <= TI.Count - 1; j++)
                 {
-                    m_id = TI.TFE_ID[j];
+                    m_id = TI.GetTFE_ID(j);
                     f_Tree.FindByTfeID(m_id, A);
                     if (A.Count > 1)
                         if (f_Equal.Find((object)m_id)==null)
@@ -56,15 +56,103 @@ namespace geliosNEW
                 fstream.Write(array, 0, array.Length);
             }
         }
-        /*     bool CheckCanDecision(int &AID);
-             bool CheckPLGParamAlternative(TParamAlternative* AL);
-             bool CheckCanPLGDecision(int &AID);
-             void ChekDeleted(TPredicateTreeItem* AI);
-             void get_opt_alt();
-             void get_opt_alt_fuz();
-             void Nud_podgot();
-             double ozenk_t_min(TBaseShape* B);
-             double ozenk_v_min(TBaseShape* B);*/
+        bool CheckCanDecision(ref int AID)
+        {
+            int m_id;
+            TBaseShape B;
+            TPredicateTreeItem TI, TJ;
+            for (int i = 0; i <= f_Tree.Count - 1; i++)
+            {
+                TI = f_Tree.GetItems(i);
+                for (int j = 0; j <= TI.Count - 1; j++)
+                {
+                    m_id = TI.GetTFE_ID(j);
+                    TJ = f_Tree.FindByParentID(m_id);
+                    if (TJ==null)
+                    {
+                        B = TI.GetTFE(j);
+                        if (B!=null)
+                        {
+                            if (B.ParamAlt==null)
+                            {
+                                AID = m_id;
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            AID = m_id;
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+        bool CheckPLGParamAlternative(TParamAlternative AL)
+        {
+            int plg;
+            int trucnt = 0;
+            string Pr;
+            TParamAlternativeItem Item;
+            for (int i = 0; i <= AL.Count - 1; i++)
+            {
+                Item = AL.Items[i];
+                Item.PREDICAT = Item.PREDICAT.TrimStart(' ');
+                Pr = Item.PREDICAT.TrimEnd(' ');
+                if (string.Compare(Pr, "1",true) == 0 || string.Compare(Pr, "(нет условия)", true) == 0)
+                    Item.CheckPLG = true;
+                else if (string.Compare(Pr, "0") == 0)
+                    Item.CheckPLG = false;
+                else
+                {
+                    plg = SharedConst.gPieModule.Run1("tell(\"temp.pra\"),reconsult(\"temp_1.dec\")," + Pr);
+                    Item.CheckPLG = plg > 0;
+                }
+            }
+
+            for (int i = 0; i <= AL.Count - 1; i++)
+            {
+                Item = AL.Items[i];
+                if (Item.CheckPLG)
+                {
+                    trucnt++;
+                    break;
+                }
+
+            }
+            return trucnt > 0;
+        }
+        bool CheckCanPLGDecision(ref int AID)
+        {
+            int m_id;
+            TBaseShape B;
+            TPredicateTreeItem TI, TJ;
+            for (int i = 0; i <= f_Tree.Count - 1; i++)
+            {
+                TI = f_Tree.GetItems(i);
+                for (int j = 0; j <= TI.Count - 1; j++)
+                {
+                    m_id = TI.GetTFE_ID(j);
+                    B = TI.GetTFE(j);
+                    if (B!=null && B.ParamAlt!=null)
+                    {
+                        if (!CheckPLGParamAlternative(B.ParamAlt) && (B.TypeShape != 8) && f_Tree.FindByParentID(m_id)==null)
+                        {
+                            AID = m_id;
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+        /*        void ChekDeleted(TPredicateTreeItem* AI);
+                void get_opt_alt();
+                void get_opt_alt_fuz();
+                void Nud_podgot();
+                double ozenk_t_min(TBaseShape* B);
+                double ozenk_v_min(TBaseShape* B);*/
         void ClearPTI()
         {
             f_ListPTI.Clear();
@@ -135,7 +223,7 @@ namespace geliosNEW
             TrackCreator.ClearBase();
             for (int i = 0; i <= f_Tree.Count - 1; i++)
             {
-                TI = f_Tree.Items[i];
+                TI = f_Tree.GetItems(i);
                 Knot = TrackCreator.CreateKnotToBase();
                 Knot.ParentID = TI.ParentID;
                 Knot.NumAlt = TI.NumAlt;
@@ -143,20 +231,29 @@ namespace geliosNEW
                 if (m_type == 12)
                     m_type = 1;
                 Knot.TypeKnot = m_type;
-                Knot.TFE_ID1 = TI.TFE_ID[0];
-                Knot.TFE_ID2 = TI.TFE_ID[1];
-                Knot.TFE_ID3 = TI.TFE_ID[2];
+                Knot.TFE_ID1 = TI.GetTFE_ID(0);
+                Knot.TFE_ID2 = TI.GetTFE_ID(1);
+                Knot.TFE_ID3 = TI.GetTFE_ID(2);
             }
         }
-        /*     void Process();
-             AnsiString Check();
-             AnsiString CheckTrack();
-             AnsiString Track();
-             AnsiString AcceptTrackFromScanner();
-             bool CheckOzenk_TFE_v(TPredicateTreeItem* ATI, double AValue);
-             bool CheckOzenk_TFE_t(TPredicateTreeItem* ATI, double AValue);
-             void ShowDecision(TColor AColorAlt, TColor AColorBadAlt, TColor AColorFont, unsigned int ATime);
-             void Ozenk_TFE();*/
+        /*     void Process();*/
+        public string Check()
+        {
+            int m_id=0;
+            string Res="";
+            if (!CheckCanDecision(ref m_id))
+                Res = "Для подблока номер " + m_id.ToString() + " не заданы ни параметрические, ни структурные альтернативы.\r\nНахождение решения невозможно!";
+            if (Res.Length<=0 && !CheckCanPLGDecision(ref m_id))
+                Res = "Для подблока номер " + m_id.ToString() + " нет структурных альтернатив и все параметрические не проходят по заданным в них условиях.\r\nНахождение решения невозможно!";
+            return Res;
+        }
+        /*         AnsiString CheckTrack();
+                 AnsiString Track();
+                 AnsiString AcceptTrackFromScanner();
+                 bool CheckOzenk_TFE_v(TPredicateTreeItem* ATI, double AValue);
+                 bool CheckOzenk_TFE_t(TPredicateTreeItem* ATI, double AValue);
+                 void ShowDecision(TColor AColorAlt, TColor AColorBadAlt, TColor AColorFont, unsigned int ATime);
+                 void Ozenk_TFE();*/
         public TPredicateTree Tree
         {
             get { return f_Tree;  }

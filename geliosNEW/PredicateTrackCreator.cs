@@ -14,12 +14,19 @@ namespace geliosNEW
             AnsiString __fastcall GetText();
             public:
          TPredicateTrackCreatorItem();
-            ~TPredicateTrackCreatorItem();
-            bool FindKnot(TPredicateScannerItemKnot* AKnot);
-            void AddKnot(TPredicateScannerItemKnot* AKnot);
-            void PushKnot(TPredicateScannerItemKnot* AKnot);
-            void DeleteKnot(TPredicateScannerItemKnot* AKnot);*/
-            public void Clear() { f_List.Clear(); }
+            ~TPredicateTrackCreatorItem();*/
+        bool FindKnot(TPredicateScannerItemKnot AKnot)
+        {
+            return f_List.IndexOf(AKnot) >= 0;
+        }
+        public void AddKnot(TPredicateScannerItemKnot AKnot)
+        {
+            if (!FindKnot(AKnot))
+                f_List.Add(AKnot);
+        }
+        /*        void PushKnot(TPredicateScannerItemKnot* AKnot);
+                void DeleteKnot(TPredicateScannerItemKnot* AKnot);*/
+        public void Clear() { f_List.Clear(); }
      /*       int CountKnotByParentID(int AID);
             void GetBadKnot(TDynamicArray* OutKnot);
             __property int Count = { read = GetCount };
@@ -49,15 +56,21 @@ namespace geliosNEW
         {
             f_BaseTrack.Clear();
         }
-        /*       TPredicateScannerItemKnot* CreateKnotToBase();
-               TPredicateTrackCreatorItem* CreateItem();
-               TPredicateTrackCreatorItem* CloneItem(TPredicateTrackCreatorItem* ASource);
-               void GetAllTrack(TPredicateTrackCreatorItem* AItem, TDynamicArray* OutTrack);
-               void GetNegativeDecidedKnot(TPredicateTrackCreatorItem* AItem, TDynamicArray* OutKnot);
+        public TPredicateScannerItemKnot CreateKnotToBase()
+        {
+            TPredicateScannerItemKnot N = new TPredicateScannerItemKnot();
+            f_ListBase.Add(N);
+            f_BaseTrack.AddKnot(N);
+            return N;
+        }
+        /*          TPredicateTrackCreatorItem* CreateItem();
+                  TPredicateTrackCreatorItem* CloneItem(TPredicateTrackCreatorItem* ASource);
+                  void GetAllTrack(TPredicateTrackCreatorItem* AItem, TDynamicArray* OutTrack);
+                  void GetNegativeDecidedKnot(TPredicateTrackCreatorItem* AItem, TDynamicArray* OutKnot);
 
-               __property int Count = { read = GetCount };
-               __property TPredicateTrackCreatorItem* Items[int AIndex] = {read = GetItems
-           };
-           __property TPredicateTrackCreatorItem* BaseTrack = { read = f_BaseTrack };*/
+                  __property int Count = { read = GetCount };
+                  __property TPredicateTrackCreatorItem* Items[int AIndex] = {read = GetItems
+              };
+              __property TPredicateTrackCreatorItem* BaseTrack = { read = f_BaseTrack };*/
     }
 }

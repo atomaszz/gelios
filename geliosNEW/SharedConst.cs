@@ -234,7 +234,7 @@ namespace geliosNEW
             frmMain.GetMainList().GetAllWorkShape(opt_sadacha.MassWork);
             opt_sadacha.InitData();
             string S = "%Предикатная модель Альтернативного Графа (структур на основе ТФЕ)\r\n";
-            S = S + "%Дата создания: " + DateToStr(Date()) + "\r\n";
+            S = S + "%Дата создания: " + DateTime.Now.ToString() + "\r\n";
             S = S + "%----------------------------------------------------\r\n";
             S = S + "%Задача оптимизации:\r\n";
             if (AOptZadacha.Length > 0)

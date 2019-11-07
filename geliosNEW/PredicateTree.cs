@@ -19,12 +19,33 @@ namespace geliosNEW
         {
             return f_List.Count;
         }
-
-        /*        int __fastcall GetTFE_ID(int AIndex);
-                TBaseShape* __fastcall GetTFE(int AIndex);
-                public:
-            TPredicateTreeItem();
-                ~TPredicateTreeItem();*/
+        public int GetTFE_ID(int AIndex)
+        {
+            TDynamicArrayItem P = f_List.GetPosition(AIndex);
+            if (P!=null)
+                return P.Int_Value;
+            else
+                return 0;
+        }
+        public TBaseShape GetTFE(int AIndex)
+        {
+            TDynamicArrayItem P = f_List.GetPosition(AIndex);
+            if (P!=null)
+                return (TBaseShape)(P.P);
+            else
+                return null;
+        }
+        public TPredicateTreeItem()
+        {
+            f_ParentID = 0;
+            f_TypeWorkShape = 0;
+            f_NumAlt = 0;
+            f_BaseWorkShape = null;
+            f_ParentShape = null;
+            f_TReated = false;
+            f_List = new TDynamicArray();
+        }
+        ~TPredicateTreeItem() { }
         public void AddBaseShape(TBaseShape AShape, int AID)
         {
             f_List.AppendInteger(AID, AShape);
@@ -95,7 +116,7 @@ namespace geliosNEW
             f_List.Add(N);
             return N;
         }
-        TPredicateTreeItem FindByTfeID(int AID, TDynamicArray Arr)
+        public TPredicateTreeItem FindByTfeID(int AID, TDynamicArray Arr)
         {
             TPredicateTreeItem Item, Res = null;
             if (Arr!=null)
@@ -105,7 +126,7 @@ namespace geliosNEW
                 Item = GetItems(i);
                 for (int j = 0; j <= Item.Count - 1; j++)
                 {
-                    if (Item.TFE_ID[j] == AID)
+                    if (Item.GetTFE_ID(j) == AID)
                     {
                         if (Res==null)
                             Res = Item;
@@ -116,8 +137,18 @@ namespace geliosNEW
             }
             return Res;
         }
-   /*     TPredicateTreeItem FindByParentID(int AID);
-                void ArrayIDToDelete(TPredicateTreeItem AItem, TDynamicArray Arr);*/
+        public TPredicateTreeItem FindByParentID(int AID)
+        {
+            TPredicateTreeItem Item;
+            for (int i = 0; i <= Count - 1; i++)
+            {
+                Item = GetItems(i);
+                if (Item.ParentID == AID)
+                    return Item;
+            }
+            return null;
+        }
+        /*    void ArrayIDToDelete(TPredicateTreeItem AItem, TDynamicArray Arr);*/
         public int Count
         {
             get { return GetCount();  }
