@@ -134,6 +134,7 @@
             this.button3.TabIndex = 2;
             this.button3.Text = "Закрыть";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // button4
             // 
@@ -331,7 +332,7 @@
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox edPercent;
+        public System.Windows.Forms.TextBox edPercent;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox textBox7;

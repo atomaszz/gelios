@@ -284,15 +284,16 @@ namespace geliosNEW
             fmStartDecision.type_char = AType_char;
             fmStartDecision.type_metod = AType_metod;
             fmStartDecision.set_sadacha_edit();
-            fmStartDecision.edPercent.Text = float_2_string(opt_sadacha.Rate, 6, 1);
+            fmStartDecision.edPercent.Text = opt_sadacha.Rate.ToString();
             fmStartDecision.Zadacha = AZadacha;
-            res = fmStartDecision.ShowModal() == mrOk;
+            fmStartDecision.ShowDialog();
+            res = fmStartDecision.DialogResult == System.Windows.Forms.DialogResult.OK;
             return res;
         }
 
         public static void FreeStartDecision()
         {
-            fmStartDecision.Release();
+        //    fmStartDecision.Release();
         }
     }
 }

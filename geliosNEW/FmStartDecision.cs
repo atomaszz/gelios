@@ -27,7 +27,7 @@ namespace geliosNEW
             { textBox6.Text = "вероятностные"; }
             if (type_char == SharedConst.FUZZY)
             { textBox6.Text = "нечеткие"; }
-            pnPribl.Visible = !(type_metod == SharedConst.TOHN);
+            panel2.Visible = !(type_metod == SharedConst.TOHN);
 
             switch (SharedConst.opt_sadacha.type_sadacha)
             {
@@ -226,6 +226,11 @@ namespace geliosNEW
         }
 
         private void Button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
         {
 
         }

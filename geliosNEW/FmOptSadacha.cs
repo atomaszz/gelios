@@ -520,16 +520,9 @@ namespace geliosNEW
             }
             return Res;
         }
-        public void get_type_metod()
+        public int get_type_metod()
         {
-            int res = SharedConst.TOHN;
-            if (cbxMetod.ItemIndex == 1)
-            {
-                res = SharedConst.PRIBLJ1;
-                if (rgMetod->ItemIndex == 1)
-                    res = SharedConst.PRIBLJ2;
-            }
-            return res;
+            return f_TypeMetod;
         }
     }
 }
