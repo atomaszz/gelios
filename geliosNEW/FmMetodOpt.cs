@@ -17,7 +17,7 @@ namespace geliosNEW
             InitializeComponent();
         }
 
-        int get_type_metod()
+        public int get_type_metod()
         {
             int res = SharedConst.TOHN;
             if (cbxMetod.SelectedIndex == 1)
@@ -29,12 +29,12 @@ namespace geliosNEW
             return res;
         }
 
-        void set_type_metod(int typ)
+        public void set_type_metod(int typ)
         {
-            if (typ == SharedConst.TOHN)
+       /*     if (typ == SharedConst.TOHN)
                 cbxMetod.SelectedIndex = 0;
             else
-                cbxMetod.SelectedIndex = 1;
+                cbxMetod.SelectedIndex = 1;*/
             if (typ == SharedConst.PRIBLJ1)
                 rg0.Checked = true;
             if (typ == SharedConst.PRIBLJ2)

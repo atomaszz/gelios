@@ -524,5 +524,9 @@ namespace geliosNEW
         {
             return f_TypeMetod;
         }
+        public void set_type_metod(int typ)
+        {
+            f_TypeMetod = typ;
+        }
     }
 }

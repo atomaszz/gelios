@@ -88,6 +88,9 @@
             // 
             this.cbxMetod.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbxMetod.FormattingEnabled = true;
+            this.cbxMetod.Items.AddRange(new object[] {
+            "Точного решения",
+            "Приближенного решения"});
             this.cbxMetod.Location = new System.Drawing.Point(12, 40);
             this.cbxMetod.Name = "cbxMetod";
             this.cbxMetod.Size = new System.Drawing.Size(248, 24);
@@ -164,7 +167,7 @@
         private System.Windows.Forms.RadioButton rg0;
         private System.Windows.Forms.ComboBox cbxMetod;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox edPercent;
+        public System.Windows.Forms.TextBox edPercent;
         private System.Windows.Forms.Button btOkClick;
         private System.Windows.Forms.Button btCancelClick;
     }

@@ -641,8 +641,19 @@ namespace geliosNEW
 
         }
 
+        private void МетодОптимизацииToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int m_type = SharedConst.opt_sadacha.get_type_metod();
+            double m_rate = SharedConst.opt_sadacha.Rate;
+            if (ShowMetodOpt(m_type, m_rate, ref m_type, ref m_rate))
+            {
+                SharedConst.opt_sadacha.set_type_metod(m_type);
+                SharedConst.opt_sadacha.Rate = m_rate;
+            }
+        }
+
         void ShowParamAlternative(TBaseShape ATFE, int AParentID, int AType_Char,
-DrawObject AGlp, bool AReadOnly)
+            DrawObject AGlp, bool AReadOnly)
         {
             //    Application.CreateForm(__classid(TfmParamAlternative), &fmParamAlternative);
             FmParamAlternative fmParamAlternative = new FmParamAlternative();
@@ -662,15 +673,14 @@ DrawObject AGlp, bool AReadOnly)
         }
         bool ShowMetodOpt(int AType, double ARate, ref int OutType, ref double OutRate)
         {
-            /*     FmMetodOpt = new TFmMetodOpt(Application);
-                 FmMetodOpt.set_type_metod(AType);
-                 FmMetodOpt.edPercent.Text = float_2_string(ARate, 6, 1);
-                 bool res = (FmMetodOpt.ShowModal() == mrOk);
-                 OutType = FmMetodOpt.get_type_metod();
-                 OutRate = StrToFloat(FmMetodOpt.edPercent.Text);
-                 FmMetodOpt.Release();
-                 return res;*/
-            return false;
+            FmMetodOpt fmMetodOpt = new FmMetodOpt();
+            fmMetodOpt.set_type_metod(AType);
+            fmMetodOpt.edPercent.Text = ARate.ToString();
+            fmMetodOpt.ShowDialog();
+            bool res = fmMetodOpt.DialogResult == DialogResult.OK;
+            OutType = fmMetodOpt.get_type_metod();
+            OutRate = Double.Parse(fmMetodOpt.edPercent.Text);
+            return res;
         }
     }
 }
