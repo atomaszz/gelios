@@ -352,9 +352,13 @@ namespace geliosNEW
                 N.AddBaseShape((TBaseShape)(D.GetPosition(i).P), D.GetPosition(i).Int_Value);
             D = null;
         }
-     /*   public:
-               TGraphTFEConvertor();
-              ~TGraphTFEConvertor();*/
+        public TGraphTFEConvertor()
+        {
+            f_Item = new TGraphTFEConvertorItem();
+            f_BTree = new TGlsBinaryTree(SharedConst.CompareNode);
+            f_Tran = new TGraphTFEConvertorTransNum();
+        }
+        ~TGraphTFEConvertor() { }
         public void Init(TPredicateItemBig AHead, TPredicateTree APredicateTree)
         {
             string SC;

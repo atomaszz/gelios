@@ -22,7 +22,7 @@ namespace geliosNEW
                    }*/
         }
         ~TPieModule() { }
-        bool CheckModule()
+        public bool CheckModule()
         {
             return false;//(f_Hinstan && f_Run1);
         }

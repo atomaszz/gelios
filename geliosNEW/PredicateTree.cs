@@ -103,9 +103,13 @@ namespace geliosNEW
             else
                 return null;
         }
-    /*    public:
-            TPredicateTree();
-            ~TPredicateTree(); */
+        public TPredicateTree()
+        {
+            {
+                f_List = new List<object>();
+            }
+        }
+        ~TPredicateTree() { }
         public void Clear()
         {
             FreeList();

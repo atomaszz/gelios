@@ -53,9 +53,14 @@ namespace geliosNEW
             else
                 return null;
         }
-        /*    public:
-             TAlternativeParserEnlargerItem();
-            ~TAlternativeParserEnlargerItem();*/
+        public TAlternativeParserEnlargerItem()
+        {
+            f_List = new List<object>();
+            f_Basis = false;
+            f_Parent = null;
+            f_ParentMain = null;
+        }
+        ~TAlternativeParserEnlargerItem() {}
         public int Pos(TAlternativeParserEnlargerStep AStep)
         {
             int plen = AStep.Count;
@@ -107,7 +112,6 @@ namespace geliosNEW
         {
             return f_List.IndexOf(AGrpTfs);
         }
-
         public bool Basis
         {
             set { f_Basis = value; }
@@ -118,7 +122,6 @@ namespace geliosNEW
             set { f_Parent = value; }
             get { return f_Parent; }
         }
-
         public TAlternativeParserGrpCrossItem ParentMain
         {
             set { f_ParentMain = value; }
@@ -128,9 +131,6 @@ namespace geliosNEW
         {
             get { return GetCount(); }
         }
-
-   /*    __property TAlternativeParserGrpItemTFS* Items[int AIndex] = { read = GetItems }*/
-
     }
     class TAlternativeParserEnlargerStep
     {
@@ -160,12 +160,15 @@ namespace geliosNEW
             if (f_List.IndexOf(AGrpTfs) < 0)
                 f_List.Add(AGrpTfs);
         }
-        //     __property TAlternativeParserEnlargerItem* Parent = {read = f_Parent, write = f_Parent};*/
+  /*      public TAlternativeParserEnlargerItem Parent
+        {
+            set { f_Parent = value;  }
+            get { return f_Parent; }
+        }*/
         public int Count
         {
             get { return GetCount();  }
         }    
-  /*            __property TAlternativeParserGrpItemTFS* Items[int AIndex] = {read = GetItems*/
     }
     class TAlternativeParserEnlargerTrashItem
     {
@@ -173,7 +176,13 @@ namespace geliosNEW
         int f_Length;
         TAlternativeParserEnlargerItem f_Owner;
         TAlternativeParserGrpItemTFS f_Pos;
-        /*   TAlternativeParserEnlargerTrashItem();*/
+        public TAlternativeParserEnlargerTrashItem()
+        {
+            f_ID = 0;
+            f_Length = 0;
+            f_Pos = null;
+            f_Owner = null;
+        }
         public int Length
         {
             set { f_Length = value; }
@@ -213,9 +222,11 @@ namespace geliosNEW
             else
                 return null;
         }
-        /*     public:
-              TAlternativeParserEnlargerTrash();
-             ~TAlternativeParserEnlargerTrash();*/
+        public TAlternativeParserEnlargerTrash()
+        {
+            f_List = new List<object>();
+        }
+        ~TAlternativeParserEnlargerTrash() { }
         public TAlternativeParserEnlargerTrashItem NewTrashItem()
         {
             TAlternativeParserEnlargerTrashItem Item = new TAlternativeParserEnlargerTrashItem();
@@ -229,9 +240,7 @@ namespace geliosNEW
         public int Count
         {
             get { return GetCount();  }
-        }
-            
-        /*  __property TAlternativeParserEnlargerTrashItem* Items[int AIndex] = {read = GetItems*/
+        }         
     }
     class TAlternativeParserEnlarger
     {
@@ -367,7 +376,10 @@ namespace geliosNEW
             }
             mDel = null;
         }
-        /*  bool IsEmptyTrash();*/
+        bool IsEmptyTrash()
+        {
+            return (f_Trash.Count == 0);
+        }
         void ClearTrash()
         {
             f_Trash.Clear();
@@ -392,9 +404,12 @@ namespace geliosNEW
             else
                 return null;
         }
-       /*       public:
-               TAlternativeParserEnlarger();
-              ~TAlternativeParserEnlarger();*/
+        public TAlternativeParserEnlarger()
+        {
+            f_List = new List<object>();
+            f_Trash = new TAlternativeParserEnlargerTrash();
+        }
+        ~TAlternativeParserEnlarger() {}
         public void Init()
         {
             ClearTrash();
@@ -420,6 +435,5 @@ namespace geliosNEW
         {
             get { return GetCount();  }
         }
-     /*          __property TAlternativeParserEnlargerItem* Items[int AIndex] = {read = GetItems*/
     }
 }

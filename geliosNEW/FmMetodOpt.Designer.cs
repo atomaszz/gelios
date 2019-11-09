@@ -148,7 +148,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FmMetodOpt";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "FmMetodOpt";
+            this.Text = "Метод оптимизации";
             this.rgMetod.ResumeLayout(false);
             this.rgMetod.PerformLayout();
             this.ResumeLayout(false);

@@ -85,12 +85,13 @@ namespace geliosNEW
         }
         void InitPieModule()
         {
-            /*         string S = "Îøèáêà çàãðóçêè ìîäóëÿ ÏÐÎËÎÃ ñèñòåìû!\r\n";
-                     S = S + "Áåç äàííîé ôóíêöèè óñëîâèÿ ïðåäèêàòîâ ÒÔÅ â çàäà÷àõ îïòèìèçàöèè áóäóò èãíîðèðîâàòüñÿ!";
-                     gPieModule = new TPieModule;
-                     if (!gPieModule.CheckModule())
-                         MessageBox(0, S.c_str(), "Ïðåäóïðåæäåíèå", MB_ICONWARNING);*/
+            string S = "Ошибка загрузки модуля ПРОЛОГ системы!\r\n";
+            S = S + "Без данной функции условия предикатов ТФЕ в задачах оптимизации будут игнорироваться!";
+            SharedConst.gPieModule = new TPieModule();
+            if (!SharedConst.gPieModule.CheckModule())
+                MessageBox.Show(S, "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
+
         public FrmMain()
         {
             InitializeComponent();
@@ -188,9 +189,9 @@ namespace geliosNEW
                   GMess.RegistrMessage(7, GLBApplySettingsForOutherGrid);*/
             InitHelp();
             InitPieModule();
-            /*     f_Zadacha = new TZadacha;
-                 f_ClipCopyTFS = new TClipCopyTFS(Handle, 0x8000000);
-                 f_PredicatePath = new TPredicatePath;*/
+            f_Zadacha = new TZadacha();
+          /*       f_ClipCopyTFS = new TClipCopyTFS(Handle, 0x8000000); */
+            f_PredicatePath = new TPredicatePath();
             f_PredicateDopPrav = "";
             /*        ApplySettings();
                     randomize();*/
@@ -634,6 +635,12 @@ namespace geliosNEW
             AWN.Prepare();
             AWN.Paint(Glp.gr);
         }
+
+        private void РешениеЗадачиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
         void ShowParamAlternative(TBaseShape ATFE, int AParentID, int AType_Char,
 DrawObject AGlp, bool AReadOnly)
         {

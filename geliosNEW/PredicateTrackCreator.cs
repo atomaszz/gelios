@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 
 namespace geliosNEW
 {
-    class TPredicateTrackCreatorItem
+    public class TPredicateTrackCreatorItem
     {
         List<object> f_List;
         /*    int __fastcall GetCount();
             TPredicateScannerItemKnot* __fastcall GetItems(int AIndex);
-            AnsiString __fastcall GetText();
-            public:
-         TPredicateTrackCreatorItem();
-            ~TPredicateTrackCreatorItem();*/
+            AnsiString __fastcall GetText();*/
+        public TPredicateTrackCreatorItem()
+        {
+            f_List = new List<object>();
+        }
+
+        ~TPredicateTrackCreatorItem() { }
         bool FindKnot(TPredicateScannerItemKnot AKnot)
         {
             return f_List.IndexOf(AKnot) >= 0;
@@ -39,15 +42,29 @@ namespace geliosNEW
         List<object> f_List;
         List<object> f_ListBase;
         TPredicateTrackCreatorItem f_BaseTrack;
-        /*int __fastcall GetCount();*/
+        public int GetCount()
+        {
+            return f_List.Count;
+        }
+
         void FreeList()
         {
             f_List.Clear();
         }
-        /*     TPredicateTrackCreatorItem* __fastcall GetItems(int AIndex);
-             public:
-              TPredicateTrackCreator();
-             ~TPredicateTrackCreator();*/
+        public TPredicateTrackCreatorItem GetItems(int AIndex)
+        {
+            if (AIndex >= 0 && AIndex <= f_List.Count - 1)
+                return (TPredicateTrackCreatorItem)(f_List.ElementAt(AIndex));
+            else
+                return null;
+        }
+        public TPredicateTrackCreator()
+        {
+            f_List = new List<object>();
+            f_ListBase = new List<object>();
+            f_BaseTrack = new TPredicateTrackCreatorItem();
+        }
+        ~TPredicateTrackCreator() { }
         public void ClearTrack()
         {
             FreeList();

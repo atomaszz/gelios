@@ -76,10 +76,14 @@ namespace geliosNEW
         TGlsListNode header;
         TGlsListNode win;
         int _length;
-
-        /*     public TGlsList();
-             ~TGlsList() { }
-             public void* insert(void* T);*/
+        public TGlsList()
+        {
+            header = new TGlsListNode(null);
+            win = header;
+            _length = 0;
+        }
+        ~TGlsList() { }
+         /*    public void* insert(void* T);*/
         public object append(object T)
         {
             header.Prev.insert(new TGlsListNode(T));

@@ -195,9 +195,12 @@ namespace geliosNEW
             }
             return null;
         }
-        /*         public:
-                  TPredicatePathItem();
-                 ~TPredicatePathItem();*/
+        public TPredicatePathItem()
+        {
+            f_List = new List<object>();
+        }
+
+        ~TPredicatePathItem() { }
         public void Clear()
         {
             FreeList();
@@ -256,10 +259,16 @@ namespace geliosNEW
          int Factorial(int N);
          void DoGenerateDescendant(TPredicatePathItem* AItem, TDynamicArray* AStack);
          bool CheckRnd();
-         bool AddPredicatePathNodeFromBase(TPredicatePathItem* AItem);
-         public:
-          TPredicatePath();
-         ~TPredicatePath();*/
+         bool AddPredicatePathNodeFromBase(TPredicatePathItem* AItem);*/
+        public TPredicatePath()
+        {
+            f_Max = 10000;
+            f_Rate = 100.0;
+            f_BasePath = new TPredicatePathItem();
+            f_UsedPath = new TPredicatePathItem();
+            f_ListDescendant = new List<object>();
+        }
+        ~TPredicatePath() { }
         public void Init()
         {
             SharedConst.PredicatePathInit();

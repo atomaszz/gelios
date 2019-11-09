@@ -295,5 +295,71 @@ namespace geliosNEW
         {
         //    fmStartDecision.Release();
         }
+        /*----------------------------------------*/
+        public static int CompareNode(object A, object B)
+        {
+            TPredicateItemBase m_A = (TPredicateItemBase)(A);
+            TPredicateItemBase m_B = (TPredicateItemBase)(B);
+            int A_ID = ParentID(m_A);
+            int B_ID = ParentID(m_B);
+            int ANum = Sign(A_ID);
+            int BNum = Sign(B_ID);
+            if ((A_ID > 0) || (B_ID > 0))
+            {
+                if ((A_ID > 0) && (B_ID > 0))
+                {
+                    if (A_ID > B_ID)
+                        return 1;
+                    else
+                        return -1;
+                }
+                return 1;
+            }
+            else
+                return CompareNum(A_ID, m_A.NumAlt, B_ID, m_B.NumAlt, ((ANum <= 0) && (BNum <= 0)));
+        }
+        public static int CompareNum(int A, int AN, int B, int BN, bool AMinus)
+        {
+            if (A == B)
+            {
+                if (AN > BN)
+                    return 1;
+                if (AN < BN)
+                    return -1;
+            }
+            if (AMinus)
+            {
+                if (A > B)
+                    return -1;
+                if (A < B)
+                    return 1;
+            }
+            else
+            {
+                if (A > B)
+                    return 1;
+                if (A < B)
+                    return -1;
+            }
+            return 0;
+        }
+        public static int ParentID(TPredicateItemBase AItem)
+        {
+            if (AItem.EnvelopeBIG == null)
+                return 0;
+            if (AItem.EnvelopeBIG.Rfc != null)
+            {
+                TAlternativeParserItemTFE ITE = AItem.EnvelopeBIG.Rfc.ParentTFE;
+                if (ITE !=null)
+                    return ITE.TFE.BaseShape.ID;
+            }
+            return AItem.EnvelopeBIG.ID;
+        }
+        public static int Sign(int Val)
+        {
+            if (Val == 0) return 0;
+            if (Val > 0) return 1;
+            else return -1;
+        }
     }
 }

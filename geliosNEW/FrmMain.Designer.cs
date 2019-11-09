@@ -310,6 +310,7 @@
             this.решениеЗадачиToolStripMenuItem.Name = "решениеЗадачиToolStripMenuItem";
             this.решениеЗадачиToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
             this.решениеЗадачиToolStripMenuItem.Text = "Решение задачи";
+            this.решениеЗадачиToolStripMenuItem.Click += new System.EventHandler(this.РешениеЗадачиToolStripMenuItem_Click);
             // 
             // методПостроенияСуперпозицииToolStripMenuItem
             // 

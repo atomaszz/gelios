@@ -119,7 +119,6 @@ namespace geliosNEW
                     trucnt++;
                     break;
                 }
-
             }
             return trucnt > 0;
         }
@@ -175,7 +174,7 @@ namespace geliosNEW
             double Get_T_Min(TPredicateTreeItem* ATI, int AIndex);*/
         public TPredicateScanner Scanner;
         public TPredicateTrackCreator TrackCreator;
-        TZadacha()
+        public TZadacha()
         {
             f_Cnt_alt = 0;
             f_CntComm = 0;
