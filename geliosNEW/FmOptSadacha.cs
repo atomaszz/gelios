@@ -12,16 +12,16 @@ namespace geliosNEW
 {
     public partial class FmOptSadacha : Form
     {
-        short type_sadacha; //выбранный тип задачи оптимизации
-        short type_ogr;     //выбранный тип ограничений
-        bool can_list;
-        int type_char;
-        string  c1, c2, c3;     //коэффициенты, нужные для задач 4-6
-        string Bd, Td, Vd;     //коэффициенты, нужные для задач 1-3
+        public short type_sadacha; //выбранный тип задачи оптимизации
+        public short type_ogr;     //выбранный тип ограничений
+        public bool can_list;
+        public int type_char;
+        public string c1, c2, c3;     //коэффициенты, нужные для задач 4-6
+        public string Bd, Td, Vd;     //коэффициенты, нужные для задач 1-3
         public TDynamicArray MassWork;
-        TDischargedMassiv OptSovm;
-        double Rate;
-        int f_TypeMetod;
+        public TDischargedMassiv OptSovm;
+        public double Rate;
+        public int f_TypeMetod;
 
         public FmOptSadacha()
         {
@@ -519,6 +519,10 @@ namespace geliosNEW
                 }
             }
             return Res;
+        }
+        public int get_type_metod()
+        {
+            return f_TypeMetod;
         }
     }
 }

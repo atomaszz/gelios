@@ -176,7 +176,7 @@ namespace geliosNEW
         }
         ~TNodeSearch() { }
     };
-    class TPainterList
+    public class TPainterList
     {
         public List<object> List;
         int f_pos;

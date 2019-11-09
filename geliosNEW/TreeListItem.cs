@@ -36,9 +36,12 @@ namespace geliosNEW
         {
             f_List.Clear();
         }
-        /*         public:
-              TMainTreeList();
-                 ~TMainTreeList();*/
+        public TMainTreeList()
+        {
+            f_List = new List<object>();
+            f_Level = -1;
+        }
+        ~TMainTreeList() { }
         public void AddToTree(TAlternateTreeList Item)
         {
             if (Item!=null)
@@ -113,10 +116,17 @@ namespace geliosNEW
             return f_List.Count;
         }
 
-        /*      void FreeList();
-              public:
-               TAlternateTreeList();
-              ~TAlternateTreeList();*/
+        /*      void FreeList();*/
+        public TAlternateTreeList()
+        {
+            f_List = new List<object>();
+            f_Main = false;
+            f_NodeStart = null;
+            f_NodeEnd = null;
+            f_ID = -1;
+            f_Num = -1;
+        }
+        ~TAlternateTreeList() { }
         public void AddToAlternate(TTreeListTFS Item)
         {
             if (Item!=null)

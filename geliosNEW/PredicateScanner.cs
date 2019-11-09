@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace geliosNEW
 {
-    class TPredicateScannerItemKnot
+    public class TPredicateScannerItemKnot
     {
         int f_ParentID;
         int f_NumAlt;
@@ -14,18 +14,131 @@ namespace geliosNEW
         int f_TFE_ID1;
         int f_TFE_ID2;
         int f_TFE_ID3;
-   /*     public:
-     TPredicateScannerItemKnot() { f_ParentID = f_NumAlt = f_TypeKnot = f_TFE_ID1 = f_TFE_ID2 = f_TFE_ID3 = 0; }
-        AnsiString ItemName();
-        __property int ParentID = { read = f_ParentID, write = f_ParentID };
-        __property int NumAlt = { read = f_NumAlt, write = f_NumAlt };
-        __property int TypeKnot = { read = f_TypeKnot, write = f_TypeKnot };
-        __property int TFE_ID1 = { read = f_TFE_ID1, write = f_TFE_ID1 };
-        __property int TFE_ID2 = { read = f_TFE_ID2, write = f_TFE_ID2 };
-        __property int TFE_ID3 = { read = f_TFE_ID3, write = f_TFE_ID3 };*/
+        public TPredicateScannerItemKnot() { f_ParentID = f_NumAlt = f_TypeKnot = f_TFE_ID1 = f_TFE_ID2 = f_TFE_ID3 = 0; }
+        string  ItemName()
+        {
+            string Knot, Res, Ls;
+            switch (f_TypeKnot)
+            {
+                case 1:
+                    {
+                        Knot = "rab_oper";
+                        break;
+                    }
+                case 2:
+                    {
+                        Knot = "rab_oper_par_AND";
+                        break;
+                    }
+                case 3:
+                    {
+                        Knot = "rab_oper_par_OR";
+                        break;
+                    }
+
+                case 4:
+                    {
+                        Knot = "diagn_control_rab";
+                        break;
+                    }
+                case 5:
+                    {
+                        Knot = "diagn_func_coltrol";
+                        break;
+                    }
+                case 6:
+                    {
+                        Knot = "rasvilka";
+                        break;
+                    }
+
+                case 7:
+                    {
+                        Knot = "proverka_if";
+                        break;
+                    }
+
+                case 8:
+                    {
+                        Knot = "while_do_control_rab";
+                        break;
+                    }
+
+                case 9:
+                    {
+                        Knot = "do_while_do_control_rab";
+                        break;
+                    }
+
+                case 10:
+                    {
+                        Knot = "do_while_do_control_func";
+                        break;
+                    }
+
+                case 11:
+                    {
+                        Knot = "proverka_uslovia";
+                        break;
+                    }
+
+                case 13:
+                    {
+                        Knot = "rab_oper_posl";
+                        break;
+                    }
+
+                default:
+                    {
+                        Knot = "unknown";
+                        break;
+                    }
+            }
+            Ls = "[";
+            if (f_TFE_ID1 != 0)
+                Ls = Ls + f_TFE_ID1.ToString();
+            if (f_TFE_ID2 != 0)
+                Ls = Ls + ", " + f_TFE_ID2.ToString();
+            if (f_TFE_ID3 != 0)
+                Ls = Ls + ", " + f_TFE_ID3.ToString();
+            Ls = Ls + "]";
+
+            Res = "tfs(" + f_ParentID.ToString() + ", " + f_NumAlt.ToString() + ", " + Knot + ", " + Ls + ").";
+            return Res;
+        }
+        public int ParentID
+        {
+            set { f_ParentID = value; }
+            get { return f_ParentID; }
+        }
+        public int NumAlt
+        {
+            set { f_NumAlt = value; }
+            get { return f_NumAlt; }
+        }
+        public int TypeKnot
+        {
+            set { f_TypeKnot = value; }
+            get { return f_TypeKnot; }
+        }
+        public int TFE_ID1
+        {
+            set { f_TFE_ID1 = value; }
+            get { return f_TFE_ID1; }
+        }
+        public int TFE_ID2
+        {
+            set { f_TFE_ID2 = value; }
+            get { return f_TFE_ID2; }
+        }
+        public int TFE_ID3
+        {
+            set { f_TFE_ID3 = value; }
+            get { return f_TFE_ID3; }
+        }
     }
 
-    class TPredicateScanner
+    public class TPredicateScanner
     {
         bool f_Prop;
         /*     char f_Simv[256];

@@ -352,9 +352,13 @@ namespace geliosNEW
                 N.AddBaseShape((TBaseShape)(D.GetPosition(i).P), D.GetPosition(i).Int_Value);
             D = null;
         }
-     /*   public:
-               TGraphTFEConvertor();
-              ~TGraphTFEConvertor();*/
+        public TGraphTFEConvertor()
+        {
+            f_Item = new TGraphTFEConvertorItem();
+            f_BTree = new TGlsBinaryTree(SharedConst.CompareNode);
+            f_Tran = new TGraphTFEConvertorTransNum();
+        }
+        ~TGraphTFEConvertor() { }
         public void Init(TPredicateItemBig AHead, TPredicateTree APredicateTree)
         {
             string SC;
@@ -406,12 +410,29 @@ namespace geliosNEW
             // f_TextRecalc = f_Tran.Make();
 
         }
-        /*    __property AnsiString PrStruct = {read = f_PrStruct
-        };
-        __property AnsiString TextRecalc = {read = f_TextRecalc};
-             __property AnsiString PrRab = {read = f_PrRab};
-             __property AnsiString PrControlRab = {read = f_PrControlRab};
-             __property AnsiString PrControlFunc = {read = f_PrControlFunc};
-             __property AnsiString PrCheckCondition = {read = f_PrCheckCondition};*/
+        public string PrStruct
+        {
+            get { return f_PrStruct; }
+        }
+        public string TextRecalc
+        {
+            get { return f_TextRecalc; }
+        }
+        public string PrRab
+        {
+            get { return f_PrRab; }
+        }
+        public string PrControlRab
+        {
+            get { return f_PrControlRab; }
+        }
+        public string PrControlFunc
+        {
+            get { return f_PrControlFunc; }
+        }
+        public string PrCheckCondition
+        {
+            get { return f_PrCheckCondition; }
+        }
     }
 }

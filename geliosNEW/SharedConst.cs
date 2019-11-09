@@ -215,7 +215,7 @@ namespace geliosNEW
             TAlternativeParserGrpItemTFS m_B = (TAlternativeParserGrpItemTFS)(B);
             int res = -100; /*** GMess.SendMess(3, int(m_A.TFS.BaseWorkShape), int(m_B.TFS.BaseWorkShape));*/ //НУКЖНО ДЕБАЖИТЬ ИСХОДНИКИ 
             if (res == -100)
-                MessageBox.Show("Исключителная ошибка в алгоритме программы. Обратитесь к разработчику");
+                MessageBox.Show("Исключителная ошибка в алгоритме программы. Обратитесь к разработчику", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return res;
         }
 
@@ -223,6 +223,143 @@ namespace geliosNEW
         {
             lc.Add(A);
             return true;
+        }
+        public static TPieModule gPieModule;
+
+        /*----------------------------------------*/
+        public static string FullPredicateModel(FrmMain frmMain, string AStruct, string ARab,
+  string AControlRab, string AControlFunc, string ACheckCondition,
+  string AOptZadacha, string ADopPrav)
+        {
+            frmMain.GetMainList().GetAllWorkShape(opt_sadacha.MassWork);
+            opt_sadacha.InitData();
+            string S = "%Предикатная модель Альтернативного Графа (структур на основе ТФЕ)\r\n";
+            S = S + "%Дата создания: " + DateTime.Now.ToString() + "\r\n";
+            S = S + "%----------------------------------------------------\r\n";
+            S = S + "%Задача оптимизации:\r\n";
+            if (AOptZadacha.Length > 0)
+                S = S + AOptZadacha + "\r\n";
+
+            S = S + "%Структура ТФЕ:\r\n";
+            if (AStruct.Length > 0)
+            {
+                S = S + AStruct;
+                S = S + "\r\n";
+            }
+            S = S + "%Параметры подблоков ТФЕ:\r\n";
+            if (ARab.Length > 0)
+            {
+                S = S + ARab;
+                S = S + "\r\n";
+            }
+            if (AControlRab.Length > 0)
+            {
+                S = S + AControlRab;
+                S = S + "\r\n";
+            }
+            if (AControlFunc.Length > 0)
+            {
+                S = S + AControlFunc;
+                S = S + "\r\n";
+            }
+            if (ACheckCondition.Length > 0)
+            {
+                S = S + ACheckCondition;
+                S = S + "\r\n";
+            }
+            S = S + "%Дополнительные (вспомогательные) правила:\r\n";
+            if (ADopPrav.Length > 0)
+            {
+                S = S + ADopPrav;
+                S = S + "\r\n";
+            }
+            return S;
+        }
+        /*------------------------------------------------------------*/
+        public static FmStartDecision fmStartDecision;
+        public static bool CreateStartDecision(TZadacha AZadacha, int AType_char, int AType_metod)
+        {
+            bool res;
+            fmStartDecision = new FmStartDecision();
+            fmStartDecision.type_char = AType_char;
+            fmStartDecision.type_metod = AType_metod;
+            fmStartDecision.set_sadacha_edit();
+            fmStartDecision.edPercent.Text = opt_sadacha.Rate.ToString();
+            fmStartDecision.Zadacha = AZadacha;
+            fmStartDecision.ShowDialog();
+            res = fmStartDecision.DialogResult == System.Windows.Forms.DialogResult.OK;
+            return res;
+        }
+
+        public static void FreeStartDecision()
+        {
+        //    fmStartDecision.Release();
+        }
+        /*----------------------------------------*/
+        public static int CompareNode(object A, object B)
+        {
+            TPredicateItemBase m_A = (TPredicateItemBase)(A);
+            TPredicateItemBase m_B = (TPredicateItemBase)(B);
+            int A_ID = ParentID(m_A);
+            int B_ID = ParentID(m_B);
+            int ANum = Sign(A_ID);
+            int BNum = Sign(B_ID);
+            if ((A_ID > 0) || (B_ID > 0))
+            {
+                if ((A_ID > 0) && (B_ID > 0))
+                {
+                    if (A_ID > B_ID)
+                        return 1;
+                    else
+                        return -1;
+                }
+                return 1;
+            }
+            else
+                return CompareNum(A_ID, m_A.NumAlt, B_ID, m_B.NumAlt, ((ANum <= 0) && (BNum <= 0)));
+        }
+        public static int CompareNum(int A, int AN, int B, int BN, bool AMinus)
+        {
+            if (A == B)
+            {
+                if (AN > BN)
+                    return 1;
+                if (AN < BN)
+                    return -1;
+            }
+            if (AMinus)
+            {
+                if (A > B)
+                    return -1;
+                if (A < B)
+                    return 1;
+            }
+            else
+            {
+                if (A > B)
+                    return 1;
+                if (A < B)
+                    return -1;
+            }
+            return 0;
+        }
+        public static int ParentID(TPredicateItemBase AItem)
+        {
+            if (AItem.EnvelopeBIG == null)
+                return 0;
+            if (AItem.EnvelopeBIG.Rfc != null)
+            {
+                TAlternativeParserItemTFE ITE = AItem.EnvelopeBIG.Rfc.ParentTFE;
+                if (ITE !=null)
+                    return ITE.TFE.BaseShape.ID;
+            }
+            return AItem.EnvelopeBIG.ID;
+        }
+        public static int Sign(int Val)
+        {
+            if (Val == 0) return 0;
+            if (Val > 0) return 1;
+            else return -1;
         }
     }
 }

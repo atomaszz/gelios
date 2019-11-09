@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace geliosNEW
 {
@@ -50,9 +51,11 @@ namespace geliosNEW
             else
                 return null;
         }
-        /*    public:
-              TAlternativeParserItemList();
-            ~TAlternativeParserItemList();*/
+        public TAlternativeParserItemList()
+        {
+            f_List = new List<object>();
+        }
+        ~TAlternativeParserItemList() { }
         public void Append(TAlternativeParserItemBase AItem)
         {
             TAlternativeParserItemBase Item;
@@ -67,18 +70,34 @@ namespace geliosNEW
         public int Count
         {
             get { return GetCount(); }
-        }
-            
-   /*       public TAlternativeParserItemBase* Items[int AIndex] = {read = GetItems*/
+        }           
     }
     public class TAlternativeParserItemTFE
     {
         TTreeListItem f_TFE;
         TAlternativeParserItemBig f_Big;
-        /*   void __fastcall SetTFE(TTreeListItem* ATFE);
-           public:
-             TAlternativeParserItemTFE();
-           ~TAlternativeParserItemTFE();*/
+        public void SetTFE(TTreeListItem ATFE)
+        {
+            if (f_TFE != null)
+            {
+                MessageBox.Show("Повторное присвоение в TAlternativeParserItemTFE не допустимо!", "Ошибка",MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            f_TFE = ATFE;
+            if (ATFE.MainNode!=null)
+            {
+                f_Big = new TAlternativeParserItemBig();
+                f_Big.MainTreeList = ATFE.MainNode;
+                f_Big.FillBasisAlternateTreeList(f_Big.MainTreeList.MainAlternative);
+                f_Big.ParentTFE = this;
+            }
+        }
+        public TAlternativeParserItemTFE()
+        {
+            f_TFE = null;
+            f_Big = null;
+        }
+        ~TAlternativeParserItemTFE() { }
         public TTreeListItem  TFE
         {
             set { f_TFE = value; }
@@ -171,10 +190,20 @@ namespace geliosNEW
         {
             return GetBasisItems(BasisCount - 1);
         }
-/*
-        public:
-                   TAlternativeParserItemBig();
-             ~TAlternativeParserItemBig();*/
+
+        public TAlternativeParserItemBig()
+        {
+            f_Check = false;
+            f_Cross = false;
+            f_Enlarge = 0;
+            f_EnlargeSetNum = false;
+            f_ParentTFE = null;
+            f_BadBasis = false;
+            f_MainList = new TAlternativeParserItemList();
+            f_List = new List<object>();
+            f_Basis = new TDynamicArray();
+        }
+        ~TAlternativeParserItemBig() {}
          public override int Who() { return 1; }
         public void BasisClear()
         {

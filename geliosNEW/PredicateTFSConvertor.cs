@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace geliosNEW
 {
-    class TPredicateItemBase
+    public class TPredicateItemBase
     {
         int f_ID;
         int f_NumAlt;
@@ -113,7 +113,7 @@ namespace geliosNEW
         }
    /*     __property TPredicateItemTFE* TFEItems[int AIndex] = { read = GetTFEItems };*/
     }
-    class TPredicateItemBig : TPredicateItemBase
+    public class TPredicateItemBig : TPredicateItemBase
     {
         bool f_Print;
         List<object> f_List;
@@ -134,8 +134,13 @@ namespace geliosNEW
             f_List.Clear();
         }
            public override int Who() { return 1; }
-        /*      TPredicateItemBig();
-      ~TPredicateItemBig();*/
+        public TPredicateItemBig()
+        {
+            f_Rfc = null;
+            f_List = new List<object>();
+            f_Print = false;
+        }
+        ~TPredicateItemBig() { }
       public void AddItem(TPredicateItemBase AItem)
         {
             f_List.Add(AItem);
@@ -661,17 +666,21 @@ namespace geliosNEW
             if (f_PathStyle == 2)
                 SetPathNode(AHead, ADyn);
         }
-        /*        public:
-                 TPredicateTFSConvertor();
-                ~TPredicateTFSConvertor();*/
+        public TPredicateTFSConvertor()
+        {
+            f_PathStyle = 0;
+            f_TryPath = true;
+            f_PredicateStart = null;
+            f_NGen = new TPredicateNumGenerator();
+            f_ListEnlarge = new List<object>();
+        }
+        ~TPredicateTFSConvertor() {}
         public void CopyTree(TAlternativeParserItemBig AHead)
         {
             TPredicateItemBig Big;
             FreeHead();
             f_PredicateStart = NewBig(AHead);
             TDynamicArray m_Stack = new TDynamicArray();
-            //0202  m_Stack.InsertToFirst(f_PredicateStart);
-            //0202   Big = (TPredicateItemBig)(m_Stack.Pop());
             Big = f_PredicateStart;
             while (Big!=null)
             {
