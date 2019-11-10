@@ -267,7 +267,7 @@ namespace geliosNEW
             TPredicateItemBase m_Base;
             if (!ABig.Envelope)
             {
-                if (ABig.Rfc.ParentTFE!=null && ABig.Print)
+                if (ABig.Rfc.ParentTFE==null && ABig.Print)
                     Res = ABig;
                 int m_cnt = ABig.Count;
                 for (int i = 0; i <= m_cnt - 1; i++)
