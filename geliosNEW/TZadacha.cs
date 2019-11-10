@@ -18,7 +18,7 @@ namespace geliosNEW
         int f_Cnt_alt;
         int f_CntComm;
         bool f_CheckNud;
-        TPredicateTree f_Tree;
+        public TPredicateTree f_Tree;
         TDynamicArray f_Equal;
         TPartialDecision f_PartialDecision;
         List<object> f_ListPTI;

@@ -88,8 +88,8 @@ namespace geliosNEW
             string S = "Ошибка загрузки модуля ПРОЛОГ системы!\r\n";
             S = S + "Без данной функции условия предикатов ТФЕ в задачах оптимизации будут игнорироваться!";
             SharedConst.gPieModule = new TPieModule();
-            if (!SharedConst.gPieModule.CheckModule())
-                MessageBox.Show(S, "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+         //   if (!SharedConst.gPieModule.CheckModule())
+           //     MessageBox.Show(S, "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         public FrmMain()
@@ -565,12 +565,12 @@ namespace geliosNEW
             TAlternativeParser AP = new TAlternativeParser();
             TPredicateTFSConvertor TC = new TPredicateTFSConvertor();
             TGraphTFEConvertor GC = new TGraphTFEConvertor();
-            m_TreeList.FillTreeFromList(MainList);
+            m_TreeList.FillTreeFromList(ref MainList);
             AP.Parse(m_TreeList.MainTreeList);
             TC.CopyTree(AP.Head);
             TC.PathStyle = 2;
             TC.Process(f_PredicatePath.BasePath, f_PredicatePath.UsedPath);
-            GC.Init(TC.Head, f_Zadacha.Tree);
+            GC.Init(ref TC.f_PredicateStart, ref f_Zadacha.f_Tree);
             f_Zadacha.Init(f_TypeParam, f_CheckNud, SharedConst.FullPredicateModel(this, GC.PrStruct,
               GC.PrRab, GC.PrControlRab, GC.PrControlFunc, GC.PrCheckCondition, OptZ, f_PredicateDopPrav));
             string S;

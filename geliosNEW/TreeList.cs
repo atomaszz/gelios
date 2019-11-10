@@ -100,7 +100,7 @@ namespace geliosNEW
             Dyn.Clear();
             return null;
         }
-        public void FillTreeFromList(TListNode AListNode)
+        public void FillTreeFromList(ref TListNode AListNode)
         {
             TTreeStackItem Item;
             TAltInfoItem AltInfoItem;
@@ -117,7 +117,7 @@ namespace geliosNEW
                 AMT = FindByLevel(f_TreeList, Item.Level);
                 if (AMT!=null)
                 {
-                    AListNode.LoadInfoForAlternate(f_AltInfo, Item.Level);
+                    AListNode.LoadInfoForAlternate(ref f_AltInfo, Item.Level);
                     for (int i = 0; i <= f_AltInfo.ItemCount - 1; i++)
                     {
                         AltInfoItem = f_AltInfo.GetItem(i);

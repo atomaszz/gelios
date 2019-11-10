@@ -196,7 +196,7 @@ namespace geliosNEW
     {
         List<object> f_ListEnlarge;
         TPredicateNumGenerator f_NGen;
-        TPredicateItemBig f_PredicateStart;
+        public TPredicateItemBig f_PredicateStart;
         TPredicatePathItem f_BasePath;
         TPredicatePathItem f_UsedPath;
         int f_PathStyle;
@@ -700,6 +700,7 @@ namespace geliosNEW
         }
         public TPredicateItemBig Head
         {
+            set { f_PredicateStart = value; }
             get { return f_PredicateStart; }
         }
         public int PathStyle

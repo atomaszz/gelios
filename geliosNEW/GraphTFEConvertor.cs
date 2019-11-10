@@ -237,7 +237,7 @@ namespace geliosNEW
                 AnsiString PrintBig(TPredicateItemBig* ABig, TDynamicArray* AStack);
                 AnsiString ParseItem(TPredicateItemBase* ABase, TDynamicArray* AStack);*/
 
-        TPredicateItemBase DoParseItem(TPredicateItemBase ABase, TDynamicArray AStack)
+        TPredicateItemBase DoParseItem(ref TPredicateItemBase ABase, ref TDynamicArray AStack)
         {
             TPredicateItemBase Res = null;
             int m_who = ABase.Who();
@@ -359,7 +359,7 @@ namespace geliosNEW
             f_Tran = new TGraphTFEConvertorTransNum();
         }
         ~TGraphTFEConvertor() { }
-        public void Init(TPredicateItemBig AHead, TPredicateTree APredicateTree)
+        public void Init(ref TPredicateItemBig AHead, ref TPredicateTree APredicateTree)
         {
             string SC;
             bool pass;
@@ -374,7 +374,7 @@ namespace geliosNEW
             Base = (TPredicateItemBase)(m_Stack.Pop());
             while (Base!=null)
             {
-                NC = DoParseItem(Base, m_Stack);
+                NC = DoParseItem(ref Base, ref m_Stack);
                 if (NC!=null)
                     f_BTree.insert(NC);
                 Base = (TPredicateItemBase)(m_Stack.Pop());

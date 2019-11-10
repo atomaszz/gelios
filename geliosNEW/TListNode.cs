@@ -356,7 +356,7 @@ namespace geliosNEW
         public void ClearNodeTypeCreate();
         public TNode CheckAlternateWSFirst(TBaseWorkShape AWS);
         public TNode CheckAlternateWSEnd(TBaseWorkShape AWS);*/
-        public void LoadInfoForAlternate(TAltInfo AltIfo, int AParentShapeID)
+        public void LoadInfoForAlternate(ref TAltInfo AltIfo, int AParentShapeID)
         {
             TNodeAlt Itm;
             TNodeMain Node, First= null, Last = null;
