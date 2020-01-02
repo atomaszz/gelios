@@ -133,9 +133,13 @@ namespace geliosNEW
         public TAlternateItem Prior();*/
     /*    public TAlternateItem Last();
         public bool EnterByShape(TBaseShape AFlagShape);
-        public bool LeaveByShape(TBaseShape* AFlagShape);
-        public void ClearAll();
-        public int Count = { read = GetCount };*/
+        public bool LeaveByShape(TBaseShape* AFlagShape);*/
+        public void ClearAll()
+        {
+            f_List.Clear();
+        }
+
+  /*    public int Count = { read = GetCount };*/
     }
 
 
@@ -206,9 +210,12 @@ namespace geliosNEW
                     int IsExistsAlternate(TBaseWorkShape* AWSFirst, TBaseWorkShape* AWSLast);
                     void CoordinateCorrect();
                     void RecalcPosition(int AParentShapeID, int AId, int ANumAlt);
-                    bool GetWSToAlternate(int AId, TBaseWorkShape** AWSFirst, TBaseWorkShape** AWSLast);
-                    void ClearAll();
-                    bool DeleteWorkShape(TBaseWorkShape* AWS);*/
+                    bool GetWSToAlternate(int AId, TBaseWorkShape** AWSFirst, TBaseWorkShape** AWSLast);*/
+        public void ClearAll()
+        {
+            f_List.Clear();
+        }
+        /*                  bool DeleteWorkShape(TBaseWorkShape* AWS);*/
         public TListChange OnListChange
         {
             set { FOnListChange = value; }

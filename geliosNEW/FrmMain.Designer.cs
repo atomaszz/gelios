@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.новаяСтруктураToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,6 +124,7 @@
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
+            this.файлToolStripMenuItem.DropDownOpening += new System.EventHandler(this.ФайлToolStripMenuItem_DropDownOpening);
             this.файлToolStripMenuItem.Click += new System.EventHandler(this.ФайлToolStripMenuItem_Click);
             // 
             // новаяСтруктураToolStripMenuItem
@@ -183,6 +185,7 @@
             this.опцииToolStripMenuItem.Name = "опцииToolStripMenuItem";
             this.опцииToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.опцииToolStripMenuItem.Text = "Опции";
+            this.опцииToolStripMenuItem.DropDownOpening += new System.EventHandler(this.ОпцииToolStripMenuItem_DropDownOpening);
             this.опцииToolStripMenuItem.Click += new System.EventHandler(this.ОпцииToolStripMenuItem_Click);
             // 
             // вставитьБлокToolStripMenuItem
@@ -278,6 +281,7 @@
             this.альтернативаToolStripMenuItem.Name = "альтернативаToolStripMenuItem";
             this.альтернативаToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
             this.альтернативаToolStripMenuItem.Text = "Альтернатива";
+            this.альтернативаToolStripMenuItem.DropDownOpening += new System.EventHandler(this.АльтернативаToolStripMenuItem_DropDownOpening);
             this.альтернативаToolStripMenuItem.Click += new System.EventHandler(this.АльтернативаToolStripMenuItem_Click);
             // 
             // добавитьАльтернативуToolStripMenuItem
@@ -315,6 +319,7 @@
             this.решениеЗадачиToolStripMenuItem.Name = "решениеЗадачиToolStripMenuItem";
             this.решениеЗадачиToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
             this.решениеЗадачиToolStripMenuItem.Text = "Решение задачи";
+            this.решениеЗадачиToolStripMenuItem.DropDownOpening += new System.EventHandler(this.РешениеЗадачиToolStripMenuItem_DropDownOpening);
             this.решениеЗадачиToolStripMenuItem.Click += new System.EventHandler(this.РешениеЗадачиToolStripMenuItem_Click);
             // 
             // методПостроенияСуперпозицииToolStripMenuItem
@@ -455,8 +460,8 @@
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLabel4.Text = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel4.Text = "|";
             // 
             // openFileDialog1
             // 
@@ -590,6 +595,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.pnlButton);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(781, 450);
             this.Name = "FrmMain";

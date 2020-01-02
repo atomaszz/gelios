@@ -60,12 +60,18 @@ namespace geliosNEW
                 MainList.RemoveAt(i);
             }
         }
-        /*    void FreeListAncestor();
-            void FreeListAlternate();
-            int GetNodeMaxID();
-            int GetTFEMaxID();
-            int GetAlternateMaxID();
-            void CheckDeleteAlternate(TBaseWorkShape AWS);*/
+        void FreeListAncestor()
+        {
+            AncestorList.Clear();
+        }
+        void FreeListAlternate()
+        {
+            AlternateList.Clear();
+        }
+        /*       int GetNodeMaxID();
+               int GetTFEMaxID();
+               int GetAlternateMaxID();
+               void CheckDeleteAlternate(TBaseWorkShape AWS);*/
         TNodeAncestor IsExistsNodeAncestor(int AIdBlock, int AIdShapeAncestor)
         {
             TNodeAncestor currNode;
@@ -263,12 +269,16 @@ namespace geliosNEW
             return Searcher.DisableFind(AUid);
         }
    /*     public bool IsFirstWorkShape(TBaseWorkShape WShape, int AltId, int ANumAlt, int IdParentShape);
-        public TBaseWorkShape GetLastWorkShape(int AltId, int ANumAlt, int IdParentShape);
-        public bool IsEmpty();
-        public int DecayWorkShape(TBaseWorkShape WDecay, TBaseWorkShape WN1, TBaseWorkShape WN2);
-        public void FusionWorkShape(TBaseWorkShape WFusion, TBaseWorkShape WN1, TBaseWorkShape WN2);
-        public TBaseWorkShape FindWorkShapeOutBaseShape(TBaseShape Shape, int &ShapeId);
-        public TBaseWorkShape FindWorkShapeOutBaseShapeID(int ShapeID, TBaseShape Shape);*/
+        public TBaseWorkShape GetLastWorkShape(int AltId, int ANumAlt, int IdParentShape);*/
+        public bool IsEmpty()
+        {
+            return (MainList.Count == 0);
+        }
+
+        /*     public int DecayWorkShape(TBaseWorkShape WDecay, TBaseWorkShape WN1, TBaseWorkShape WN2);
+             public void FusionWorkShape(TBaseWorkShape WFusion, TBaseWorkShape WN1, TBaseWorkShape WN2);
+             public TBaseWorkShape FindWorkShapeOutBaseShape(TBaseShape Shape, int &ShapeId);
+             public TBaseWorkShape FindWorkShapeOutBaseShapeID(int ShapeID, TBaseShape Shape);*/
         public bool CreateAlternate(TBaseWorkShape WS, TBaseWorkShape WE, int AID, int ANumAlt)
         {
             TNodeAlt Alt;
@@ -343,19 +353,34 @@ namespace geliosNEW
         public TNodeMain FindPriorNode2(TBaseWorkShape W);
 
         public bool CompareWorkShape(TBaseWorkShape WS, TBaseWorkShape WE);
-        public bool GetWSToAlternate(int AId, TBaseWorkShape AWSFirst, TBaseWorkShape AWSLast);
-        public void BeginUpdate();
-        public void EndUpdate();
-        public void ClearAll();
-        public void PrepareDeleteWorkShape(TBaseWorkShape AWS);
-        public int DeleteWorkShape();
-        public void SaveAllToFile(AnsiString AFileName, int ATypeParam, TDischargedMassiv AOgrSovm);
-        public TNodeMain CreateNode(TBaseWorkShape WS);
-        public TNodeAncestor CreateNodeAncestor(int AId, int AIdAncestor);
-        public void PrepareAddNode(TNodeMain Nd);
-        public void ClearNodeTypeCreate();
-        public TNode CheckAlternateWSFirst(TBaseWorkShape AWS);
-        public TNode CheckAlternateWSEnd(TBaseWorkShape AWS);*/
+        public bool GetWSToAlternate(int AId, TBaseWorkShape AWSFirst, TBaseWorkShape AWSLast);*/
+        public void BeginUpdate()
+        {
+            f_Update = true;
+        }
+        public void EndUpdate()
+        {
+            f_Update = false;
+        }
+        public void ClearAll()
+        {
+            BeginUpdate();
+            Searcher.ClearAll();
+            f_StackDustController.ClearAll();
+            FreeListAncestor();
+            FreeListMain();
+            FreeListAlternate();
+            EndUpdate();
+        }
+        /*   public void PrepareDeleteWorkShape(TBaseWorkShape AWS);
+           public int DeleteWorkShape();
+           public void SaveAllToFile(AnsiString AFileName, int ATypeParam, TDischargedMassiv AOgrSovm);
+           public TNodeMain CreateNode(TBaseWorkShape WS);
+           public TNodeAncestor CreateNodeAncestor(int AId, int AIdAncestor);
+           public void PrepareAddNode(TNodeMain Nd);
+           public void ClearNodeTypeCreate();
+           public TNode CheckAlternateWSFirst(TBaseWorkShape AWS);
+           public TNode CheckAlternateWSEnd(TBaseWorkShape AWS);*/
         public void LoadInfoForAlternate(ref TAltInfo AltIfo, int AParentShapeID)
         {
             TNodeAlt Itm;

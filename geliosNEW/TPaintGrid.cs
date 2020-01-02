@@ -439,7 +439,7 @@ namespace geliosNEW
             f_WndHandler = new IntPtr();
             f_UnderControl = null;
             f_RefreshFon = true;
-            f_CurrEndPoint = new Point(40, 100);
+            f_CurrEndPoint = new Point(80, 100);
             f_X_offs = 0; //смещение по Х
             f_Y_offs = 0; //смещение по Y
             f_WSPenWidth = 1;
@@ -598,12 +598,18 @@ namespace geliosNEW
                 return;
             }
         }
-    /*    void PrepareLevel();
-        void PrepareLevelOnOffset();
-        void ClearAltWSList();
-        void AddToAltWSList(TBaseWorkShape* AWS);
-        HRGN GetRGNAltWSList();
-        bool IsAltWSListEmpty();*/
+        public void PrepareLevel()
+        {
+            f_X_offs = 0; //смещение по X
+            f_Y_offs = 0; //смещение по Y
+            f_X_offsSum = f_Y_offsSum = 0;
+        }
+
+        /*      void PrepareLevelOnOffset();
+              void ClearAltWSList();
+              void AddToAltWSList(TBaseWorkShape* AWS);
+              HRGN GetRGNAltWSList();
+              bool IsAltWSListEmpty();*/
         TBaseShape FindTFE(int Ax, int Ay)
         {
             TBaseShape CurrShape;
@@ -643,12 +649,26 @@ namespace geliosNEW
                }
                return null;
            }*/
-        /*    void ClearAll();
-            void RecalcAfterDeleted(bool AFirst, TPoint FPoint);
-            void SetWSFlagEvent(TBaseWorkShape* WS);
-            void RecalcBaseOffsetPosition();
-            void RecalcFollowWorkShape(TBaseWorkShape* ABeforeInsertWork, TPoint AEndPoint);
-            void RecalcAfterConverted(bool AFirst, TPoint FPoint);*/
+        public void ClearAll()
+        {
+            f_SelectedTFE = null;
+            f_SelectedTFS = null;
+            f_ClipPath.Clear();
+            g_PainterList.ClearAll();
+            f_ListForPaint.Clear();
+         //   f_FlagController.ClearAll();
+            f_InvalidateList.Clear();
+            f_LineCutting.ClearAll();
+            g_AlternateList.ClearAll();
+            f_AltWSList.Clear();
+            f_localVisiblearrowall = false;
+            f_CurrEndPoint = new Point(80, 100);
+        }
+        /*  void RecalcAfterDeleted(bool AFirst, TPoint FPoint);
+          void SetWSFlagEvent(TBaseWorkShape* WS);
+          void RecalcBaseOffsetPosition();
+          void RecalcFollowWorkShape(TBaseWorkShape* ABeforeInsertWork, TPoint AEndPoint);
+          void RecalcAfterConverted(bool AFirst, TPoint FPoint);*/
         public TBaseWorkShape FindShapeFromCompositeWork(int AShapeID)
         {
             TBaseWorkShape TempWork;

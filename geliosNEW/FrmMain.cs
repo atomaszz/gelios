@@ -362,7 +362,11 @@ namespace geliosNEW
 
         private void новаяСтруктураToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (MainList.IsEmpty()) return;
+            DialogResult res = MessageBox.Show("Вы действительно хотите удалить все ТФС?", "Внимание!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (!f_IsDebug && (res == DialogResult.No))
+                return;
+            ClearWorkSpace();
         }
 
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
@@ -641,6 +645,10 @@ namespace geliosNEW
             методПостроенияСуперпозицииToolStripMenuItem.Enabled = Grid.g_PainterList.Count > 0;
             найтиРешениеToolStripMenuItem.Enabled = Grid.g_PainterList.Count > 0;
         }
+        private void РешениеЗадачиToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            РешениеЗадачиToolStripMenuItem_Click(sender, e);
+        }
 
         private void МетодОптимизацииToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -656,6 +664,10 @@ namespace geliosNEW
         private void ФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
             преобразоватьВПридиктнуюМодельToolStripMenuItem.Enabled = Grid.g_PainterList.Count > 0;
+        }
+        private void ФайлToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            ФайлToolStripMenuItem_Click(sender, e);
         }
 
         private void ОпцииToolStripMenuItem_Click(object sender, EventArgs e)
@@ -687,6 +699,10 @@ namespace geliosNEW
             начатьПросмотрАльтернативToolStripMenuItem.Enabled = ka;
 
         }
+        private void ОпцииToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            ОпцииToolStripMenuItem_Click(sender, e);
+        }
 
         private void СвернутьToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -699,6 +715,10 @@ namespace geliosNEW
             добавитьАльтернативуToolStripMenuItem.Enabled = false;
             поднятьВверхToolStripMenuItem.Enabled = false;
             удалитьАльтернативуToolStripMenuItem.Enabled = false;
+        }
+        private void АльтернативаToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            АльтернативаToolStripMenuItem_Click(sender, e);
         }
 
         private void ПоднятьВверхToolStripMenuItem_Click(object sender, EventArgs e)
@@ -725,6 +745,7 @@ namespace geliosNEW
             fmParamAlternative.ShowDialog();
             //       fmParamAlternative.Release();
         }
+
         bool ShowMetodOpt(int AType, double ARate, ref int OutType, ref double OutRate)
         {
             FmMetodOpt fmMetodOpt = new FmMetodOpt();
@@ -735,6 +756,48 @@ namespace geliosNEW
             OutType = fmMetodOpt.get_type_metod();
             OutRate = Double.Parse(fmMetodOpt.edPercent.Text);
             return res;
+        }
+
+        void ClearWorkSpace()
+        {
+            f_Operation = 0;
+            TAltSelectorItem Item;
+            f_AlternateController.ClearAll();
+            f_AltSelector.ClearAll();
+            f_AltStackController.ClearAll();
+            MainList.ClearAll();
+            LevelController.ClearAll();
+            LevelController.Push(0);
+            Grid.ClearAll();
+      //      f_StackHistory.Clear();
+      //      f_StackHistory.InitStack();
+
+            f_IdAlternative = 0;
+            f_CurrIDBlock = 1;
+            f_CurrIDShape = 0;
+            f_CurrIDLine = 0;
+      //      sbY.Max = 0;
+     //       sbX.Max = 0;
+            X_Base = Y_Base = X_Ofs = Y_Ofs = 0;
+            f_Operation = 0;
+
+            Item = f_AltSelector.CreateNewAlternateID(LevelController.ParentShapeID);
+            f_IdAlternative = Item.ID;
+            f_NumAlternative = f_AltSelector.AddAltItem(f_IdAlternative);
+            f_IdAlternativeParent = f_IdAlternative;
+            f_NumAlternativeParent = f_NumAlternative;
+            MainList.CreateAlternate(null, null, f_IdAlternative, f_NumAlternative);
+            f_AltStackController.Push(f_IdAlternative, f_NumAlternative,
+                f_IdAlternativeParent, f_NumAlternativeParent);
+
+       //     PrepareTabs(f_NumAlternative);
+      //      PrepareScroll();
+            ListChange();
+            AlternateListChange();
+            Grid.PrepareLevel();
+            Grid.PreparePaint();
+            SetNewPolygon();
+            pbMain.Invalidate();
         }
     }
 }
