@@ -9,7 +9,7 @@ namespace geliosNEW
 {
     class TRectShape : TBaseShape
     {
-        public bool PowerIn()
+        override public bool PowerIn()
         {
             return true;
         }

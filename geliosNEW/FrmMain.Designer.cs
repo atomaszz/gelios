@@ -123,6 +123,7 @@
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
+            this.файлToolStripMenuItem.Click += new System.EventHandler(this.ФайлToolStripMenuItem_Click);
             // 
             // новаяСтруктураToolStripMenuItem
             // 
@@ -182,6 +183,7 @@
             this.опцииToolStripMenuItem.Name = "опцииToolStripMenuItem";
             this.опцииToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.опцииToolStripMenuItem.Text = "Опции";
+            this.опцииToolStripMenuItem.Click += new System.EventHandler(this.ОпцииToolStripMenuItem_Click);
             // 
             // вставитьБлокToolStripMenuItem
             // 
@@ -225,6 +227,7 @@
             this.свернутьToolStripMenuItem.Name = "свернутьToolStripMenuItem";
             this.свернутьToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
             this.свернутьToolStripMenuItem.Text = "Свернуть";
+            this.свернутьToolStripMenuItem.Click += new System.EventHandler(this.СвернутьToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -275,6 +278,7 @@
             this.альтернативаToolStripMenuItem.Name = "альтернативаToolStripMenuItem";
             this.альтернативаToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
             this.альтернативаToolStripMenuItem.Text = "Альтернатива";
+            this.альтернативаToolStripMenuItem.Click += new System.EventHandler(this.АльтернативаToolStripMenuItem_Click);
             // 
             // добавитьАльтернативуToolStripMenuItem
             // 
@@ -287,6 +291,7 @@
             this.поднятьВверхToolStripMenuItem.Name = "поднятьВверхToolStripMenuItem";
             this.поднятьВверхToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.поднятьВверхToolStripMenuItem.Text = "Поднять вверх";
+            this.поднятьВверхToolStripMenuItem.Click += new System.EventHandler(this.ПоднятьВверхToolStripMenuItem_Click);
             // 
             // удалитьАльтернативуToolStripMenuItem
             // 

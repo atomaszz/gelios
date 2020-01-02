@@ -408,8 +408,8 @@ namespace geliosNEW
                     break;
             case SharedConst.ZAD_4:
                     label1.Text = "Примечания";
-                    pictureBox1.Image = imageList1.Images[SharedConst.ZAD_3];
-                    pictureBox2.Image = imageList2.Images[SharedConst.ZAD_3];
+                    pictureBox1.Image = imageList1.Images[SharedConst.ZAD_4];
+                    pictureBox2.Image = imageList2.Images[SharedConst.ZAD_4];
                     tabControl1.SelectedIndex = 3;
              break;
             case SharedConst.ZAD_5:

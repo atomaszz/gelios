@@ -774,19 +774,19 @@ namespace geliosNEW
             set { f_UnderControl = value;  }
             get { return f_UnderControl;  }
         }
-/*__property int WSPenWidth = { read = f_WSPenWidth, write = f_WSPenWidth };
-__property bool RefreshFon = { read = f_RefreshFon, write = f_RefreshFon };
+        /*__property int WSPenWidth = { read = f_WSPenWidth, write = f_WSPenWidth };
+        __property bool RefreshFon = { read = f_RefreshFon, write = f_RefreshFon };
 
-__property TColor LineColor = {read = f_LineColor, write = SetLineColor};
-   __property bool BrushTFE = { read = f_BrushTFE, write = SetBrushTFE };
-__property TColor BrushColor = {read = f_BrushColor, write = SetBrushColor};
-   __property Graphics::TFont* FontTFE = { read = f_FontTFE, write = SetFontTFE};
-__property int FlagType = { read = f_FlagType, write = SetFlagType };
-__property TColor LeaveFlagColor  = {read = f_LeaveFlagColor, write = SetLeaveFlagColor};
-   __property TColor EnterFlagColor  = {read = f_EnterFlagColor, write = SetEnterFlagColor};
-   __property TColor FrameColorTFE = {read = f_FrameColorTFE, write = SetFrameColorTFE};
-   __property TColor FrameColorTFS = {read = f_FrameColorTFS, write = SetFrameColorTFS};*/
-   public  int Regim
+        __property TColor LineColor = {read = f_LineColor, write = SetLineColor};
+           __property bool BrushTFE = { read = f_BrushTFE, write = SetBrushTFE };
+        __property TColor BrushColor = {read = f_BrushColor, write = SetBrushColor};
+           __property Graphics::TFont* FontTFE = { read = f_FontTFE, write = SetFontTFE};
+        __property int FlagType = { read = f_FlagType, write = SetFlagType };
+        __property TColor LeaveFlagColor  = {read = f_LeaveFlagColor, write = SetLeaveFlagColor};
+           __property TColor EnterFlagColor  = {read = f_EnterFlagColor, write = SetEnterFlagColor};
+           __property TColor FrameColorTFE = {read = f_FrameColorTFE, write = SetFrameColorTFE};
+           __property TColor FrameColorTFS = {read = f_FrameColorTFS, write = SetFrameColorTFS};*/
+        public  int Regim
         {
             get { return f_Regim; }
             set { SetRegim(value); }
@@ -808,8 +808,12 @@ __property TColor LeaveFlagColor  = {read = f_LeaveFlagColor, write = SetLeaveFl
         {
             get { return f_SelectedTFE; }
         }
-   /*     __property TBaseWorkShape* SelectedTFS = { read = f_SelectedTFS, write = f_SelectedTFS };
-        __property TColor AltFlagColor = {read = f_AltFlagColor, write = SetAltFlagColor};
+        public TBaseWorkShape SelectedTFS
+        {
+            get { return f_SelectedTFS; }
+            set { f_SelectedTFS = value; }
+        }
+   /*    __property TColor AltFlagColor = {read = f_AltFlagColor, write = SetAltFlagColor};
            __property TColor AltEnterFlagColor = {read = f_AltEnterFlagColor, write = SetAltEnterFlagColor};
            __property TColor AltArrowColor = {read = f_AltArrowColor, write = SetAltArrowColor};
            __property TColor AltEnterArrowColor = {read = f_AltEnterArrowColor, write = SetAltEnterArrowColor};

@@ -190,7 +190,7 @@ namespace geliosNEW
             InitHelp();
             InitPieModule();
             f_Zadacha = new TZadacha();
-          /*       f_ClipCopyTFS = new TClipCopyTFS(Handle, 0x8000000); */
+          /* f_ClipCopyTFS = new TClipCopyTFS(Handle, 0x8000000); */
             f_PredicatePath = new TPredicatePath();
             f_PredicateDopPrav = "";
             /*        ApplySettings();
@@ -638,7 +638,8 @@ namespace geliosNEW
 
         private void РешениеЗадачиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            методПостроенияСуперпозицииToolStripMenuItem.Enabled = Grid.g_PainterList.Count > 0;
+            найтиРешениеToolStripMenuItem.Enabled = Grid.g_PainterList.Count > 0;
         }
 
         private void МетодОптимизацииToolStripMenuItem_Click(object sender, EventArgs e)
@@ -650,6 +651,59 @@ namespace geliosNEW
                 SharedConst.opt_sadacha.set_type_metod(m_type);
                 SharedConst.opt_sadacha.Rate = m_rate;
             }
+        }
+
+        private void ФайлToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            преобразоватьВПридиктнуюМодельToolStripMenuItem.Enabled = Grid.g_PainterList.Count > 0;
+        }
+
+        private void ОпцииToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool ka = Grid.g_PainterList.Count > 0;
+
+            вставитьБлокToolStripMenuItem.Enabled = ka;
+            вставитьБлокToolStripMenuItem.Checked = (f_Operation == 1) && ka;
+
+            вставитьСтруктуруИзФайлаToolStripMenuItem.Enabled = ka;
+            вставитьСтруктуруИзФайлаToolStripMenuItem.Checked = (f_Operation == 5) && ka;
+            добавитьредактироватьАльтернативуToolStripMenuItem.Enabled = ka;
+            удалитьТФСToolStripMenuItem.Enabled = Grid.SelectedTFS != null;
+            удалитьОтТочкиДоТочкиToolStripMenuItem.Enabled = ka;
+
+            bool enb = Grid.SelectedTFE != null;
+            if (enb)
+                enb = Grid.SelectedTFE.PowerIn();
+            раскрытьToolStripMenuItem.Enabled = enb;
+
+            свернутьToolStripMenuItem.Enabled = false; /*когда-нибудь с этим можно разобраться
+                /*= (LevelController.ParentShapeID != 0) && tcMain.Tabs.Count == 0 - не понять как и где используется tcMain*/
+
+            копироватьToolStripMenuItem.Enabled = ka;
+
+            //добавлю когда-нибдуь потом
+            /*   вставитьИзБуфераToolStripMenuItem = (f_ClipCopyTFS.CanalLength() > 0);*/
+            вставитьИзБуфераToolStripMenuItem.Enabled = false;
+            начатьПросмотрАльтернативToolStripMenuItem.Enabled = ka;
+
+        }
+
+        private void СвернутьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void АльтернативаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //добавлю когда-нибдуь потом
+            добавитьАльтернативуToolStripMenuItem.Enabled = false;
+            поднятьВверхToolStripMenuItem.Enabled = false;
+            удалитьАльтернативуToolStripMenuItem.Enabled = false;
+        }
+
+        private void ПоднятьВверхToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
         void ShowParamAlternative(TBaseShape ATFE, int AParentID, int AType_Char,

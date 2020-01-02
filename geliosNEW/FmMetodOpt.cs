@@ -12,9 +12,11 @@ namespace geliosNEW
 {
     public partial class FmMetodOpt : Form
     {
+        public bool m_bIsApproximate;
         public FmMetodOpt()
         {
             InitializeComponent();
+            m_bIsApproximate = false;
         }
 
         public int get_type_metod()
@@ -31,10 +33,10 @@ namespace geliosNEW
 
         public void set_type_metod(int typ)
         {
-       /*     if (typ == SharedConst.TOHN)
+            if (typ == SharedConst.TOHN)
                 cbxMetod.SelectedIndex = 0;
             else
-                cbxMetod.SelectedIndex = 1;*/
+                cbxMetod.SelectedIndex = 1;
             if (typ == SharedConst.PRIBLJ1)
                 rg0.Checked = true;
             if (typ == SharedConst.PRIBLJ2)
@@ -56,16 +58,17 @@ namespace geliosNEW
                 return;
             }
         }
-
-        private void CbxMetod_MouseClick(object sender, MouseEventArgs e)
-        {
-            CbxMetod();
-        }
         void CbxMetod()
         {
-            /*    rgMetod.Enabled = cbxMetod.ItemIndex;
-             *    lblPribl.Enabled = cbxMetod.ItemIndex;
-             *    edPercent.Enabled = cbxMetod.ItemIndex;*/
+            m_bIsApproximate = cbxMetod.SelectedIndex == 1;
+            rgMetod.Enabled = m_bIsApproximate;
+            label2.Enabled = m_bIsApproximate;
+            edPercent.Enabled = m_bIsApproximate;
+        }
+
+        private void CbxMetod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CbxMetod();
         }
     }
 }
