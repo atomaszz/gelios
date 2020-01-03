@@ -82,6 +82,6 @@ C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Debug\geliosNEW.FmTredactChar.resource
 C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Debug\geliosNEW.Properties.Resources.resources
 C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Debug\geliosNEW.FrmMain.resources
 C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Debug\geliosNEW.csproj.GenerateResource.cache
-C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Debug\geliosNEW.csproj.CoreCompileInputs.cache
 C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Debug\geliosNEW.exe
 C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Debug\geliosNEW.pdb
+C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Debug\geliosNEW.FmViewDecision.resources
