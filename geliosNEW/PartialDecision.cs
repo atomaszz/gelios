@@ -34,7 +34,7 @@ namespace geliosNEW
 
         public void DoDecision()
         {
-            PARAM param1, param2, param3, param_rez; //для результирующих параметров
+            PARAM [] param1, param2, param3, param_rez; //для результирующих параметров
             TParamAlternativeItem AI;
             int i1, i2, i3, i_rez; //количество альтернатив
             int n1, n2, n3, n_rez; //номер подблоков
@@ -62,9 +62,9 @@ namespace geliosNEW
             n_rez = f_WorkItem.Count;
             n1 = f_WorkItem.GetTFE_ID(i_rez);
             //pull
- /*           PA = GetParamAlternativeByID(n1);
+            PA = GetParamAlternativeByID(n1);
             i1 = PA.Count;
-  param1 = (struct PARAM *)malloc(sizeof(struct PARAM)*i1);
+ /* param1 = (struct PARAM *)malloc(sizeof(struct PARAM)*i1);
   memset(param1, 0, sizeof(struct PARAM)*i1);
   for (int i = 0; i <= i1 - 1; i++)
   {
