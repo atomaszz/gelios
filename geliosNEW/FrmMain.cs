@@ -558,7 +558,6 @@ namespace geliosNEW
 
         private void найтиРешениеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int StartTime, EndTime;
             string OptZ = SharedConst.opt_sadacha.make_sadacha() + "\r\n" + SharedConst.opt_sadacha.make_ogrsovm();
 
             f_PredicatePath.Init();
@@ -585,10 +584,12 @@ namespace geliosNEW
             {
                 if (SharedConst.CreateStartDecision(f_Zadacha, f_TypeParam, SharedConst.opt_sadacha.get_type_metod()))
                 {
-                    /*   StartTime = GetTickCount();
-                       f_Zadacha.Process();
-                       EndTime = GetTickCount();
-                       f_Zadacha.ShowDecision(f_VwColorAlt, f_VwColorBadAlt, f_VwColorFont, EndTime - StartTime);
+                    var startTime = System.Diagnostics.Stopwatch.StartNew();
+                    f_Zadacha.Process();
+                    startTime.Stop();
+                    var resultTime = startTime.Elapsed;
+
+             /*       f_Zadacha.ShowDecision(f_VwColorAlt, f_VwColorBadAlt, f_VwColorFont, EndTime - StartTime);
                    }
                    FreeStartDecision();*/
                 }

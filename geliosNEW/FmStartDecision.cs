@@ -15,9 +15,11 @@ namespace geliosNEW
         public TZadacha Zadacha;
         public int type_char;
         public int type_metod;
+        public bool ModalResult;
         public FmStartDecision()
         {
             InitializeComponent();
+            ModalResult = false;
         }
         public void set_sadacha_edit()
         {
@@ -227,7 +229,15 @@ namespace geliosNEW
 
         private void Button1_Click(object sender, EventArgs e)
         {
-
+            double d;
+            if (!Double.TryParse(edPercent.Text, out d))
+            {  
+                MessageBox.Show("Использован недопустимый символ.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                edPercent.Focus();
+                return;
+            }
+            SharedConst.opt_sadacha.Rate = d;
+            ModalResult = true;
         }
 
         private void Button3_Click(object sender, EventArgs e)
