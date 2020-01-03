@@ -32,7 +32,7 @@ namespace geliosNEW
             switch (SharedConst.opt_sadacha.type_sadacha)
             {
                 case SharedConst.ZAD_1:
-                    textBox1.Text = "B(F) . max";
+                    textBox1.Text = "B(F) -> max";
                     textBox5.Text = "    F <= Do";
 
                     switch (SharedConst.opt_sadacha.type_ogr)
@@ -88,7 +88,7 @@ namespace geliosNEW
                     }
                     break;
                 case SharedConst.ZAD_2:
-                    textBox1.Text = "T(F) . min";
+                    textBox1.Text = "T(F) -> min";
                     textBox5.Text = "    F <= Do";
 
                     switch (SharedConst.opt_sadacha.type_ogr)
@@ -144,7 +144,7 @@ namespace geliosNEW
                     }
                     break;
                 case SharedConst.ZAD_3:
-                    textBox1.Text = "V(F) . min";
+                    textBox1.Text = "V(F) -> min";
                     textBox5.Text = "    F <= Do";
 
                     switch (SharedConst.opt_sadacha.type_ogr)
@@ -198,21 +198,21 @@ namespace geliosNEW
                     }
                     break;
                 case SharedConst.ZAD_4:
-                    textBox1.Text = "c1*B(F) - c2*T(F) - c3*V(F) . max";
+                    textBox1.Text = "c1*B(F) - c2*T(F) - c3*V(F) -> max";
                     textBox5.Text = "                           F <= Do";
                     textBox2.Text = "";
                     textBox3.Text = "";
                     textBox4.Text = "c1=" + SharedConst.opt_sadacha.c1 + "   c2=" + SharedConst.opt_sadacha.c2 + "   c3=" + SharedConst.opt_sadacha.c3;
                     break;
                 case SharedConst.ZAD_5:
-                    textBox1.Text = "c1*(B(F)-B')/(B'-B,)+c2*(T(F)-T')/(T'-T,)+c3*(V(F)-V')/(V'-V,).max";
+                    textBox1.Text = "c1*(B(F)-B')/(B'-B,)+c2*(T(F)-T')/(T'-T,)+c3*(V(F)-V')/(V'-V,) -> max";
                     textBox5.Text = "                                                            F <= Do";
                     textBox2.Text = "";
                     textBox3.Text = "";
                     textBox4.Text = "c1=" + SharedConst.opt_sadacha.c1 + "   c2=" + SharedConst.opt_sadacha.c2 + "   c3=" + SharedConst.opt_sadacha.c3;
                     break;
                 case SharedConst.ZAD_6:
-                    textBox1.Text = "B^l (F) - T^k (F) - V^m (F) . max";
+                    textBox1.Text = "B^l (F) - T^k (F) - V^m (F) -> max";
                     textBox5.Text = "                           F <= Do";
                     textBox2.Text = "";
                     textBox3.Text = "";

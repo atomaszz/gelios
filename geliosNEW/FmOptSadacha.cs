@@ -200,7 +200,72 @@ namespace geliosNEW
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (checkBox1.Checked == false && checkBox2.Checked == false && checkBox3.Checked == false &&
+                checkBox4.Checked == false && checkBox5.Checked == false && checkBox6.Checked == false)
+            {
+                MessageBox.Show("Не выбран тип задачи оптимизации.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            //проверка наличия введенных коэффициентов
+            bool f;
+            f = true;
+            if (checkBox7.Checked && checkBox8.Checked == false && checkBox9.Checked == false) type_ogr = 1;
+            if (checkBox7.Checked == false && checkBox8.Checked && checkBox9.Checked == false) type_ogr = 2;
+            if (checkBox7.Checked && checkBox8.Checked && checkBox9.Checked == false) type_ogr = 3;
+            if (checkBox7.Checked == false && checkBox8.Checked == false && checkBox9.Checked == false) type_ogr = 0;
+            if (checkBox7.Checked && checkBox8.Checked == false && checkBox9.Checked == true) type_ogr = 5;
+            if (checkBox7.Checked == false && checkBox8.Checked && checkBox9.Checked == true) type_ogr = 6;
+            if (checkBox7.Checked && checkBox8.Checked && checkBox9.Checked == true) type_ogr = 7;
+            if (checkBox7.Checked == false && checkBox8.Checked == false && checkBox9.Checked == true) type_ogr = 4;
+            switch (type_sadacha)
+            {
+                case SharedConst.ZAD_1:
+                    if (checkBox7.Checked)
+                        if (textBox4.Text == "") f = false;
+                        else Vd = textBox4.Text;//V
+                    if (checkBox8.Checked)
+                        if (textBox5.Text == "") f = false;
+                        else Td = textBox5.Text;//T
+                    break;
+
+                case SharedConst.ZAD_2:
+                    if (checkBox7.Checked)
+                        if (textBox6.Text == "") f = false;
+                        else Vd = textBox6.Text;//V
+                    if (checkBox8.Checked)
+                        if (textBox7.Text == "") f = false;
+                        else Bd = textBox7.Text;//B
+                    break;
+
+                case SharedConst.ZAD_3:
+                    if (checkBox7.Checked)
+                        if (textBox8.Text == "") f = false;
+                        else Bd = textBox8.Text;//B
+                    if (checkBox8.Checked)
+                        if (textBox9.Text == "") f = false;
+                        else Td = textBox9.Text; //T
+                    break;
+
+                case SharedConst.ZAD_4:
+                    if (textBox10.Text == "" || textBox11.Text == "" || textBox12.Text == "") f = false;
+                    c1 = textBox10.Text; c2 = textBox11.Text; c3 = textBox12.Text;
+                    break;
+                case SharedConst.ZAD_5:
+                    if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "") f = false;
+                    c1 = textBox1.Text; c2 = textBox2.Text; c3 = textBox3.Text;
+                    break;
+                case SharedConst.ZAD_6:
+                    if (textBox13.Text == "" || textBox14.Text == "" || textBox15.Text == "") f = false;
+                    c1 = textBox13.Text; c2 = textBox14.Text; c3 = textBox15.Text;
+                    break;
+            }
+            if (f == false)
+            {
+                MessageBox.Show("Не заданы коэффициенты.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+          //  Close();
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
