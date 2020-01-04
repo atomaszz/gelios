@@ -199,7 +199,7 @@ namespace geliosNEW
                 if (ATFS.GetTFEItems(i).Big!=null)
                     AStack.InsertToFirst(ATFS.GetTFEItems(i).Big);
         }
-        void CheckParseItem(TPredicateItemBase ABase, TDynamicArray AStack)
+        void CheckParseItem(ref TPredicateItemBase ABase, ref TDynamicArray AStack)
         {
             int m_type;
             TPredicateItemPWork m_PW;
@@ -244,24 +244,24 @@ namespace geliosNEW
             if (m_who == 1)
             {
                 TPredicateItemBig m_Big = (TPredicateItemBig)(ABase);
-                Res = DoPrintBig(m_Big, AStack);
+                Res = DoPrintBig(ref m_Big, ref AStack);
             }
             if (m_who == 2)
             {
                 TPredicateItemPWork m_PW = (TPredicateItemPWork)(ABase);
-                Res = DoPrintPWork(m_PW, AStack);
+                Res = DoPrintPWork(ref m_PW, ref AStack);
             }
             if (m_who == 0)
                 Res = ABase;
             return Res;
         }
-        TPredicateItemPWork DoPrintPWork(TPredicateItemPWork APWork, TDynamicArray AStack)
+        TPredicateItemPWork DoPrintPWork(ref TPredicateItemPWork APWork, ref TDynamicArray AStack)
         {
-            CheckParseItem(APWork.Item1, AStack);
-            CheckParseItem(APWork.Item2, AStack);
+            CheckParseItem(ref APWork.f_Item1, ref AStack);
+            CheckParseItem(ref APWork.f_Item2, ref AStack);
             return APWork;
         }
-        TPredicateItemBig DoPrintBig(TPredicateItemBig ABig, TDynamicArray AStack)
+        TPredicateItemBig DoPrintBig(ref TPredicateItemBig ABig, ref TDynamicArray AStack)
         {
             TPredicateItemBig Res = null;
             TPredicateItemBase m_Base;
@@ -274,7 +274,7 @@ namespace geliosNEW
                 {
                     m_Base = ABig.GetItems(i);
                     m_Base.EnvelopeBIG = ABig;
-                    CheckParseItem(m_Base, AStack);
+                    CheckParseItem(ref m_Base, ref AStack);
                 }
             }
             return Res;

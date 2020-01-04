@@ -739,8 +739,8 @@ namespace geliosNEW
             TParamAlternative PA;
             TPredicateTreeItem TI;
 
-            ozenk_t.Val[0] = ozenk_t_min(null);
-            ozenk_v.Val[0] = ozenk_v_min(null);
+            ozenk_t.SetVal(0,0,ozenk_t_min(null));
+            ozenk_v.SetVal(0,0,ozenk_v_min(null));
 
             for (int i = CountPTI - 1; i >= 0; i--)
             {
@@ -749,8 +749,8 @@ namespace geliosNEW
                 {
                     B = TI.GetTFE(j);
                     m_indx = TI.GetTFE_ID(j);
-                    ozenk_t.Val[m_indx] = ozenk_t_min(B);
-                    ozenk_v.Val[m_indx] = ozenk_v_min(B);
+                    ozenk_t.SetVal(0,m_indx, ozenk_t_min(B));
+                    ozenk_v.SetVal(0,m_indx, ozenk_v_min(B));
                 }
             }
         }

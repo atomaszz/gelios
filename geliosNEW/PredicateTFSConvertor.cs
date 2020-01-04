@@ -174,8 +174,8 @@ namespace geliosNEW
     }
     class TPredicateItemPWork :  TPredicateItemBase
     {
-      TPredicateItemBase f_Item1;
-        TPredicateItemBase f_Item2;
+      public TPredicateItemBase f_Item1;
+      public TPredicateItemBase f_Item2;
         /*public:
               int Who() { return 2; }
         TPredicateItemPWork();

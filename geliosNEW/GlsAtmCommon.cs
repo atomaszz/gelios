@@ -154,6 +154,7 @@ namespace geliosNEW
     }
     class TGlsBTreeNode :  TGlsNode
     {
+        bool bIsRoot;
         TGlsBTreeNode _lchild;
         TGlsBTreeNode _rchild;
         object _val;
@@ -163,6 +164,7 @@ namespace geliosNEW
             _val = T;
             _lchild = null;
             _rchild = null;
+            bIsRoot = true;
         }
         ~TGlsBTreeNode() { }
         public object Val
