@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace geliosNEW
 {
-    public class PARAM
+    public class param
     {
         public double[] par;
         public double[,] par_fuz;
         public string stv;
         public double sovm0;
         public double sovm1;
+        public double sovm;
 
-        public PARAM()
+        public param()
         {
             par = new double[12];
             par_fuz = new double[13,9];
@@ -34,7 +35,9 @@ namespace geliosNEW
 
         public void DoDecision()
         {
-            PARAM [] param1, param2, param3, param_rez; //для результирующих параметров
+            param[] param1, param2, param3, param_rez; //для результирующих параметров
+            param2 = new param[0];
+            param3 = new param[0];
             TParamAlternativeItem AI;
             int i1, i2, i3, i_rez; //количество альтернатив
             int n1, n2, n3, n_rez; //номер подблоков
@@ -51,8 +54,8 @@ namespace geliosNEW
                 a1_td_f, td_f1n, td_f1b, a2_td_f, td_f2n, td_f2b, a3_td_f, td_f3n, td_f3b,
                 a1_vd_f, vd_f1n, vd_f1b, a2_vd_f, vd_f2n, vd_f2b, a3_vd_f, vd_f3n, vd_f3b,
                 a1_p_el_f, p_el_f1n, p_el_f1b, a2_p_el_f, p_el_f2n, p_el_f2b, a3_p_el_f, p_el_f3n, p_el_f3b,
-                sovmest, sovmest0, sovmest1;
-            string s_name, s_el, s_func, s_predicat, add_name, sostav;
+                sovmest = 0, sovmest0 = 0, sovmest1 = 0;
+            string s_name, s_el, s_func, s_predicat="", add_name="", sostav;
             i1 = 0;
             i2 = 0;
             i3 = 0;
@@ -64,238 +67,978 @@ namespace geliosNEW
             //pull
             PA = GetParamAlternativeByID(n1);
             i1 = PA.Count;
- /* param1 = (struct PARAM *)malloc(sizeof(struct PARAM)*i1);
-  memset(param1, 0, sizeof(struct PARAM)*i1);
-  for (int i = 0; i <= i1 - 1; i++)
-  {
-    AI = PA.Items[i];
-    param1[i].par[0] = AI.B;
-    param1[i].par[1] = AI.T;
-    param1[i].par[2] = AI.V;
-    param1[i].par_fuz[0][0] = AI.A1_B_F;
-    param1[i].par_fuz[0][1] = AI.B_F1N;
-    param1[i].par_fuz[0][2] = AI.B_F1B;
-    param1[i].par_fuz[0][3] = AI.A2_B_F;
-    param1[i].par_fuz[0][4] = AI.B_F2N;
-    param1[i].par_fuz[0][5] = AI.B_F2B;
-    param1[i].par_fuz[0][6] = AI.A3_B_F;
-    param1[i].par_fuz[0][7] = AI.B_F3N;
-    param1[i].par_fuz[0][8] = AI.B_F3B;
+            param1 = new param[i1];
+            for (int i = 0; i <= i1 - 1; i++)
+            {
+                AI = PA.Items[i];
+                param1[i] = new param();
+                param1[i].par[0] = AI.B;
+                param1[i].par[1] = AI.T;
+                param1[i].par[2] = AI.V;
+                param1[i].par_fuz[0, 0] = AI.A1_B_F;
+                param1[i].par_fuz[0, 1] = AI.B_F1N;
+                param1[i].par_fuz[0, 2] = AI.B_F1B;
+                param1[i].par_fuz[0, 3] = AI.A2_B_F;
+                param1[i].par_fuz[0, 4] = AI.B_F2N;
+                param1[i].par_fuz[0, 5] = AI.B_F2B;
+                param1[i].par_fuz[0, 6] = AI.A3_B_F;
+                param1[i].par_fuz[0, 7] = AI.B_F3N;
+                param1[i].par_fuz[0, 8] = AI.B_F3B;
 
-    param1[i].par_fuz[1][0] = AI.A1_T_F;
-    param1[i].par_fuz[1][1] = AI.T_F1N;
-    param1[i].par_fuz[1][2] = AI.T_F1B;
-    param1[i].par_fuz[1][3] = AI.A2_T_F;
-    param1[i].par_fuz[1][4] = AI.T_F2N;
-    param1[i].par_fuz[1][5] = AI.T_F2B;
-    param1[i].par_fuz[1][6] = AI.A3_T_F;
-    param1[i].par_fuz[1][7] = AI.T_F3N;
-    param1[i].par_fuz[1][8] = AI.T_F3B;
+                param1[i].par_fuz[1, 0] = AI.A1_T_F;
+                param1[i].par_fuz[1, 1] = AI.T_F1N;
+                param1[i].par_fuz[1, 2] = AI.T_F1B;
+                param1[i].par_fuz[1, 3] = AI.A2_T_F;
+                param1[i].par_fuz[1, 4] = AI.T_F2N;
+                param1[i].par_fuz[1, 5] = AI.T_F2B;
+                param1[i].par_fuz[1, 6] = AI.A3_T_F;
+                param1[i].par_fuz[1, 7] = AI.T_F3N;
+                param1[i].par_fuz[1, 8] = AI.T_F3B;
 
-    param1[i].par_fuz[2][0] = AI.A1_V_F;
-    param1[i].par_fuz[2][1] = AI.V_F1N;
-    param1[i].par_fuz[2][2] = AI.V_F1B;
-    param1[i].par_fuz[2][3] = AI.A2_V_F;
-    param1[i].par_fuz[2][4] = AI.V_F2N;
-    param1[i].par_fuz[2][5] = AI.V_F2B;
-    param1[i].par_fuz[2][6] = AI.A3_V_F;
-    param1[i].par_fuz[2][7] = AI.V_F3N;
-    param1[i].par_fuz[2][8] = AI.V_F3B;
+                param1[i].par_fuz[2, 0] = AI.A1_V_F;
+                param1[i].par_fuz[2, 1] = AI.V_F1N;
+                param1[i].par_fuz[2, 2] = AI.V_F1B;
+                param1[i].par_fuz[2, 3] = AI.A2_V_F;
+                param1[i].par_fuz[2, 4] = AI.V_F2N;
+                param1[i].par_fuz[2, 5] = AI.V_F2B;
+                param1[i].par_fuz[2, 6] = AI.A3_V_F;
+                param1[i].par_fuz[2, 7] = AI.V_F3N;
+                param1[i].par_fuz[2, 8] = AI.V_F3B;
 
-    StrLCopy(param1[i].stv, AI.SOSTAV.c_str(), StrMemSize);
-        param1[i].stv[StrMemSize] = '\0';
-    param1[i].sovm = AI.SOVM;
-    param1[i].sovm0 = AI.SOVM0;
-    param1[i].sovm1 = AI.SOVM1;
-  }
-    i_rez++;
+                param1[i].stv = AI.SOSTAV;
+                param1[i].stv += '\0';
 
-  if(n_rez >= 2)
-  {
-    n2 = f_WorkItem.TFE_ID[i_rez];
-    type = 5;
-    if(f_WorkItem.TFE[i_rez] )
-      type =  f_WorkItem.TFE[i_rez].TypeShape;
-    if (type == 5)
-    {
-      PA = GetParamAlternativeByID(n2);
-    i2 = PA.Count;
-      param2 = (struct PARAM *)malloc(sizeof(struct PARAM)* i2);
-      memset(param2, 0, sizeof(struct PARAM)* i2);
-      for (int i = 0; i <= i2 - 1; i++)
-      {
-        AI = PA.Items[i];
-        param2[i].par[0] = AI.B;
-        param2[i].par[1] = AI.T;
-        param2[i].par[2] = AI.V;
-        param2[i].par_fuz[0][0] = AI.A1_B_F;
-        param2[i].par_fuz[0][1] = AI.B_F1N;
-        param2[i].par_fuz[0][2] = AI.B_F1B;
-        param2[i].par_fuz[0][3] = AI.A2_B_F;
-        param2[i].par_fuz[0][4] = AI.B_F2N;
-        param2[i].par_fuz[0][5] = AI.B_F2B;
-        param2[i].par_fuz[0][6] = AI.A3_B_F;
-        param2[i].par_fuz[0][7] = AI.B_F3N;
-        param2[i].par_fuz[0][8] = AI.B_F3B;
+                param1[i].sovm = AI.SOVM;
+                param1[i].sovm0 = AI.SOVM0;
+                param1[i].sovm1 = AI.SOVM1;
+            }
+            i_rez++;
 
-        param2[i].par_fuz[1][0] = AI.A1_T_F;
-        param2[i].par_fuz[1][1] = AI.T_F1N;
-        param2[i].par_fuz[1][2] = AI.T_F1B;
-        param2[i].par_fuz[1][3] = AI.A2_T_F;
-        param2[i].par_fuz[1][4] = AI.T_F2N;
-        param2[i].par_fuz[1][5] = AI.T_F2B;
-        param2[i].par_fuz[1][6] = AI.A3_T_F;
-        param2[i].par_fuz[1][7] = AI.T_F3N;
-        param2[i].par_fuz[1][8] = AI.T_F3B;
+            if (n_rez >= 2)
+            {
+                n2 = f_WorkItem.GetTFE_ID(i_rez);
+                type = 5;
+                if (f_WorkItem.GetTFE(i_rez) != null)
+                    type = f_WorkItem.GetTFE(i_rez).TypeShape;
+                if (type == 5)
+                {
+                    PA = GetParamAlternativeByID(n2);
+                    i2 = PA.Count;
+                    param2 = new param[i2];
+                    for (int i = 0; i <= i2 - 1; i++)
+                    {
+                        AI = PA.Items[i];
+                        param2[i].par[0] = AI.B;
+                        param2[i].par[1] = AI.T;
+                        param2[i].par[2] = AI.V;
+                        param2[i].par_fuz[0, 0] = AI.A1_B_F;
+                        param2[i].par_fuz[0, 1] = AI.B_F1N;
+                        param2[i].par_fuz[0, 2] = AI.B_F1B;
+                        param2[i].par_fuz[0, 3] = AI.A2_B_F;
+                        param2[i].par_fuz[0, 4] = AI.B_F2N;
+                        param2[i].par_fuz[0, 5] = AI.B_F2B;
+                        param2[i].par_fuz[0, 6] = AI.A3_B_F;
+                        param2[i].par_fuz[0, 7] = AI.B_F3N;
+                        param2[i].par_fuz[0, 8] = AI.B_F3B;
 
-        param2[i].par_fuz[2][0] = AI.A1_V_F;
-        param2[i].par_fuz[2][1] = AI.V_F1N;
-        param2[i].par_fuz[2][2] = AI.V_F1B;
-        param2[i].par_fuz[2][3] = AI.A2_V_F;
-        param2[i].par_fuz[2][4] = AI.V_F2N;
-        param2[i].par_fuz[2][5] = AI.V_F2B;
-        param2[i].par_fuz[2][6] = AI.A3_V_F;
-        param2[i].par_fuz[2][7] = AI.V_F3N;
-        param2[i].par_fuz[2][8] = AI.V_F3B;
+                        param2[i].par_fuz[1, 0] = AI.A1_T_F;
+                        param2[i].par_fuz[1, 1] = AI.T_F1N;
+                        param2[i].par_fuz[1, 2] = AI.T_F1B;
+                        param2[i].par_fuz[1, 3] = AI.A2_T_F;
+                        param2[i].par_fuz[1, 4] = AI.T_F2N;
+                        param2[i].par_fuz[1, 5] = AI.T_F2B;
+                        param2[i].par_fuz[1, 6] = AI.A3_T_F;
+                        param2[i].par_fuz[1, 7] = AI.T_F3N;
+                        param2[i].par_fuz[1, 8] = AI.T_F3B;
 
-        StrLCopy(param2[i].stv, AI.SOSTAV.c_str(), StrMemSize);
-    param2[i].stv[StrMemSize] = '\0';
-        param2[i].sovm = AI.SOVM;
-        param2[i].sovm0 = AI.SOVM0;
-        param2[i].sovm1 = AI.SOVM1;
+                        param2[i].par_fuz[2, 0] = AI.A1_V_F;
+                        param2[i].par_fuz[2, 1] = AI.V_F1N;
+                        param2[i].par_fuz[2, 2] = AI.V_F1B;
+                        param2[i].par_fuz[2, 3] = AI.A2_V_F;
+                        param2[i].par_fuz[2, 4] = AI.V_F2N;
+                        param2[i].par_fuz[2, 5] = AI.V_F2B;
+                        param2[i].par_fuz[2, 6] = AI.A3_V_F;
+                        param2[i].par_fuz[2, 7] = AI.V_F3N;
+                        param2[i].par_fuz[2, 8] = AI.V_F3B;
 
-      }
-i_rez++;
-    }
-  }
+                        param2[i].stv = AI.SOSTAV;
+                        param2[i].stv += '\0';
+                        param2[i].sovm = AI.SOVM;
+                        param2[i].sovm0 = AI.SOVM0;
+                        param2[i].sovm1 = AI.SOVM1;
+                    }
+                    i_rez++;
+                }
+            }
+            if (n_rez >= 2)
+            {
+                n3 = f_WorkItem.GetTFE_ID(i_rez);
+                type = 5;
+                if (f_WorkItem.GetTFE(i_rez) != null)
+                    type = f_WorkItem.GetTFE(i_rez).TypeShape;
+                if (type != 5)
+                {
+                    PA = GetParamAlternativeByID(n3);
+                    i3 = PA.Count;
+                    param3 = new param[i3];
+                    for (int i = 0; i <= i3 - 1; i++)
+                    {
+                        AI = PA.Items[i];
+
+                        param3[i].par[3] = AI.P_11;
+                        param3[i].par[4] = AI.P_00;
+                        param3[i].par[5] = AI.T_D;
+                        param3[i].par[6] = AI.V_D;
+                        param3[i].par[7] = AI.P_DIAGN_EL;
+                        param3[i].par[8] = AI.K_11;
+                        param3[i].par[9] = AI.K_00;
+                        param3[i].par[10] = AI.T_F;
+                        param3[i].par[11] = AI.V_F;
+
+                        param3[i].par_fuz[3, 0] = AI.A1_P11_F;
+                        param3[i].par_fuz[3, 1] = AI.P11_F1N;
+                        param3[i].par_fuz[3, 2] = AI.P11_F1B;
+                        param3[i].par_fuz[3, 3] = AI.A2_P11_F;
+                        param3[i].par_fuz[3, 4] = AI.P11_F2N;
+                        param3[i].par_fuz[3, 5] = AI.P11_F2B;
+                        param3[i].par_fuz[3, 6] = AI.A3_P11_F;
+                        param3[i].par_fuz[3, 7] = AI.P11_F3N;
+                        param3[i].par_fuz[3, 8] = AI.P11_F3B;
+
+                        param3[i].par_fuz[4, 0] = AI.A1_P00_F;
+                        param3[i].par_fuz[4, 1] = AI.P00_F1N;
+                        param3[i].par_fuz[4, 2] = AI.P00_F1B;
+                        param3[i].par_fuz[4, 3] = AI.A2_P00_F;
+                        param3[i].par_fuz[4, 4] = AI.P00_F2N;
+                        param3[i].par_fuz[4, 5] = AI.P00_F2B;
+                        param3[i].par_fuz[4, 6] = AI.A3_P00_F;
+                        param3[i].par_fuz[4, 7] = AI.P00_F3N;
+                        param3[i].par_fuz[4, 8] = AI.P00_F3B;
+
+                        param3[i].par_fuz[5, 0] = AI.A1_TD_F;
+                        param3[i].par_fuz[5, 1] = AI.TD_F1N;
+                        param3[i].par_fuz[5, 2] = AI.TD_F1B;
+                        param3[i].par_fuz[5, 3] = AI.A2_TD_F;
+                        param3[i].par_fuz[5, 4] = AI.TD_F2N;
+                        param3[i].par_fuz[5, 5] = AI.TD_F2B;
+                        param3[i].par_fuz[5, 6] = AI.A3_TD_F;
+                        param3[i].par_fuz[5, 7] = AI.TD_F3N;
+                        param3[i].par_fuz[5, 8] = AI.TD_F3B;
+
+                        param3[i].par_fuz[6, 0] = AI.A1_VD_F;
+                        param3[i].par_fuz[6, 1] = AI.VD_F1N;
+                        param3[i].par_fuz[6, 2] = AI.VD_F1B;
+                        param3[i].par_fuz[6, 3] = AI.A2_VD_F;
+                        param3[i].par_fuz[6, 4] = AI.VD_F2N;
+                        param3[i].par_fuz[6, 5] = AI.VD_F2B;
+                        param3[i].par_fuz[6, 6] = AI.A3_VD_F;
+                        param3[i].par_fuz[6, 7] = AI.VD_F3N;
+                        param3[i].par_fuz[6, 8] = AI.VD_F3B;
+
+                        param3[i].par_fuz[7, 0] = AI.A1_P_EL_F;
+                        param3[i].par_fuz[7, 1] = AI.P_EL_F1N;
+                        param3[i].par_fuz[7, 2] = AI.P_EL_F1B;
+                        param3[i].par_fuz[7, 3] = AI.A2_P_EL_F;
+                        param3[i].par_fuz[7, 4] = AI.P_EL_F2N;
+                        param3[i].par_fuz[7, 5] = AI.P_EL_F2B;
+                        param3[i].par_fuz[7, 6] = AI.A3_P_EL_F;
+                        param3[i].par_fuz[7, 7] = AI.P_EL_F3N;
+                        param3[i].par_fuz[7, 8] = AI.P_EL_F3B;
+
+                        param3[i].par_fuz[8, 0] = AI.A1_K11_F;
+                        param3[i].par_fuz[8, 1] = AI.K11_F1N;
+                        param3[i].par_fuz[8, 2] = AI.K11_F1B;
+                        param3[i].par_fuz[8, 3] = AI.A2_K11_F;
+                        param3[i].par_fuz[8, 4] = AI.K11_F2N;
+                        param3[i].par_fuz[8, 5] = AI.K11_F2B;
+                        param3[i].par_fuz[8, 6] = AI.A3_K11_F;
+                        param3[i].par_fuz[8, 7] = AI.K11_F3N;
+                        param3[i].par_fuz[8, 8] = AI.K11_F3B;
+
+                        param3[i].par_fuz[9, 0] = AI.A1_K00_F;
+                        param3[i].par_fuz[9, 1] = AI.K00_F1N;
+                        param3[i].par_fuz[9, 2] = AI.K00_F1B;
+                        param3[i].par_fuz[9, 3] = AI.A2_K00_F;
+                        param3[i].par_fuz[9, 4] = AI.K00_F2N;
+                        param3[i].par_fuz[9, 5] = AI.K00_F2B;
+                        param3[i].par_fuz[9, 6] = AI.A3_K00_F;
+                        param3[i].par_fuz[9, 7] = AI.K00_F3N;
+                        param3[i].par_fuz[9, 8] = AI.K00_F3B;
+
+                        param3[i].par_fuz[10, 0] = AI.A1_TF_F;
+                        param3[i].par_fuz[10, 1] = AI.TF_F1N;
+                        param3[i].par_fuz[10, 2] = AI.TF_F1B;
+                        param3[i].par_fuz[10, 3] = AI.A2_TF_F;
+                        param3[i].par_fuz[10, 4] = AI.TF_F2N;
+                        param3[i].par_fuz[10, 5] = AI.TF_F2B;
+                        param3[i].par_fuz[10, 6] = AI.A3_TF_F;
+                        param3[i].par_fuz[10, 7] = AI.TF_F3N;
+                        param3[i].par_fuz[10, 8] = AI.TF_F3B;
+
+                        param3[i].par_fuz[11, 0] = AI.A1_VF_F;
+                        param3[i].par_fuz[11, 1] = AI.VF_F1N;
+                        param3[i].par_fuz[11, 2] = AI.VF_F1B;
+                        param3[i].par_fuz[11, 3] = AI.A2_VF_F;
+                        param3[i].par_fuz[11, 4] = AI.VF_F2N;
+                        param3[i].par_fuz[11, 5] = AI.VF_F2B;
+                        param3[i].par_fuz[11, 6] = AI.A3_VF_F;
+                        param3[i].par_fuz[11, 7] = AI.VF_F3N;
+                        param3[i].par_fuz[11, 8] = AI.VF_F3B;
+                        if (AI.CheckPLG)
+                            s_predicat = "1";
+                        else
+                            s_predicat = "0";
+                        param3[i].stv = AI.SOSTAV;
+                        param3[i].stv += '\0';
+                        param3[i].sovm = AI.SOVM;
+                        param3[i].sovm0 = AI.SOVM0;
+                        param3[i].sovm1 = AI.SOVM1;
+                    }
+                }
+            }
+
+            ////////////////////
+
+            int r = 0;
+            if (i2 == 0)
+                i2 = 1;
+            if (i3 == 0)
+                i3 = 1;
+            i_rez = i1 * i2 * i3;
+            param_rez = new param[i_rez];
+
+            for (int k = 0; k < i1; k++)
+                for (int n = 0; n < i2; n++)
+                    for (int h = 0; h < i3; h++)
+                    {
+
+                        type = 5;
+                        s_name = "(нет названия)";
+                        s_func = "(нет функции)";
+                        s_el = "(нет элемента)";
+
+                        switch (work_type)
+                        {
+                            //расчитываем параметры
+                            //и альтернативы результата добавляем в таблицу как альтернативы подблока-родителя
+                            case 1:
+                                //расчитываем параметры для блока РАБОЧАЯ
+                                if (f_Parent.Type_Char == SharedConst.PROP)
+                                    calc_RAB(param1[k].par[0], param1[k].par[1], param1[k].par[2],
+                                    ref param_rez[r].par[0], ref param_rez[r].par[1], ref param_rez[r].par[2]);
+                                else
+                                    calc_RAB_fuz(
+                                    param1[k].par_fuz[0,0], param1[k].par_fuz[0,1], param1[k].par_fuz[0,2],
+                                    param1[k].par_fuz[0,3], param1[k].par_fuz[0,4], param1[k].par_fuz[0,5],
+                                    param1[k].par_fuz[0,6], param1[k].par_fuz[0,7], param1[k].par_fuz[0,8],
+                                    param1[k].par_fuz[1,0], param1[k].par_fuz[1,1], param1[k].par_fuz[1,2],
+                                    param1[k].par_fuz[1,3], param1[k].par_fuz[1,4], param1[k].par_fuz[1,5],
+                                    param1[k].par_fuz[1,6], param1[k].par_fuz[1,7], param1[k].par_fuz[1,8],
+                                    param1[k].par_fuz[2,0], param1[k].par_fuz[2,1], param1[k].par_fuz[2,2],
+                                    param1[k].par_fuz[2,3], param1[k].par_fuz[2,4], param1[k].par_fuz[2,5],
+                                    param1[k].par_fuz[2,6], param1[k].par_fuz[2,7], param1[k].par_fuz[2,8],
+                                    ref param_rez[r].par_fuz[0,0], ref param_rez[r].par_fuz[0,1], ref param_rez[r].par_fuz[0,2],
+                                    ref param_rez[r].par_fuz[0,3], ref param_rez[r].par_fuz[0,4], ref param_rez[r].par_fuz[0,5],
+                                    ref param_rez[r].par_fuz[0,6], ref param_rez[r].par_fuz[0,7], ref param_rez[r].par_fuz[0,8],
+                                    ref param_rez[r].par_fuz[1,0], ref param_rez[r].par_fuz[1,1], ref param_rez[r].par_fuz[1,2],
+                                    ref param_rez[r].par_fuz[1,3], ref param_rez[r].par_fuz[1,4], ref param_rez[r].par_fuz[1,5],
+                                    ref param_rez[r].par_fuz[1,6], ref param_rez[r].par_fuz[1,7], ref param_rez[r].par_fuz[1,8],
+                                    ref param_rez[r].par_fuz[2,0], ref param_rez[r].par_fuz[2,1], ref param_rez[r].par_fuz[2,2],
+                                    ref param_rez[r].par_fuz[2,3], ref param_rez[r].par_fuz[2,4], ref param_rez[r].par_fuz[2,5],
+                                    ref param_rez[r].par_fuz[2,6], ref param_rez[r].par_fuz[2,7], ref param_rez[r].par_fuz[2,8]);
+                                //добавляем в таблицу новую альтернативу
+                                if (f_Parent.Type_Char == SharedConst.PROP)
+                                {
+                                    s_b = param_rez[r].par[0];
+                                    s_t = param_rez[r].par[1];
+                                    s_v = param_rez[r].par[2];
+                                }
+                                else
+                                {
+                                    s_b = 1;
+                                    s_t = 0;
+                                    s_v = 0;
+                                }
+                                a1_b_f = param_rez[r].par_fuz[0,0];
+                                b_f1n = param_rez[r].par_fuz[0,1];
+                                b_f1b = param_rez[r].par_fuz[0,2];
+                                a2_b_f = param_rez[r].par_fuz[0,3];
+                                b_f2n = param_rez[r].par_fuz[0,4]; b_f2b = param_rez[r].par_fuz[0,5];
+                                a3_b_f = param_rez[r].par_fuz[0,6]; b_f3n = param_rez[r].par_fuz[0,7]; b_f3b = param_rez[r].par_fuz[0,8];
+                                a1_t_f = param_rez[r].par_fuz[1,0]; t_f1n = param_rez[r].par_fuz[1,1]; t_f1b = param_rez[r].par_fuz[1,2];
+                                a2_t_f = param_rez[r].par_fuz[1,3]; t_f2n = param_rez[r].par_fuz[1,4]; t_f2b = param_rez[r].par_fuz[1,5];
+                                a3_t_f = param_rez[r].par_fuz[1,6]; t_f3n = param_rez[r].par_fuz[1,7]; t_f3b = param_rez[r].par_fuz[1,8];
+                                a1_v_f = param_rez[r].par_fuz[2,0]; v_f1n = param_rez[r].par_fuz[2,1]; v_f1b = param_rez[r].par_fuz[2,2];
+                                a2_v_f = param_rez[r].par_fuz[2,3]; v_f2n = param_rez[r].par_fuz[2,4]; v_f2b = param_rez[r].par_fuz[2,5];
+                                a3_v_f = param_rez[r].par_fuz[2,6]; v_f3n = param_rez[r].par_fuz[2,7]; v_f3b = param_rez[r].par_fuz[2,8];
 
 
-  if (n_rez >= 2)
-  {
-    n3 = f_WorkItem.TFE_ID[i_rez];
-    type = 5;
-    if(f_WorkItem.TFE[i_rez] )
-      type =  f_WorkItem.TFE[i_rez].TypeShape;
-    if (type != 5)
-    {
-      PA = GetParamAlternativeByID(n3);
-i3 = PA.Count;
-      param3 = (struct PARAM *)malloc(sizeof(struct PARAM)* i3);
-      memset(param3, 0, sizeof(struct PARAM)* i3);
-      for (int i = 0; i <= i3 - 1; i++)
-      {
-        AI = PA.Items[i];
+                                sostav = param1[k].stv;
+                                f_ParamAlt.AddItem(CreateParamAlternativeItem(sostav, add_name, s_name, s_func, s_el, type, (short)f_WorkItem.ParentID,
+                                                   s_b, s_t, s_v,
+                                                   1, 1, 0, 0, 1, 1, 0, 0,
+                                                   "(нет элемента)", 1,
+                                                   a1_b_f, b_f1n, b_f1b, a2_b_f, b_f2n, b_f2b, a3_b_f, b_f3n, b_f3b,
+                                                   a1_t_f, t_f1n, t_f1b, a2_t_f, t_f2n, t_f2b, a3_t_f, t_f3n, t_f3b,
+                                                   a1_v_f, v_f1n, v_f1b, a2_v_f, v_f2n, v_f2b, a3_v_f, v_f3n, v_f3b,
+                                                   0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                   0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                   0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                   "(нет условия)", sovmest, sovmest0, sovmest1));
+                                break;
 
-        param3[i].par[3] = AI.P_11;
-        param3[i].par[4] = AI.P_00;
-        param3[i].par[5] = AI.T_D;
-        param3[i].par[6] = AI.V_D;
-        param3[i].par[7] = AI.P_DIAGN_EL;
-        param3[i].par[8] = AI.K_11;
-        param3[i].par[9] = AI.K_00;
-        param3[i].par[10] = AI.T_F;
-        param3[i].par[11] = AI.V_F;
 
-        param3[i].par_fuz[3][0] = AI.A1_P11_F;
-        param3[i].par_fuz[3][1] = AI.P11_F1N;
-        param3[i].par_fuz[3][2] = AI.P11_F1B;
-        param3[i].par_fuz[3][3] = AI.A2_P11_F;
-        param3[i].par_fuz[3][4] = AI.P11_F2N;
-        param3[i].par_fuz[3][5] = AI.P11_F2B;
-        param3[i].par_fuz[3][6] = AI.A3_P11_F;
-        param3[i].par_fuz[3][7] = AI.P11_F3N;
-        param3[i].par_fuz[3][8] = AI.P11_F3B;
+                            case 12:
+                                //расчитываем параметры для блока РАБОЧАЯ
+                                if (f_Parent.Type_Char == SharedConst.PROP)
+                                    calc_RAB(param1[k].par[0], param1[k].par[1], param1[k].par[2],
+                                    ref param_rez[r].par[0], ref param_rez[r].par[1], ref param_rez[r].par[2]);
+                                else
+                                    calc_RAB_fuz(
+                                    param1[k].par_fuz[0,0], param1[k].par_fuz[0,1], param1[k].par_fuz[0,2],
+                                    param1[k].par_fuz[0,3], param1[k].par_fuz[0,4], param1[k].par_fuz[0,5],
+                                    param1[k].par_fuz[0,6], param1[k].par_fuz[0,7], param1[k].par_fuz[0,8],
+                                    param1[k].par_fuz[1,0], param1[k].par_fuz[1,1], param1[k].par_fuz[1,2],
+                                    param1[k].par_fuz[1,3], param1[k].par_fuz[1,4], param1[k].par_fuz[1,5],
+                                    param1[k].par_fuz[1,6], param1[k].par_fuz[1,7], param1[k].par_fuz[1,8],
+                                    param1[k].par_fuz[2,0], param1[k].par_fuz[2,1], param1[k].par_fuz[2,2],
+                                    param1[k].par_fuz[2,3], param1[k].par_fuz[2,4], param1[k].par_fuz[2,5],
+                                    param1[k].par_fuz[2,6], param1[k].par_fuz[2,7], param1[k].par_fuz[2,8],
+                                    ref param_rez[r].par_fuz[0,0], ref param_rez[r].par_fuz[0,1], ref param_rez[r].par_fuz[0,2],
+                                    ref param_rez[r].par_fuz[0,3], ref param_rez[r].par_fuz[0,4], ref param_rez[r].par_fuz[0,5],
+                                    ref param_rez[r].par_fuz[0,6], ref param_rez[r].par_fuz[0,7], ref param_rez[r].par_fuz[0,8],
+                                    ref param_rez[r].par_fuz[1,0], ref param_rez[r].par_fuz[1,1], ref param_rez[r].par_fuz[1,2],
+                                    ref param_rez[r].par_fuz[1,3], ref param_rez[r].par_fuz[1,4], ref param_rez[r].par_fuz[1,5],
+                                    ref param_rez[r].par_fuz[1,6], ref param_rez[r].par_fuz[1,7], ref param_rez[r].par_fuz[1,8],
+                                    ref param_rez[r].par_fuz[2,0], ref param_rez[r].par_fuz[2,1], ref param_rez[r].par_fuz[2,2],
+                                    ref param_rez[r].par_fuz[2,3], ref param_rez[r].par_fuz[2,4], ref param_rez[r].par_fuz[2,5],
+                                    ref param_rez[r].par_fuz[2,6], ref param_rez[r].par_fuz[2,7], ref param_rez[r].par_fuz[2,8]);
+                                //добавляем в таблицу новую альтернативу
+                                if (f_Parent.Type_Char == SharedConst.PROP)
+                                {
+                                    s_b = param_rez[r].par[0];
+                                    s_t = param_rez[r].par[1];
+                                    s_v = param_rez[r].par[2];
+                                }
+                                else
+                                {
+                                    s_b = 1;
+                                    s_t = 0;
+                                    s_v = 0;
+                                }
+                                a1_b_f = param_rez[r].par_fuz[0,0];
+                                b_f1n = param_rez[r].par_fuz[0,1];
+                                b_f1b = param_rez[r].par_fuz[0,2];
+                                a2_b_f = param_rez[r].par_fuz[0,3];
+                                b_f2n = param_rez[r].par_fuz[0,4]; b_f2b = param_rez[r].par_fuz[0,5];
+                                a3_b_f = param_rez[r].par_fuz[0,6]; b_f3n = param_rez[r].par_fuz[0,7]; b_f3b = param_rez[r].par_fuz[0,8];
+                                a1_t_f = param_rez[r].par_fuz[1,0]; t_f1n = param_rez[r].par_fuz[1,1]; t_f1b = param_rez[r].par_fuz[1,2];
+                                a2_t_f = param_rez[r].par_fuz[1,3]; t_f2n = param_rez[r].par_fuz[1,4]; t_f2b = param_rez[r].par_fuz[1,5];
+                                a3_t_f = param_rez[r].par_fuz[1,6]; t_f3n = param_rez[r].par_fuz[1,7]; t_f3b = param_rez[r].par_fuz[1,8];
+                                a1_v_f = param_rez[r].par_fuz[2,0]; v_f1n = param_rez[r].par_fuz[2,1]; v_f1b = param_rez[r].par_fuz[2,2];
+                                a2_v_f = param_rez[r].par_fuz[2,3]; v_f2n = param_rez[r].par_fuz[2,4]; v_f2b = param_rez[r].par_fuz[2,5];
+                                a3_v_f = param_rez[r].par_fuz[2,6]; v_f3n = param_rez[r].par_fuz[2,7]; v_f3b = param_rez[r].par_fuz[2,8];
 
-        param3[i].par_fuz[4][0] = AI.A1_P00_F;
-        param3[i].par_fuz[4][1] = AI.P00_F1N;
-        param3[i].par_fuz[4][2] = AI.P00_F1B;
-        param3[i].par_fuz[4][3] = AI.A2_P00_F;
-        param3[i].par_fuz[4][4] = AI.P00_F2N;
-        param3[i].par_fuz[4][5] = AI.P00_F2B;
-        param3[i].par_fuz[4][6] = AI.A3_P00_F;
-        param3[i].par_fuz[4][7] = AI.P00_F3N;
-        param3[i].par_fuz[4][8] = AI.P00_F3B;
+                                sostav = param1[k].stv;
+                                f_ParamAlt.AddItem(CreateParamAlternativeItem(sostav, add_name, s_name, s_func, s_el, type, (short)f_WorkItem.ParentID,
+                                                   s_b, s_t, s_v,
+                                                   1, 1, 0, 0, 1, 1, 0, 0,
+                                                   "(нет элемента)", 1,
+                                                   a1_b_f, b_f1n, b_f1b, a2_b_f, b_f2n, b_f2b, a3_b_f, b_f3n, b_f3b,
+                                                   a1_t_f, t_f1n, t_f1b, a2_t_f, t_f2n, t_f2b, a3_t_f, t_f3n, t_f3b,
+                                                   a1_v_f, v_f1n, v_f1b, a2_v_f, v_f2n, v_f2b, a3_v_f, v_f3n, v_f3b,
+                                                   0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                   0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                   0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                   "(нет условия)", sovmest, sovmest0, sovmest1));
+                                break;
 
-        param3[i].par_fuz[5][0] = AI.A1_TD_F;
-        param3[i].par_fuz[5][1] = AI.TD_F1N;
-        param3[i].par_fuz[5][2] = AI.TD_F1B;
-        param3[i].par_fuz[5][3] = AI.A2_TD_F;
-        param3[i].par_fuz[5][4] = AI.TD_F2N;
-        param3[i].par_fuz[5][5] = AI.TD_F2B;
-        param3[i].par_fuz[5][6] = AI.A3_TD_F;
-        param3[i].par_fuz[5][7] = AI.TD_F3N;
-        param3[i].par_fuz[5][8] = AI.TD_F3B;
+                            case 13://расчитываем параметры для блока РАБОЧАЯ ПОСЛЕД.
+                                if (f_Parent.Type_Char == SharedConst.PROP)
+                                    CommonCulc.calc_RAB_2(param1[k].par[0], param1[k].par[1], param1[k].par[2],
+                                               param2[n].par[0], param2[n].par[1], param2[n].par[2],
+                                               ref param_rez[r].par[0], ref param_rez[r].par[1], ref param_rez[r].par[2]);
+                                else
+                                {
+                                    CommonCulc.calc_RAB_2_fuz(
+                                       param1[k].par_fuz[0,0], param1[k].par_fuz[0,1], param1[k].par_fuz[0,2],
+                                       param1[k].par_fuz[0,3], param1[k].par_fuz[0,4], param1[k].par_fuz[0,5],
+                                       param1[k].par_fuz[0,6], param1[k].par_fuz[0,7], param1[k].par_fuz[0,8],
+                                       param1[k].par_fuz[1,0], param1[k].par_fuz[1,1], param1[k].par_fuz[1,2],
+                                       param1[k].par_fuz[1,3], param1[k].par_fuz[1,4], param1[k].par_fuz[1,5],
+                                       param1[k].par_fuz[1,6], param1[k].par_fuz[1,7], param1[k].par_fuz[1,8],
+                                       param1[k].par_fuz[2,0], param1[k].par_fuz[2,1], param1[k].par_fuz[2,2],
+                                       param1[k].par_fuz[2,3], param1[k].par_fuz[2,4], param1[k].par_fuz[2,5],
+                                       param1[k].par_fuz[2,6], param1[k].par_fuz[2,7], param1[k].par_fuz[2,8],
+                                       param2[n].par_fuz[0,0], param2[n].par_fuz[0,1], param2[n].par_fuz[0,2],
+                                       param2[n].par_fuz[0,3], param2[n].par_fuz[0,4], param2[n].par_fuz[0,5],
+                                       param2[n].par_fuz[0,6], param2[n].par_fuz[0,7], param2[n].par_fuz[0,8],
+                                       param2[n].par_fuz[1,0], param2[n].par_fuz[1,1], param2[n].par_fuz[1,2],
+                                       param2[n].par_fuz[1,3], param2[n].par_fuz[1,4], param2[n].par_fuz[1,5],
+                                       param2[n].par_fuz[1,6], param2[n].par_fuz[1,7], param2[n].par_fuz[1,8],
+                                       param2[n].par_fuz[2,0], param2[n].par_fuz[2,1], param2[n].par_fuz[2,2],
+                                       param2[n].par_fuz[2,3], param2[n].par_fuz[2,4], param2[n].par_fuz[2,5],
+                                       param2[n].par_fuz[2,6], param2[n].par_fuz[2,7], param2[n].par_fuz[2,8],
+                                       ref param_rez[r].par_fuz[0,0], ref param_rez[r].par_fuz[0,1], ref param_rez[r].par_fuz[0,2],
+                                       ref param_rez[r].par_fuz[0,3], ref param_rez[r].par_fuz[0,4], ref param_rez[r].par_fuz[0,5],
+                                       ref param_rez[r].par_fuz[0,6], ref param_rez[r].par_fuz[0,7], ref param_rez[r].par_fuz[0,8],
+                                       ref param_rez[r].par_fuz[1,0], ref param_rez[r].par_fuz[1,1], ref param_rez[r].par_fuz[1,2],
+                                       ref param_rez[r].par_fuz[1,3], ref param_rez[r].par_fuz[1,4], ref param_rez[r].par_fuz[1,5],
+                                       ref param_rez[r].par_fuz[1,6], ref param_rez[r].par_fuz[1,7], ref param_rez[r].par_fuz[1,8],
+                                       ref param_rez[r].par_fuz[2,0], ref param_rez[r].par_fuz[2,1], ref param_rez[r].par_fuz[2,2],
+                                       ref param_rez[r].par_fuz[2,3], ref param_rez[r].par_fuz[2,4], ref param_rez[r].par_fuz[2,5],
+                                       ref param_rez[r].par_fuz[2,6], ref param_rez[r].par_fuz[2,7], ref param_rez[r].par_fuz[2,8]);
+                                }
+                                if (f_Parent.Type_Char == SharedConst.PROP)
+                                {
+                                    s_b = param_rez[r].par[0];
+                                    s_t = param_rez[r].par[1];
+                                    s_v = param_rez[r].par[2];
+                                }
+                                else
+                                {
+                                    s_b = 1;
+                                    s_t = 0;
+                                    s_v = 0;
+                                }
+                                a1_b_f = param_rez[r].par_fuz[0,0]; b_f1n = param_rez[r].par_fuz[0,1]; b_f1b = param_rez[r].par_fuz[0,2];
+                                a2_b_f = param_rez[r].par_fuz[0,3]; b_f2n = param_rez[r].par_fuz[0,4]; b_f2b = param_rez[r].par_fuz[0,5];
+                                a3_b_f = param_rez[r].par_fuz[0,6]; b_f3n = param_rez[r].par_fuz[0,7]; b_f3b = param_rez[r].par_fuz[0,8];
+                                a1_t_f = param_rez[r].par_fuz[1,0]; t_f1n = param_rez[r].par_fuz[1,1]; t_f1b = param_rez[r].par_fuz[1,2];
+                                a2_t_f = param_rez[r].par_fuz[1,3]; t_f2n = param_rez[r].par_fuz[1,4]; t_f2b = param_rez[r].par_fuz[1,5];
+                                a3_t_f = param_rez[r].par_fuz[1,6]; t_f3n = param_rez[r].par_fuz[1,7]; t_f3b = param_rez[r].par_fuz[1,8];
+                                a1_v_f = param_rez[r].par_fuz[2,0]; v_f1n = param_rez[r].par_fuz[2,1]; v_f1b = param_rez[r].par_fuz[2,2];
+                                a2_v_f = param_rez[r].par_fuz[2,3]; v_f2n = param_rez[r].par_fuz[2,4]; v_f2b = param_rez[r].par_fuz[2,5];
+                                a3_v_f = param_rez[r].par_fuz[2,6]; v_f3n = param_rez[r].par_fuz[2,7]; v_f3b = param_rez[r].par_fuz[2,8];
 
-        param3[i].par_fuz[6][0] = AI.A1_VD_F;
-        param3[i].par_fuz[6][1] = AI.VD_F1N;
-        param3[i].par_fuz[6][2] = AI.VD_F1B;
-        param3[i].par_fuz[6][3] = AI.A2_VD_F;
-        param3[i].par_fuz[6][4] = AI.VD_F2N;
-        param3[i].par_fuz[6][5] = AI.VD_F2B;
-        param3[i].par_fuz[6][6] = AI.A3_VD_F;
-        param3[i].par_fuz[6][7] = AI.VD_F3N;
-        param3[i].par_fuz[6][8] = AI.VD_F3B;
+                                sostav = param1[k].stv + ";" + param2[n].stv;
 
-        param3[i].par_fuz[7][0] = AI.A1_P_EL_F;
-        param3[i].par_fuz[7][1] = AI.P_EL_F1N;
-        param3[i].par_fuz[7][2] = AI.P_EL_F1B;
-        param3[i].par_fuz[7][3] = AI.A2_P_EL_F;
-        param3[i].par_fuz[7][4] = AI.P_EL_F2N;
-        param3[i].par_fuz[7][5] = AI.P_EL_F2B;
-        param3[i].par_fuz[7][6] = AI.A3_P_EL_F;
-        param3[i].par_fuz[7][7] = AI.P_EL_F3N;
-        param3[i].par_fuz[7][8] = AI.P_EL_F3B;
+                                f_ParamAlt.AddItem(CreateParamAlternativeItem(sostav, add_name, s_name, s_func, s_el, type, (short)f_WorkItem.ParentID,
+                                                     s_b, s_t, s_v,
+                                                     1, 1, 0, 0, 1, 1, 0, 0,
+                                                     "(нет элемента)", 1,
+                                                     a1_b_f, b_f1n, b_f1b, a2_b_f, b_f2n, b_f2b, a3_b_f, b_f3n, b_f3b,
+                                                     a1_t_f, t_f1n, t_f1b, a2_t_f, t_f2n, t_f2b, a3_t_f, t_f3n, t_f3b,
+                                                     a1_v_f, v_f1n, v_f1b, a2_v_f, v_f2n, v_f2b, a3_v_f, v_f3n, v_f3b,
+                                                     0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                     0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                     0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                     "(нет условия)", sovmest, sovmest0, sovmest1));
+                                break;
 
-        param3[i].par_fuz[8][0] = AI.A1_K11_F;
-        param3[i].par_fuz[8][1] = AI.K11_F1N;
-        param3[i].par_fuz[8][2] = AI.K11_F1B;
-        param3[i].par_fuz[8][3] = AI.A2_K11_F;
-        param3[i].par_fuz[8][4] = AI.K11_F2N;
-        param3[i].par_fuz[8][5] = AI.K11_F2B;
-        param3[i].par_fuz[8][6] = AI.A3_K11_F;
-        param3[i].par_fuz[8][7] = AI.K11_F3N;
-        param3[i].par_fuz[8][8] = AI.K11_F3B;
+                            case 2://расчитываем параметры для блока РАБОЧАЯ ПАРАЛ И.
+                                if (f_Parent.Type_Char == SharedConst.PROP)
+                                    CommonCulc.calc_RAB_2par_AND(param1[k].par[0], param1[k].par[1], param1[k].par[2],
+                                                        param2[n].par[0], param2[n].par[1], param2[n].par[2],
+                                                        ref param_rez[r].par[0], ref param_rez[r].par[1], ref param_rez[r].par[2]);
+                                else
+                                    CommonCulc.calc_RAB_2par_AND_fuz(
+                                       param1[k].par_fuz[0,0], param1[k].par_fuz[0,1], param1[k].par_fuz[0,2],
+                                       param1[k].par_fuz[0,3], param1[k].par_fuz[0,4], param1[k].par_fuz[0,5],
+                                       param1[k].par_fuz[0,6], param1[k].par_fuz[0,7], param1[k].par_fuz[0,8],
+                                       param1[k].par_fuz[1,0], param1[k].par_fuz[1,1], param1[k].par_fuz[1,2],
+                                       param1[k].par_fuz[1,3], param1[k].par_fuz[1,4], param1[k].par_fuz[1,5],
+                                       param1[k].par_fuz[1,6], param1[k].par_fuz[1,7], param1[k].par_fuz[1,8],
+                                       param1[k].par_fuz[2,0], param1[k].par_fuz[2,1], param1[k].par_fuz[2,2],
+                                       param1[k].par_fuz[2,3], param1[k].par_fuz[2,4], param1[k].par_fuz[2,5],
+                                       param1[k].par_fuz[2,6], param1[k].par_fuz[2,7], param1[k].par_fuz[2,8],
+                                       param2[n].par_fuz[0,0], param2[n].par_fuz[0,1], param2[n].par_fuz[0,2],
+                                       param2[n].par_fuz[0,3], param2[n].par_fuz[0,4], param2[n].par_fuz[0,5],
+                                       param2[n].par_fuz[0,6], param2[n].par_fuz[0,7], param2[n].par_fuz[0,8],
+                                       param2[n].par_fuz[1,0], param2[n].par_fuz[1,1], param2[n].par_fuz[1,2],
+                                       param2[n].par_fuz[1,3], param2[n].par_fuz[1,4], param2[n].par_fuz[1,5],
+                                       param2[n].par_fuz[1,6], param2[n].par_fuz[1,7], param2[n].par_fuz[1,8],
+                                       param2[n].par_fuz[2,0], param2[n].par_fuz[2,1], param2[n].par_fuz[2,2],
+                                       param2[n].par_fuz[2,3], param2[n].par_fuz[2,4], param2[n].par_fuz[2,5],
+                                       param2[n].par_fuz[2,6], param2[n].par_fuz[2,7], param2[n].par_fuz[2,8],
+                                       ref param_rez[r].par_fuz[0,0], ref param_rez[r].par_fuz[0,1], ref param_rez[r].par_fuz[0,2],
+                                       ref param_rez[r].par_fuz[0,3], ref param_rez[r].par_fuz[0,4], ref param_rez[r].par_fuz[0,5],
+                                       ref param_rez[r].par_fuz[0,6], ref param_rez[r].par_fuz[0,7], ref param_rez[r].par_fuz[0,8],
+                                       ref param_rez[r].par_fuz[1,0], ref param_rez[r].par_fuz[1,1], ref param_rez[r].par_fuz[1,2],
+                                       ref param_rez[r].par_fuz[1,3], ref param_rez[r].par_fuz[1,4], ref param_rez[r].par_fuz[1,5],
+                                       ref param_rez[r].par_fuz[1,6], ref param_rez[r].par_fuz[1,7], ref param_rez[r].par_fuz[1,8],
+                                       ref param_rez[r].par_fuz[2,0], ref param_rez[r].par_fuz[2,1], ref param_rez[r].par_fuz[2,2],
+                                       ref param_rez[r].par_fuz[2,3], ref param_rez[r].par_fuz[2,4], ref param_rez[r].par_fuz[2,5],
+                                       ref param_rez[r].par_fuz[2,6], ref param_rez[r].par_fuz[2,7], ref param_rez[r].par_fuz[2,8]);
 
-        param3[i].par_fuz[9][0] = AI.A1_K00_F;
-        param3[i].par_fuz[9][1] = AI.K00_F1N;
-        param3[i].par_fuz[9][2] = AI.K00_F1B;
-        param3[i].par_fuz[9][3] = AI.A2_K00_F;
-        param3[i].par_fuz[9][4] = AI.K00_F2N;
-        param3[i].par_fuz[9][5] = AI.K00_F2B;
-        param3[i].par_fuz[9][6] = AI.A3_K00_F;
-        param3[i].par_fuz[9][7] = AI.K00_F3N;
-        param3[i].par_fuz[9][8] = AI.K00_F3B;
+                                s_b = param_rez[r].par[0];
+                                s_t = param_rez[r].par[1];
+                                s_v = param_rez[r].par[2];
+                                a1_b_f = param_rez[r].par_fuz[0,0]; b_f1n = param_rez[r].par_fuz[0,1]; b_f1b = param_rez[r].par_fuz[0,2];
+                                a2_b_f = param_rez[r].par_fuz[0,3]; b_f2n = param_rez[r].par_fuz[0,4]; b_f2b = param_rez[r].par_fuz[0,5];
+                                a3_b_f = param_rez[r].par_fuz[0,6]; b_f3n = param_rez[r].par_fuz[0,7]; b_f3b = param_rez[r].par_fuz[0,8];
+                                a1_t_f = param_rez[r].par_fuz[1,0]; t_f1n = param_rez[r].par_fuz[1,1]; t_f1b = param_rez[r].par_fuz[1,2];
+                                a2_t_f = param_rez[r].par_fuz[1,3]; t_f2n = param_rez[r].par_fuz[1,4]; t_f2b = param_rez[r].par_fuz[1,5];
+                                a3_t_f = param_rez[r].par_fuz[1,6]; t_f3n = param_rez[r].par_fuz[1,7]; t_f3b = param_rez[r].par_fuz[1,8];
+                                a1_v_f = param_rez[r].par_fuz[2,0]; v_f1n = param_rez[r].par_fuz[2,1]; v_f1b = param_rez[r].par_fuz[2,2];
+                                a2_v_f = param_rez[r].par_fuz[2,3]; v_f2n = param_rez[r].par_fuz[2,4]; v_f2b = param_rez[r].par_fuz[2,5];
+                                a3_v_f = param_rez[r].par_fuz[2,6]; v_f3n = param_rez[r].par_fuz[2,7]; v_f3b = param_rez[r].par_fuz[2,8];
 
-        param3[i].par_fuz[10][0] = AI.A1_TF_F;
-        param3[i].par_fuz[10][1] = AI.TF_F1N;
-        param3[i].par_fuz[10][2] = AI.TF_F1B;
-        param3[i].par_fuz[10][3] = AI.A2_TF_F;
-        param3[i].par_fuz[10][4] = AI.TF_F2N;
-        param3[i].par_fuz[10][5] = AI.TF_F2B;
-        param3[i].par_fuz[10][6] = AI.A3_TF_F;
-        param3[i].par_fuz[10][7] = AI.TF_F3N;
-        param3[i].par_fuz[10][8] = AI.TF_F3B;
 
-        param3[i].par_fuz[11][0] = AI.A1_VF_F;
-        param3[i].par_fuz[11][1] = AI.VF_F1N;
-        param3[i].par_fuz[11][2] = AI.VF_F1B;
-        param3[i].par_fuz[11][3] = AI.A2_VF_F;
-        param3[i].par_fuz[11][4] = AI.VF_F2N;
-        param3[i].par_fuz[11][5] = AI.VF_F2B;
-        param3[i].par_fuz[11][6] = AI.A3_VF_F;
-        param3[i].par_fuz[11][7] = AI.VF_F3N;
-        param3[i].par_fuz[11][8] = AI.VF_F3B;
-        if (AI.CheckPLG)
-          s_predicat = "1";
-        else
-          s_predicat = "0";
-        StrLCopy(param3[i].stv, AI.SOSTAV.c_str(), StrMemSize);
-param3[i].stv[StrMemSize]='\0';
-        param3[i].sovm = AI.SOVM;
-        param3[i].sovm0 = AI.SOVM0;
-        param3[i].sovm1 = AI.SOVM1;
-      }
-    }*/
+                                sostav = param1[k].stv + ";" + param2[n].stv;
+
+                                f_ParamAlt.AddItem(CreateParamAlternativeItem(sostav, add_name, s_name, s_func, s_el, type, (short)f_WorkItem.ParentID,
+                                                    s_b, s_t, s_v,
+                                                    1, 1, 0, 0, 1, 1, 0, 0,
+                                                    "(нет элемента)", 1,
+                                                    a1_b_f, b_f1n, b_f1b, a2_b_f, b_f2n, b_f2b, a3_b_f, b_f3n, b_f3b,
+                                                    a1_t_f, t_f1n, t_f1b, a2_t_f, t_f2n, t_f2b, a3_t_f, t_f3n, t_f3b,
+                                                    a1_v_f, v_f1n, v_f1b, a2_v_f, v_f2n, v_f2b, a3_v_f, v_f3n, v_f3b,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    "(нет условия)", sovmest, sovmest0, sovmest1));
+                                break;
+                            case 3://расчитываем параметры для блока РАБОЧАЯ ПАРАЛ ИЛИ.
+                                if (f_Parent.Type_Char == SharedConst.PROP)
+                                    CommonCulc.calc_RAB_2par_OR(param1[k].par[0], param1[k].par[1], param1[k].par[2],
+                                                      param2[n].par[0], param2[n].par[1], param2[n].par[2],
+                                                      ref param_rez[r].par[0], ref param_rez[r].par[1], ref param_rez[r].par[2]);
+                                else
+                                    CommonCulc.calc_RAB_2par_OR_fuz(
+                                      param1[k].par_fuz[0,0], param1[k].par_fuz[0,1], param1[k].par_fuz[0,2],
+                                      param1[k].par_fuz[0,3], param1[k].par_fuz[0,4], param1[k].par_fuz[0,5],
+                                      param1[k].par_fuz[0,6], param1[k].par_fuz[0,7], param1[k].par_fuz[0,8],
+                                      param1[k].par_fuz[1,0], param1[k].par_fuz[1,1], param1[k].par_fuz[1,2],
+                                      param1[k].par_fuz[1,3], param1[k].par_fuz[1,4], param1[k].par_fuz[1,5],
+                                      param1[k].par_fuz[1,6], param1[k].par_fuz[1,7], param1[k].par_fuz[1,8],
+                                      param1[k].par_fuz[2,0], param1[k].par_fuz[2,1], param1[k].par_fuz[2,2],
+                                      param1[k].par_fuz[2,3], param1[k].par_fuz[2,4], param1[k].par_fuz[2,5],
+                                      param1[k].par_fuz[2,6], param1[k].par_fuz[2,7], param1[k].par_fuz[2,8],
+                                      param2[n].par_fuz[0,0], param2[n].par_fuz[0,1], param2[n].par_fuz[0,2],
+                                      param2[n].par_fuz[0,3], param2[n].par_fuz[0,4], param2[n].par_fuz[0,5],
+                                      param2[n].par_fuz[0,6], param2[n].par_fuz[0,7], param2[n].par_fuz[0,8],
+                                      param2[n].par_fuz[1,0], param2[n].par_fuz[1,1], param2[n].par_fuz[1,2],
+                                      param2[n].par_fuz[1,3], param2[n].par_fuz[1,4], param2[n].par_fuz[1,5],
+                                      param2[n].par_fuz[1,6], param2[n].par_fuz[1,7], param2[n].par_fuz[1,8],
+                                      param2[n].par_fuz[2,0], param2[n].par_fuz[2,1], param2[n].par_fuz[2,2],
+                                      param2[n].par_fuz[2,3], param2[n].par_fuz[2,4], param2[n].par_fuz[2,5],
+                                      param2[n].par_fuz[2,6], param2[n].par_fuz[2,7], param2[n].par_fuz[2,8],
+                                      ref param_rez[r].par_fuz[0,0], ref param_rez[r].par_fuz[0,1], ref param_rez[r].par_fuz[0,2],
+                                      ref param_rez[r].par_fuz[0,3], ref param_rez[r].par_fuz[0,4], ref param_rez[r].par_fuz[0,5],
+                                      ref param_rez[r].par_fuz[0,6], ref param_rez[r].par_fuz[0,7], ref param_rez[r].par_fuz[0,8],
+                                      ref param_rez[r].par_fuz[1,0], ref param_rez[r].par_fuz[1,1], ref param_rez[r].par_fuz[1,2],
+                                      ref param_rez[r].par_fuz[1,3], ref param_rez[r].par_fuz[1,4], ref param_rez[r].par_fuz[1,5],
+                                      ref param_rez[r].par_fuz[1,6], ref param_rez[r].par_fuz[1,7], ref param_rez[r].par_fuz[1,8],
+                                      ref param_rez[r].par_fuz[2,0], ref param_rez[r].par_fuz[2,1], ref param_rez[r].par_fuz[2,2],
+                                      ref param_rez[r].par_fuz[2,3], ref param_rez[r].par_fuz[2,4], ref param_rez[r].par_fuz[2,5],
+                                      ref param_rez[r].par_fuz[2,6], ref param_rez[r].par_fuz[2,7], ref param_rez[r].par_fuz[2,8]);
+
+                                s_b = param_rez[r].par[0];
+                                s_t = param_rez[r].par[1];
+                                s_v = param_rez[r].par[2];
+                                a1_b_f = param_rez[r].par_fuz[0,0]; b_f1n = param_rez[r].par_fuz[0,1]; b_f1b = param_rez[r].par_fuz[0,2];
+                                a2_b_f = param_rez[r].par_fuz[0,3]; b_f2n = param_rez[r].par_fuz[0,4]; b_f2b = param_rez[r].par_fuz[0,5];
+                                a3_b_f = param_rez[r].par_fuz[0,6]; b_f3n = param_rez[r].par_fuz[0,7]; b_f3b = param_rez[r].par_fuz[0,8];
+                                a1_t_f = param_rez[r].par_fuz[1,0]; t_f1n = param_rez[r].par_fuz[1,1]; t_f1b = param_rez[r].par_fuz[1,2];
+                                a2_t_f = param_rez[r].par_fuz[1,3]; t_f2n = param_rez[r].par_fuz[1,4]; t_f2b = param_rez[r].par_fuz[1,5];
+                                a3_t_f = param_rez[r].par_fuz[1,6]; t_f3n = param_rez[r].par_fuz[1,7]; t_f3b = param_rez[r].par_fuz[1,8];
+                                a1_v_f = param_rez[r].par_fuz[2,0]; v_f1n = param_rez[r].par_fuz[2,1]; v_f1b = param_rez[r].par_fuz[2,2];
+                                a2_v_f = param_rez[r].par_fuz[2,3]; v_f2n = param_rez[r].par_fuz[2,4]; v_f2b = param_rez[r].par_fuz[2,5];
+                                a3_v_f = param_rez[r].par_fuz[2,6]; v_f3n = param_rez[r].par_fuz[2,7]; v_f3b = param_rez[r].par_fuz[2,8];
+                                sostav = param1[k].stv + ";" + param2[n].stv;
+
+                                f_ParamAlt.AddItem(CreateParamAlternativeItem(sostav, add_name, s_name, s_func, s_el, type, (short)f_WorkItem.ParentID,
+                                                    s_b, s_t, s_v,
+                                                    1, 1, 0, 0, 1, 1, 0, 0,
+                                                    "(нет элемента)", 1,
+                                                    a1_b_f, b_f1n, b_f1b, a2_b_f, b_f2n, b_f2b, a3_b_f, b_f3n, b_f3b,
+                                                    a1_t_f, t_f1n, t_f1b, a2_t_f, t_f2n, t_f2b, a3_t_f, t_f3n, t_f3b,
+                                                    a1_v_f, v_f1n, v_f1b, a2_v_f, v_f2n, v_f2b, a3_v_f, v_f3n, v_f3b,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    "(нет условия)", sovmest, sovmest0, sovmest1));
+                                break;
+                            case 4://расчитываем параметры для блока Диагностика работоспособности.
+                                if (f_Parent.Type_Char == SharedConst.PROP)
+                                    CommonCulc.calc_DIAGN(param1[k].par[0], param1[k].par[1], param1[k].par[2],
+                                                      param3[h].par[7],
+                                                      param3[h].par[3], param3[h].par[4], param3[h].par[5], param3[h].par[6],
+                                                      ref param_rez[r].par[0], ref param_rez[r].par[1], ref param_rez[r].par[2]);
+                                else
+                                    CommonCulc.calc_DIAGN_fuz(
+                                     param1[k].par_fuz[0,0], param1[k].par_fuz[0,1], param1[k].par_fuz[0,2],
+                                     param1[k].par_fuz[0,3], param1[k].par_fuz[0,4], param1[k].par_fuz[0,5],
+                                     param1[k].par_fuz[0,6], param1[k].par_fuz[0,7], param1[k].par_fuz[0,8],
+                                     param1[k].par_fuz[1,0], param1[k].par_fuz[1,1], param1[k].par_fuz[1,2],
+                                     param1[k].par_fuz[1,3], param1[k].par_fuz[1,4], param1[k].par_fuz[1,5],
+                                     param1[k].par_fuz[1,6], param1[k].par_fuz[1,7], param1[k].par_fuz[1,8],
+                                     param1[k].par_fuz[2,0], param1[k].par_fuz[2,1], param1[k].par_fuz[2,2],
+                                     param1[k].par_fuz[2,3], param1[k].par_fuz[2,4], param1[k].par_fuz[2,5],
+                                     param1[k].par_fuz[2,6], param1[k].par_fuz[2,7], param1[k].par_fuz[2,8],
+                                     param3[h].par_fuz[7,0], param3[h].par_fuz[0,1], param3[h].par_fuz[0,2],
+                                     param3[h].par_fuz[7,3], param3[h].par_fuz[0,4], param3[h].par_fuz[0,5],
+                                     param3[h].par_fuz[7,6], param3[h].par_fuz[0,7], param3[h].par_fuz[0,8],
+                                     param3[h].par_fuz[3,0], param3[h].par_fuz[3,1], param3[h].par_fuz[3,2],
+                                     param3[h].par_fuz[3,3], param3[h].par_fuz[3,4], param3[h].par_fuz[3,5],
+                                     param3[h].par_fuz[3,6], param3[h].par_fuz[3,7], param3[h].par_fuz[3,8],
+                                     param3[h].par_fuz[4,0], param3[h].par_fuz[4,1], param3[h].par_fuz[4,2],
+                                     param3[h].par_fuz[4,3], param3[h].par_fuz[4,4], param3[h].par_fuz[4,5],
+                                     param3[h].par_fuz[4,6], param3[h].par_fuz[4,7], param3[h].par_fuz[4,8],
+                                     param3[h].par_fuz[5,0], param3[h].par_fuz[5,1], param3[h].par_fuz[5,2],
+                                     param3[h].par_fuz[5,3], param3[h].par_fuz[5,4], param3[h].par_fuz[5,5],
+                                     param3[h].par_fuz[5,6], param3[h].par_fuz[5,7], param3[h].par_fuz[5,8],
+                                     param3[h].par_fuz[6,0], param3[h].par_fuz[6,1], param3[h].par_fuz[6,2],
+                                     param3[h].par_fuz[6,3], param3[h].par_fuz[6,4], param3[h].par_fuz[6,5],
+                                     param3[h].par_fuz[6,6], param3[h].par_fuz[6,7], param3[h].par_fuz[6,8],
+                                     ref param_rez[r].par_fuz[0,0], ref param_rez[r].par_fuz[0,1], ref param_rez[r].par_fuz[0,2],
+                                     ref param_rez[r].par_fuz[0,3], ref param_rez[r].par_fuz[0,4], ref param_rez[r].par_fuz[0,5],
+                                     ref param_rez[r].par_fuz[0,6], ref param_rez[r].par_fuz[0,7], ref param_rez[r].par_fuz[0,8],
+                                     ref param_rez[r].par_fuz[1,0], ref param_rez[r].par_fuz[1,1], ref param_rez[r].par_fuz[1,2],
+                                     ref param_rez[r].par_fuz[1,3], ref param_rez[r].par_fuz[1,4], ref param_rez[r].par_fuz[1,5],
+                                     ref param_rez[r].par_fuz[1,6], ref param_rez[r].par_fuz[1,7], ref param_rez[r].par_fuz[1,8],
+                                     ref param_rez[r].par_fuz[2,0], ref param_rez[r].par_fuz[2,1], ref param_rez[r].par_fuz[2,2],
+                                     ref param_rez[r].par_fuz[2,3], ref param_rez[r].par_fuz[2,4], ref param_rez[r].par_fuz[2,5],
+                                     ref param_rez[r].par_fuz[2,6], ref param_rez[r].par_fuz[2,7], ref param_rez[r].par_fuz[2,8]);
+
+                                s_b = param_rez[r].par[0];
+                                s_t = param_rez[r].par[1];
+                                s_v = param_rez[r].par[2];
+                           
+                                a1_b_f = param_rez[r].par_fuz[0,0]; b_f1n = param_rez[r].par_fuz[0,1]; b_f1b = param_rez[r].par_fuz[0,2];
+                                a2_b_f = param_rez[r].par_fuz[0,3]; b_f2n = param_rez[r].par_fuz[0,4]; b_f2b = param_rez[r].par_fuz[0,5];
+                                a3_b_f = param_rez[r].par_fuz[0,6]; b_f3n = param_rez[r].par_fuz[0,7]; b_f3b = param_rez[r].par_fuz[0,8];
+                                a1_t_f = param_rez[r].par_fuz[1,0]; t_f1n = param_rez[r].par_fuz[1,1]; t_f1b = param_rez[r].par_fuz[1,2];
+                                a2_t_f = param_rez[r].par_fuz[1,3]; t_f2n = param_rez[r].par_fuz[1,4]; t_f2b = param_rez[r].par_fuz[1,5];
+                                a3_t_f = param_rez[r].par_fuz[1,6]; t_f3n = param_rez[r].par_fuz[1,7]; t_f3b = param_rez[r].par_fuz[1,8];
+                                a1_v_f = param_rez[r].par_fuz[2,0]; v_f1n = param_rez[r].par_fuz[2,1]; v_f1b = param_rez[r].par_fuz[2,2];
+                                a2_v_f = param_rez[r].par_fuz[2,3]; v_f2n = param_rez[r].par_fuz[2,4]; v_f2b = param_rez[r].par_fuz[2,5];
+                                a3_v_f = param_rez[r].par_fuz[2,6]; v_f3n = param_rez[r].par_fuz[2,7]; v_f3b = param_rez[r].par_fuz[2,8];
+               
+                                sostav = param1[k].stv + ";" + param3[h].stv;
+
+                                f_ParamAlt.AddItem(CreateParamAlternativeItem(sostav, add_name, s_name, s_func, s_el, type, (short)f_WorkItem.ParentID,
+                                                    s_b, s_t, s_v,
+                                                    1, 1, 0, 0, 1, 1, 0, 0,
+                                                    "(нет элемента)", 1,
+                                                    a1_b_f, b_f1n, b_f1b, a2_b_f, b_f2n, b_f2b, a3_b_f, b_f3n, b_f3b,
+                                                    a1_t_f, t_f1n, t_f1b, a2_t_f, t_f2n, t_f2b, a3_t_f, t_f3n, t_f3b,
+                                                    a1_v_f, v_f1n, v_f1b, a2_v_f, v_f2n, v_f2b, a3_v_f, v_f3n, v_f3b,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    "(нет условия)", sovmest, sovmest0, sovmest1));
+                                break;
+                            case 5://расчитываем параметры для блока Функциональный контроль
+                                if (f_Parent.Type_Char == SharedConst.PROP)
+                                    CommonCulc.calc_DIAGN_2(param1[k].par[0], param1[k].par[1], param1[k].par[2],
+                                                      param3[h].par[8], param3[h].par[9], param3[h].par[10], param3[h].par[11],
+                                                      ref param_rez[r].par[0], ref param_rez[r].par[1], ref param_rez[r].par[2]);
+                                else
+                                    CommonCulc.calc_DIAGN_2_fuz(
+                                     param1[k].par_fuz[0,0], param1[k].par_fuz[0,1], param1[k].par_fuz[0,2],
+                                     param1[k].par_fuz[0,3], param1[k].par_fuz[0,4], param1[k].par_fuz[0,5],
+                                     param1[k].par_fuz[0,6], param1[k].par_fuz[0,7], param1[k].par_fuz[0,8],
+                                     param1[k].par_fuz[1,0], param1[k].par_fuz[1,1], param1[k].par_fuz[1,2],
+                                     param1[k].par_fuz[1,3], param1[k].par_fuz[1,4], param1[k].par_fuz[1,5],
+                                     param1[k].par_fuz[1,6], param1[k].par_fuz[1,7], param1[k].par_fuz[1,8],
+                                     param1[k].par_fuz[2,0], param1[k].par_fuz[2,1], param1[k].par_fuz[2,2],
+                                     param1[k].par_fuz[2,3], param1[k].par_fuz[2,4], param1[k].par_fuz[2,5],
+                                     param1[k].par_fuz[2,6], param1[k].par_fuz[2,7], param1[k].par_fuz[2,8],
+                                     param3[h].par_fuz[8,0], param3[h].par_fuz[8,1], param3[h].par_fuz[8,2],
+                                     param3[h].par_fuz[8,3], param3[h].par_fuz[8,4], param3[h].par_fuz[8,5],
+                                     param3[h].par_fuz[8,6], param3[h].par_fuz[8,7], param3[h].par_fuz[8,8],
+                                     param3[h].par_fuz[9,0], param3[h].par_fuz[9,1], param3[h].par_fuz[9,2],
+                                     param3[h].par_fuz[9,3], param3[h].par_fuz[9,4], param3[h].par_fuz[9,5],
+                                     param3[h].par_fuz[9,6], param3[h].par_fuz[9,7], param3[h].par_fuz[9,8],
+                                     param3[h].par_fuz[10,0], param3[h].par_fuz[10,1], param3[h].par_fuz[10,2],
+                                     param3[h].par_fuz[10,3], param3[h].par_fuz[10,4], param3[h].par_fuz[10,5],
+                                     param3[h].par_fuz[10,6], param3[h].par_fuz[10,7], param3[h].par_fuz[10,8],
+                                     param3[h].par_fuz[11,0], param3[h].par_fuz[11,1], param3[h].par_fuz[11,2],
+                                     param3[h].par_fuz[11,3], param3[h].par_fuz[11,4], param3[h].par_fuz[11,5],
+                                     param3[h].par_fuz[11,6], param3[h].par_fuz[11,7], param3[h].par_fuz[11,8],
+                                     ref param_rez[r].par_fuz[0,0], ref param_rez[r].par_fuz[0,1], ref param_rez[r].par_fuz[0,2],
+                                     ref param_rez[r].par_fuz[0,3], ref param_rez[r].par_fuz[0,4], ref param_rez[r].par_fuz[0,5],
+                                     ref param_rez[r].par_fuz[0,6], ref param_rez[r].par_fuz[0,7], ref param_rez[r].par_fuz[0,8],
+                                     ref param_rez[r].par_fuz[1,0], ref param_rez[r].par_fuz[1,1], ref param_rez[r].par_fuz[1,2],
+                                     ref param_rez[r].par_fuz[1,3], ref param_rez[r].par_fuz[1,4], ref param_rez[r].par_fuz[1,5],
+                                     ref param_rez[r].par_fuz[1,6], ref param_rez[r].par_fuz[1,7], ref param_rez[r].par_fuz[1,8],
+                                     ref param_rez[r].par_fuz[2,0], ref param_rez[r].par_fuz[2,1], ref param_rez[r].par_fuz[2,2],
+                                     ref param_rez[r].par_fuz[2,3], ref param_rez[r].par_fuz[2,4], ref param_rez[r].par_fuz[2,5],
+                                     ref param_rez[r].par_fuz[2,6], ref param_rez[r].par_fuz[2,7], ref param_rez[r].par_fuz[2,8]);
+
+                                s_b = param_rez[r].par[0];
+                                s_t = param_rez[r].par[1];
+                                s_v = param_rez[r].par[2];
+
+                                a1_b_f = param_rez[r].par_fuz[0,0]; b_f1n = param_rez[r].par_fuz[0,1]; b_f1b = param_rez[r].par_fuz[0,2];
+                                a2_b_f = param_rez[r].par_fuz[0,3]; b_f2n = param_rez[r].par_fuz[0,4]; b_f2b = param_rez[r].par_fuz[0,5];
+                                a3_b_f = param_rez[r].par_fuz[0,6]; b_f3n = param_rez[r].par_fuz[0,7]; b_f3b = param_rez[r].par_fuz[0,8];
+                                a1_t_f = param_rez[r].par_fuz[1,0]; t_f1n = param_rez[r].par_fuz[1,1]; t_f1b = param_rez[r].par_fuz[1,2];
+                                a2_t_f = param_rez[r].par_fuz[1,3]; t_f2n = param_rez[r].par_fuz[1,4]; t_f2b = param_rez[r].par_fuz[1,5];
+                                a3_t_f = param_rez[r].par_fuz[1,6]; t_f3n = param_rez[r].par_fuz[1,7]; t_f3b = param_rez[r].par_fuz[1,8];
+                                a1_v_f = param_rez[r].par_fuz[2,0]; v_f1n = param_rez[r].par_fuz[2,1]; v_f1b = param_rez[r].par_fuz[2,2];
+                                a2_v_f = param_rez[r].par_fuz[2,3]; v_f2n = param_rez[r].par_fuz[2,4]; v_f2b = param_rez[r].par_fuz[2,5];
+                                a3_v_f = param_rez[r].par_fuz[2,6]; v_f3n = param_rez[r].par_fuz[2,7]; v_f3b = param_rez[r].par_fuz[2,8];
+
+                                sostav = param1[k].stv + ";" + param3[h].stv;
+
+                                f_ParamAlt.AddItem(CreateParamAlternativeItem(sostav, add_name, s_name, s_func, s_el, type, (short)f_WorkItem.ParentID,
+                                                    s_b, s_t, s_v,
+                                                    1, 1, 0, 0, 1, 1, 0, 0,
+                                                    "(нет элемента)", 1,
+                                                    a1_b_f, b_f1n, b_f1b, a2_b_f, b_f2n, b_f2b, a3_b_f, b_f3n, b_f3b,
+                                                    a1_t_f, t_f1n, t_f1b, a2_t_f, t_f2n, t_f2b, a3_t_f, t_f3n, t_f3b,
+                                                    a1_v_f, v_f1n, v_f1b, a2_v_f, v_f2n, v_f2b, a3_v_f, v_f3n, v_f3b,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    "нет условия", sovmest, sovmest0, sovmest1));
+                                break;
+                            case 8:
+                                if (f_Parent.Type_Char == SharedConst.PROP)
+                                    CommonCulc.calc_WHILE_DO(param1[k].par[0], param1[k].par[1], param1[k].par[2],
+                                                      param3[h].par[7],
+                                                      param3[h].par[3], param3[h].par[4], param3[h].par[5], param3[h].par[6],
+                                                      ref param_rez[r].par[0], ref param_rez[r].par[1], ref param_rez[r].par[2]);
+                                else
+                                    CommonCulc.calc_WHILE_DO_fuz(
+                                     param1[k].par_fuz[0,0], param1[k].par_fuz[0,1], param1[k].par_fuz[0,2],
+                                     param1[k].par_fuz[0,3], param1[k].par_fuz[0,4], param1[k].par_fuz[0,5],
+                                     param1[k].par_fuz[0,6], param1[k].par_fuz[0,7], param1[k].par_fuz[0,8],
+                                     param1[k].par_fuz[1,0], param1[k].par_fuz[1,1], param1[k].par_fuz[1,2],
+                                     param1[k].par_fuz[1,3], param1[k].par_fuz[1,4], param1[k].par_fuz[1,5],
+                                     param1[k].par_fuz[1,6], param1[k].par_fuz[1,7], param1[k].par_fuz[1,8],
+                                     param1[k].par_fuz[2,0], param1[k].par_fuz[2,1], param1[k].par_fuz[2,2],
+                                     param1[k].par_fuz[2,3], param1[k].par_fuz[2,4], param1[k].par_fuz[2,5],
+                                     param1[k].par_fuz[2,6], param1[k].par_fuz[2,7], param1[k].par_fuz[2,8],
+                                     param3[h].par_fuz[7,0], param3[h].par_fuz[0,1], param3[h].par_fuz[0,2],
+                                     param3[h].par_fuz[7,3], param3[h].par_fuz[0,4], param3[h].par_fuz[0,5],
+                                     param3[h].par_fuz[7,6], param3[h].par_fuz[0,7], param3[h].par_fuz[0,8],
+                                     param3[h].par_fuz[3,0], param3[h].par_fuz[3,1], param3[h].par_fuz[3,2],
+                                     param3[h].par_fuz[3,3], param3[h].par_fuz[3,4], param3[h].par_fuz[3,5],
+                                     param3[h].par_fuz[3,6], param3[h].par_fuz[3,7], param3[h].par_fuz[3,8],
+                                     param3[h].par_fuz[4,0], param3[h].par_fuz[4,1], param3[h].par_fuz[4,2],
+                                     param3[h].par_fuz[4,3], param3[h].par_fuz[4,4], param3[h].par_fuz[4,5],
+                                     param3[h].par_fuz[4,6], param3[h].par_fuz[4,7], param3[h].par_fuz[4,8],
+                                     param3[h].par_fuz[5,0], param3[h].par_fuz[5,1], param3[h].par_fuz[5,2],
+                                     param3[h].par_fuz[5,3], param3[h].par_fuz[5,4], param3[h].par_fuz[5,5],
+                                     param3[h].par_fuz[5,6], param3[h].par_fuz[5,7], param3[h].par_fuz[5,8],
+                                     param3[h].par_fuz[6,0], param3[h].par_fuz[6,1], param3[h].par_fuz[6,2],
+                                     param3[h].par_fuz[6,3], param3[h].par_fuz[6,4], param3[h].par_fuz[6,5],
+                                     param3[h].par_fuz[6,6], param3[h].par_fuz[6,7], param3[h].par_fuz[6,8],
+                                     ref param_rez[r].par_fuz[0,0], ref param_rez[r].par_fuz[0,1], ref param_rez[r].par_fuz[0,2],
+                                     ref param_rez[r].par_fuz[0,3], ref param_rez[r].par_fuz[0,4], ref param_rez[r].par_fuz[0,5],
+                                     ref param_rez[r].par_fuz[0,6], ref param_rez[r].par_fuz[0,7], ref param_rez[r].par_fuz[0,8],
+                                     ref param_rez[r].par_fuz[1,0], ref param_rez[r].par_fuz[1,1], ref param_rez[r].par_fuz[1,2],
+                                     ref param_rez[r].par_fuz[1,3], ref param_rez[r].par_fuz[1,4], ref param_rez[r].par_fuz[1,5],
+                                     ref param_rez[r].par_fuz[1,6], ref param_rez[r].par_fuz[1,7], ref param_rez[r].par_fuz[1,8],
+                                     ref param_rez[r].par_fuz[2,0], ref param_rez[r].par_fuz[2,1], ref param_rez[r].par_fuz[2,2],
+                                     ref param_rez[r].par_fuz[2,3], ref param_rez[r].par_fuz[2,4], ref param_rez[r].par_fuz[2,5],
+                                     ref param_rez[r].par_fuz[2,6], ref param_rez[r].par_fuz[2,7], ref param_rez[r].par_fuz[2,8]);
+
+                                s_b = param_rez[r].par[0];
+                                s_t = param_rez[r].par[1];
+                                s_v = param_rez[r].par[2];
+
+                                a1_b_f = param_rez[r].par_fuz[0,0]; b_f1n = param_rez[r].par_fuz[0,1]; b_f1b = param_rez[r].par_fuz[0,2];
+                                a2_b_f = param_rez[r].par_fuz[0,3]; b_f2n = param_rez[r].par_fuz[0,4]; b_f2b = param_rez[r].par_fuz[0,5];
+                                a3_b_f = param_rez[r].par_fuz[0,6]; b_f3n = param_rez[r].par_fuz[0,7]; b_f3b = param_rez[r].par_fuz[0,8];
+                                a1_t_f = param_rez[r].par_fuz[1,0]; t_f1n = param_rez[r].par_fuz[1,1]; t_f1b = param_rez[r].par_fuz[1,2];
+                                a2_t_f = param_rez[r].par_fuz[1,3]; t_f2n = param_rez[r].par_fuz[1,4]; t_f2b = param_rez[r].par_fuz[1,5];
+                                a3_t_f = param_rez[r].par_fuz[1,6]; t_f3n = param_rez[r].par_fuz[1,7]; t_f3b = param_rez[r].par_fuz[1,8];
+                                a1_v_f = param_rez[r].par_fuz[2,0]; v_f1n = param_rez[r].par_fuz[2,1]; v_f1b = param_rez[r].par_fuz[2,2];
+                                a2_v_f = param_rez[r].par_fuz[2,3]; v_f2n = param_rez[r].par_fuz[2,4]; v_f2b = param_rez[r].par_fuz[2,5];
+                                a3_v_f = param_rez[r].par_fuz[2,6]; v_f3n = param_rez[r].par_fuz[2,7]; v_f3b = param_rez[r].par_fuz[2,8];
+
+                                sostav = param1[k].stv + ";" + param3[h].stv;
+
+                                f_ParamAlt.AddItem(CreateParamAlternativeItem(sostav, add_name, s_name, s_func, s_el, type, (short)f_WorkItem.ParentID,
+                                                    s_b, s_t, s_v,
+                                                    1, 1, 0, 0, 1, 1, 0, 0,
+                                                    "(нет элемента)", 1,
+                                                    a1_b_f, b_f1n, b_f1b, a2_b_f, b_f2n, b_f2b, a3_b_f, b_f3n, b_f3b,
+                                                    a1_t_f, t_f1n, t_f1b, a2_t_f, t_f2n, t_f2b, a3_t_f, t_f3n, t_f3b,
+                                                    a1_v_f, v_f1n, v_f1b, a2_v_f, v_f2n, v_f2b, a3_v_f, v_f3n, v_f3b,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    "(нет условия)", sovmest, sovmest0, sovmest1));
+                                break;
+
+                            //для всех других типов - просто добавляем "пустые" альтернативы в блок-родитель
+                            case SharedConst.RASV_SIM: //для подмножеств альтернатив
+                                if (f_Parent.Type_Char == SharedConst.PROP)
+                                    CommonCulc.calc_RASV_SIM(param1[k].par[0], param1[k].par[1], param1[k].par[2],
+                                               param2[n].par[0], param2[n].par[1], param2[n].par[2],
+                                               s_predicat,
+                                               ref param_rez[r].par[0], ref param_rez[r].par[1], ref param_rez[r].par[2]);
+                                else
+                                    CommonCulc.calc_RASV_SIM_fuz(
+                                           param1[k].par_fuz[0,0], param1[k].par_fuz[0,1], param1[k].par_fuz[0,2],
+                                           param1[k].par_fuz[0,3], param1[k].par_fuz[0,4], param1[k].par_fuz[0,5],
+                                           param1[k].par_fuz[0,6], param1[k].par_fuz[0,7], param1[k].par_fuz[0,8],
+                                           param1[k].par_fuz[1,0], param1[k].par_fuz[1,1], param1[k].par_fuz[1,2],
+                                           param1[k].par_fuz[1,3], param1[k].par_fuz[1,4], param1[k].par_fuz[1,5],
+                                           param1[k].par_fuz[1,6], param1[k].par_fuz[1,7], param1[k].par_fuz[1,8],
+                                           param1[k].par_fuz[2,0], param1[k].par_fuz[2,1], param1[k].par_fuz[2,2],
+                                           param1[k].par_fuz[2,3], param1[k].par_fuz[2,4], param1[k].par_fuz[2,5],
+                                           param1[k].par_fuz[2,6], param1[k].par_fuz[2,7], param1[k].par_fuz[2,8],
+                                           param2[n].par_fuz[0,0], param2[n].par_fuz[0,1], param2[n].par_fuz[0,2],
+                                           param2[n].par_fuz[0,3], param2[n].par_fuz[0,4], param2[n].par_fuz[0,5],
+                                           param2[n].par_fuz[0,6], param2[n].par_fuz[0,7], param2[n].par_fuz[0,8],
+                                           param2[n].par_fuz[1,0], param2[n].par_fuz[1,1], param2[n].par_fuz[1,2],
+                                           param2[n].par_fuz[1,3], param2[n].par_fuz[1,4], param2[n].par_fuz[1,5],
+                                           param2[n].par_fuz[1,6], param2[n].par_fuz[1,7], param2[n].par_fuz[1,8],
+                                           param2[n].par_fuz[2,0], param2[n].par_fuz[2,1], param2[n].par_fuz[2,2],
+                                           param2[n].par_fuz[2,3], param2[n].par_fuz[2,4], param2[n].par_fuz[2,5],
+                                           param2[n].par_fuz[2,6], param2[n].par_fuz[2,7], param2[n].par_fuz[2,8],
+                                           s_predicat,
+                                           // param3[h].pred,
+                                           ref param_rez[r].par_fuz[0,0], ref param_rez[r].par_fuz[0,1], ref param_rez[r].par_fuz[0,2],
+                                           ref param_rez[r].par_fuz[0,3], ref param_rez[r].par_fuz[0,4], ref param_rez[r].par_fuz[0,5],
+                                           ref param_rez[r].par_fuz[0,6], ref param_rez[r].par_fuz[0,7], ref param_rez[r].par_fuz[0,8],
+                                           ref param_rez[r].par_fuz[1,0], ref param_rez[r].par_fuz[1,1], ref param_rez[r].par_fuz[1,2],
+                                           ref param_rez[r].par_fuz[1,3], ref param_rez[r].par_fuz[1,4], ref param_rez[r].par_fuz[1,5],
+                                           ref param_rez[r].par_fuz[1,6], ref param_rez[r].par_fuz[1,7], ref param_rez[r].par_fuz[1,8],
+                                           ref param_rez[r].par_fuz[2,0], ref param_rez[r].par_fuz[2,1], ref param_rez[r].par_fuz[2,2],
+                                           ref param_rez[r].par_fuz[2,3], ref param_rez[r].par_fuz[2,4], ref param_rez[r].par_fuz[2,5],
+                                           ref param_rez[r].par_fuz[2,6], ref param_rez[r].par_fuz[2,7], ref param_rez[r].par_fuz[2,8]);
+
+                                s_b = param_rez[r].par[0];
+                                s_t = param_rez[r].par[1];
+                                s_v = param_rez[r].par[2];
+
+                                a1_b_f = param_rez[r].par_fuz[0,0]; b_f1n = param_rez[r].par_fuz[0,1]; b_f1b = param_rez[r].par_fuz[0,2];
+                                a2_b_f = param_rez[r].par_fuz[0,3]; b_f2n = param_rez[r].par_fuz[0,4]; b_f2b = param_rez[r].par_fuz[0,5];
+                                a3_b_f = param_rez[r].par_fuz[0,6]; b_f3n = param_rez[r].par_fuz[0,7]; b_f3b = param_rez[r].par_fuz[0,8];
+                                a1_t_f = param_rez[r].par_fuz[1,0]; t_f1n = param_rez[r].par_fuz[1,1]; t_f1b = param_rez[r].par_fuz[1,2];
+                                a2_t_f = param_rez[r].par_fuz[1,3]; t_f2n = param_rez[r].par_fuz[1,4]; t_f2b = param_rez[r].par_fuz[1,5];
+                                a3_t_f = param_rez[r].par_fuz[1,6]; t_f3n = param_rez[r].par_fuz[1,7]; t_f3b = param_rez[r].par_fuz[1,8];
+                                a1_v_f = param_rez[r].par_fuz[2,0]; v_f1n = param_rez[r].par_fuz[2,1]; v_f1b = param_rez[r].par_fuz[2,2];
+                                a2_v_f = param_rez[r].par_fuz[2,3]; v_f2n = param_rez[r].par_fuz[2,4]; v_f2b = param_rez[r].par_fuz[2,5];
+                                a3_v_f = param_rez[r].par_fuz[2,6]; v_f3n = param_rez[r].par_fuz[2,7]; v_f3b = param_rez[r].par_fuz[2,8];
+
+                                if (s_predicat == "1") sostav = param1[k].stv + ";" + param2[n].stv + ".0;" + param3[h].stv;
+                                else sostav = "" + param1[k].stv + ".0;" + param2[n].stv + ";" + param3[h].stv;
+
+                                f_ParamAlt.AddItem(CreateParamAlternativeItem(sostav, add_name, s_name, s_func, s_el, type, (short)f_WorkItem.ParentID,
+                                                    s_b, s_t, s_v,
+                                                    1, 1, 0, 0, 1, 1, 0, 0,
+                                                    "(нет элемента)", 1,
+                                                    a1_b_f, b_f1n, b_f1b, a2_b_f, b_f2n, b_f2b, a3_b_f, b_f3n, b_f3b,
+                                                    a1_t_f, t_f1n, t_f1b, a2_t_f, t_f2n, t_f2b, a3_t_f, t_f3n, t_f3b,
+                                                    a1_v_f, v_f1n, v_f1b, a2_v_f, v_f2n, v_f2b, a3_v_f, v_f3n, v_f3b,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    "(нет условия)", sovmest, sovmest0, sovmest1));
+                                break;
+                            //развилка
+                            case 6:
+                                if (f_Parent.Type_Char == SharedConst.PROP)
+                                    CommonCulc.calc_RASV(param1[k].par[0], param1[k].par[1], param1[k].par[2],
+                                                      param2[n].par[0], param2[n].par[1], param2[n].par[2],
+                                                      param3[h].par[7],
+                                                      param3[h].par[3], param3[h].par[4], param3[h].par[5], param3[h].par[6],
+                                                      ref param_rez[r].par[0], ref param_rez[r].par[1], ref param_rez[r].par[2]);
+                                else
+                                    CommonCulc.calc_RASV_fuz(
+                                     param1[k].par_fuz[0,0], param1[k].par_fuz[0,1], param1[k].par_fuz[0,2],
+                                     param1[k].par_fuz[0,3], param1[k].par_fuz[0,4], param1[k].par_fuz[0,5],
+                                     param1[k].par_fuz[0,6], param1[k].par_fuz[0,7], param1[k].par_fuz[0,8],
+                                     param1[k].par_fuz[1,0], param1[k].par_fuz[1,1], param1[k].par_fuz[1,2],
+                                     param1[k].par_fuz[1,3], param1[k].par_fuz[1,4], param1[k].par_fuz[1,5],
+                                     param1[k].par_fuz[1,6], param1[k].par_fuz[1,7], param1[k].par_fuz[1,8],
+                                     param1[k].par_fuz[2,0], param1[k].par_fuz[2,1], param1[k].par_fuz[2,2],
+                                     param1[k].par_fuz[2,3], param1[k].par_fuz[2,4], param1[k].par_fuz[2,5],
+                                     param1[k].par_fuz[2,6], param1[k].par_fuz[2,7], param1[k].par_fuz[2,8],
+                                     param2[n].par_fuz[0,0], param2[n].par_fuz[0,1], param2[n].par_fuz[0,2],
+                                     param2[n].par_fuz[0,3], param2[n].par_fuz[0,4], param2[n].par_fuz[0,5],
+                                     param2[n].par_fuz[0,6], param2[n].par_fuz[0,7], param2[n].par_fuz[0,8],
+                                     param2[n].par_fuz[1,0], param2[n].par_fuz[1,1], param2[n].par_fuz[1,2],
+                                     param2[n].par_fuz[1,3], param2[n].par_fuz[1,4], param2[n].par_fuz[1,5],
+                                     param2[n].par_fuz[1,6], param2[n].par_fuz[1,7], param2[n].par_fuz[1,8],
+                                     param2[n].par_fuz[2,0], param2[n].par_fuz[2,1], param2[n].par_fuz[2,2],
+                                     param2[n].par_fuz[2,3], param2[n].par_fuz[2,4], param2[n].par_fuz[2,5],
+                                     param2[n].par_fuz[2,6], param2[n].par_fuz[2,7], param2[n].par_fuz[2,8],
+                                     param3[h].par_fuz[7,0], param3[h].par_fuz[0,1], param3[h].par_fuz[0,2],
+                                     param3[h].par_fuz[7,3], param3[h].par_fuz[0,4], param3[h].par_fuz[0,5],
+                                     param3[h].par_fuz[7,6], param3[h].par_fuz[0,7], param3[h].par_fuz[0,8],
+                                     param3[h].par_fuz[3,0], param3[h].par_fuz[3,1], param3[h].par_fuz[3,2],
+                                     param3[h].par_fuz[3,3], param3[h].par_fuz[3,4], param3[h].par_fuz[3,5],
+                                     param3[h].par_fuz[3,6], param3[h].par_fuz[3,7], param3[h].par_fuz[3,8],
+                                     param3[h].par_fuz[4,0], param3[h].par_fuz[4,1], param3[h].par_fuz[4,2],
+                                     param3[h].par_fuz[4,3], param3[h].par_fuz[4,4], param3[h].par_fuz[4,5],
+                                     param3[h].par_fuz[4,6], param3[h].par_fuz[4,7], param3[h].par_fuz[4,8],
+                                     param3[h].par_fuz[5,0], param3[h].par_fuz[5,1], param3[h].par_fuz[5,2],
+                                     param3[h].par_fuz[5,3], param3[h].par_fuz[5,4], param3[h].par_fuz[5,5],
+                                     param3[h].par_fuz[5,6], param3[h].par_fuz[5,7], param3[h].par_fuz[5,8],
+                                     param3[h].par_fuz[6,0], param3[h].par_fuz[6,1], param3[h].par_fuz[6,2],
+                                     param3[h].par_fuz[6,3], param3[h].par_fuz[6,4], param3[h].par_fuz[6,5],
+                                     param3[h].par_fuz[6,6], param3[h].par_fuz[6,7], param3[h].par_fuz[6,8],
+                                     ref param_rez[r].par_fuz[0,0], ref param_rez[r].par_fuz[0,1], ref param_rez[r].par_fuz[0,2],
+                                     ref param_rez[r].par_fuz[0,3], ref param_rez[r].par_fuz[0,4], ref param_rez[r].par_fuz[0,5],
+                                     ref param_rez[r].par_fuz[0,6], ref param_rez[r].par_fuz[0,7], ref param_rez[r].par_fuz[0,8],
+                                     ref param_rez[r].par_fuz[1,0], ref param_rez[r].par_fuz[1,1], ref param_rez[r].par_fuz[1,2],
+                                     ref param_rez[r].par_fuz[1,3], ref param_rez[r].par_fuz[1,4], ref param_rez[r].par_fuz[1,5],
+                                     ref param_rez[r].par_fuz[1,6], ref param_rez[r].par_fuz[1,7], ref param_rez[r].par_fuz[1,8],
+                                     ref param_rez[r].par_fuz[2,0], ref param_rez[r].par_fuz[2,1], ref param_rez[r].par_fuz[2,2],
+                                     ref param_rez[r].par_fuz[2,3], ref param_rez[r].par_fuz[2,4], ref param_rez[r].par_fuz[2,5],
+                                     ref param_rez[r].par_fuz[2,6], ref param_rez[r].par_fuz[2,7], ref param_rez[r].par_fuz[2,8]);
+
+                                s_b = param_rez[r].par[0];
+                                s_t = param_rez[r].par[1];
+                                s_v = param_rez[r].par[2];
+
+                                a1_b_f = param_rez[r].par_fuz[0,0]; b_f1n = param_rez[r].par_fuz[0,1]; b_f1b = param_rez[r].par_fuz[0,2];
+                                a2_b_f = param_rez[r].par_fuz[0,3]; b_f2n = param_rez[r].par_fuz[0,4]; b_f2b = param_rez[r].par_fuz[0,5];
+                                a3_b_f = param_rez[r].par_fuz[0,6]; b_f3n = param_rez[r].par_fuz[0,7]; b_f3b = param_rez[r].par_fuz[0,8];
+                                a1_t_f = param_rez[r].par_fuz[1,0]; t_f1n = param_rez[r].par_fuz[1,1]; t_f1b = param_rez[r].par_fuz[1,2];
+                                a2_t_f = param_rez[r].par_fuz[1,3]; t_f2n = param_rez[r].par_fuz[1,4]; t_f2b = param_rez[r].par_fuz[1,5];
+                                a3_t_f = param_rez[r].par_fuz[1,6]; t_f3n = param_rez[r].par_fuz[1,7]; t_f3b = param_rez[r].par_fuz[1,8];
+                                a1_v_f = param_rez[r].par_fuz[2,0]; v_f1n = param_rez[r].par_fuz[2,1]; v_f1b = param_rez[r].par_fuz[2,2];
+                                a2_v_f = param_rez[r].par_fuz[2,3]; v_f2n = param_rez[r].par_fuz[2,4]; v_f2b = param_rez[r].par_fuz[2,5];
+                                a3_v_f = param_rez[r].par_fuz[2,6]; v_f3n = param_rez[r].par_fuz[2,7]; v_f3b = param_rez[r].par_fuz[2,8];
+
+                                sostav = param1[k].stv + ";" + param2[n].stv + ";" + param3[h].stv;
+                                
+                                f_ParamAlt.AddItem(CreateParamAlternativeItem(sostav, add_name, s_name, s_func, s_el, type, (short)f_WorkItem.ParentID,
+                                                    s_b, s_t, s_v,
+                                                    1, 1, 0, 0, 1, 1, 0, 0,
+                                                    "(нет элемента)", 1,
+                                                    a1_b_f, b_f1n, b_f1b, a2_b_f, b_f2n, b_f2b, a3_b_f, b_f3n, b_f3b,
+                                                    a1_t_f, t_f1n, t_f1b, a2_t_f, t_f2n, t_f2b, a3_t_f, t_f3n, t_f3b,
+                                                    a1_v_f, v_f1n, v_f1b, a2_v_f, v_f2n, v_f2b, a3_v_f, v_f3n, v_f3b,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                    "(нет условия)", sovmest, sovmest0, sovmest1));
+                                break;
+                            case SharedConst.PROV_IF:
+                                sostav = param1[k].stv + ";" + param3[h].stv;
+                                f_ParamAlt.AddItem(CreateParamAlternativeItem(sostav, add_name, s_name, s_func, s_el, type, (short)f_WorkItem.ParentID,
+                                                   1, 0, 0,
+                                                   1, 1, 0, 0, 1, 1, 0, 0,
+                                                   "(нет элемента)", 1,
+                                                   0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                   0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                   0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                   0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                   "(нет условия)", sovmest, sovmest0, sovmest1));
+
+                                break;
+
+                            default:
+
+                                sostav = param1[k].stv + ";" + param2[n].stv + ";" + param3[h].stv;
+
+                                f_ParamAlt.AddItem(CreateParamAlternativeItem(sostav, add_name, s_name, s_func, s_el, type, (short)f_WorkItem.ParentID,
+                                                   1, 0, 0,
+                                                   1, 1, 0, 0, 1, 1, 0, 0,
+                                                   "(нет элемента)", 1,
+                                                   0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                   0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                   0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0, 0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                   0, 0, 0, 0.5, 0, 0, 1, 0, 0,
+                                                   "(нет условия)", sovmest, sovmest0, sovmest1));
+
+                                break;
+                        }
+                        r++;
+                    }
+
         }
         void proverka_type_krit(int type_krit)
         {
@@ -1477,9 +2220,242 @@ param3[i].stv[StrMemSize]='\0';
             }
         }
 
+        void calc_RAB(double b1, double t1, double v1, ref double b, ref double t, ref double v)
+        {
+            b = b1;
+            t = t1;
+            v = v1;
+        }
+        void calc_RAB_fuz(double a1_b1_f, double b1_f1n, double b1_f1b,
+            double a2_b1_f, double b1_f2n, double b1_f2b, double a3_b1_f, double b1_f3n, double b1_f3b,
+            double a1_t1_f, double t1_f1n, double t1_f1b,
+            double a2_t1_f, double t1_f2n, double t1_f2b, double a3_t1_f, double t1_f3n, double t1_f3b,
+            double a1_v1_f, double v1_f1n, double v1_f1b,
+            double a2_v1_f, double v1_f2n, double v1_f2b, double a3_v1_f, double v1_f3n, double v1_f3b,
+            ref double a1_b_f, ref double b_f1n, ref double b_f1b,
+            ref double a2_b_f, ref double b_f2n, ref double b_f2b, ref double a3_b_f, ref double b_f3n, ref double b_f3b,
+            ref double a1_t_f, ref double t_f1n, ref double t_f1b,
+            ref double a2_t_f, ref double t_f2n, ref double t_f2b, ref double a3_t_f, ref double t_f3n, ref double t_f3b,
+            ref double a1_v_f, ref double v_f1n, ref double v_f1b,
+            ref double a2_v_f, ref double v_f2n, ref double v_f2b, ref double a3_v_f, ref double v_f3n, ref double v_f3b)
+        {
+            a1_b_f = a1_b1_f; b_f1n = b1_f1n; b_f1b = b1_f1b; a2_b_f = a2_b1_f; b_f2n = b1_f2n;
+            b_f2b = b1_f2b; a3_b_f = a3_b1_f; b_f3n = b1_f3n; b_f3b = b1_f3b;
+            a1_t_f = a1_t1_f; t_f1n = t1_f1n; t_f1b = t1_f1b; a2_t_f = a2_t1_f; t_f2n = t1_f2n;
+            t_f2b = t1_f2b; a3_t_f = a3_t1_f; t_f3n = t1_f3n; t_f3b = t1_f3b;
+            a1_v_f = a1_v1_f; v_f1n = v1_f1n; v_f1b = v1_f1b; a2_v_f = a2_v1_f; v_f2n = v1_f2n;
+            v_f2b = v1_f2b; a3_v_f = a3_v1_f; v_f3n = v1_f3n; v_f3b = v1_f3b;
+        }
+        TParamAlternativeItem CreateParamAlternativeItem(string sostav, string history, string name, string func, string elem, int type, short number,
+                                     double b, double t, double v,
+                                     double k11, double k00, double tf, double vf,
+                                     double p11, double p00, double td, double vd,
+                                     string elem_diagn, double p_elem,
+                                     double a1_b_f, double b_f1n, double b_f1b,
+                                     double a2_b_f, double b_f2n, double b_f2b,
+                                     double a3_b_f, double b_f3n, double b_f3b,
+                                     double a1_t_f, double t_f1n, double t_f1b,
+                                     double a2_t_f, double t_f2n, double t_f2b,
+                                     double a3_t_f, double t_f3n, double t_f3b,
+                                     double a1_v_f, double v_f1n, double v_f1b,
+                                     double a2_v_f, double v_f2n, double v_f2b,
+                                     double a3_v_f, double v_f3n, double v_f3b,
+                                     double a1_k11_f, double k11_f1n, double k11_f1b,
+                                     double a2_k11_f, double k11_f2n, double k11_f2b,
+                                     double a3_k11_f, double k11_f3n, double k11_f3b,
+                                     double a1_k00_f, double k00_f1n, double k00_f1b,
+                                     double a2_k00_f, double k00_f2n, double k00_f2b,
+                                     double a3_k00_f, double k00_f3n, double k00_f3b,
+                                     double a1_tf_f, double tf_f1n, double tf_f1b,
+                                     double a2_tf_f, double tf_f2n, double tf_f2b,
+                                     double a3_tf_f, double tf_f3n, double tf_f3b,
+                                     double a1_vf_f, double vf_f1n, double vf_f1b,
+                                     double a2_vf_f, double vf_f2n, double vf_f2b,
+                                     double a3_vf_f, double vf_f3n, double vf_f3b,
+                                     double a1_p11_f, double p11_f1n, double p11_f1b,
+                                     double a2_p11_f, double p11_f2n, double p11_f2b,
+                                     double a3_p11_f, double p11_f3n, double p11_f3b,
+                                     double a1_p00_f, double p00_f1n, double p00_f1b,
+                                     double a2_p00_f, double p00_f2n, double p00_f2b,
+                                     double a3_p00_f, double p00_f3n, double p00_f3b,
+                                     double a1_td_f, double td_f1n, double td_f1b,
+                                     double a2_td_f, double td_f2n, double td_f2b,
+                                     double a3_td_f, double td_f3n, double td_f3b,
+                                     double a1_vd_f, double vd_f1n, double vd_f1b,
+                                     double a2_vd_f, double vd_f2n, double vd_f2b,
+                                     double a3_vd_f, double vd_f3n, double vd_f3b,
+                                     double a1_p_el_f, double p_el_f1n, double p_el_f1b,
+                                     double a2_p_el_f, double p_el_f2n, double p_el_f2b,
+                                     double a3_p_el_f, double p_el_f3n, double p_el_f3b,
+                                     string predicat, double sovm, double sovm0, double sovm1)
+        {
+            TParamAlternativeItem Item = new TParamAlternativeItem();
+            Item.SOSTAV = sostav;
+            Item.PRED_ISTOR = history;
+            Item.NAME = name;
+            Item.FUNCTION2 = func;
+            Item.ELEMENT = elem;
+            Item.TYPE = type;
+            Item.NUMBER = number;
+            Item.SOVM = sovm;
+            Item.SOVM0 = sovm0;
+            Item.SOVM1 = sovm0;
+            Item.PREDICAT = predicat;
 
-       /*        __property TPartialDecision* Parent = {read = f_Parent
-           };*/
+            switch (type)
+            {
+                case 5:
+                    Item.B = b;
+                    Item.T = t;
+                    Item.V = v;
+
+                    Item.A1_B_F = a1_b_f;
+                    Item.B_F1N = b_f1n;
+                    Item.B_F1B = b_f1b;
+                    Item.A2_B_F = a2_b_f;
+                    Item.B_F2N = b_f2n;
+                    Item.B_F2B = b_f2b;
+                    Item.A3_B_F = a3_b_f;
+                    Item.B_F3N = b_f3n;
+                    Item.B_F3B = b_f3b;
+
+                    Item.A1_T_F = a1_t_f;
+                    Item.T_F1N = t_f1n;
+                    Item.T_F1B = t_f1b;
+                    Item.A2_T_F = a2_t_f;
+                    Item.T_F2N = t_f2n;
+                    Item.T_F2B = t_f2b;
+                    Item.A3_T_F = a3_t_f;
+                    Item.T_F3N = t_f3n;
+                    Item.T_F3B = t_f3b;
+
+                    Item.A1_V_F = a1_v_f;
+                    Item.V_F1N = v_f1n;
+                    Item.V_F1B = v_f1b;
+                    Item.A2_V_F = a2_v_f;
+                    Item.V_F2N = v_f2n;
+                    Item.V_F2B = v_f2b;
+                    Item.A3_V_F = a3_v_f;
+                    Item.V_F3N = v_f3n;
+                    Item.V_F3B = v_f3b;
+                    break;
+                case 7:
+                    Item.K_11 = k11;
+                    Item.K_00 = k00;
+                    Item.T_F = tf;
+                    Item.V_F = vf;
+
+                    Item.A1_K11_F = a1_k11_f;
+                    Item.K11_F1N = k11_f1n;
+                    Item.K11_F1B = k11_f1b;
+                    Item.A2_K11_F = a2_k11_f;
+                    Item.K11_F2N = k11_f2n;
+                    Item.K11_F2B = k11_f2b;
+                    Item.A3_K11_F = a3_k11_f;
+                    Item.K11_F3N = k11_f3n;
+                    Item.K11_F3B = k11_f3b;
+
+                    Item.A1_K00_F = a1_k00_f;
+                    Item.K00_F1N = k00_f1n;
+                    Item.K00_F1B = k00_f1b;
+                    Item.A2_K00_F = a2_k00_f;
+                    Item.K00_F2N = k00_f2n;
+                    Item.K00_F2B = k00_f2b;
+                    Item.A3_K00_F = a3_k00_f;
+                    Item.K00_F3N = k00_f3n;
+                    Item.K00_F3B = k00_f3b;
+
+                    Item.A1_TF_F = a1_tf_f;
+                    Item.TF_F1N = tf_f1n;
+                    Item.TF_F1B = tf_f1b;
+                    Item.A2_TF_F = a2_tf_f;
+                    Item.TF_F2N = tf_f2n;
+                    Item.TF_F2B = tf_f2b;
+                    Item.A3_TF_F = a3_tf_f;
+                    Item.TF_F3N = tf_f3n;
+                    Item.TF_F3B = tf_f3b;
+
+                    Item.A1_VF_F = a1_vf_f;
+                    Item.VF_F1N = vf_f1n;
+                    Item.VF_F1B = vf_f1b;
+                    Item.A2_VF_F = a2_vf_f;
+                    Item.VF_F2N = vf_f2n;
+                    Item.VF_F2B = vf_f2b;
+                    Item.A3_VF_F = a3_vf_f;
+                    Item.VF_F3N = vf_f3n;
+                    Item.VF_F3B = vf_f3b;
+                    break;
+
+                case 6:
+                    Item.ELEM_DIAGN = elem_diagn;
+
+                    Item.P_11 = p11;
+                    Item.P_00 = p00;
+                    Item.T_D = td;
+                    Item.V_D = vd;
+
+                    Item.P_DIAGN_EL = p_elem;
+
+                    Item.A1_P11_F = a1_p11_f;
+                    Item.P11_F1N = p11_f1n;
+                    Item.P11_F1B = p11_f1b;
+                    Item.A2_P11_F = a2_p11_f;
+                    Item.P11_F2N = p11_f2n;
+                    Item.P11_F2B = p11_f2b;
+                    Item.A3_P11_F = a3_p11_f;
+                    Item.P11_F3N = p11_f3n;
+                    Item.P11_F3B = p11_f3b;
+
+                    Item.A1_P00_F = a1_p00_f;
+                    Item.P00_F1N = p00_f1n;
+                    Item.P00_F1B = p00_f1b;
+                    Item.A2_P00_F = a2_p00_f;
+                    Item.P00_F2N = p00_f2n;
+                    Item.P00_F2B = p00_f2b;
+                    Item.A3_P00_F = a3_p00_f;
+                    Item.P00_F3N = p00_f3n;
+                    Item.P00_F3B = p00_f3b;
+
+                    Item.A1_TD_F = a1_td_f;
+                    Item.TD_F1N = td_f1n;
+                    Item.TD_F1B = td_f1b;
+                    Item.A2_TD_F = a2_td_f;
+                    Item.TD_F2N = td_f2n;
+                    Item.TD_F2B = td_f2b;
+                    Item.A3_TD_F = a3_td_f;
+                    Item.TD_F3N = td_f3n;
+                    Item.TD_F3B = td_f3b;
+
+                    Item.A1_VD_F = a1_vd_f;
+                    Item.VD_F1N = vd_f1n;
+                    Item.VD_F1B = vd_f1b;
+                    Item.A2_VD_F = a2_vd_f;
+                    Item.VD_F2N = vd_f2n;
+                    Item.VD_F2B = vd_f2b;
+                    Item.A3_VD_F = a3_vd_f;
+                    Item.VD_F3N = vd_f3n;
+                    Item.VD_F3B = vd_f3b;
+
+                    Item.A1_P_EL_F = a1_p_el_f;
+                    Item.P_EL_F1N = p_el_f1n;
+                    Item.P_EL_F1B = p_el_f1b;
+                    Item.A2_P_EL_F = a2_p_el_f;
+                    Item.P_EL_F2N = p_el_f2n;
+                    Item.P_EL_F2B = p_el_f2b;
+                    Item.A3_P_EL_F = a3_p_el_f;
+                    Item.P_EL_F3N = p_el_f3n;
+                    Item.P_EL_F3B = p_el_f3b;
+                    break;
+
+                case 8: Item.PREDICAT = predicat; break;
+            }
+            return Item;
+        }
+        public TPartialDecision Parent
+        {
+            get { return f_Parent; }
+        }
+           
         public TParamAlternative ParamAlt
         {
             get { return f_ParamAlt; }
