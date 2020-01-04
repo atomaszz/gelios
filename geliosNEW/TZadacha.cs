@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace geliosNEW
 {
@@ -1081,8 +1082,25 @@ namespace geliosNEW
             }
             return (double)ozenk_t.GetItems(1,num_parent) > f_TMax;
         }
-        /*    void ShowDecision(TColor AColorAlt, TColor AColorBadAlt, TColor AColorFont, unsigned int ATime);
-            void Ozenk_TFE();*/
+        public void ShowDecision(Color AColorAlt, Color AColorBadAlt, Color AColorFont, int ATime)
+        {
+            string s;
+            SharedConst.fmViewDecision = new FmViewDecision();
+            SharedConst.fmViewDecision.VwColorAlt = AColorAlt;
+            SharedConst.fmViewDecision.VwColorBadAlt = AColorBadAlt;
+            SharedConst.fmViewDecision.VwColorFont = AColorFont;
+
+            SharedConst.fmViewDecision.ParamAlt = f_PartialDecision.GetItems(0).ParamAlt;
+            SharedConst.fmViewDecision.SetBTVText(f_OptB, f_OptT, f_OptV);
+            SharedConst.fmViewDecision.SetSostavText(f_Sostav, f_Cnt_alt.ToString(), f_CntComm.ToString());
+            SharedConst.fmViewDecision.SetInformText(SharedConst.fmStartDecision.GetEdit1(),
+            SharedConst.fmStartDecision.GetEdit5(), SharedConst.fmStartDecision.GetEdit2(),
+            SharedConst.fmStartDecision.GetEdit3(), SharedConst.fmStartDecision.GetEdit4());
+            SharedConst.fmViewDecision.Type_Char = SharedConst.fmStartDecision.type_char;
+            SharedConst.fmViewDecision.SetTimeText(ATime.ToString() + " мсек");
+            SharedConst.fmViewDecision.ShowDialog();
+        }
+        /*    void Ozenk_TFE();*/
         public TPredicateTree Tree
         {
             get { return f_Tree;  }

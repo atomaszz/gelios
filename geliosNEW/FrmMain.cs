@@ -75,6 +75,10 @@ namespace geliosNEW
         TPredicatePath f_PredicatePath;
         TZadacha f_Zadacha;
         string f_PredicateDopPrav;
+
+        Color f_VwColorAlt;
+        Color f_VwColorBadAlt;
+        Color f_VwColorFont;
         public TListNode GetMainList()
         {
             return MainList;
@@ -588,17 +592,16 @@ namespace geliosNEW
                     f_Zadacha.Process();
                     startTime.Stop();
                     var resultTime = startTime.Elapsed;
-
-             /*       f_Zadacha.ShowDecision(f_VwColorAlt, f_VwColorBadAlt, f_VwColorFont, EndTime - StartTime);
-                   }
-                   FreeStartDecision();*/
+                    
+                    f_Zadacha.ShowDecision(f_VwColorAlt, f_VwColorBadAlt, f_VwColorFont, resultTime.Milliseconds + resultTime.Seconds*1000);
                 }
-                GC = null;
-                TC = null;
-                AP = null;
-                m_TreeList = null;
-                /*    FreeTFEConvertor();*/
+        //           FreeStartDecision();
             }
+            GC = null;
+            TC = null;
+            AP = null;
+            m_TreeList = null;
+            /*    FreeTFEConvertor();*/
         }
         void BuildGlp(TBaseWorkShape AWN, DrawObject Glp, TBaseShape ASel)
         {

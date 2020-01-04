@@ -277,6 +277,7 @@ namespace geliosNEW
         }
         /*------------------------------------------------------------*/
         public static FmStartDecision fmStartDecision;
+        public static FmViewDecision fmViewDecision;
         public static bool CreateStartDecision(TZadacha AZadacha, int AType_char, int AType_metod)
         {
             bool res;
