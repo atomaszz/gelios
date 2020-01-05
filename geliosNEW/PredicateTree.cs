@@ -124,6 +124,10 @@ namespace geliosNEW
             f_List.Add(N);
             return N;
         }
+        public void AddPredicateTreeItem(TPredicateTreeItem N)
+        {
+            f_List.Add(N);
+        }
         public TPredicateTreeItem FindByTfeID(int AID, TDynamicArray Arr)
         {
             TPredicateTreeItem Item, Res = null;

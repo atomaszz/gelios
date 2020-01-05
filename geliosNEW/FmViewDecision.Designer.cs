@@ -75,14 +75,14 @@
             // 
             // button1
             // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.button1.Location = new System.Drawing.Point(706, 3);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
             this.button1.Name = "button1";
             this.button1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.button1.Size = new System.Drawing.Size(85, 30);
             this.button1.TabIndex = 6;
-            this.button1.Text = "Отмена";
+            this.button1.Text = "Закрыть";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -110,7 +110,6 @@
             this.button2.TabIndex = 0;
             this.button2.Text = "Показать решение";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Visible = false;
             // 
             // panel1
             // 
@@ -155,6 +154,7 @@
             this.sgAlternative.Location = new System.Drawing.Point(0, 19);
             this.sgAlternative.MultiSelect = false;
             this.sgAlternative.Name = "sgAlternative";
+            this.sgAlternative.RowTemplate.ReadOnly = true;
             this.sgAlternative.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.sgAlternative.Size = new System.Drawing.Size(791, 200);
             this.sgAlternative.TabIndex = 6;
@@ -472,6 +472,7 @@
             this.Name = "FmViewDecision";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Решение задачи";
+            this.Shown += new System.EventHandler(this.FmViewDecision_Shown);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
