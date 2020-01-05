@@ -85,3 +85,8 @@ C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Debug\geliosNEW.csproj.GenerateResourc
 C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Debug\geliosNEW.exe
 C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Debug\geliosNEW.pdb
 C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Debug\geliosNEW.FmViewDecision.resources
+C:\Users\Atom\GitHub\gelios\geliosNEW\bin\Debug\geliosNEW.exe.manifest
+C:\Users\Atom\GitHub\gelios\geliosNEW\bin\Debug\geliosNEW.application
+C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Debug\geliosNEW.TrustInfo.xml
+C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Debug\geliosNEW.exe.manifest
+C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Debug\geliosNEW.application
