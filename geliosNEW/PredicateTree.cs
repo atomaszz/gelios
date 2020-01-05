@@ -75,9 +75,13 @@ namespace geliosNEW
         {
             get { return GetCount(); }
         }
-      /*      __property TBaseShape* TFE[int AIndex] = { read = GetTFE };
-            __property int TFE_ID[int AIndex] = { read = GetTFE_ID };
-            __property bool TReated = { read = f_TReated, write = f_TReated };*/
+        /*      __property TBaseShape* TFE[int AIndex] = { read = GetTFE };
+              __property int TFE_ID[int AIndex] = { read = GetTFE_ID };*/
+        public bool TReated
+        {
+            set { f_TReated = value; }
+            get { return f_TReated; }
+        }
         public int NumAlt
         {
             set { f_NumAlt = value; }
@@ -152,7 +156,30 @@ namespace geliosNEW
             }
             return null;
         }
-        /*    void ArrayIDToDelete(TPredicateTreeItem AItem, TDynamicArray Arr);*/
+        public void ArrayIDToDelete(TPredicateTreeItem AItem, TDynamicArray Arr)
+        {
+            TPredicateTreeItem Item;
+            Arr.Clear();
+            int del, cfind;
+            for (int i = 0; i <= AItem.Count - 1; i++)
+            {
+                del = AItem.GetTFE_ID(i);
+                cfind = 0;
+                for (int j = 0; j <= f_List.Count - 1; j++)
+                {
+                    Item = (TPredicateTreeItem)(f_List.ElementAt(j));
+                    if (!Item.TReated && (Item != AItem))
+                    {
+                        for (int k = 0; k <= Item.Count - 1; k++)
+                            if (del == Item.GetTFE_ID(k))
+                                cfind++;
+                    }
+                }
+                if (cfind==0 && Arr.Find(del)!=null)
+                    Arr.Append(del);
+
+            }
+        }
         public int Count
         {
             get { return GetCount();  }

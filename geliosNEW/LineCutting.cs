@@ -143,19 +143,23 @@ namespace geliosNEW
         }
 
         ~TLineCutting() { }
-  /*      public void BeginMoving(int Ax, int Ay);
-        public void Moving(int Ax, int Ay);
-        public void EndMoving(int &AxOfs, int &AyOfs);
-        public void ClearAll();*/
-
-        public TBaseWorkShape WorkShape
+        /*      public void BeginMoving(int Ax, int Ay);
+              public void Moving(int Ax, int Ay);
+              public void EndMoving(int &AxOfs, int &AyOfs);*/
+        public void ClearAll()
         {
-            set { SetWorkShape(value); }
-            get { return f_WorkShape; }
+            FreePointList();
+            FreeBaseLineList();
         }
 
-    /*    public TBaseWorkShape* NextWorkShape = { read = f_NextWorkShape, write = SetNextWorkShape };
-        public bool IsFirstWS = { read = f_IsFirstWS, write = f_IsFirstWS };
-        public bool IsLastWS = { read = f_IsLastWS, write = f_IsLastWS };*/
+              public TBaseWorkShape WorkShape
+              {
+                  set { SetWorkShape(value); }
+                  get { return f_WorkShape; }
+              }
+
+          /*    public TBaseWorkShape* NextWorkShape = { read = f_NextWorkShape, write = SetNextWorkShape };
+              public bool IsFirstWS = { read = f_IsFirstWS, write = f_IsFirstWS };
+              public bool IsLastWS = { read = f_IsLastWS, write = f_IsLastWS };*/
     }
 }

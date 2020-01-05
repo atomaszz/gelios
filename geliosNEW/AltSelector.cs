@@ -85,7 +85,13 @@ namespace geliosNEW
         /*      public TAltSelectorItem CreateNewAlternateID2(int AID, int AParentShapeID, int ANum);
               public bool DeleteAltItem(int AID, int ANum);
               public TAltSelectorItem FindFirst(int AID, int AParentShapeID);
-              public TAltSelectorItem FindNext();
-              public void ClearAll();*/
+              public TAltSelectorItem FindNext();*/
+        public void ClearAll()
+        {
+            f_List.Clear();
+            f_FinderList.Clear();
+            f_pos = 0;
+            f_Id = 0;
+        }
     }
 }

@@ -286,16 +286,19 @@ namespace geliosNEW
             }
        //     Canvas.Font = F_Font;
         }
-        /*            public int PointInFrame(int X, int Y);
-                    public virtual bool PowerIn();
-                    public bool ReactMouse(TPoint APoint);
+        /*            public int PointInFrame(int X, int Y);*/
+        public virtual bool PowerIn()
+        {
+            return false;
+        }
+         /*           public bool ReactMouse(TPoint APoint);
                     public void ApplyOffset(int Ax, int Ay);*/
         public virtual bool CopyObject(TBaseShape ASource)
         {
             if (ASource==null) return false;
             ASource.BrushColor = F_BrushColor;
             ASource.PenColor = F_PenColor;
-            ASource.F_FrameColor = F_FrameColor; //цвет обрамл¤ющего пр¤моугольника
+            ASource.F_FrameColor = F_FrameColor; //цвет обрамляющего прямоугольника
       //      ASource.F_Font.Assign(F_Font);
             ASource.F_PenWidth = F_PenWidth;  // ширина пена
             ASource.F_PenStyle = F_PenStyle;  //стиль пена

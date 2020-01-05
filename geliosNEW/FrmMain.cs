@@ -75,6 +75,10 @@ namespace geliosNEW
         TPredicatePath f_PredicatePath;
         TZadacha f_Zadacha;
         string f_PredicateDopPrav;
+
+        Color f_VwColorAlt;
+        Color f_VwColorBadAlt;
+        Color f_VwColorFont;
         public TListNode GetMainList()
         {
             return MainList;
@@ -88,8 +92,8 @@ namespace geliosNEW
             string S = "Ошибка загрузки модуля ПРОЛОГ системы!\r\n";
             S = S + "Без данной функции условия предикатов ТФЕ в задачах оптимизации будут игнорироваться!";
             SharedConst.gPieModule = new TPieModule();
-            if (!SharedConst.gPieModule.CheckModule())
-                MessageBox.Show(S, "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+         //   if (!SharedConst.gPieModule.CheckModule())
+           //     MessageBox.Show(S, "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         public FrmMain()
@@ -190,7 +194,7 @@ namespace geliosNEW
             InitHelp();
             InitPieModule();
             f_Zadacha = new TZadacha();
-          /*       f_ClipCopyTFS = new TClipCopyTFS(Handle, 0x8000000); */
+          /* f_ClipCopyTFS = new TClipCopyTFS(Handle, 0x8000000); */
             f_PredicatePath = new TPredicatePath();
             f_PredicateDopPrav = "";
             /*        ApplySettings();
@@ -362,7 +366,11 @@ namespace geliosNEW
 
         private void новаяСтруктураToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (MainList.IsEmpty()) return;
+            DialogResult res = MessageBox.Show("Вы действительно хотите удалить все ТФС?", "Внимание!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (!f_IsDebug && (res == DialogResult.No))
+                return;
+            ClearWorkSpace();
         }
 
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
@@ -554,7 +562,6 @@ namespace geliosNEW
 
         private void найтиРешениеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int StartTime, EndTime;
             string OptZ = SharedConst.opt_sadacha.make_sadacha() + "\r\n" + SharedConst.opt_sadacha.make_ogrsovm();
 
             f_PredicatePath.Init();
@@ -565,12 +572,12 @@ namespace geliosNEW
             TAlternativeParser AP = new TAlternativeParser();
             TPredicateTFSConvertor TC = new TPredicateTFSConvertor();
             TGraphTFEConvertor GC = new TGraphTFEConvertor();
-            m_TreeList.FillTreeFromList(MainList);
-            AP.Parse(m_TreeList.MainTreeList);
+            m_TreeList.FillTreeFromList(ref MainList);
+            AP.Parse(ref m_TreeList.f_TreeList);
             TC.CopyTree(AP.Head);
             TC.PathStyle = 2;
             TC.Process(f_PredicatePath.BasePath, f_PredicatePath.UsedPath);
-            GC.Init(TC.Head, f_Zadacha.Tree);
+            GC.Init(ref TC.f_PredicateStart, ref f_Zadacha.f_Tree);
             f_Zadacha.Init(f_TypeParam, f_CheckNud, SharedConst.FullPredicateModel(this, GC.PrStruct,
               GC.PrRab, GC.PrControlRab, GC.PrControlFunc, GC.PrCheckCondition, OptZ, f_PredicateDopPrav));
             string S;
@@ -581,19 +588,20 @@ namespace geliosNEW
             {
                 if (SharedConst.CreateStartDecision(f_Zadacha, f_TypeParam, SharedConst.opt_sadacha.get_type_metod()))
                 {
-                    /*   StartTime = GetTickCount();
-                       f_Zadacha.Process();
-                       EndTime = GetTickCount();
-                       f_Zadacha.ShowDecision(f_VwColorAlt, f_VwColorBadAlt, f_VwColorFont, EndTime - StartTime);
-                   }
-                   FreeStartDecision();*/
+                    var startTime = System.Diagnostics.Stopwatch.StartNew();
+                    f_Zadacha.Process();
+                    startTime.Stop();
+                    var resultTime = startTime.Elapsed;
+                    
+                    f_Zadacha.ShowDecision(f_VwColorAlt, f_VwColorBadAlt, f_VwColorFont, resultTime.Milliseconds + resultTime.Seconds*1000);
                 }
-                GC = null;
-                TC = null;
-                AP = null;
-                m_TreeList = null;
-                /*    FreeTFEConvertor();*/
+        //           FreeStartDecision();
             }
+            GC = null;
+            TC = null;
+            AP = null;
+            m_TreeList = null;
+            /*    FreeTFEConvertor();*/
         }
         void BuildGlp(TBaseWorkShape AWN, DrawObject Glp, TBaseShape ASel)
         {
@@ -638,11 +646,92 @@ namespace geliosNEW
 
         private void РешениеЗадачиToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            методПостроенияСуперпозицииToolStripMenuItem.Enabled = Grid.g_PainterList.Count > 0;
+            найтиРешениеToolStripMenuItem.Enabled = Grid.g_PainterList.Count > 0;
+        }
+        private void РешениеЗадачиToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            РешениеЗадачиToolStripMenuItem_Click(sender, e);
+        }
+
+        private void МетодОптимизацииToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int m_type = SharedConst.opt_sadacha.get_type_metod();
+            double m_rate = SharedConst.opt_sadacha.Rate;
+            if (ShowMetodOpt(m_type, m_rate, ref m_type, ref m_rate))
+            {
+                SharedConst.opt_sadacha.set_type_metod(m_type);
+                SharedConst.opt_sadacha.Rate = m_rate;
+            }
+        }
+
+        private void ФайлToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            преобразоватьВПридиктнуюМодельToolStripMenuItem.Enabled = Grid.g_PainterList.Count > 0;
+        }
+        private void ФайлToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            ФайлToolStripMenuItem_Click(sender, e);
+        }
+
+        private void ОпцииToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool ka = Grid.g_PainterList.Count > 0;
+
+            вставитьБлокToolStripMenuItem.Enabled = ka;
+            вставитьБлокToolStripMenuItem.Checked = (f_Operation == 1) && ka;
+
+            вставитьСтруктуруИзФайлаToolStripMenuItem.Enabled = ka;
+            вставитьСтруктуруИзФайлаToolStripMenuItem.Checked = (f_Operation == 5) && ka;
+            добавитьредактироватьАльтернативуToolStripMenuItem.Enabled = ka;
+            удалитьТФСToolStripMenuItem.Enabled = Grid.SelectedTFS != null;
+            удалитьОтТочкиДоТочкиToolStripMenuItem.Enabled = ka;
+
+            bool enb = Grid.SelectedTFE != null;
+            if (enb)
+                enb = Grid.SelectedTFE.PowerIn();
+            раскрытьToolStripMenuItem.Enabled = enb;
+
+            свернутьToolStripMenuItem.Enabled = false; /*когда-нибудь с этим можно разобраться
+                /*= (LevelController.ParentShapeID != 0) && tcMain.Tabs.Count == 0 - не понять как и где используется tcMain*/
+
+            копироватьToolStripMenuItem.Enabled = ka;
+
+            //добавлю когда-нибдуь потом
+            /*   вставитьИзБуфераToolStripMenuItem = (f_ClipCopyTFS.CanalLength() > 0);*/
+            вставитьИзБуфераToolStripMenuItem.Enabled = false;
+            начатьПросмотрАльтернативToolStripMenuItem.Enabled = ka;
+
+        }
+        private void ОпцииToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            ОпцииToolStripMenuItem_Click(sender, e);
+        }
+
+        private void СвернутьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void АльтернативаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //добавлю когда-нибдуь потом
+            добавитьАльтернативуToolStripMenuItem.Enabled = false;
+            поднятьВверхToolStripMenuItem.Enabled = false;
+            удалитьАльтернативуToolStripMenuItem.Enabled = false;
+        }
+        private void АльтернативаToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            АльтернативаToolStripMenuItem_Click(sender, e);
+        }
+
+        private void ПоднятьВверхToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
         }
 
         void ShowParamAlternative(TBaseShape ATFE, int AParentID, int AType_Char,
-DrawObject AGlp, bool AReadOnly)
+            DrawObject AGlp, bool AReadOnly)
         {
             //    Application.CreateForm(__classid(TfmParamAlternative), &fmParamAlternative);
             FmParamAlternative fmParamAlternative = new FmParamAlternative();
@@ -660,17 +749,59 @@ DrawObject AGlp, bool AReadOnly)
             fmParamAlternative.ShowDialog();
             //       fmParamAlternative.Release();
         }
+
         bool ShowMetodOpt(int AType, double ARate, ref int OutType, ref double OutRate)
         {
-            /*     FmMetodOpt = new TFmMetodOpt(Application);
-                 FmMetodOpt.set_type_metod(AType);
-                 FmMetodOpt.edPercent.Text = float_2_string(ARate, 6, 1);
-                 bool res = (FmMetodOpt.ShowModal() == mrOk);
-                 OutType = FmMetodOpt.get_type_metod();
-                 OutRate = StrToFloat(FmMetodOpt.edPercent.Text);
-                 FmMetodOpt.Release();
-                 return res;*/
-            return false;
+            FmMetodOpt fmMetodOpt = new FmMetodOpt();
+            fmMetodOpt.set_type_metod(AType);
+            fmMetodOpt.edPercent.Text = ARate.ToString();
+            fmMetodOpt.ShowDialog();
+            bool res = fmMetodOpt.DialogResult == DialogResult.OK;
+            OutType = fmMetodOpt.get_type_metod();
+            OutRate = Double.Parse(fmMetodOpt.edPercent.Text);
+            return res;
+        }
+
+        void ClearWorkSpace()
+        {
+            f_Operation = 0;
+            TAltSelectorItem Item;
+            f_AlternateController.ClearAll();
+            f_AltSelector.ClearAll();
+            f_AltStackController.ClearAll();
+            MainList.ClearAll();
+            LevelController.ClearAll();
+            LevelController.Push(0);
+            Grid.ClearAll();
+      //      f_StackHistory.Clear();
+      //      f_StackHistory.InitStack();
+
+            f_IdAlternative = 0;
+            f_CurrIDBlock = 1;
+            f_CurrIDShape = 0;
+            f_CurrIDLine = 0;
+      //      sbY.Max = 0;
+     //       sbX.Max = 0;
+            X_Base = Y_Base = X_Ofs = Y_Ofs = 0;
+            f_Operation = 0;
+
+            Item = f_AltSelector.CreateNewAlternateID(LevelController.ParentShapeID);
+            f_IdAlternative = Item.ID;
+            f_NumAlternative = f_AltSelector.AddAltItem(f_IdAlternative);
+            f_IdAlternativeParent = f_IdAlternative;
+            f_NumAlternativeParent = f_NumAlternative;
+            MainList.CreateAlternate(null, null, f_IdAlternative, f_NumAlternative);
+            f_AltStackController.Push(f_IdAlternative, f_NumAlternative,
+                f_IdAlternativeParent, f_NumAlternativeParent);
+
+       //     PrepareTabs(f_NumAlternative);
+      //      PrepareScroll();
+            ListChange();
+            AlternateListChange();
+            Grid.PrepareLevel();
+            Grid.PreparePaint();
+            SetNewPolygon();
+            pbMain.Invalidate();
         }
     }
 }

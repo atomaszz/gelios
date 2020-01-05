@@ -47,8 +47,11 @@ namespace geliosNEW
             f_CurrentItem = Item;
             return Item;
         }
-    /*    public TAltStackItem Pop();
-        public void ClearAll();
-        public TAltStackItem CurrentItem = {read = f_CurrentItem*/
+    /*    public TAltStackItem Pop();*/
+        public void ClearAll()
+        {
+            f_List.Clear();
+        }
+/*       public TAltStackItem CurrentItem = {read = f_CurrentItem*/
         }
 }

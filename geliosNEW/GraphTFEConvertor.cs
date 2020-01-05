@@ -190,7 +190,7 @@ namespace geliosNEW
     TGraphTFEConvertorItem f_Item;
     TGlsBinaryTree f_BTree;
     TGraphTFEConvertorTransNum f_Tran;
-        void PushTFS(TPredicateItemTFS ATFS, TDynamicArray AStack)
+        void PushTFS(TPredicateItemTFS ATFS, ref TDynamicArray AStack)
         {
             int m_type = ATFS.TFS.BaseWorkShape.TypeShape;
             if ((m_type != 1) || ((m_type == 1) && (ATFS.EnvelopeBIG!=null)))
@@ -199,7 +199,7 @@ namespace geliosNEW
                 if (ATFS.GetTFEItems(i).Big!=null)
                     AStack.InsertToFirst(ATFS.GetTFEItems(i).Big);
         }
-        void CheckParseItem(TPredicateItemBase ABase, TDynamicArray AStack)
+        void CheckParseItem(ref TPredicateItemBase ABase, ref TDynamicArray AStack)
         {
             int m_type;
             TPredicateItemPWork m_PW;
@@ -207,14 +207,14 @@ namespace geliosNEW
             {
                 m_type = ABase.Who();
                 if (m_type == 0)
-                    PushTFS((TPredicateItemTFS)(ABase), AStack);
+                    PushTFS((TPredicateItemTFS)(ABase), ref AStack);
                 if (m_type == 1)
-                    PushBig((TPredicateItemBig)(ABase), AStack);
+                    PushBig((TPredicateItemBig)(ABase), ref AStack);
                 if (m_type == 2)
-                    PushPWork((TPredicateItemPWork)(ABase), AStack);
+                    PushPWork((TPredicateItemPWork)(ABase), ref AStack);
             }
         }
-        void PushBig(TPredicateItemBig ABig, TDynamicArray AStack)
+        void PushBig(TPredicateItemBig ABig, ref TDynamicArray AStack)
         {
             if (ABig.Envelope)
             {
@@ -224,12 +224,12 @@ namespace geliosNEW
                 if ((m_who == 2) || (m_who == 1))
                     AStack.InsertToFirst(B);
                 if (m_who == 0)
-                    PushTFS((TPredicateItemTFS)(B), AStack);
+                    PushTFS((TPredicateItemTFS)(B), ref AStack);
             }
             else
                 AStack.InsertToFirst(ABig);
         }
-        void PushPWork(TPredicateItemPWork APWork, TDynamicArray AStack)
+        void PushPWork(TPredicateItemPWork APWork, ref TDynamicArray AStack)
         {
             AStack.InsertToFirst(APWork);
         }
@@ -237,44 +237,44 @@ namespace geliosNEW
                 AnsiString PrintBig(TPredicateItemBig* ABig, TDynamicArray* AStack);
                 AnsiString ParseItem(TPredicateItemBase* ABase, TDynamicArray* AStack);*/
 
-        TPredicateItemBase DoParseItem(TPredicateItemBase ABase, TDynamicArray AStack)
+        TPredicateItemBase DoParseItem(ref TPredicateItemBase ABase, ref TDynamicArray AStack)
         {
             TPredicateItemBase Res = null;
             int m_who = ABase.Who();
             if (m_who == 1)
             {
                 TPredicateItemBig m_Big = (TPredicateItemBig)(ABase);
-                Res = DoPrintBig(m_Big, AStack);
+                Res = DoPrintBig(ref m_Big, ref AStack);
             }
             if (m_who == 2)
             {
                 TPredicateItemPWork m_PW = (TPredicateItemPWork)(ABase);
-                Res = DoPrintPWork(m_PW, AStack);
+                Res = DoPrintPWork(ref m_PW, ref AStack);
             }
             if (m_who == 0)
                 Res = ABase;
             return Res;
         }
-        TPredicateItemPWork DoPrintPWork(TPredicateItemPWork APWork, TDynamicArray AStack)
+        TPredicateItemPWork DoPrintPWork(ref TPredicateItemPWork APWork, ref TDynamicArray AStack)
         {
-            CheckParseItem(APWork.Item1, AStack);
-            CheckParseItem(APWork.Item2, AStack);
+            CheckParseItem(ref APWork.f_Item1, ref AStack);
+            CheckParseItem(ref APWork.f_Item2, ref AStack);
             return APWork;
         }
-        TPredicateItemBig DoPrintBig(TPredicateItemBig ABig, TDynamicArray AStack)
+        TPredicateItemBig DoPrintBig(ref TPredicateItemBig ABig, ref TDynamicArray AStack)
         {
             TPredicateItemBig Res = null;
             TPredicateItemBase m_Base;
             if (!ABig.Envelope)
             {
-                if (ABig.Rfc.ParentTFE!=null && ABig.Print)
+                if (ABig.Rfc.ParentTFE==null && ABig.Print)
                     Res = ABig;
                 int m_cnt = ABig.Count;
                 for (int i = 0; i <= m_cnt - 1; i++)
                 {
                     m_Base = ABig.GetItems(i);
                     m_Base.EnvelopeBIG = ABig;
-                    CheckParseItem(m_Base, AStack);
+                    CheckParseItem(ref m_Base, ref AStack);
                 }
             }
             return Res;
@@ -359,7 +359,7 @@ namespace geliosNEW
             f_Tran = new TGraphTFEConvertorTransNum();
         }
         ~TGraphTFEConvertor() { }
-        public void Init(TPredicateItemBig AHead, TPredicateTree APredicateTree)
+        public void Init(ref TPredicateItemBig AHead, ref TPredicateTree APredicateTree)
         {
             string SC;
             bool pass;
@@ -374,7 +374,7 @@ namespace geliosNEW
             Base = (TPredicateItemBase)(m_Stack.Pop());
             while (Base!=null)
             {
-                NC = DoParseItem(Base, m_Stack);
+                NC = DoParseItem(ref Base, ref m_Stack);
                 if (NC!=null)
                     f_BTree.insert(NC);
                 Base = (TPredicateItemBase)(m_Stack.Pop());
@@ -387,7 +387,9 @@ namespace geliosNEW
             SharedConst.lcList.first();
             for (int i = 0; i <= SharedConst.lcList.length() - 1; i++)
             {
-                Base = (TPredicateItemBase)(SharedConst.lcList.val());
+                TGlsListNode tmpNode = (TGlsListNode)SharedConst.lcList.val();
+                TPredicateItemTFS tmpPredicateItem = (TPredicateItemTFS)(tmpNode.Val);
+                Base = (TPredicateItemBase)(tmpPredicateItem);
                 f_Item.Make(Base, Base.EnvelopeBIG);
                 SC = f_Item.OutString;
                 if (SC.Length > 0)

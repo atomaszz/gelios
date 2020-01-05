@@ -69,13 +69,13 @@
             this.rg1.Name = "rg1";
             this.rg1.Size = new System.Drawing.Size(214, 17);
             this.rg1.TabIndex = 1;
-            this.rg1.TabStop = true;
             this.rg1.Text = "С учетом ограничений на показатели";
             this.rg1.UseVisualStyleBackColor = true;
             // 
             // rg0
             // 
             this.rg0.AutoSize = true;
+            this.rg0.Checked = true;
             this.rg0.Location = new System.Drawing.Point(16, 19);
             this.rg0.Name = "rg0";
             this.rg0.Size = new System.Drawing.Size(118, 17);
@@ -88,11 +88,14 @@
             // 
             this.cbxMetod.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbxMetod.FormattingEnabled = true;
+            this.cbxMetod.Items.AddRange(new object[] {
+            "Точного решения",
+            "Приближенного решения"});
             this.cbxMetod.Location = new System.Drawing.Point(12, 40);
             this.cbxMetod.Name = "cbxMetod";
             this.cbxMetod.Size = new System.Drawing.Size(248, 24);
             this.cbxMetod.TabIndex = 2;
-            this.cbxMetod.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CbxMetod_MouseClick);
+            this.cbxMetod.SelectedIndexChanged += new System.EventHandler(this.CbxMetod_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -164,7 +167,7 @@
         private System.Windows.Forms.RadioButton rg0;
         private System.Windows.Forms.ComboBox cbxMetod;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox edPercent;
+        public System.Windows.Forms.TextBox edPercent;
         private System.Windows.Forms.Button btOkClick;
         private System.Windows.Forms.Button btCancelClick;
     }

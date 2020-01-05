@@ -61,20 +61,25 @@ namespace geliosNEW
             get { return _prev; }
         }
     }
-    class TGlsListNode : TGlsNode
+    public class TGlsListNode : TGlsNode
     {
-     object _val;
+     public object _val;
         public TGlsListNode(object AVal) { _val = AVal; }
+
+        void tmpSet (object val)
+        {
+            _val = val;
+        }
         public object Val
         {
-            set { _val = value; }
+            set { tmpSet(value); }
             get { return _val; }
         }
     }
     public class TGlsList : TGlsNode
     {
         TGlsListNode header;
-        TGlsListNode win;
+        public TGlsListNode win;
         int _length;
         public TGlsList()
         {
@@ -154,6 +159,7 @@ namespace geliosNEW
     }
     class TGlsBTreeNode :  TGlsNode
     {
+        bool bIsRoot;
         TGlsBTreeNode _lchild;
         TGlsBTreeNode _rchild;
         object _val;
@@ -163,6 +169,7 @@ namespace geliosNEW
             _val = T;
             _lchild = null;
             _rchild = null;
+            bIsRoot = true;
         }
         ~TGlsBTreeNode() { }
         public object Val

@@ -15,9 +15,11 @@ namespace geliosNEW
         public TZadacha Zadacha;
         public int type_char;
         public int type_metod;
+        public bool ModalResult;
         public FmStartDecision()
         {
             InitializeComponent();
+            ModalResult = false;
         }
         public void set_sadacha_edit()
         {
@@ -32,7 +34,7 @@ namespace geliosNEW
             switch (SharedConst.opt_sadacha.type_sadacha)
             {
                 case SharedConst.ZAD_1:
-                    textBox1.Text = "B(F) . max";
+                    textBox1.Text = "B(F) -> max";
                     textBox5.Text = "    F <= Do";
 
                     switch (SharedConst.opt_sadacha.type_ogr)
@@ -88,7 +90,7 @@ namespace geliosNEW
                     }
                     break;
                 case SharedConst.ZAD_2:
-                    textBox1.Text = "T(F) . min";
+                    textBox1.Text = "T(F) -> min";
                     textBox5.Text = "    F <= Do";
 
                     switch (SharedConst.opt_sadacha.type_ogr)
@@ -144,7 +146,7 @@ namespace geliosNEW
                     }
                     break;
                 case SharedConst.ZAD_3:
-                    textBox1.Text = "V(F) . min";
+                    textBox1.Text = "V(F) -> min";
                     textBox5.Text = "    F <= Do";
 
                     switch (SharedConst.opt_sadacha.type_ogr)
@@ -198,21 +200,21 @@ namespace geliosNEW
                     }
                     break;
                 case SharedConst.ZAD_4:
-                    textBox1.Text = "c1*B(F) - c2*T(F) - c3*V(F) . max";
+                    textBox1.Text = "c1*B(F) - c2*T(F) - c3*V(F) -> max";
                     textBox5.Text = "                           F <= Do";
                     textBox2.Text = "";
                     textBox3.Text = "";
                     textBox4.Text = "c1=" + SharedConst.opt_sadacha.c1 + "   c2=" + SharedConst.opt_sadacha.c2 + "   c3=" + SharedConst.opt_sadacha.c3;
                     break;
                 case SharedConst.ZAD_5:
-                    textBox1.Text = "c1*(B(F)-B')/(B'-B,)+c2*(T(F)-T')/(T'-T,)+c3*(V(F)-V')/(V'-V,).max";
+                    textBox1.Text = "c1*(B(F)-B')/(B'-B,)+c2*(T(F)-T')/(T'-T,)+c3*(V(F)-V')/(V'-V,) -> max";
                     textBox5.Text = "                                                            F <= Do";
                     textBox2.Text = "";
                     textBox3.Text = "";
                     textBox4.Text = "c1=" + SharedConst.opt_sadacha.c1 + "   c2=" + SharedConst.opt_sadacha.c2 + "   c3=" + SharedConst.opt_sadacha.c3;
                     break;
                 case SharedConst.ZAD_6:
-                    textBox1.Text = "B^l (F) - T^k (F) - V^m (F) . max";
+                    textBox1.Text = "B^l (F) - T^k (F) - V^m (F) -> max";
                     textBox5.Text = "                           F <= Do";
                     textBox2.Text = "";
                     textBox3.Text = "";
@@ -227,12 +229,40 @@ namespace geliosNEW
 
         private void Button1_Click(object sender, EventArgs e)
         {
-
+            double d;
+            if (!Double.TryParse(edPercent.Text, out d))
+            {  
+                MessageBox.Show("Использован недопустимый символ.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                edPercent.Focus();
+                return;
+            }
+            SharedConst.opt_sadacha.Rate = d;
+            ModalResult = true;
         }
 
         private void Button3_Click(object sender, EventArgs e)
         {
 
+        }
+        public string GetEdit1()
+        {
+            return textBox1.Text;
+        }
+        public string GetEdit2()
+        {
+            return textBox2.Text;
+        }
+        public string GetEdit3()
+        {
+            return textBox3.Text;
+        }
+        public string GetEdit4()
+        {
+            return textBox4.Text;
+        }
+        public string GetEdit5()
+        {
+            return textBox5.Text;
         }
     }
 }

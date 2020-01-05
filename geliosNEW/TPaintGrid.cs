@@ -439,7 +439,7 @@ namespace geliosNEW
             f_WndHandler = new IntPtr();
             f_UnderControl = null;
             f_RefreshFon = true;
-            f_CurrEndPoint = new Point(40, 100);
+            f_CurrEndPoint = new Point(80, 100);
             f_X_offs = 0; //смещение по Х
             f_Y_offs = 0; //смещение по Y
             f_WSPenWidth = 1;
@@ -598,12 +598,18 @@ namespace geliosNEW
                 return;
             }
         }
-    /*    void PrepareLevel();
-        void PrepareLevelOnOffset();
-        void ClearAltWSList();
-        void AddToAltWSList(TBaseWorkShape* AWS);
-        HRGN GetRGNAltWSList();
-        bool IsAltWSListEmpty();*/
+        public void PrepareLevel()
+        {
+            f_X_offs = 0; //смещение по X
+            f_Y_offs = 0; //смещение по Y
+            f_X_offsSum = f_Y_offsSum = 0;
+        }
+
+        /*      void PrepareLevelOnOffset();
+              void ClearAltWSList();
+              void AddToAltWSList(TBaseWorkShape* AWS);
+              HRGN GetRGNAltWSList();
+              bool IsAltWSListEmpty();*/
         TBaseShape FindTFE(int Ax, int Ay)
         {
             TBaseShape CurrShape;
@@ -643,12 +649,26 @@ namespace geliosNEW
                }
                return null;
            }*/
-        /*    void ClearAll();
-            void RecalcAfterDeleted(bool AFirst, TPoint FPoint);
-            void SetWSFlagEvent(TBaseWorkShape* WS);
-            void RecalcBaseOffsetPosition();
-            void RecalcFollowWorkShape(TBaseWorkShape* ABeforeInsertWork, TPoint AEndPoint);
-            void RecalcAfterConverted(bool AFirst, TPoint FPoint);*/
+        public void ClearAll()
+        {
+            f_SelectedTFE = null;
+            f_SelectedTFS = null;
+            f_ClipPath.Clear();
+            g_PainterList.ClearAll();
+            f_ListForPaint.Clear();
+         //   f_FlagController.ClearAll();
+            f_InvalidateList.Clear();
+            f_LineCutting.ClearAll();
+            g_AlternateList.ClearAll();
+            f_AltWSList.Clear();
+            f_localVisiblearrowall = false;
+            f_CurrEndPoint = new Point(80, 100);
+        }
+        /*  void RecalcAfterDeleted(bool AFirst, TPoint FPoint);
+          void SetWSFlagEvent(TBaseWorkShape* WS);
+          void RecalcBaseOffsetPosition();
+          void RecalcFollowWorkShape(TBaseWorkShape* ABeforeInsertWork, TPoint AEndPoint);
+          void RecalcAfterConverted(bool AFirst, TPoint FPoint);*/
         public TBaseWorkShape FindShapeFromCompositeWork(int AShapeID)
         {
             TBaseWorkShape TempWork;
@@ -774,19 +794,19 @@ namespace geliosNEW
             set { f_UnderControl = value;  }
             get { return f_UnderControl;  }
         }
-/*__property int WSPenWidth = { read = f_WSPenWidth, write = f_WSPenWidth };
-__property bool RefreshFon = { read = f_RefreshFon, write = f_RefreshFon };
+        /*__property int WSPenWidth = { read = f_WSPenWidth, write = f_WSPenWidth };
+        __property bool RefreshFon = { read = f_RefreshFon, write = f_RefreshFon };
 
-__property TColor LineColor = {read = f_LineColor, write = SetLineColor};
-   __property bool BrushTFE = { read = f_BrushTFE, write = SetBrushTFE };
-__property TColor BrushColor = {read = f_BrushColor, write = SetBrushColor};
-   __property Graphics::TFont* FontTFE = { read = f_FontTFE, write = SetFontTFE};
-__property int FlagType = { read = f_FlagType, write = SetFlagType };
-__property TColor LeaveFlagColor  = {read = f_LeaveFlagColor, write = SetLeaveFlagColor};
-   __property TColor EnterFlagColor  = {read = f_EnterFlagColor, write = SetEnterFlagColor};
-   __property TColor FrameColorTFE = {read = f_FrameColorTFE, write = SetFrameColorTFE};
-   __property TColor FrameColorTFS = {read = f_FrameColorTFS, write = SetFrameColorTFS};*/
-   public  int Regim
+        __property TColor LineColor = {read = f_LineColor, write = SetLineColor};
+           __property bool BrushTFE = { read = f_BrushTFE, write = SetBrushTFE };
+        __property TColor BrushColor = {read = f_BrushColor, write = SetBrushColor};
+           __property Graphics::TFont* FontTFE = { read = f_FontTFE, write = SetFontTFE};
+        __property int FlagType = { read = f_FlagType, write = SetFlagType };
+        __property TColor LeaveFlagColor  = {read = f_LeaveFlagColor, write = SetLeaveFlagColor};
+           __property TColor EnterFlagColor  = {read = f_EnterFlagColor, write = SetEnterFlagColor};
+           __property TColor FrameColorTFE = {read = f_FrameColorTFE, write = SetFrameColorTFE};
+           __property TColor FrameColorTFS = {read = f_FrameColorTFS, write = SetFrameColorTFS};*/
+        public  int Regim
         {
             get { return f_Regim; }
             set { SetRegim(value); }
@@ -808,8 +828,12 @@ __property TColor LeaveFlagColor  = {read = f_LeaveFlagColor, write = SetLeaveFl
         {
             get { return f_SelectedTFE; }
         }
-   /*     __property TBaseWorkShape* SelectedTFS = { read = f_SelectedTFS, write = f_SelectedTFS };
-        __property TColor AltFlagColor = {read = f_AltFlagColor, write = SetAltFlagColor};
+        public TBaseWorkShape SelectedTFS
+        {
+            get { return f_SelectedTFS; }
+            set { f_SelectedTFS = value; }
+        }
+   /*    __property TColor AltFlagColor = {read = f_AltFlagColor, write = SetAltFlagColor};
            __property TColor AltEnterFlagColor = {read = f_AltEnterFlagColor, write = SetAltEnterFlagColor};
            __property TColor AltArrowColor = {read = f_AltArrowColor, write = SetAltArrowColor};
            __property TColor AltEnterArrowColor = {read = f_AltEnterArrowColor, write = SetAltEnterArrowColor};

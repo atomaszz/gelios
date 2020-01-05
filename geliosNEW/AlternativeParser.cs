@@ -139,10 +139,12 @@ namespace geliosNEW
             else
                 return null;
         }
-        /*      public:
-                    TAlternativeParserItemTFS();
-              ~TAlternativeParserItemTFS();
-              int Who() { return 0; }*/
+        public TAlternativeParserItemTFS()
+        {
+            f_TFS = null;
+            f_List = new List<object>();
+        }
+        public override int Who() { return 0; }
         public TTreeListTFS TFS
         {
             set { SetTFS(value);  }
@@ -414,7 +416,7 @@ namespace geliosNEW
             f_Head = new TAlternativeParserItemBig();
         }
         /*        void DoMakeAlternative();*/
-        void DoParse(TMainTreeList AMainTree)
+        void DoParse(ref TMainTreeList AMainTree)
         {
             TAlternativeParserItemBig mBig, mTemp;
             TAlternativeParserItemBase mBase;
@@ -427,14 +429,14 @@ namespace geliosNEW
             while (mBig!=null)
             {
                 if (CheckEnlarge(mBig))
-                    MakeBig(mBig, f_Head == mBig);
+                    MakeBig(ref mBig, f_Head == mBig);
                 mBig.Check = true;
                 mBig.GetAllFirstBigsNoCheck(m_Stack);
                 mBig = (TAlternativeParserItemBig)(m_Stack.Pop());
             }
             m_Stack = null;
         }
-        void MakeBig(TAlternativeParserItemBig ABig, bool AByPass)
+        void MakeBig(ref TAlternativeParserItemBig ABig, bool AByPass)
         {
             int m_n = 0;
             bool b_basis, b_main, b_tail, b_go, b_parent, b_cbm, b_valid = false;
@@ -498,14 +500,14 @@ namespace geliosNEW
 
             }
             f_Grp.Make();
-            FillBigFromGrp(ABig);
+            FillBigFromGrp(ref ABig);
             D = null;
             Mass = null;
         }
-        void FillBigFromGrp(TAlternativeParserItemBig ABig)
+        void FillBigFromGrp(ref TAlternativeParserItemBig ABig)
         {
             for (int i = 0; i <= f_Grp.CountOUT - 1; i++)
-                FillItemGrp(f_Grp.GetItemsOUT(i), ABig);
+                FillItemGrp(f_Grp.GetItemsOUT(i), ref ABig);
         }
         void CreateParserGrpItemList(TDynamicArray AMass, TAlternateTreeList Alternative)
         {
@@ -527,7 +529,7 @@ namespace geliosNEW
 
             TAlternativeParserItemBig mBig = new TAlternativeParserItemBig();
             for (int i = 0; i <= ACrossItem.CountBasis - 1; i++)
-                FillItemGrp(ACrossItem.GetItemsBasis(i), mBig);
+                FillItemGrp(ACrossItem.GetItemsBasis(i), ref mBig);
             mBig.Check = true;
             mBig.OwnerBig = mHeadBig;
             mBig.NumAlt = 0;
@@ -540,13 +542,13 @@ namespace geliosNEW
                 mBig.Check = true;
                 mBig.Cross = true;
                 for (int j = 0; j <= Cross.Count - 1; j++)
-                    FillItemGrp(Cross.GetItems(j), mBig);
+                    FillItemGrp(Cross.GetItems(j), ref mBig);
                 mBig.NumAlt = i + 1;
                 mBig.OwnerBig = mHeadBig;
                 mHeadBig.AddBig(mBig);
             }
         }
-        void FillItemGrp(TAlternativeParserGrpItemBase AItem, TAlternativeParserItemBig ABig)
+        void FillItemGrp(TAlternativeParserGrpItemBase AItem, ref TAlternativeParserItemBig ABig)
         {
             TAlternativeParserGrpItemTFS GTfs;
             TAlternativeParserGrpItemList GList;
@@ -607,10 +609,10 @@ namespace geliosNEW
             f_ListEnlarge = new List<object>();
         }
         ~TAlternativeParser() { }
-        public void Parse(TMainTreeList AMainTree)
+        public void Parse(ref TMainTreeList AMainTree)
         {
             if (AMainTree!=null)
-                DoParse(AMainTree);
+                DoParse(ref AMainTree);
         }
         public TAlternativeParserItemBig Head
         {

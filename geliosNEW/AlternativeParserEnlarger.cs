@@ -9,15 +9,14 @@ namespace geliosNEW
     class TAlternativeParserEnlargerBase
     {
         TAlternativeParserEnlargerItem f_Parent;
-        /*     public:
-          TAlternativeParserEnlargerBase() {; }
-             virtual ~TAlternativeParserEnlargerBase() {; }
-             virtual int Who() { return -1; }*/
+        public virtual int Who() { return -1; }
     }
     class TAlternativeParserEnlargerTFS : TAlternativeParserEnlargerBase
     {
-        /*   int Who();
-          ~TAlternativeParserEnlargerTFS() {; }*/
+        public override int Who()
+        {
+            return 0;
+        }
     }
     class TAlternativeParserEnlargerBig : TAlternativeParserEnlargerBase
     {
@@ -27,14 +26,18 @@ namespace geliosNEW
             f_List.Clear();
         }
       /*  int __fastcall GetCount();
-        TAlternativeParserEnlargerTFS* __fastcall GetItems(int AIndex);
-        public:
-             int Who();
-        TAlternativeParserEnlargerBig();
-        ~TAlternativeParserEnlargerBig();
-        void AddItem(TAlternativeParserEnlargerTFS* ATfs);
-        __property int Count = { read = GetCount };
-        __property TAlternativeParserEnlargerTFS* Items[int AIndex] = { read = GetItems };*/
+        TAlternativeParserEnlargerTFS* __fastcall GetItems(int AIndex);*/
+        public override int Who()
+        {
+            return 0;
+        }
+        public TAlternativeParserEnlargerBig()
+        {
+            f_List = new List<object>();
+        }
+        /*    void AddItem(TAlternativeParserEnlargerTFS* ATfs);
+            __property int Count = { read = GetCount };
+            __property TAlternativeParserEnlargerTFS* Items[int AIndex] = { read = GetItems };*/
     }
     class TAlternativeParserEnlargerItem
     {

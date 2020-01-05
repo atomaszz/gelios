@@ -16,10 +16,12 @@ namespace geliosNEW
     public class TAlternativeParserGrpItemTFS : TAlternativeParserGrpItemBase
     {
       TTreeListTFS f_TFS;
-        /*  public:
-            TAlternativeParserGrpItemTFS();
-          ~TAlternativeParserGrpItemTFS() { return; }
-          int Who() { return 0; }*/
+      public TAlternativeParserGrpItemTFS()
+        {
+            f_TFS = null;
+        }
+        ~TAlternativeParserGrpItemTFS() { return; }
+        public override int Who() { return 0; }
         public TTreeListTFS TFS
         {
             set { f_TFS = value; }
