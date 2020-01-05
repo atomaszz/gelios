@@ -311,11 +311,11 @@ namespace geliosNEW
                 for (int n = 0; n < i2; n++)
                     for (int h = 0; h < i3; h++)
                     {
-
                         type = 5;
                         s_name = "(нет названия)";
                         s_func = "(нет функции)";
                         s_el = "(нет элемента)";
+                        param_rez[r] = new param();
 
                         switch (work_type)
                         {
