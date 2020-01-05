@@ -19,7 +19,14 @@ namespace geliosNEW
             f_ID = 0;
             f_EnvelopeBIG = null;
         }
-       public virtual int Who() { return -1; }
+        public TPredicateItemBase(TGlsListNode src)
+        {
+         /*   f_NumAlt = src.
+            f_Envelope = false;
+            f_ID = 0;
+            f_EnvelopeBIG = null;*/
+        }
+        public virtual int Who() { return -1; }
        public virtual void ListIDFill(TDynamicArray AList)
         {
             AList.AppendInteger(f_ID, null);
@@ -112,7 +119,89 @@ namespace geliosNEW
             }
 
         }
-        /*    void ListIDFill(TDynamicArray* AList);*/
+        public override void ListIDFill(TDynamicArray AList)
+        {
+            int m_who = TFS.BaseWorkShape.TypeShape;
+            switch (m_who)
+            {
+                case 1:
+                    {
+                        AList.AppendInteger(GetTFEItems(0).TFE.BaseShape.ID, GetTFEItems(0).TFE.BaseShape);
+                        break;
+                    }
+                case 2:
+                    {
+                        AList.AppendInteger(GetTFEItems(0).TFE.BaseShape.ID, GetTFEItems(0).TFE.BaseShape);
+                        AList.AppendInteger(GetTFEItems(1).TFE.BaseShape.ID, GetTFEItems(1).TFE.BaseShape);
+                        break;
+                    }
+                case 3:
+                    {
+                        AList.AppendInteger(GetTFEItems(0).TFE.BaseShape.ID, GetTFEItems(0).TFE.BaseShape);
+                        AList.AppendInteger(GetTFEItems(1).TFE.BaseShape.ID, GetTFEItems(1).TFE.BaseShape);
+                        break;
+                    }
+
+                case 4:
+                    {
+                        AList.AppendInteger(GetTFEItems(0).TFE.BaseShape.ID, GetTFEItems(0).TFE.BaseShape);
+                        AList.AppendInteger(GetTFEItems(1).TFE.BaseShape.ID, GetTFEItems(1).TFE.BaseShape);
+                        break;
+                    }
+                case 5:
+                    {
+                        AList.AppendInteger(GetTFEItems(0).TFE.BaseShape.ID, GetTFEItems(0).TFE.BaseShape);
+                        AList.AppendInteger(GetTFEItems(1).TFE.BaseShape.ID, GetTFEItems(1).TFE.BaseShape);
+                        break;
+                    }
+                case 6:
+                    {
+                        AList.AppendInteger(GetTFEItems(1).TFE.BaseShape.ID, GetTFEItems(1).TFE.BaseShape);
+                        AList.AppendInteger(GetTFEItems(2).TFE.BaseShape.ID, GetTFEItems(2).TFE.BaseShape);
+                        AList.AppendInteger(GetTFEItems(0).TFE.BaseShape.ID, GetTFEItems(0).TFE.BaseShape);
+                        break;
+                    }
+
+                case 7:
+                    {
+                        AList.AppendInteger(GetTFEItems(1).TFE.BaseShape.ID, GetTFEItems(1).TFE.BaseShape);
+                        AList.AppendInteger(GetTFEItems(0).TFE.BaseShape.ID, GetTFEItems(0).TFE.BaseShape);
+                        break;
+                    }
+
+                case 8:
+                    {
+                        AList.AppendInteger(GetTFEItems(0).TFE.BaseShape.ID, GetTFEItems(0).TFE.BaseShape);
+                        AList.AppendInteger(GetTFEItems(1).TFE.BaseShape.ID, GetTFEItems(1).TFE.BaseShape);
+                        break;
+                    }
+
+                case 9:
+                    {
+                        AList.AppendInteger(GetTFEItems(1).TFE.BaseShape.ID, GetTFEItems(1).TFE.BaseShape);
+                        AList.AppendInteger(GetTFEItems(0).TFE.BaseShape.ID, GetTFEItems(0).TFE.BaseShape);
+                        AList.AppendInteger(GetTFEItems(2).TFE.BaseShape.ID, GetTFEItems(2).TFE.BaseShape);
+                        break;
+                    }
+
+                case 10:
+                    {
+                        AList.AppendInteger(GetTFEItems(1).TFE.BaseShape.ID, GetTFEItems(1).TFE.BaseShape);
+                        AList.AppendInteger(GetTFEItems(0).TFE.BaseShape.ID, GetTFEItems(0).TFE.BaseShape);
+                        AList.AppendInteger(GetTFEItems(2).TFE.BaseShape.ID, GetTFEItems(2).TFE.BaseShape);
+                        break;
+                    }
+
+
+                case 11:
+                    {
+                        AList.AppendInteger(GetTFEItems(1).TFE.BaseShape.ID, GetTFEItems(1).TFE.BaseShape);
+                        AList.AppendInteger(GetTFEItems(2).TFE.BaseShape.ID, GetTFEItems(2).TFE.BaseShape);
+                        AList.AppendInteger(GetTFEItems(0).TFE.BaseShape.ID, GetTFEItems(0).TFE.BaseShape);
+                        break;
+                    }
+            }
+        }
         public TTreeListTFS TFS
         {
             get { return f_TFS; }
@@ -192,8 +281,31 @@ namespace geliosNEW
             f_Item1 = null;
             f_Item2 = null;
         }
+        void ListIDFill(TDynamicArray AList)
+        {
+            int id;
+            TPredicateItemTFS mTfs;
+            //мб только укрупненная или просто рабочая операция
+            id = f_Item1.Who();
+            if (id == 0)
+            {
+                mTfs = (TPredicateItemTFS)(f_Item1);
+                id = mTfs.GetTFEItems(0).TFE.BaseShape.ID;
+                AList.AppendInteger(id, mTfs.GetTFEItems(0).TFE.BaseShape);
+            }
+            else
+                AList.AppendInteger(f_Item1.ID, null);
 
-        /*    void ListIDFill(TDynamicArray* AList);*/
+            id = f_Item2.Who();
+            if (id == 0)
+            {
+                mTfs = (TPredicateItemTFS)(f_Item2);
+                id = mTfs.GetTFEItems(0).TFE.BaseShape.ID;
+                AList.AppendInteger(id, mTfs.GetTFEItems(0).TFE.BaseShape);
+            }
+            else
+                AList.AppendInteger(f_Item2.ID, null);
+        }
         public TPredicateItemBase Item1
         {
             set { f_Item1 = value; }
