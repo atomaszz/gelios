@@ -57,7 +57,7 @@ namespace geliosNEW
 
     class TTreeList
     {
-        TMainTreeList f_TreeList;
+        public TMainTreeList f_TreeList;
         TTreeStack f_Stack;
         TAltInfo f_AltInfo;
         void Init(int ALevel)

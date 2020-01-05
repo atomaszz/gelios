@@ -190,7 +190,7 @@ namespace geliosNEW
     TGraphTFEConvertorItem f_Item;
     TGlsBinaryTree f_BTree;
     TGraphTFEConvertorTransNum f_Tran;
-        void PushTFS(TPredicateItemTFS ATFS, TDynamicArray AStack)
+        void PushTFS(TPredicateItemTFS ATFS, ref TDynamicArray AStack)
         {
             int m_type = ATFS.TFS.BaseWorkShape.TypeShape;
             if ((m_type != 1) || ((m_type == 1) && (ATFS.EnvelopeBIG!=null)))
@@ -207,14 +207,14 @@ namespace geliosNEW
             {
                 m_type = ABase.Who();
                 if (m_type == 0)
-                    PushTFS((TPredicateItemTFS)(ABase), AStack);
+                    PushTFS((TPredicateItemTFS)(ABase), ref AStack);
                 if (m_type == 1)
-                    PushBig((TPredicateItemBig)(ABase), AStack);
+                    PushBig((TPredicateItemBig)(ABase), ref AStack);
                 if (m_type == 2)
-                    PushPWork((TPredicateItemPWork)(ABase), AStack);
+                    PushPWork((TPredicateItemPWork)(ABase), ref AStack);
             }
         }
-        void PushBig(TPredicateItemBig ABig, TDynamicArray AStack)
+        void PushBig(TPredicateItemBig ABig, ref TDynamicArray AStack)
         {
             if (ABig.Envelope)
             {
@@ -224,12 +224,12 @@ namespace geliosNEW
                 if ((m_who == 2) || (m_who == 1))
                     AStack.InsertToFirst(B);
                 if (m_who == 0)
-                    PushTFS((TPredicateItemTFS)(B), AStack);
+                    PushTFS((TPredicateItemTFS)(B), ref AStack);
             }
             else
                 AStack.InsertToFirst(ABig);
         }
-        void PushPWork(TPredicateItemPWork APWork, TDynamicArray AStack)
+        void PushPWork(TPredicateItemPWork APWork, ref TDynamicArray AStack)
         {
             AStack.InsertToFirst(APWork);
         }

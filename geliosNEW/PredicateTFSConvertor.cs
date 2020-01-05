@@ -12,9 +12,14 @@ namespace geliosNEW
         int f_NumAlt;
         bool f_Envelope;
         TPredicateItemBig f_EnvelopeBIG;
-/*        TPredicateItemBase();
-        virtual ~TPredicateItemBase() { return; }*/
-        public virtual int Who() { return -1; }
+        public TPredicateItemBase()
+        {
+            f_NumAlt = -1;
+            f_Envelope = false;
+            f_ID = 0;
+            f_EnvelopeBIG = null;
+        }
+       public virtual int Who() { return -1; }
        public virtual void ListIDFill(TDynamicArray AList)
         {
             AList.AppendInteger(f_ID, null);
@@ -45,9 +50,12 @@ namespace geliosNEW
         TTreeListItem f_TFE;
         TPredicateItemBig f_Big;
         TAlternativeParserItemTFE f_RfcTFE;
-        /*  public:
-           TPredicateItemTFE();
-          ~TPredicateItemTFE();*/
+        public TPredicateItemTFE()
+        {
+            f_TFE = null;
+            f_Big = null;
+            f_RfcTFE = null;
+        }
         public TTreeListItem TFE
         {
             set { f_TFE = value; }
@@ -83,9 +91,11 @@ namespace geliosNEW
             else
                 return null;
         }
-        /*     public:
-                   TPredicateItemTFS();
-             ~TPredicateItemTFS();*/
+        public TPredicateItemTFS()
+        {
+            f_TFS = null;
+            f_ListTFE = new List<object>();
+        }
         public override int Who() { return 0; }
         public void Assign(TAlternativeParserItemTFS ATfs)
         {
@@ -176,11 +186,14 @@ namespace geliosNEW
     {
       public TPredicateItemBase f_Item1;
       public TPredicateItemBase f_Item2;
-        /*public:
-              int Who() { return 2; }
-        TPredicateItemPWork();
-        ~TPredicateItemPWork();
-        void ListIDFill(TDynamicArray* AList);*/
+      public override int Who() { return 2; }
+        public TPredicateItemPWork()
+        {
+            f_Item1 = null;
+            f_Item2 = null;
+        }
+
+        /*    void ListIDFill(TDynamicArray* AList);*/
         public TPredicateItemBase Item1
         {
             set { f_Item1 = value; }
@@ -215,7 +228,7 @@ namespace geliosNEW
             N.NumAlt = ABig.NumAlt;
             return N;
         }
-        void DoCopyTree(TPredicateItemBig ABig, TDynamicArray AStack)
+        void DoCopyTree(ref TPredicateItemBig ABig, ref TDynamicArray AStack)
         {
             int m_who;
             TAlternativeParserItemList ML;
@@ -684,7 +697,7 @@ namespace geliosNEW
             Big = f_PredicateStart;
             while (Big!=null)
             {
-                DoCopyTree(Big, m_Stack);
+                DoCopyTree(ref Big, ref m_Stack);
                 Big = (TPredicateItemBig)(m_Stack.Pop());
             }
             m_Stack = null;

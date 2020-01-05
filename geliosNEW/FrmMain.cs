@@ -573,7 +573,7 @@ namespace geliosNEW
             TPredicateTFSConvertor TC = new TPredicateTFSConvertor();
             TGraphTFEConvertor GC = new TGraphTFEConvertor();
             m_TreeList.FillTreeFromList(ref MainList);
-            AP.Parse(m_TreeList.MainTreeList);
+            AP.Parse(ref m_TreeList.f_TreeList);
             TC.CopyTree(AP.Head);
             TC.PathStyle = 2;
             TC.Process(f_PredicatePath.BasePath, f_PredicatePath.UsedPath);
