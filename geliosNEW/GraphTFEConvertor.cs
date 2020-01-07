@@ -389,10 +389,10 @@ namespace geliosNEW
             SharedConst.lcList.first();
             for (int i = 0; i <= SharedConst.lcList.length() - 1; i++)
             {
-                TGlsListNode tmpNode = (TGlsListNode)SharedConst.lcList.val();
+          //      TGlsListNode tmpNode = (TGlsListNode)SharedConst.lcList.val();
       //          TPredicateItemTFS tmpPredicateItem = (TPredicateItemTFS)(tmpNode.Val);
-     //           TPredicateItemPWork
-                Base = (TPredicateItemBase)(tmpNode.Val);
+     //           TPredicateItemPWork 
+                Base = (TPredicateItemBase)(SharedConst.lcList.val());
                 f_Item.Make(Base, Base.EnvelopeBIG);
                 SC = f_Item.OutString;
                 if (SC.Length > 0)

@@ -128,6 +128,7 @@ namespace geliosNEW
                     for (int i = 0; i <= i2 - 1; i++)
                     {
                         AI = PA.Items[i];
+                        param2[i] = new param();
                         param2[i].par[0] = AI.B;
                         param2[i].par[1] = AI.T;
                         param2[i].par[2] = AI.V;
@@ -184,7 +185,7 @@ namespace geliosNEW
                     for (int i = 0; i <= i3 - 1; i++)
                     {
                         AI = PA.Items[i];
-
+                        param3[i] = new param();
                         param3[i].par[3] = AI.P_11;
                         param3[i].par[4] = AI.P_00;
                         param3[i].par[5] = AI.T_D;
