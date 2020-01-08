@@ -328,7 +328,7 @@ namespace geliosNEW
         }
         void AddElementToTree(TPredicateTree APredicateTree)
         {
-            TPredicateTreeItem N = APredicateTree.NewPredicateTreeItem();
+            TPredicateTreeItem N = new TPredicateTreeItem();
             N.ParentID = f_Item.ParentID;
             N.ParentShape = f_Item.ParentBaseShape;
             N.NumAlt = f_Item.Item.NumAlt + 1;
@@ -351,6 +351,8 @@ namespace geliosNEW
             for (int i = 0; i <= cnt - 1; i++)
                 N.AddBaseShape((TBaseShape)(D.GetPosition(i).P), D.GetPosition(i).Int_Value);
             D = null;
+            
+            APredicateTree.AddPredicateTreeItem(N);
         }
         public TGraphTFEConvertor()
         {
@@ -387,9 +389,10 @@ namespace geliosNEW
             SharedConst.lcList.first();
             for (int i = 0; i <= SharedConst.lcList.length() - 1; i++)
             {
-                TGlsListNode tmpNode = (TGlsListNode)SharedConst.lcList.val();
-                TPredicateItemTFS tmpPredicateItem = (TPredicateItemTFS)(tmpNode.Val);
-                Base = (TPredicateItemBase)(tmpPredicateItem);
+          //      TGlsListNode tmpNode = (TGlsListNode)SharedConst.lcList.val();
+      //          TPredicateItemTFS tmpPredicateItem = (TPredicateItemTFS)(tmpNode.Val);
+     //           TPredicateItemPWork 
+                Base = (TPredicateItemBase)(SharedConst.lcList.val());
                 f_Item.Make(Base, Base.EnvelopeBIG);
                 SC = f_Item.OutString;
                 if (SC.Length > 0)

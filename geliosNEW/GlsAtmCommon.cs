@@ -37,7 +37,7 @@ namespace geliosNEW
             _next = _prev = this;
             return this;
         }
-        public void splice(TGlsNode b)
+        public void splice(ref TGlsNode b)
         {
             TGlsNode a = this;
             TGlsNode an = a._next;
@@ -79,12 +79,12 @@ namespace geliosNEW
     public class TGlsList : TGlsNode
     {
         TGlsListNode header;
-        public TGlsListNode win;
+  //      TGlsListNode win;
         int _length;
         public TGlsList()
         {
             header = new TGlsListNode(null);
-            win = header;
+    //        win = header;
             _length = 0;
         }
         ~TGlsList() { }
@@ -95,7 +95,7 @@ namespace geliosNEW
             ++_length;
             return T;
         }
-        public TGlsList append(TGlsList T)
+   /*     public TGlsList append(TGlsList T)
         {
             TGlsListNode a = (TGlsListNode)(header.Prev);
             a.splice(T.header);
@@ -104,28 +104,46 @@ namespace geliosNEW
             T._length = 0;
             T.win = header;
             return this;
-        }
+        }*/
         /*     public void* prepend(void* T);
              public void* remove();
              public void val(void* T);*/
         public object val()
         {
-            return win.Val;
+            if (header.Val is TGlsListNode)
+            {
+                TGlsListNode tNode = (TGlsListNode)header.Val;
+                return tNode.Val;
+            }
+            else
+            {
+                return header.Val;
+            }
         }
         public object next()
         {
-            win = (TGlsListNode)(win.Next);
-            return win.Val;
+            if (header.Val is TGlsListNode)
+            {
+                TGlsListNode tNode = (TGlsListNode)header.Val;
+                header = (TGlsListNode)(tNode.Next);
+                return header.Val;
+            }
+            else
+            {
+                header = (TGlsListNode)(header.Next);
+                return header.Val;
+            }
         }
         public object prev()
         {
-            win = (TGlsListNode)(win.Prev);
-            return win.Val;
+            header = (TGlsListNode)(header.Prev);
+            return header.Val;
         }
         public object first()
         {
-            win = new TGlsListNode(header.Next);
-            return win.Val;
+            header = new TGlsListNode(header.Next);
+            TGlsListNode tNode = (TGlsListNode)(header.Val);
+            return tNode.Val;
         }
         /*    public void* last();*/
         public int length()

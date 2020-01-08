@@ -281,7 +281,7 @@ namespace geliosNEW
             f_Item1 = null;
             f_Item2 = null;
         }
-        void ListIDFill(TDynamicArray AList)
+        public override void ListIDFill(TDynamicArray AList)
         {
             int id;
             TPredicateItemTFS mTfs;

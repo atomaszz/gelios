@@ -106,7 +106,7 @@ namespace geliosNEW
                 param1[i].par_fuz[2, 8] = AI.V_F3B;
 
                 param1[i].stv = AI.SOSTAV;
-                param1[i].stv += '\0';
+            //    param1[i].stv += '\0';
 
                 param1[i].sovm = AI.SOVM;
                 param1[i].sovm0 = AI.SOVM0;
@@ -128,6 +128,7 @@ namespace geliosNEW
                     for (int i = 0; i <= i2 - 1; i++)
                     {
                         AI = PA.Items[i];
+                        param2[i] = new param();
                         param2[i].par[0] = AI.B;
                         param2[i].par[1] = AI.T;
                         param2[i].par[2] = AI.V;
@@ -162,7 +163,7 @@ namespace geliosNEW
                         param2[i].par_fuz[2, 8] = AI.V_F3B;
 
                         param2[i].stv = AI.SOSTAV;
-                        param2[i].stv += '\0';
+                    //    param2[i].stv += '\0';
                         param2[i].sovm = AI.SOVM;
                         param2[i].sovm0 = AI.SOVM0;
                         param2[i].sovm1 = AI.SOVM1;
@@ -184,7 +185,7 @@ namespace geliosNEW
                     for (int i = 0; i <= i3 - 1; i++)
                     {
                         AI = PA.Items[i];
-
+                        param3[i] = new param();
                         param3[i].par[3] = AI.P_11;
                         param3[i].par[4] = AI.P_00;
                         param3[i].par[5] = AI.T_D;
@@ -289,7 +290,7 @@ namespace geliosNEW
                         else
                             s_predicat = "0";
                         param3[i].stv = AI.SOSTAV;
-                        param3[i].stv += '\0';
+                    //    param3[i].stv += '\0';
                         param3[i].sovm = AI.SOVM;
                         param3[i].sovm0 = AI.SOVM0;
                         param3[i].sovm1 = AI.SOVM1;
@@ -1194,20 +1195,20 @@ namespace geliosNEW
             int q = 0;
             for (; ; )
             {
-                i1 = 0; while (p[q] != ';' && p[q] != ':' && p[q] != '\0') n1[i1++] = p[q++]; n1[i1] = '\0';
-                q++; i1 = 0; while (p[q] != ';' && p[q] != ':' && p[q] != '\0') n2[i1++] =  p[q++]; n2[i1] = '\0';
+                i1 = 0; while (p[q] != ';' && p[q] != ':' && q != p.Length) n1[i1++] = p[q++]; n1[i1] = '\0';
+                q++; i1 = 0; while (p[q] != ';' && p[q] != ':' && q != p.Length) n2[i1++] =  p[q++]; n2[i1] = '\0';
                 n3[Int32.Parse(n1.ToString())] = Int32.Parse(n2.ToString());
-                if (p[q] != '\0') { q++; continue; }
+                if (q != p.Length) { q++; continue; }
                 else break;
             }
             p = S2;
             q = 0;
             for (; ; )
             {
-                i1 = 0; while (p[q] != ';' && p[q] != ':' && p[q] != '\0') n1[i1++] = p[q++]; n1[i1] = '\0';
-                q++; i1 = 0; while (p[q] != ';' && p[q] != ':' && p[q] != '\0') n2[i1++] = p[q++]; n2[i1] = '\0';
+                i1 = 0; while (p[q] != ';' && p[q] != ':' && q != p.Length) n1[i1++] = p[q++]; n1[i1] = '\0';
+                q++; i1 = 0; while (p[q] != ';' && p[q] != ':' && q != p.Length) n2[i1++] = p[q++]; n2[i1] = '\0';
                 n4[Int32.Parse(n1.ToString())] = Int32.Parse(n2.ToString());
-                if (p[q] != '\0') { q++; continue; }
+                if (q != p.Length) { q++; continue; }
                 else break;
             }
 
@@ -1547,11 +1548,11 @@ namespace geliosNEW
                     {
                         FreeApd();
                         f_Apd = new TParamAlternative();
-                        CopyAlternateParam2(f_Apd, B.ParamAlt, B.TypeShape == 8);
+                        CopyAlternateParam2(ref f_Apd, B.ParamAlt, B.TypeShape == 8);
 
                         PDI = f_Parent.FindPartialDecisionItemByParentID(AID);
                         if (PDI!=null)
-                            CopyAlternateParam2(f_Apd, PDI.ParamAlt, false);
+                            CopyAlternateParam2(ref f_Apd, PDI.ParamAlt, false);
                         return f_Apd;
                     }
 
@@ -2464,7 +2465,7 @@ namespace geliosNEW
         {
             get { return f_WorkItem;  }
         }
-        void CopyAlternateParam2(TParamAlternative ADest, TParamAlternative ASource, bool AByPassGPL)
+        void CopyAlternateParam2(ref TParamAlternative ADest, TParamAlternative ASource, bool AByPassGPL)
         {
             if (ADest != null && ASource != null)
             {
@@ -2521,12 +2522,11 @@ namespace geliosNEW
             return null;
         }
         /*       TPartialDecisionItem* FindPartialDecisionItemByTFEID(int AID);*/
-        public TPartialDecisionItem GetNew(TPredicateTreeItem APTItem)
+        public void GetNew(ref TPartialDecisionItem Item, TPredicateTreeItem APTItem)
         {
-            TPartialDecisionItem Item = new TPartialDecisionItem(this);
+            Item = new TPartialDecisionItem(this);
             Item.InitDecision(APTItem);
             f_List.Add(Item);
-            return Item;
         }
         public bool FreeItem(TPartialDecisionItem AItem)
         {

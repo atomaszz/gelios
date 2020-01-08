@@ -20,6 +20,11 @@ C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Release\geliosNEW.FmTredactChar.resour
 C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Release\geliosNEW.Properties.Resources.resources
 C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Release\geliosNEW.FrmMain.resources
 C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Release\geliosNEW.csproj.GenerateResource.cache
-C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Release\geliosNEW.csproj.CoreCompileInputs.cache
 C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Release\geliosNEW.exe
 C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Release\geliosNEW.pdb
+C:\Users\Atom\GitHub\gelios\geliosNEW\bin\Release\geliosNEW.exe.manifest
+C:\Users\Atom\GitHub\gelios\geliosNEW\bin\Release\geliosNEW.application
+C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Release\geliosNEW.FmViewDecision.resources
+C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Release\geliosNEW.TrustInfo.xml
+C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Release\geliosNEW.exe.manifest
+C:\Users\Atom\GitHub\gelios\geliosNEW\obj\Release\geliosNEW.application

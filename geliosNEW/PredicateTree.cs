@@ -124,6 +124,10 @@ namespace geliosNEW
             f_List.Add(N);
             return N;
         }
+        public void AddPredicateTreeItem(TPredicateTreeItem N)
+        {
+            f_List.Add(N);
+        }
         public TPredicateTreeItem FindByTfeID(int AID, TDynamicArray Arr)
         {
             TPredicateTreeItem Item, Res = null;
@@ -156,7 +160,7 @@ namespace geliosNEW
             }
             return null;
         }
-        public void ArrayIDToDelete(TPredicateTreeItem AItem, TDynamicArray Arr)
+        public void ArrayIDToDelete(TPredicateTreeItem AItem, ref TDynamicArray Arr)
         {
             TPredicateTreeItem Item;
             Arr.Clear();
@@ -175,7 +179,7 @@ namespace geliosNEW
                                 cfind++;
                     }
                 }
-                if (cfind==0 && Arr.Find(del)!=null)
+                if (cfind==0 && Arr.Find(del)==null)
                     Arr.Append(del);
 
             }
