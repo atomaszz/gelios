@@ -152,7 +152,7 @@ namespace geliosNEW
         {
             TPartialDecisionItem DI;
             TDynamicArray D = new TDynamicArray();
-            f_Tree.ArrayIDToDelete(AI, D);
+            f_Tree.ArrayIDToDelete(AI, ref D);
             for (int i = 0; i <= D.Count - 1; i++)
             {
                 int del = (int)D.GetItems(i);
@@ -927,15 +927,15 @@ namespace geliosNEW
         {
             string S;
             TPredicateTreeItem TI;
-            TPartialDecisionItem P;
+            TPartialDecisionItem P = new TPartialDecisionItem(null);
             Nud_podgot();
             for (int i = CountPTI - 1; i >= 0; i--)
             {
                 TI = (TPredicateTreeItem)f_ListPTI[i];
-                P = f_PartialDecision.GetNew(TI);
+                TI.TReated = true;
+                f_PartialDecision.GetNew(ref P,TI);
                 f_PartialDecision.FreeItem(f_PartialDecision.PullAlternate(P));
                 P.Make();
-                TI.TReated = true;
                 ChekDeleted(TI);
             }
             if (f_PartialDecision.Type_Char == SharedConst.PROP) get_opt_alt();
@@ -1125,10 +1125,10 @@ namespace geliosNEW
             int q = 0;
             for (; ; )
             {
-                i1 = 0; while (p[q] != ';' && p[q] != ':' && p[q] != '\0') n1[i1++] = p[q++]; n1[i1] = '\0';
-                q++; i1 = 0; while (p[q] != ';' && p[q] != ':' && p[q] != '\0') n2[i1++]  = p[q++]; n2[i1] = '\0';
+                i1 = 0; while (p[q] != ';' && p[q] != ':' && q != p.Length) n1[i1++] = p[q++]; n1[i1] = '\0';
+                q++; i1 = 0; while (p[q] != ';' && p[q] != ':' && q != p.Length) n2[i1++]  = p[q++]; n2[i1] = '\0';
                 n3[Int64.Parse(n1.ToString())] = Int32.Parse(n2.ToString());
-                if (p[q] != '\0') 
+                if (q != p.Length) 
                 { 
                     q++; continue; 
                 }
